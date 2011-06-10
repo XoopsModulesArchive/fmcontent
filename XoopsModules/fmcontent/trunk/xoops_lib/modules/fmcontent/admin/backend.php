@@ -55,8 +55,8 @@ switch ($op) {
         $topic_id = $obj->db->getInsertId();
 
         //permission
-        fmcontentPermHandler::setpermission($forMods,'fmcontent_access',$_POST['groups_view'] ,$topic_id, true);
-        fmcontentPermHandler::setpermission($forMods,'fmcontent_submit',$_POST['groups_submit'] ,$topic_id,true);
+        fmcontentPermission::setpermission($forMods,'fmcontent_access',$_POST['groups_view'] ,$topic_id, true);
+        fmcontentPermission::setpermission($forMods,'fmcontent_submit',$_POST['groups_submit'] ,$topic_id,true);
 
         // Redirect page
         fmcontent_Redirect('topic.php', 1, _FMCONTENT_MSG_WAIT);
@@ -76,8 +76,8 @@ switch ($op) {
             fmcontentUtils::uploadimg($forMods, 'topic_img' , $obj,$_REQUEST['topic_img']);
             
             //permission
-            fmcontentPermHandler::setpermission($forMods,'fmcontent_access',$_POST['groups_view'] ,$topic_id,false);
-            fmcontentPermHandler::setpermission($forMods,'fmcontent_submit',$_POST['groups_submit'] ,$topic_id,false);
+            fmcontentPermission::setpermission($forMods,'fmcontent_access',$_POST['groups_view'] ,$topic_id,false);
+            fmcontentPermission::setpermission($forMods,'fmcontent_submit',$_POST['groups_submit'] ,$topic_id,false);
 
             if (!$topic_handler->insert($obj)) {
                 echo 'error';
