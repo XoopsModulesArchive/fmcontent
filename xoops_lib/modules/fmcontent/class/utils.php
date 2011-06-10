@@ -21,8 +21,6 @@
 class fmcontentUtils {
 
 	function uploadimg($forMods, $type , $obj,$image) {
-     
-	     //Form topic_img	
         include_once XOOPS_ROOT_PATH . "/class/uploader.php";
         $uploader_img = new XoopsMediaUploader(XOOPS_ROOT_PATH . xoops_getModuleOption('img_dir', $forMods->getVar('dirname')), xoops_getModuleOption('img_mime', $forMods->getVar('dirname')), xoops_getModuleOption('img_size', $forMods->getVar('dirname')), xoops_getModuleOption('img_maxwidth', $forMods->getVar('dirname')), xoops_getModuleOption('img_maxheight', $forMods->getVar('dirname')));
         if ($uploader_img->fetchMedia($type)) {
@@ -39,6 +37,18 @@ class fmcontentUtils {
                 $obj->setVar($type, $image);
             }
         }	
+	}	
+	
+	function deleteimg ($forMods , $type , $obj){
+			if($obj->getVar($type)) {
+				$currentPicture = XOOPS_ROOT_PATH.xoops_getModuleOption('img_dir', $forMods->getVar('dirname')).$obj->getVar($type);
+				if(is_file($currentPicture) && file_exists($currentPicture)) {
+					if(!unlink($currentPicture)) {
+						trigger_error("Error, impossible to delete the picture attached to this article");
+					}
+				}
+			}
+			$obj->setVar($type, '');
 	}	
 	
 
