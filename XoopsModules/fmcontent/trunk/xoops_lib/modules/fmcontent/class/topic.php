@@ -90,7 +90,15 @@ class fmcontent_topic extends XoopsObject {
 
         $form->addElement(new XoopsFormTextArea(_FMCONTENT_TOPIC_DESC, "topic_desc", $this->getVar("topic_desc"), 5, 47), false);
         $form->addElement(new XoopsFormText(_FMCONTENT_TOPIC_WEIGHT, "topic_weight", 5, 11, $this->getVar("topic_weight")), false);
-        $form->addElement(new XoopsFormText(_FMCONTENT_TOPIC_IMG, "topic_img", 50, 255, $this->getVar("topic_img")), false);
+        
+        // Image
+        $topic_img = $this->getVar('topic_img') ? $this->getVar('topic_img') : 'blank.gif';
+        $uploadirectory_topic_img = xoops_getModuleOption('img_dir', $forMods->getVar('dirname'));
+        $fileseltray_topic_img = new XoopsFormElementTray(_FMCONTENT_TOPIC_IMG, '<br />');
+        $fileseltray_topic_img->addElement(new XoopsFormLabel('', "<img class='fromimage' src='" . XOOPS_URL . $uploadirectory_topic_img . $topic_img . "' name='image_topic_img' id='image_topic_img' alt='' />"));
+        $fileseltray_topic_img->addElement(new XoopsFormFile(_FMCONTENT_FORMUPLOAD, 'topic_img', xoops_getModuleOption('img_size', $forMods->getVar('dirname'))), false);
+        $form->addElement($fileseltray_topic_img);
+        
         $form->addElement(new XoopsFormRadioYN(_FMCONTENT_TOPIC_ONLINE, 'topic_online', $this->getVar('topic_online', 'e')));
         $form->addElement(new XoopsFormRadioYN(_FMCONTENT_TOPIC_MENU, 'topic_asmenu', $this->getVar('topic_asmenu', 'e')));
         $showtype = new XoopsFormSelect(_FMCONTENT_TOPIC_SHOWTYPE, 'topic_showtype', $this->getVar("topic_showtype"));

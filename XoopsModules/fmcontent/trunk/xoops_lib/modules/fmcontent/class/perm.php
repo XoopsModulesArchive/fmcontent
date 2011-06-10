@@ -1,4 +1,23 @@
 <?php
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * FmContent page class
+ *
+ * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @author      Zoullou (http://www.zoullou.net)
+ * @author      Hossein Azizabadi (AKA Voltan)
+ * @version     $Id:$
+ */
 
 if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
@@ -39,6 +58,26 @@ class fmcontentPermHandler {
         $autorizedCat = $this->getAuthorizedPublicCat($user, $perm, $forMods);
         return in_array($topic_id, $autorizedCat);
     }
+    
+	function setpermission($forMods,$gperm_name , $groups_action ,$id,$new) {
+
+            $gperm_handler = &xoops_gethandler('groupperm');
+            
+            if(!$new) {
+            $criteria = new CriteriaCompo();
+            $criteria->add(new Criteria('gperm_itemid', $id, '='));
+            $criteria->add(new Criteria('gperm_modid', $forMods->getVar('mid'), '='));
+            $criteria->add(new Criteria('gperm_name', $gperm_name, '='));
+            $gperm_handler->deleteAll($criteria);
+            }
+            
+            if (isset($groups_action)) {
+                foreach ($groups_action as $onegroup_id) {
+                    $gperm_handler->addRight($gperm_name, $id, $onegroup_id, $forMods->getVar('mid'));
+                }
+            }
+
+	}	
 
 }
 

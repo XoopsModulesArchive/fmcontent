@@ -1,3 +1,9 @@
+1.10
+=================================
+- Add uploadimg function in utils class (Voltan)
+- Add setpermission function in perm class (Voltan)
+- Add upload image for topics (Voltan)
+
 1.05
 =================================
 - Improve blocks (ianez - Voltan) 

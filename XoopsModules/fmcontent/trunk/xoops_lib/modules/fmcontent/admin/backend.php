@@ -45,27 +45,18 @@ switch ($op) {
         $obj->setVar('topic_date_created', time());
         $obj->setVar('topic_date_update', time());
 
+        //image
+        fmcontentUtils::uploadimg($forMods, 'topic_img' , $obj,$_REQUEST['topic_img']);
+
         if (!$topic_handler->insert($obj)) {
             echo 'error';
         }
 
-        $new_topic = $obj->db->getInsertId();
+        $topic_id = $obj->db->getInsertId();
 
-        //permission pour voir
-        $gperm_handler = &xoops_gethandler('groupperm');
-        if (isset($_REQUEST['groups_view'])) {
-            foreach ($_REQUEST['groups_view'] as $onegroup_id) {
-                $gperm_handler->addRight('fmcontent_access', $new_topic, $onegroup_id, $xoopsModule->getVar('mid'));
-            }
-        }
-
-        //permission pour editer
-        $gperm_handler = &xoops_gethandler('groupperm');
-        if (isset($_POST['groups_submit'])) {
-            foreach ($_POST['groups_submit'] as $onegroup_id) {
-                $gperm_handler->addRight('fmcontent_submit', $new_topic, $onegroup_id, $xoopsModule->getVar('mid'));
-            }
-        }
+        //permission
+        fmcontentPermHandler::setpermission($forMods,'fmcontent_access',$_POST['groups_view'] ,$topic_id, true);
+        fmcontentPermHandler::setpermission($forMods,'fmcontent_submit',$_POST['groups_submit'] ,$topic_id,true);
 
         // Redirect page
         fmcontent_Redirect('topic.php', 1, _FMCONTENT_MSG_WAIT);
@@ -81,32 +72,12 @@ switch ($op) {
             $obj->setVars($_POST);
             $obj->setVar('topic_date_update', time());
 
-            //permission pour voir
-            $gperm_handler = &xoops_gethandler('groupperm');
-            $criteria = new CriteriaCompo();
-            $criteria->add(new Criteria('gperm_itemid', $topic_id, '='));
-            $criteria->add(new Criteria('gperm_modid', $xoopsModule->getVar('mid'), '='));
-            $criteria->add(new Criteria('gperm_name', 'fmcontent_access', '='));
-            $gperm_handler->deleteAll($criteria);
-            if (isset($_REQUEST['groups_view'])) {
-                foreach ($_REQUEST['groups_view'] as $onegroup_id) {
-                    $gperm_handler->addRight('fmcontent_access', $topic_id, $onegroup_id, $xoopsModule->getVar('mid'));
-                }
-            }
-
-            //permission pour editer
-            $gperm_handler = &xoops_gethandler('groupperm');
-            $criteria = new CriteriaCompo();
-            $criteria->add(new Criteria('gperm_itemid', $topic_id, '='));
-            $criteria->add(new Criteria('gperm_modid', $xoopsModule->getVar('mid'), '='));
-            $criteria->add(new Criteria('gperm_name', 'fmcontent_submit', '='));
-            $gperm_handler->deleteAll($criteria);
-            if (isset($_POST['groups_submit'])) {
-                foreach ($_POST['groups_submit'] as $onegroup_id) {
-                    $gperm_handler->addRight('fmcontent_submit', $topic_id, $onegroup_id, $xoopsModule->getVar('mid'));
-                }
-
-            }
+            //image
+            fmcontentUtils::uploadimg($forMods, 'topic_img' , $obj,$_REQUEST['topic_img']);
+            
+            //permission
+            fmcontentPermHandler::setpermission($forMods,'fmcontent_access',$_POST['groups_view'] ,$topic_id,false);
+            fmcontentPermHandler::setpermission($forMods,'fmcontent_submit',$_POST['groups_submit'] ,$topic_id,false);
 
             if (!$topic_handler->insert($obj)) {
                 echo 'error';
@@ -145,24 +116,8 @@ switch ($op) {
         $obj->setVar('content_create', time());
         $obj->setVar('content_update', time());
 
-        //Form topic_img	
-        include_once XOOPS_ROOT_PATH . "/class/uploader.php";
-        $uploaddir_content_img = XOOPS_ROOT_PATH . xoops_getModuleOption('img_dir', $forMods->getVar('dirname'));
-        $uploader_content_img = new XoopsMediaUploader($uploaddir_content_img, xoops_getModuleOption('img_mime', $forMods->getVar('dirname')), xoops_getModuleOption('img_size', $forMods->getVar('dirname')), xoops_getModuleOption('img_maxwidth', $forMods->getVar('dirname')), xoops_getModuleOption('img_maxheight', $forMods->getVar('dirname')));
-        if ($uploader_content_img->fetchMedia('content_img')) {
-            $uploader_content_img->setPrefix("content_img_");
-            $uploader_content_img->fetchMedia('content_img');
-            if (!$uploader_content_img->upload()) {
-                $errors = $uploader_content_img->getErrors();
-                redirect_header("javascript:history.go(-1)", 3, $errors);
-            } else {
-                $obj->setVar('content_img', $uploader_content_img->getSavedFileName());
-            }
-        } else {
-            if (isset($_REQUEST['content_img'])) {
-                $obj->setVar('content_img', $_REQUEST['content_img']);
-            }
-        }
+        //image
+        fmcontentUtils::uploadimg($forMods, 'content_img' , $obj,$_REQUEST['content_img']);
 
         $content_handler->updateposts($_REQUEST['content_uid'], $_REQUEST['content_status'], $content_action = 'add');
 
@@ -217,25 +172,9 @@ switch ($op) {
             if (!isset($_REQUEST['doxcode'])) {
                 $obj->setVar('doxcode', 0);
             }
-
-            //Form topic_img
-            include_once XOOPS_ROOT_PATH . "/class/uploader.php";
-            $uploaddir_content_img = XOOPS_ROOT_PATH . xoops_getModuleOption('img_dir', $forMods->getVar('dirname'));
-            $uploader_content_img = new XoopsMediaUploader($uploaddir_content_img, xoops_getModuleOption('img_mime', $forMods->getVar('dirname')), xoops_getModuleOption('img_size', $forMods->getVar('dirname')), xoops_getModuleOption('img_maxwidth', $forMods->getVar('dirname')), xoops_getModuleOption('img_maxheight', $forMods->getVar('dirname')));
-            if ($uploader_content_img->fetchMedia('content_img')) {
-                $uploader_content_img->setPrefix("content_img_");
-                $uploader_content_img->fetchMedia('content_img');
-                if (!$uploader_content_img->upload()) {
-                    $errors = $uploader_content_img->getErrors();
-                    redirect_header("javascript:history.go(-1)", 3, $errors);
-                } else {
-                    $obj->setVar('content_img', $uploader_content_img->getSavedFileName());
-                }
-            } else {
-                if (isset($_REQUEST['content_img'])) {
-                    $obj->setVar('content_img', $_REQUEST['content_img']);
-                }
-            }
+            
+            //image
+            fmcontentUtils::uploadimg($forMods, 'content_img' , $obj,$_REQUEST['content_img']);
 
             if (!$content_handler->insert($obj)) {
                 echo 'error';
