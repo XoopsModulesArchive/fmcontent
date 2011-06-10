@@ -1,0 +1,90 @@
+	<{if $img_lightbox}>
+	<script type="text/javascript" >
+		$(function() {
+			  $('.gallery a').lightBox({
+		        imageLoading:'<{$xoops_url}>/modules/<{$xoops_dirname}>/language/<{$xoops_language}>/images/lightbox-ico-loading.gif',
+		        imageBtnClose:'<{$xoops_url}>/modules/<{$xoops_dirname}>/language/<{$xoops_language}>/images/lightbox-btn-close.gif',
+		        imageBtnNext:'<{$xoops_url}>/modules/<{$xoops_dirname}>/language/<{$xoops_language}>/images/lightbox-btn-next.gif',
+		        imageBtnPrev:'<{$xoops_url}>/modules/<{$xoops_dirname}>/language/<{$xoops_language}>/images/lightbox-btn-prev.gif',
+		        imageBlank:'<{$xoops_url}>/modules/<{$xoops_dirname}>/language/<{$xoops_language}>/images/lightbox-blank.gif',
+		        txtImage: '<{$smarty.const._FMCONTENT_LIGHTBOX_IMAGE}>',
+		        overlayOpacity: 0.6,
+		        containerResizeSpeed: 350,
+		        txtOf: '<{$smarty.const._FMCONTENT_LIGHTBOX_OF}>'
+			  });
+		});
+	</script>
+	<{/if}>
+	
+	<{if $editinplace}>
+	<script type="text/javascript" charset="utf-8">
+	    $(function() {
+	
+	        /* Handle links inside editable area. */
+	        $('.editable > a').bind('click', function() {
+	            $(this).parent().trigger('click');
+	            return false;
+	        });
+	
+	        $('#content_<{$content.content_id}>').editable('<{$xoops_url}>/modules/<{$xoops_dirname}>/ajax.php', {
+	            indicator : '<img src="images/indicator.gif">',
+	            type      : 'wysiwyg',
+	            width     : 640,
+	            height    : 'auto',
+	            onblur    : 'ignore',
+	            submit    : 'OK',
+	            cancel    : 'Cancel'
+	        });
+	
+	    });
+	</script>
+	<{/if}>
+	
+	<{if $breadcrumb_show || $rss}>
+	<div class="fmcontent_top">
+		<{if $breadcrumb_show}>
+		<div class="breadcrumb floatleft">
+			<{if $breadcrumb_tohome}>
+			<span class="">
+				<a title="<{$smarty.const._FMCONTENT_HOME}>" href="<{$xoops_url}>"><{$smarty.const._FMCONTENT_HOME}></a>
+			</span>
+			<{/if}>
+			<{if $breadcrumb_modname && $breadcrumb_tohome}>&raquo;<{/if}>
+			<{if $breadcrumb_modname}>
+	  		<{if $link || $topic_title}>
+	  		<span class="">
+	  			<a title="<{$modname}>" href="<{$xoops_url}>/modules/<{$xoops_dirname}>"><{$modname}></a>
+	  		</span>
+	  		<{elseif $topic_title ==''}>
+	  		<span class=""><{$modname}></span>
+	      <{/if}>
+	      <{/if}>
+			<{if $link.topicid && ( $breadcrumb_modname || $breadcrumb_tohome) }>&raquo;<{/if}>
+			<{if $link.topicid}>
+			<span class="">
+				<a title="<{$link.topic}>" href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php?topic=<{$link.topicid}>"><{$link.topic}></a>
+			</span>			
+			<{if $topic_title && ($breadcrumb_modname || $breadcrumb_tohome) }>&raquo;<{/if}>
+			<{if $topic_title}><span class=""><{$topic_title}></span><{/if}>
+			<span class=""> &raquo; </span><{if $content.content_title}><span class=""><{$content.content_title}></span><{/if}>
+			<{elseif $topic_title}>
+			<{if $breadcrumb_modname || $breadcrumb_tohome}>&raquo;<{/if}>
+	      <span class=""><{$topic_title}></span>
+			<{elseif $link.topicshow =='0'}>
+			<{if $breadcrumb_modname || $breadcrumb_tohome}>&raquo;<{/if}>
+			<{if $content.content_title}><span class=""><{$content.content_title}></span><{/if}>
+			<{/if}>
+		</div>
+		<{/if}>
+		
+		<{if $rss}>
+		<div class="rss floatright">
+	    	<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/rss.php"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/rss.png" alt="" /></a>
+	   </div>
+		<{/if}>
+		
+		<{if $breadcrumb_show || $rss}>
+		<div class="endline"></div>
+		<{/if}>
+	</div>
+	<{/if}>

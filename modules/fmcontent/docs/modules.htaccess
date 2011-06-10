@@ -1,0 +1,9 @@
+Options +FollowSymlinks
+RewriteEngine on
+RewriteRule   ^([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ content.php?id=$2&page=$3 [L]
+RewriteRule   ^print/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ print.php?id=$2&page=$3 [L]
+RewriteRule   ^pdf/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ pdf.php?id=$2&page=$3 [L]
+RewriteRule   ^comment-new/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ comment-new.php?id=$2&page=$3 [L]
+RewriteRule   ^comment-edit/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ comment-edit.php?id=$1&page=$4&com_id=$3 [L]
+RewriteRule   ^comment-reply/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ comment-reply.php?id=$1&page=$4&com_id=$3 [L]
+RewriteRule   ^comment-delete/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ comment-delete.php?id=$1&page=$4&com_id=$3 [L]
