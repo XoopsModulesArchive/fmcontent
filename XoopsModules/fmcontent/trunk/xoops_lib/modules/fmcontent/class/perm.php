@@ -23,12 +23,12 @@ if (!defined("XOOPS_ROOT_PATH")) {
     die("XOOPS root path not defined");
 }
 
-class fmcontentPermHandler {
+class fmcontentPermission {
 
     function &getHandler() {
         static $permHandler;
         if (!isset($permHandler)) {
-            $permHandler = new fmcontentPermHandler();
+            $permHandler = new fmcontentPermission();
         }
         return $permHandler;
     }
@@ -41,7 +41,7 @@ class fmcontentPermHandler {
         }
     }
 
-    function getAuthorizedPublicCat(&$user, $perm, $forMods) {
+    function getAuthorizedTopic(&$user, $perm, $forMods) {
         static $authorizedCat;
         $userId = ($user) ? $user->getVar('uid') : 0;
         if (!isset($authorizedCat[$perm][$userId])) {
@@ -55,7 +55,7 @@ class fmcontentPermHandler {
     }
 
     function isAllowed(&$user, $perm, $topic_id, $forMods) {
-        $autorizedCat = $this->getAuthorizedPublicCat($user, $perm, $forMods);
+        $autorizedCat = $this->getAuthorizedTopic($user, $perm, $forMods);
         return in_array($topic_id, $autorizedCat);
     }
     

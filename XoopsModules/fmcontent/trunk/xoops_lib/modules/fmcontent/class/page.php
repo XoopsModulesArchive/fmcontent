@@ -241,7 +241,7 @@ class fmcontent_content extends XoopsObject {
         $form->addElement(new XoopsFormText(_FMCONTENT_FORMTITLE, 'content_title', 50, 255, $this->getVar('content_title', 'e')), true);
         // Topic
         $topic_Handler = xoops_getModuleHandler("topic", "fmcontent");
-        $perm_handler = fmcontentPermHandler::getHandler();
+        $perm_handler = fmcontentPermission::getHandler();
         $topics = fmcontent_MygetItemIds('fmcontent_submit', $forMods->getVar('dirname'));
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('topic_modid', $forMods->getVar('mid')));
