@@ -29,6 +29,7 @@ require_once $GLOBALS['xoops']->path('/modules/fmcontent/class/folder.php');
 
 require_once XOOPS_TRUST_PATH . '/modules/fmcontent/include/functions.php';
 require_once XOOPS_TRUST_PATH . '/modules/fmcontent/class/admin.php';
+require_once XOOPS_TRUST_PATH . '/modules/fmcontent/class/utils.php';
 
 xoops_load('xoopsformloader');
 

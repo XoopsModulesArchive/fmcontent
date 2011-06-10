@@ -26,6 +26,7 @@ if (!defined('XOOPS_TRUST_PATH')) die('set XOOPS_TRUST_PATH into mainfile.php');
 
 require_once XOOPS_TRUST_PATH . '/modules/fmcontent/include/functions.php';
 include_once XOOPS_TRUST_PATH . '/modules/fmcontent/class/perm.php';
+require_once XOOPS_TRUST_PATH . '/modules/fmcontent/class/utils.php';
 // Load template class
 require_once XOOPS_ROOT_PATH . '/class/template.php';
 
