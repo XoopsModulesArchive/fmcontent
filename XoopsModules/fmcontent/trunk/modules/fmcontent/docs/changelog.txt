@@ -1,0 +1,69 @@
+1.05
+=================================
+- Improve blocks (ianez - Voltan) 
+- Fix bug in getTopicCount (Voltan)
+- Fix menu block for show all contents (Voltan)
+- improve all templates (ianez)
+
+1.04
+=================================
+- Fix error on permissions when there is no topic (Mamba)
+- Fix some html errors in templates (Voltan)
+- Add page title for pages and topic (Voltan)
+- Fix Breadcrumb (ianez - Voltan)
+- Fix fmcontent_Url if topic title not exist (Voltan)
+- Fix fmcontent_AjaxFilter (ianez - Voltan)
+- improve all templates (ianez)
+
+1.03 
+=================================
+- Fix error if topic not exist (Voltan)
+- Fix error FolderHandler in tools.php (Voltan)
+- Change $tpl whit $xoopsTpl in admin pages (Voltan)
+- Fix fmcontent_Filter function for change capitalized (Voltan)
+- Fix topic name in menu block if select static pages (Voltan)
+- Rebuild about module page (Voltan)
+- Fix error in getContentList function (Voltan)
+- Fix list block title in utf-8 languages (Voltan)
+- Chage page block setting for select dynamic pages (Voltan)
+- Add Breadcrumb (Voltan)
+
+1.02 
+=================================
+- Rename module from forcontent to fmcontent (For Muss content)
+- Fix RSS bug (formuss)
+- Add topic name to URL (formuss - voltan)
+- Fix pdf and print file URL (formuss)
+- Edited backend.php for use this module RSS (Voltan)
+- Improve Queries (Voltan)
+- Add function for update user posts after add or delete or change status (Voltan)
+- Submit page in user side (Voltan)
+- Improve templates(Voltan)
+- Add some config options for print page (Voltan)
+- Set check permissions in pdf and print pages (Voltan)
+- Fix some bugs and improve block templates (Voltan)
+- Add option for add title to menu title and Meta Keywords and Meta Description whit ajax in submit page (Voltan)
+
+1.01 
+=================================
+- Add topic (Voltan)
+- Complate menu system (Voltan)
+- Add tag module support (Voltan)
+- Add Comment support (Voltan)
+- Improve templates and design (Voltan)
+- Support XOOPS search (Voltan)
+- RSS (Voltan)
+- Add Bookmark whit show/hide option (Voltan)
+- Add facebook/twitter/Google buze shear logo (Voltan)
+- Add some options for show/hide information in user side (Voltan)
+- Advertisement (Voltan)
+- improved blocks (Voltan)
+- Attach image whit some view options(Voltan)
+- hits (Voltan)
+- Permission system (Voltan)
+- Default content for each topic (Voltan)
+- adjusted Admin GUI to XOOPS Standard Module GUI (mamba)
+
+1.00 
+=================================
+Original release (For Muss)

@@ -1,0 +1,9 @@
+Options +FollowSymlinks
+RewriteEngine on
+RewriteRule   ^fmcontent/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/content.php?id=$2&page=$3 [L]
+RewriteRule   ^fmcontent/print/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/print.php?id=$2&page=$3 [L]
+RewriteRule   ^fmcontent/pdf/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/pdf.php?id=$2&page=$3 [L]
+RewriteRule   ^fmcontent/comment-new/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/comment-new.php?id=$2&page=$3 [L]
+RewriteRule   ^fmcontent/comment-edit/([^./]+)/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/comment-edit.php?id=$2&page=$3&com_id=$3 [L]
+RewriteRule   ^fmcontent/comment-reply/([^./]+)/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/comment-reply.php?id=$2&page=$3&com_id=$3 [L]
+RewriteRule   ^fmcontent/comment-delete/([^./]+)/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/comment-delete.php?id=$2&page=$3&com_id=$3 [L]

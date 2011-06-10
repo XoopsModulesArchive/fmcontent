@@ -1,0 +1,225 @@
+/**
+ * fmContent module
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright    The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @license             http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package    fmContent
+ * @since        2.5.0
+ * @author     voltan
+ * @version    $Id $
+ **/
+
+.itemImg img {
+	max-width: 200px;
+	max-height: 200px;
+	margin-top: 3px;
+}
+
+.content_img {
+	max-width: 300px;
+	max-height: 300px;
+}
+
+#facebook {
+	margin-left: 8px;
+}
+
+#bookmarkme {
+	margin: 0;
+}
+
+#bookmarkmetitle {
+	text-align: center;
+}
+
+#bookmarkmeitems ul,#socialnetwork ul {
+	width: 100%;
+	height: 23px;
+	list-style-type: none;
+}
+
+#bookmarkmeitems ul li,#socialnetwork ul li {
+	display: inline;
+	float: left;
+	margin: 3px;
+}
+
+.onecolumn {
+	text-align: justify;
+	margin: 2px;
+	padding: 2px;
+}
+
+.twocolumn {
+	column-count: 2;
+	column-gap: 1.5em;
+	-moz-column-count: 2;
+	-moz-column-gap: 1.5em;
+	-webkit-column-count: 2;
+	-webkit-column-gap: 1.5em;
+	text-align: justify;
+	margin: 2px;
+	padding: 2px;
+}
+
+.threecolumn {
+	column-count: 3;
+	column-gap: 1.2em;
+	-moz-column-count: 3;
+	-moz-column-gap: 1.2em;
+	-webkit-column-count: 3;
+	-webkit-column-gap: 1.2em;
+	text-align: justify;
+	margin: 2px;
+	padding: 2px;
+}
+
+.forcolumn {
+	column-count: 4;
+	column-gap: 1.2em;
+	-moz-column-count: 4;
+	-moz-column-gap: 1.2em;
+	-webkit-column-count: 4;
+	-webkit-column-gap: 1.2em;
+	text-align: justify;
+	margin: 2px;
+	padding: 2px;
+}
+
+.endline {
+	width: 100%;
+	clear: both;
+}
+
+.fmcontent_top {
+	padding-bottom: 8px;
+}
+
+.breadcrumb {
+	line-height: 0.8em;
+	font-size: 1em;
+}
+
+.breadcrumb a {
+	font-weight: normal;
+}
+
+.breadcrumb a:hover {
+	text-decoration: underline;
+}
+
+.rss {
+	margin: 0;
+	padding: 0;
+}
+
+.floatleft,.floatright {
+	margin: 0;
+	padding: 0;
+}
+
+.topic_header h2 {
+	padding: 0px 0 6px 0;
+	margin: 0;
+}
+
+.comment_bar {
+	margin-top: 10px;
+}
+
+li h3 {
+	padding: 0;
+	margin: 0;
+}
+
+.fmcontent li.ui-state-default {
+	list-style: none;
+	margin: 0 0 5px 0;
+}
+
+/*for JQuery UI*/
+.fmcontent .ui-widget-content {
+	margin: 0 1px 12px 1px;
+	border: 1px solid #cccccc;
+	padding: 3px;
+}
+
+.fmcontent table.ui-widget-content {
+	margin: 0 auto;
+	padding: 0px;
+  border: 0px solid #cccccc;
+  width:99%;
+}
+
+.fmcontent .ui-widget-content .ui-widget-content {
+	margin: 5px;
+	padding: 7px;
+}
+
+.fmcontent .ui-widget-content a:hover {
+	text-decoration: underline;
+}
+
+.fmcontent .ui-widget-content h1 {
+	margin: 0;
+	padding: 0;
+}
+
+.fmcontent .ui-widget-content h2 {
+	margin: 0;
+	padding: 0;
+}
+
+.fmcontent .ui-state-default {
+	margin: 5px;
+	padding: 5px;
+}
+
+.fmcontent .ui-state-default img {
+	vertical-align: bottom;
+}
+
+.fmcontent .ui-widget-header {
+	padding: 5px 3px 5px 7px;
+	margin: 5px;
+}
+
+.fmcontent .ui-widget-content .onecolumn {
+	margin: 3px 0 5px 0;
+	padding: 0px;
+}
+
+.fmcontent .ui-widget-content .ui-widget-content .ui-state-default {
+	margin: 0 0 3px 0;
+}
+
+.fmcontent .related h2 {
+	margin: 0 0 0 2px;
+	padding: 7px 0;
+}
+
+#default.ui-widget-content {
+	margin: 0 0px 6px 2px;
+	border: 0px solid #cccccc;
+	padding: 0 0 3px 0;
+}
+
+#default .ui-widget-header {
+	margin: 5px 2px;
+}
+
+#default.ui-widget-content .ui-widget-content {
+	margin: 2px;
+	padding: 7px;
+}
+
+#default .ui-state-default {
+	margin: 5px 2px;
+}

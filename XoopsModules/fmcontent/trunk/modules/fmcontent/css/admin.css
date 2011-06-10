@@ -1,0 +1,228 @@
+/**
+ * fmContent module
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright    The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @license             http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package    fmContent
+ * @since        2.5.0
+ * @author     kris, Mamba ,voltan
+ * @version    $Id $
+ **/
+#about fieldset {
+	margin: 10px;
+	padding: 5px;
+}
+
+#about legend {
+	margin: 0 5px;
+	padding: 0 5px 8px 5px;
+}
+
+#about label,#about text {
+	display: block;
+	float: left;
+	margin-bottom: 12px;
+}
+
+#about label {
+	text-align: right;
+	width: 200px;
+	padding-right: 20px;
+}
+
+#about .label {
+	font-size: 16px;
+	color: #2F5376;
+	font-weight: bold;
+}
+
+#about .txtchangelog {
+	height: 350px;
+	overflow: auto;
+	line-height: 1.2em;
+}
+
+#about .modulename {
+	margin-top: 1px;
+	margin-bottom: 4px;
+	font-size: 18px;
+	line-height: 18px;
+	color: rgb(47, 83, 118);
+	font-weight: bold;
+}
+
+#about .aboutposition {
+	margin: 0 30px 0 30px;
+}
+
+#about .modulelogo {
+	min-width: 110px !important;
+	margin: 15px 0 0 0;
+	text-align: center;
+}
+
+/* menu */
+div.rmmenuicon {
+	margin: 3px;
+	font-family: Tahoma, Arial, Helvetica;
+	text-align: center;
+}
+
+div.rmmenuicon a {
+	display: block;
+	float: left;
+	height: 75px !important;
+	width: 75px !important;
+	vertical-align: middle;
+	text-decoration: none;
+	border: 1px solid #CCCCCC;
+	padding: 2px 5px 1px 5px;
+	margin: 3px;
+	color: #666666;
+	background-color: #f0f0f0;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	border-radius: 6px;
+}
+
+div.rmmenuicon img {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+div.rmmenuicon a span {
+	font-size: 11px;
+	font-weight: bold;
+	display: block;
+}
+
+div.rmmenuicon a:hover {
+	background-color: #FFF6C1;
+	border: 1px solid #FF9900;
+	color: #1E90FF;
+}
+
+div.rmmenuicon a:hover span {
+	text-decoration: none;
+}
+
+.moduleicons .navigation {
+	font-size: 12px;
+	color: #606060;
+	background: no-repeat left top;
+	font-weight: bold;
+	height: 30px;
+	vertical-align: middle;
+	padding: 5px 0 0 40px;
+	border-bottom: 1px solid #393e41;
+}
+
+.moduleicons #index {
+	background-image: url(../images/admin/home.png);
+}
+
+.moduleicons #topic {
+	background-image: url(../images/admin/category.png);
+}
+
+.moduleicons #content {
+	background-image: url(../images/admin/content.png);
+}
+
+.moduleicons #tools {
+	background-image: url(../images/admin/administration.png);
+}
+
+.moduleicons #permission {
+	background-image: url(../images/admin/lock.png);
+}
+
+.moduleicons #about {
+	background-image: url(../images/admin/about.png);
+}
+
+.txtchangelog {
+	height: 350px;
+	overflow: auto;
+}
+
+tr.level1 td {
+	background-color: #F1F1F1;
+}
+
+.level1 span {
+	padding-left: 0;
+}
+
+tr.level2 td {
+	background-color: #F1FFF1;
+}
+
+.level2 span {
+	padding-left: 16px;
+}
+
+.level3 span {
+	padding-left: 32px;
+}
+
+tr.level3 td {
+	background-color: #FFF1FF;
+}
+
+#xo-module-log {
+	padding: 5px;
+}
+
+#xo-module-log h4 {
+	margin: 0px;
+	border-bottom: dashed 1px #000000;
+}
+
+#xo-module-log .xo-logger {
+	padding: 0 .5em;
+	margin: 5px;
+	min-height: 200px;
+	height: 350px;
+	width: 700px;
+	overflow: auto;
+	background-color: #fdfdfd;
+	border: 1px dashed #666;
+	list-style: none;
+}
+
+.xo-logger li {
+	list-style: none;
+}
+
+.moduleicons {
+	height: 30px;
+	width: 100%;
+}
+
+.tables {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.title {
+	
+}
+
+.fromimage {
+	max-width: 500px;
+	margin: 5px;
+}
+
+.endline {
+	width: 100%;
+	clear: both;
+}

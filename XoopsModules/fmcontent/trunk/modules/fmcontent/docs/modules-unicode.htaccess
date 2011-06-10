@@ -1,0 +1,9 @@
+Options +FollowSymlinks
+RewriteEngine on
+RewriteRule   ^([^./]+)/([^./]+)/([^./]+)\.html$ content.php?id=$2&page=$3 [L]
+RewriteRule   ^print/([^./]+)/([^./]+)/([^./]+)\.html$ print.php?id=$2&page=$3 [L]
+RewriteRule   ^pdf/([^./]+)/([^./]+)/([^./]+)\.html$ pdf.php?id=$2&page=$3 [L]
+RewriteRule   ^comment-new/([^./]+)/([^./]+)/([^./]+)\.html$ comment-new.php?id=$2&page=$3 [L]
+RewriteRule   ^comment-edit/([^./]+)/([^./]+)/([^./]+)/([^./]+)\.html$ comment-edit.php?id=$1&page=$4&com_id=$3 [L]
+RewriteRule   ^comment-reply/([^./]+)/([^./]+)/([^./]+)/([^./]+)\.html$ comment-reply.php?id=$1&page=$4&com_id=$3 [L]
+RewriteRule   ^comment-delete/([^./]+)/([^./]+)/([^./]+)/([^./]+)\.html$ comment-delete.php?id=$1&page=$4&com_id=$3 [L]
