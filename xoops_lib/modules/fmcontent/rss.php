@@ -90,7 +90,7 @@ if (!$xoopsTpl->is_cached('db:fmcontent_rss.html')) {
     $topic_handler = xoops_getmodulehandler('topic', 'fmcontent');
 
     if ($content_topic != 0) {
-        $permHandler = fmcontentPermHandler::getHandler();
+        $permHandler = fmcontentPermission::getHandler();
         if ($permHandler->isAllowed($xoopsUser, 'fmcontent_access', $content_topic)) {
             $topic_obj = $topic_handler->get($content_topic);
         }

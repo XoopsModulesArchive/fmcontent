@@ -36,7 +36,7 @@ xoops_loadLanguage('admin', $forMods->getVar('dirname', 'e'));
 
 // Check the access permission
 global $xoopsUser;
-$perm_handler = fmcontentPermHandler::getHandler();
+$perm_handler = fmcontentPermission::getHandler();
 if (!$perm_handler->isAllowed($xoopsUser, 'fmcontent_ac', '8', $forMods)) {
     redirect_header("index.php", 3, _NOPERM);
     exit;

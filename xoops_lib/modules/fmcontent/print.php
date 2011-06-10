@@ -66,7 +66,7 @@ if (isset($content_topic) && $content_topic > 0) {
     }
 
     // Check the access permission
-    $perm_handler = fmcontentPermHandler::getHandler();
+    $perm_handler = fmcontentPermission::getHandler();
     if (!$perm_handler->isAllowed($xoopsUser, 'fmcontent_access', $view_topic->getVar('topic_id'), $forMods)) {
         redirect_header("index.php", 3, _NOPERM);
         exit;
