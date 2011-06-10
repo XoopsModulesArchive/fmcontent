@@ -74,7 +74,9 @@ switch ($op) {
 
             //image
             fmcontentUtils::uploadimg($forMods, 'topic_img' , $obj,$_REQUEST['topic_img']);
-            
+		if(isset($_POST['deleteimage']) && intval($_POST['deleteimage']) == 1) {
+           fmcontentUtils::deleteimg($forMods, 'topic_img' , $obj);
+		}
             //permission
             fmcontentPermission::setpermission($forMods,'fmcontent_access',$_POST['groups_view'] ,$topic_id,false);
             fmcontentPermission::setpermission($forMods,'fmcontent_submit',$_POST['groups_submit'] ,$topic_id,false);
@@ -175,6 +177,9 @@ switch ($op) {
             
             //image
             fmcontentUtils::uploadimg($forMods, 'content_img' , $obj,$_REQUEST['content_img']);
+		if(isset($_POST['deleteimage']) && intval($_POST['deleteimage']) == 1) {
+           fmcontentUtils::deleteimg($forMods, 'content_img' , $obj);
+		}
 
             if (!$content_handler->insert($obj)) {
                 echo 'error';

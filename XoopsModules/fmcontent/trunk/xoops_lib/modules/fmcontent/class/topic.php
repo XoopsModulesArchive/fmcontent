@@ -96,6 +96,11 @@ class fmcontent_topic extends XoopsObject {
         $uploadirectory_topic_img = xoops_getModuleOption('img_dir', $forMods->getVar('dirname'));
         $fileseltray_topic_img = new XoopsFormElementTray(_FMCONTENT_TOPIC_IMG, '<br />');
         $fileseltray_topic_img->addElement(new XoopsFormLabel('', "<img class='fromimage' src='" . XOOPS_URL . $uploadirectory_topic_img . $topic_img . "' name='image_topic_img' id='image_topic_img' alt='' />"));
+        if($this->getVar('topic_img')) {
+	        $delete_img = new XoopsFormCheckBox('', 'deleteimage', 0);
+			  $delete_img->addOption(1, _DELETE);
+			  $fileseltray_topic_img->addElement($delete_img);
+		  }
         $fileseltray_topic_img->addElement(new XoopsFormFile(_FMCONTENT_FORMUPLOAD, 'topic_img', xoops_getModuleOption('img_size', $forMods->getVar('dirname'))), false);
         $form->addElement($fileseltray_topic_img);
         

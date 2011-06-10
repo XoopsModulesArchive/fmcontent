@@ -172,12 +172,16 @@ class fmcontent_content extends XoopsObject {
         $uploadirectory_content_img = xoops_getModuleOption('img_dir', $forMods->getVar('dirname'));
         $fileseltray_content_img = new XoopsFormElementTray(_FMCONTENT_IMG, '<br />');
         $fileseltray_content_img->addElement(new XoopsFormLabel('', "<img class='fromimage' src='" . XOOPS_URL . $uploadirectory_content_img . $content_img . "' name='image_content_img' id='image_content_img' alt='' />"));
-        $fileseltray_content_img->addElement(new XoopsFormFile(_FMCONTENT_FORMUPLOAD, 'content_img', xoops_getModuleOption('img_size', $forMods->getVar('dirname'))), false);
+        if($this->getVar('content_img')) {
+	        $delete_img = new XoopsFormCheckBox('', 'deleteimage', 0);
+			  $delete_img->addOption(1, _DELETE);
+			  $fileseltray_content_img->addElement($delete_img);
+		  }
+		  $fileseltray_content_img->addElement(new XoopsFormFile(_FMCONTENT_FORMUPLOAD, 'content_img', xoops_getModuleOption('img_size', $forMods->getVar('dirname'))), false);
         $form->addElement($fileseltray_content_img);
         // Metas
         $form->addElement(new XoopsFormTextArea('Metas Keyword', 'content_words', $this->getVar('content_words', 'e'), 5, 90));
         $form->addElement(new XoopsFormTextArea('Metas Description', 'content_desc', $this->getVar('content_desc', 'e'), 5, 90));
-        //
         // Content author
         $form->addElement(new XoopsFormText(_FMCONTENT_FORMAUTHOR, 'content_author', 50, 255, $this->getVar('content_author', 'e')), false);
         // Content Source
