@@ -4,6 +4,7 @@
 - Add setpermission function in perm class (Voltan)
 - Add upload image for topics (Voltan)
 - Add delete option for images (Voltan)
+- Add Breadcrumb function in utils class (Voltan)
 
 1.05
 =================================
