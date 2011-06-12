@@ -20,392 +20,376 @@
  */
 
 class fmcontent_content extends XoopsObject {
-
-    public $mod;
-    public $db;
-    public $table;
-
-    /**
-     * Class constructor
-     */
-    function fmcontent_content() {
-        $this->initVar('content_id', XOBJ_DTYPE_INT);
-        $this->initVar('content_title', XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar('content_titleview', XOBJ_DTYPE_INT, 1);
-        $this->initVar('content_menu', XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar('content_topic', XOBJ_DTYPE_INT);
-        $this->initVar('content_type', XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar('content_short', XOBJ_DTYPE_TXTAREA, '');
-        $this->initVar('content_text', XOBJ_DTYPE_TXTAREA, '');
-        $this->initVar('content_link', XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar('content_words', XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar('content_desc', XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar('content_alias', XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar('content_status', XOBJ_DTYPE_INT, 1);
-        $this->initVar('content_display', XOBJ_DTYPE_INT, 0);
-        $this->initVar('content_default', XOBJ_DTYPE_INT, 0);
-        $this->initVar('content_create', XOBJ_DTYPE_INT, '');
-        $this->initVar('content_update', XOBJ_DTYPE_INT, '');
-        $this->initVar('content_uid', XOBJ_DTYPE_INT, 0);
-        $this->initVar('content_author', XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar('content_source', XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar('content_groups', XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar('content_order', XOBJ_DTYPE_INT, 0);
-        $this->initVar('content_next', XOBJ_DTYPE_INT, 0);
-        $this->initVar('content_prev', XOBJ_DTYPE_INT, 0);
-        $this->initVar('content_modid', XOBJ_DTYPE_INT, '');
-        $this->initVar('content_hits', XOBJ_DTYPE_INT, '');
-        $this->initVar('content_img', XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar('content_rating', XOBJ_DTYPE_OTHER, '');
-        $this->initVar('content_votes', XOBJ_DTYPE_INT, '');
-        $this->initVar('content_comments', XOBJ_DTYPE_INT, '');
-        $this->initVar('dohtml', XOBJ_DTYPE_INT, 1);
-        $this->initVar('doxcode', XOBJ_DTYPE_INT, 1);
-        $this->initVar('dosmiley', XOBJ_DTYPE_INT, 1);
-        $this->initVar('doimage', XOBJ_DTYPE_INT, 1);
-        $this->initVar('dobr', XOBJ_DTYPE_INT, 0);
-
-        $this->db = $GLOBALS['xoopsDB'];
-        $this->table = $this->db->prefix('fmcontent_content');
-    }
-
-    function getContentForm($forMods, $content_type = 'content') {
-        $form = new XoopsThemeForm(_FMCONTENT_FORM, 'content', 'backend.php', 'post');
-        $form->setExtra('enctype="multipart/form-data"');
-
-        if ($this->isNew()) {
-            $groups = xoops_getModuleOption('groups', $forMods->getVar('dirname', 'e'));
-            $form->addElement(new XoopsFormHidden('op', 'add'));
-            $form->addElement(new XoopsFormHidden('content_uid', $GLOBALS['xoopsUser']->getVar('uid')));
-        } else {
-            $groups = explode(" ", $this->getVar('content_groups', 'e'));
-            $form->addElement(new XoopsFormHidden('op', 'edit'));
-            $content_type = $this->getVar('content_type', 'e');
-        }
-        // Content Id
-        $form->addElement(new XoopsFormHidden('content_id', $this->getVar('content_id', 'e')));
-        // Module Id
-        $form->addElement(new XoopsFormHidden('content_modid', $forMods->getVar('mid')));
-        // Content type
-        $form->addElement(new XoopsFormHidden('content_type', $content_type));
-        // Content title
-        $title = new XoopsFormElementTray(_FMCONTENT_FORMTITLE);
-        $title->addElement(new XoopsFormText('', 'content_title', 50, 255, $this->getVar('content_title', 'e')), true);
-        $display_title = new XoopsFormCheckBox('', 'content_titleview', $this->getVar('content_titleview', 'e'));
-        $display_title->addOption(1, _FMCONTENT_FORMTITLE_DISP);
-        $title->addElement($display_title);
-        $form->addElement($title);
-        // Content menu
-        $form->addElement(new XoopsFormText(_FMCONTENT_CONTENT_MENU, 'content_menu', 50, 255, $this->getVar('content_menu', 'e')), true);
-        // Content menu text
-        $form->addElement(new XoopsFormText(_FMCONTENT_FORMALIAS, 'content_alias', 50, 255, $this->getVar('content_alias', 'e')), true);
-        // Topic
-        $topic_Handler = xoops_getModuleHandler("topic", "fmcontent");
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('topic_modid', $forMods->getVar('mid')));
-        $topic = $topic_Handler->getObjects($criteria);
-        $tree = new XoopsObjectTree($topic, 'topic_id', 'topic_pid');
-        ob_start();
-        echo $tree->makeSelBox('content_topic', 'topic_title', '--', $this->getVar('content_topic', 'e'), true);
-        $topic_sel = new XoopsFormLabel(_FMCONTENT_CONTENT_TOPIC, ob_get_contents());
-        $topic_sel->setDescription(_FMCONTENT_CONTENT_TOPIC_DESC);
-        $form->addElement($topic_sel);
-        ob_end_clean();
-        // Short
-        $form->addElement(new XoopsFormTextArea(_FMCONTENT_SHORT, 'content_short', $this->getVar('content_short', 'e'), 5, 90));
-        // Editor
-        $editor_tray = new XoopsFormElementTray(_FMCONTENT_FORMTEXT, '<br />');
-        if (class_exists('XoopsFormEditor')) {
-            $configs = array(
-                'name' => 'content_desc',
-                'value' => $this->getVar('content_text', 'e'),
-                'rows' => 25,
-                'cols' => 90,
-                'width' => '100%',
-                'height' => '400px',
-                'editor' => xoops_getModuleOption('form_editor', $forMods->getVar('dirname', 'e'))
-            );
-            $editor_tray->addElement(new XoopsFormEditor('', 'content_text', $configs, false, $onfailure = 'textarea'));
-        } else {
-            $editor_tray->addElement(new XoopsFormDhtmlTextArea('', 'content_text', $this->getVar('content_text', 'e'), '100%', '100%'));
-        }
-        $editor_tray->setDescription(_FMCONTENT_FORMTEXT_DESC);
-        if (!fmcontent_isEditorHTML($forMods->getVar('dirname', 'e'))) {
-            if ($this->isNew()) {
-                $this->setVar('dohtml', 0);
-                $this->setVar('dobr', 1);
-            }
-            // HTML
-            $html_checkbox = new XoopsFormCheckBox('', 'dohtml', $this->getVar('dohtml', 'e'));
-            $html_checkbox->addOption(1, _FMCONTENT_DOHTML);
-            $editor_tray->addElement($html_checkbox);
-            // Break line
-            $breaks_checkbox = new XoopsFormCheckBox('', 'dobr', $this->getVar('dobr', 'e'));
-            $breaks_checkbox->addOption(1, _FMCONTENT_BREAKS);
-            $editor_tray->addElement($breaks_checkbox);
-        } else {
-            $form->addElement(new xoopsFormHidden('dohtml', 1));
-            $form->addElement(new xoopsFormHidden('dobr', 0));
-        }
-        // Xoops Image
-        $doimage_checkbox = new XoopsFormCheckBox('', 'doimage', $this->getVar('doimage', 'e'));
-        $doimage_checkbox->addOption(1, _FMCONTENT_DOIMAGE);
-        $editor_tray->addElement($doimage_checkbox);
-        // Xoops Code
-        $xcodes_checkbox = new XoopsFormCheckBox('', 'doxcode', $this->getVar('doxcode', 'e'));
-        $xcodes_checkbox->addOption(1, _FMCONTENT_DOXCODE);
-        $editor_tray->addElement($xcodes_checkbox);
-        // Xoops Smiley
-        $smiley_checkbox = new XoopsFormCheckBox('', 'dosmiley', $this->getVar('dosmiley', 'e'));
-        $smiley_checkbox->addOption(1, _FMCONTENT_DOSMILEY);
-        $editor_tray->addElement($smiley_checkbox);
-        // Editor and options
-        $form->addElement($editor_tray);
-        //tag
-        if ((xoops_getModuleOption('usetag', $forMods->getVar('dirname'))) and (is_dir(XOOPS_ROOT_PATH . '/modules/tag'))) {
-            $items_id = $this->isNew() ? 0 : $this->getVar("content_id");
-            include_once XOOPS_ROOT_PATH . "/modules/tag/include/formtag.php";
-            $form->addElement(new XoopsFormTag("item_tag", 60, 255, $items_id, $catid = 0));
-        }
-        // Image
-        $content_img = $this->getVar('content_img') ? $this->getVar('content_img') : 'blank.gif';
-        $uploadirectory_content_img = xoops_getModuleOption('img_dir', $forMods->getVar('dirname'));
-        $fileseltray_content_img = new XoopsFormElementTray(_FMCONTENT_IMG, '<br />');
-        $fileseltray_content_img->addElement(new XoopsFormLabel('', "<img class='fromimage' src='" . XOOPS_URL . $uploadirectory_content_img . $content_img . "' name='image_content_img' id='image_content_img' alt='' />"));
-        if($this->getVar('content_img')) {
-	        $delete_img = new XoopsFormCheckBox('', 'deleteimage', 0);
-			  $delete_img->addOption(1, _DELETE);
-			  $fileseltray_content_img->addElement($delete_img);
-		  }
-		  $fileseltray_content_img->addElement(new XoopsFormFile(_FMCONTENT_FORMUPLOAD, 'content_img', xoops_getModuleOption('img_size', $forMods->getVar('dirname'))), false);
-        $form->addElement($fileseltray_content_img);
-        // Metas
-        $form->addElement(new XoopsFormTextArea('Metas Keyword', 'content_words', $this->getVar('content_words', 'e'), 5, 90));
-        $form->addElement(new XoopsFormTextArea('Metas Description', 'content_desc', $this->getVar('content_desc', 'e'), 5, 90));
-        // Content author
-        $form->addElement(new XoopsFormText(_FMCONTENT_FORMAUTHOR, 'content_author', 50, 255, $this->getVar('content_author', 'e')), false);
-        // Content Source
-        $form->addElement(new XoopsFormText(_FMCONTENT_FORMSOURCE, 'content_source', 50, 255, $this->getVar('content_source', 'e')), false);
-        // Groups access
-        $form->addElement(new XoopsFormSelectGroup(_FMCONTENT_FORMGROUP, 'content_groups', true, $groups, 5, true));
-        // Next & prev
-        $content_Handler = xoops_getModuleHandler("page", "fmcontent");
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('content_modid', $forMods->getVar('mid')));
-        $criteria->add(new Criteria('content_status', '1'));
-        $content = $content_Handler->getObjects($criteria);
-        $tree = new XoopsObjectTree($content, 'content_id', 'content_topic');
-        ob_start();
-        echo $tree->makeSelBox('content_prev', 'content_title', '', $this->getVar('content_prev', 'e'), true);
-        $form->addElement(new XoopsFormLabel(_FMCONTENT_FORMPREV, ob_get_contents()));
-        ob_end_clean();
-        ob_start();
-        echo $tree->makeSelBox('content_next', 'content_title', '', $this->getVar('content_next', 'e'), true);
-        $form->addElement(new XoopsFormLabel(_FMCONTENT_FORMNEXT, ob_get_contents()));
-        ob_end_clean();
-        // Active
-        $form->addElement(new XoopsFormRadioYN(_FMCONTENT_FORMACTIF, 'content_status', $this->getVar('content_status', 'e')));
-        // Menu
-        $form->addElement(new XoopsFormRadioYN(_FMCONTENT_FORMDISPLAY, 'content_display', $this->getVar('content_display', 'e')));
-        // Default
-        $form->addElement(new XoopsFormRadioYN(_FMCONTENT_FORMDEFAULT, 'content_default', $this->getVar('content_default', 'e')));
-        // Submit buttons
-        $button_tray = new XoopsFormElementTray('', '');
-        $submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
-        $button_tray->addElement($submit_btn);
-        $cancel_btn = new XoopsFormButton('', 'cancel', _CANCEL, 'cancel');
-        $cancel_btn->setExtra('onclick="javascript:history.go(-1);"');
-        $button_tray->addElement($cancel_btn);
-        $form->addElement($button_tray);
-        $form->display();
-
-        return $form;
-    }
-
-    function getContentSimpleForm($forMods, $content_type = 'content') {
-        $form = new XoopsThemeForm(_FMCONTENT_FORM, 'content', 'submit.php', 'post');
-        $form->setExtra('enctype="multipart/form-data"');
-
-        if ($this->isNew()) {
-            $groups = xoops_getModuleOption('groups', $forMods->getVar('dirname', 'e'));
-            $form->addElement(new XoopsFormHidden('op', 'add'));
-            $form->addElement(new XoopsFormHidden('content_uid', $GLOBALS['xoopsUser']->getVar('uid')));
-        } else {
-            $groups = explode(" ", $this->getVar('content_groups', 'e'));
-            $form->addElement(new XoopsFormHidden('op', 'edit'));
-            $content_type = $this->getVar('content_type', 'e');
-        }
-        // Content Id
-        $form->addElement(new XoopsFormHidden('content_id', $this->getVar('content_id', 'e')));
-        // Module Id
-        $form->addElement(new XoopsFormHidden('content_modid', $forMods->getVar('mid')));
-        // Content type
-        $form->addElement(new XoopsFormHidden('content_type', $content_type));
-        // Content title
-        $form->addElement(new XoopsFormText(_FMCONTENT_FORMTITLE, 'content_title', 50, 255, $this->getVar('content_title', 'e')), true);
-        // Topic
-        $topic_Handler = xoops_getModuleHandler("topic", "fmcontent");
-        $perm_handler = fmcontentPermission::getHandler();
-        $topics = fmcontent_MygetItemIds('fmcontent_submit', $forMods->getVar('dirname'));
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('topic_modid', $forMods->getVar('mid')));
-        global $xoopsUser;
-        if ($xoopsUser) {
-            if (!$xoopsUser->isAdmin($forMods->getVar('mid'))) {
-                $criteria->add(new Criteria('topic_id', '(' . implode(',', $topics) . ')', 'IN'));
-            }
-        } else {
-            $criteria->add(new Criteria('topic_id', '(' . implode(',', $topics) . ')', 'IN'));
-        }
-        $topic = $topic_Handler->getObjects($criteria);
-        $tree = new XoopsObjectTree($topic, 'topic_id', 'topic_pid');
-        ob_start();
-        echo $tree->makeSelBox('content_topic', 'topic_title', '--', $this->getVar('content_topic', 'e'), true);
-        $topic_sel = new XoopsFormLabel(_FMCONTENT_CONTENT_TOPIC, ob_get_contents());
-        $topic_sel->setDescription(_FMCONTENT_CONTENT_TOPIC_DESC);
-        $form->addElement($topic_sel);
-        ob_end_clean();
-        // Short
-        $form->addElement(new XoopsFormTextArea(_FMCONTENT_SHORT, 'content_short', $this->getVar('content_short', 'e'), 5, 80));
-        // Editor
-        $editor_tray = new XoopsFormElementTray(_FMCONTENT_FORMTEXT, '<br />');
-        if (class_exists('XoopsFormEditor')) {
-            $configs = array(
-                'name' => 'content_desc',
-                'value' => $this->getVar('content_text', 'e'),
-                'rows' => 15,
-                'cols' => 80,
-                'width' => '95%',
-                'height' => '250px',
-                'editor' => xoops_getModuleOption('form_editor', $forMods->getVar('dirname', 'e'))
-            );
-            $editor_tray->addElement(new XoopsFormEditor('', 'content_text', $configs, false, $onfailure = 'textarea'));
-        } else {
-            $editor_tray->addElement(new XoopsFormDhtmlTextArea('', 'content_text', $this->getVar('content_text', 'e'), '100%', '100%'));
-        }
-        $editor_tray->setDescription(_FMCONTENT_FORMTEXT_DESC);
-        // Editor and options
-        $form->addElement($editor_tray);
-        if (!fmcontent_isEditorHTML($forMods->getVar('dirname', 'e'))) {
-            $form->addElement(new xoopsFormHidden('dohtml', 0));
-            $form->addElement(new xoopsFormHidden('dobr', 1));
-        } else {
-            $form->addElement(new xoopsFormHidden('dohtml', 1));
-            $form->addElement(new xoopsFormHidden('dobr', 0));
-        }
-        $form->addElement(new xoopsFormHidden('doimage', 1));
-        $form->addElement(new xoopsFormHidden('doxcode', 1));
-        $form->addElement(new xoopsFormHidden('dosmiley', 1));
-        //tag
-        if ((xoops_getModuleOption('usetag', $forMods->getVar('dirname'))) and (is_dir(XOOPS_ROOT_PATH . '/modules/tag'))) {
-            $items_id = $this->isNew() ? 0 : $this->getVar("content_id");
-            include_once XOOPS_ROOT_PATH . "/modules/tag/include/formtag.php";
-            $form->addElement(new XoopsFormTag("item_tag", 60, 255, $items_id, $catid = 0));
-        }
-        // Image
-        $content_img = $this->getVar('content_img') ? $this->getVar('content_img') : 'blank.gif';
-        $uploadirectory_content_img = xoops_getModuleOption('img_dir', $forMods->getVar('dirname'));
-        $fileseltray_content_img = new XoopsFormElementTray(_FMCONTENT_IMG, '<br />');
-        $fileseltray_content_img->addElement(new XoopsFormLabel('', "<img class='fromimage' src='" . XOOPS_URL . $uploadirectory_content_img . $content_img . "' name='image_content_img' id='image_content_img' alt='' />"));
-        $fileseltray_content_img->addElement(new XoopsFormFile(_FMCONTENT_FORMUPLOAD, 'content_img', xoops_getModuleOption('img_size', $forMods->getVar('dirname'))), false);
-        $form->addElement($fileseltray_content_img);
-        // Submit buttons
-        $button_tray = new XoopsFormElementTray('', '');
-        $submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
-        $button_tray->addElement($submit_btn);
-        $cancel_btn = new XoopsFormButton('', 'cancel', _CANCEL, 'cancel');
-        $cancel_btn->setExtra('onclick="javascript:history.go(-1);"');
-        $button_tray->addElement($cancel_btn);
-        $form->addElement($button_tray);
-        $form->display();
-
-        return $form;
-    }
-
-    function getMenuForm($forMods, $content_type = 'link') {
-        $form = new XoopsThemeForm(_FMCONTENT_FORM, 'link', 'backend.php', 'post');
-        $form->setExtra('enctype="multipart/form-data"');
-
-        if ($this->isNew()) {
-            $groups = xoops_getModuleOption('groups', $forMods->getVar('dirname', 'e'));
-            $form->addElement(new XoopsFormHidden('op', 'add'));
-            $form->addElement(new XoopsFormHidden('content_uid', $GLOBALS['xoopsUser']->getVar('uid')));
-        } else {
-            $groups = explode(" ", $this->getVar('content_groups', 'e'));
-            $form->addElement(new XoopsFormHidden('op', 'edit'));
-            $content_type = $this->getVar('content_type', 'e');
-        }
-        // Content Id
-        $form->addElement(new XoopsFormHidden('content_id', $this->getVar('content_id', 'e')));
-        // Module Id
-        $form->addElement(new XoopsFormHidden('content_modid', $forMods->getVar('mid')));
-        // Display menu
-        $form->addElement(new XoopsFormHidden('content_display', '1'));
-        // Content type
-        $form->addElement(new XoopsFormHidden('content_type', $content_type));
-        // Content menumenu
-        $form->addElement(new XoopsFormText(_FMCONTENT_CONTENT_MENU, 'content_menu', 50, 255, $this->getVar('content_menu', 'e')), true);
-        // Link
-        $form->addElement(new XoopsFormText(_FMCONTENT_FORMLINK, 'content_link', 50, 255, $this->getVar('content_link', 'e')), true);
-        // Topic
-        $topic_Handler = xoops_getModuleHandler("topic", "fmcontent");
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('topic_modid', $forMods->getVar('mid')));
-        $topic = $topic_Handler->getObjects($criteria);
-        $tree = new XoopsObjectTree($topic, 'topic_id', 'topic_pid');
-        ob_start();
-        echo $tree->makeSelBox('content_topic', 'topic_title', '--', $this->getVar('content_topic', 'e'), true);
-        $form->addElement(new XoopsFormLabel(_FMCONTENT_CONTENT_TOPIC, ob_get_contents()));
-        ob_end_clean();
-        // Groups access
-        $form->addElement(new XoopsFormSelectGroup(_FMCONTENT_FORMGROUP, 'content_groups', true, $groups, 5, true));
-        // Options
-        $options = new XoopsFormElementTray(_FMCONTENT_FORMOPTION);
-        // Active
-        $form->addElement(new XoopsFormRadioYN(_FMCONTENT_FORMACTIF, 'content_status', $this->getVar('content_status', 'e')));
-
-        $button_tray = new XoopsFormElementTray('', '');
-        $submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
-        $button_tray->addElement($submit_btn);
-        $cancel_btn = new XoopsFormButton('', 'cancel', _CANCEL, 'cancel');
-        $cancel_btn->setExtra('onclick="javascript:history.go(-1);"');
-        $button_tray->addElement($cancel_btn);
-        $form->addElement($button_tray);
-        $form->display();
-
-        return $form;
-    }
-
-    /**
-     * Check if content alias already exist
-     *
-     * @param   String  $alias
-     * @return  boolean
-     **/
-    function existAlias($alias) {
-        $query = "SELECT `content_id` FROM " . $this->table . " WHERE `content_alias` = '" . $alias . "'";
-        $result = $this->db->query($query);
-        $count = $this->db->getRowsNum($result);
-        if ($count == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
-     * Returns an array representation of the object
-     *
-     * @return array
-     **/
-    function toArray() {
-        $ret = array();
-        $vars = $this->getVars();
-        foreach (array_keys($vars) as $i) {
-            $ret[$i] = $this->getVar($i);
-        }
-        return $ret;
-    }
+	
+	public $mod;
+	public $db;
+	public $table;
+	
+	/**
+	 * Class constructor
+	 */
+	function fmcontent_content() {
+		$this->initVar ( 'content_id', XOBJ_DTYPE_INT );
+		$this->initVar ( 'content_title', XOBJ_DTYPE_TXTBOX, '' );
+		$this->initVar ( 'content_titleview', XOBJ_DTYPE_INT, 1 );
+		$this->initVar ( 'content_menu', XOBJ_DTYPE_TXTBOX, '' );
+		$this->initVar ( 'content_topic', XOBJ_DTYPE_INT );
+		$this->initVar ( 'content_type', XOBJ_DTYPE_TXTBOX, '' );
+		$this->initVar ( 'content_short', XOBJ_DTYPE_TXTAREA, '' );
+		$this->initVar ( 'content_text', XOBJ_DTYPE_TXTAREA, '' );
+		$this->initVar ( 'content_link', XOBJ_DTYPE_TXTBOX, '' );
+		$this->initVar ( 'content_words', XOBJ_DTYPE_TXTBOX, '' );
+		$this->initVar ( 'content_desc', XOBJ_DTYPE_TXTBOX, '' );
+		$this->initVar ( 'content_alias', XOBJ_DTYPE_TXTBOX, '' );
+		$this->initVar ( 'content_status', XOBJ_DTYPE_INT, 1 );
+		$this->initVar ( 'content_display', XOBJ_DTYPE_INT, 0 );
+		$this->initVar ( 'content_default', XOBJ_DTYPE_INT, 0 );
+		$this->initVar ( 'content_create', XOBJ_DTYPE_INT, '' );
+		$this->initVar ( 'content_update', XOBJ_DTYPE_INT, '' );
+		$this->initVar ( 'content_uid', XOBJ_DTYPE_INT, 0 );
+		$this->initVar ( 'content_author', XOBJ_DTYPE_TXTBOX, '' );
+		$this->initVar ( 'content_source', XOBJ_DTYPE_TXTBOX, '' );
+		$this->initVar ( 'content_groups', XOBJ_DTYPE_TXTBOX, '' );
+		$this->initVar ( 'content_order', XOBJ_DTYPE_INT, 0 );
+		$this->initVar ( 'content_next', XOBJ_DTYPE_INT, 0 );
+		$this->initVar ( 'content_prev', XOBJ_DTYPE_INT, 0 );
+		$this->initVar ( 'content_modid', XOBJ_DTYPE_INT, '' );
+		$this->initVar ( 'content_hits', XOBJ_DTYPE_INT, '' );
+		$this->initVar ( 'content_img', XOBJ_DTYPE_TXTBOX, '' );
+		$this->initVar ( 'content_rating', XOBJ_DTYPE_OTHER, '' );
+		$this->initVar ( 'content_votes', XOBJ_DTYPE_INT, '' );
+		$this->initVar ( 'content_comments', XOBJ_DTYPE_INT, '' );
+		$this->initVar ( 'dohtml', XOBJ_DTYPE_INT, 1 );
+		$this->initVar ( 'doxcode', XOBJ_DTYPE_INT, 1 );
+		$this->initVar ( 'dosmiley', XOBJ_DTYPE_INT, 1 );
+		$this->initVar ( 'doimage', XOBJ_DTYPE_INT, 1 );
+		$this->initVar ( 'dobr', XOBJ_DTYPE_INT, 0 );
+		
+		$this->db = $GLOBALS ['xoopsDB'];
+		$this->table = $this->db->prefix ( 'fmcontent_content' );
+	}
+	
+	function getContentForm($forMods, $content_type = 'content') {
+		$form = new XoopsThemeForm ( _FMCONTENT_FORM, 'content', 'backend.php', 'post' );
+		$form->setExtra ( 'enctype="multipart/form-data"' );
+		
+		if ($this->isNew ()) {
+			$groups = xoops_getModuleOption ( 'groups', $forMods->getVar ( 'dirname', 'e' ) );
+			$form->addElement ( new XoopsFormHidden ( 'op', 'add' ) );
+			$form->addElement ( new XoopsFormHidden ( 'content_uid', $GLOBALS ['xoopsUser']->getVar ( 'uid' ) ) );
+		} else {
+			$groups = explode ( " ", $this->getVar ( 'content_groups', 'e' ) );
+			$form->addElement ( new XoopsFormHidden ( 'op', 'edit' ) );
+			$content_type = $this->getVar ( 'content_type', 'e' );
+		}
+		// Content Id
+		$form->addElement ( new XoopsFormHidden ( 'content_id', $this->getVar ( 'content_id', 'e' ) ) );
+		// Module Id
+		$form->addElement ( new XoopsFormHidden ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		// Content type
+		$form->addElement ( new XoopsFormHidden ( 'content_type', $content_type ) );
+		// Content title
+		$title = new XoopsFormElementTray ( _FMCONTENT_FORMTITLE );
+		$title->addElement ( new XoopsFormText ( '', 'content_title', 50, 255, $this->getVar ( 'content_title', 'e' ) ), true );
+		$display_title = new XoopsFormCheckBox ( '', 'content_titleview', $this->getVar ( 'content_titleview', 'e' ) );
+		$display_title->addOption ( 1, _FMCONTENT_FORMTITLE_DISP );
+		$title->addElement ( $display_title );
+		$form->addElement ( $title );
+		// Content menu
+		$form->addElement ( new XoopsFormText ( _FMCONTENT_CONTENT_MENU, 'content_menu', 50, 255, $this->getVar ( 'content_menu', 'e' ) ), true );
+		// Content menu text
+		$form->addElement ( new XoopsFormText ( _FMCONTENT_FORMALIAS, 'content_alias', 50, 255, $this->getVar ( 'content_alias', 'e' ) ), true );
+		// Topic
+		$topic_Handler = xoops_getModuleHandler ( "topic", "fmcontent" );
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		$topic = $topic_Handler->getObjects ( $criteria );
+		$tree = new XoopsObjectTree ( $topic, 'topic_id', 'topic_pid' );
+		ob_start ();
+		echo $tree->makeSelBox ( 'content_topic', 'topic_title', '--', $this->getVar ( 'content_topic', 'e' ), true );
+		$topic_sel = new XoopsFormLabel ( _FMCONTENT_CONTENT_TOPIC, ob_get_contents () );
+		$topic_sel->setDescription ( _FMCONTENT_CONTENT_TOPIC_DESC );
+		$form->addElement ( $topic_sel );
+		ob_end_clean ();
+		// Short
+		$form->addElement ( new XoopsFormTextArea ( _FMCONTENT_SHORT, 'content_short', $this->getVar ( 'content_short', 'e' ), 5, 90 ) );
+		// Editor
+		$editor_tray = new XoopsFormElementTray ( _FMCONTENT_FORMTEXT, '<br />' );
+		if (class_exists ( 'XoopsFormEditor' )) {
+			$configs = array ('name' => 'content_desc', 'value' => $this->getVar ( 'content_text', 'e' ), 'rows' => 25, 'cols' => 90, 'width' => '100%', 'height' => '400px', 'editor' => xoops_getModuleOption ( 'form_editor', $forMods->getVar ( 'dirname', 'e' ) ) );
+			$editor_tray->addElement ( new XoopsFormEditor ( '', 'content_text', $configs, false, $onfailure = 'textarea' ) );
+		} else {
+			$editor_tray->addElement ( new XoopsFormDhtmlTextArea ( '', 'content_text', $this->getVar ( 'content_text', 'e' ), '100%', '100%' ) );
+		}
+		$editor_tray->setDescription ( _FMCONTENT_FORMTEXT_DESC );
+		if (! fmcontent_isEditorHTML ( $forMods->getVar ( 'dirname', 'e' ) )) {
+			if ($this->isNew ()) {
+				$this->setVar ( 'dohtml', 0 );
+				$this->setVar ( 'dobr', 1 );
+			}
+			// HTML
+			$html_checkbox = new XoopsFormCheckBox ( '', 'dohtml', $this->getVar ( 'dohtml', 'e' ) );
+			$html_checkbox->addOption ( 1, _FMCONTENT_DOHTML );
+			$editor_tray->addElement ( $html_checkbox );
+			// Break line
+			$breaks_checkbox = new XoopsFormCheckBox ( '', 'dobr', $this->getVar ( 'dobr', 'e' ) );
+			$breaks_checkbox->addOption ( 1, _FMCONTENT_BREAKS );
+			$editor_tray->addElement ( $breaks_checkbox );
+		} else {
+			$form->addElement ( new xoopsFormHidden ( 'dohtml', 1 ) );
+			$form->addElement ( new xoopsFormHidden ( 'dobr', 0 ) );
+		}
+		// Xoops Image
+		$doimage_checkbox = new XoopsFormCheckBox ( '', 'doimage', $this->getVar ( 'doimage', 'e' ) );
+		$doimage_checkbox->addOption ( 1, _FMCONTENT_DOIMAGE );
+		$editor_tray->addElement ( $doimage_checkbox );
+		// Xoops Code
+		$xcodes_checkbox = new XoopsFormCheckBox ( '', 'doxcode', $this->getVar ( 'doxcode', 'e' ) );
+		$xcodes_checkbox->addOption ( 1, _FMCONTENT_DOXCODE );
+		$editor_tray->addElement ( $xcodes_checkbox );
+		// Xoops Smiley
+		$smiley_checkbox = new XoopsFormCheckBox ( '', 'dosmiley', $this->getVar ( 'dosmiley', 'e' ) );
+		$smiley_checkbox->addOption ( 1, _FMCONTENT_DOSMILEY );
+		$editor_tray->addElement ( $smiley_checkbox );
+		// Editor and options
+		$form->addElement ( $editor_tray );
+		//tag
+		if ((xoops_getModuleOption ( 'usetag', $forMods->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
+			$items_id = $this->isNew () ? 0 : $this->getVar ( "content_id" );
+			include_once XOOPS_ROOT_PATH . "/modules/tag/include/formtag.php";
+			$form->addElement ( new XoopsFormTag ( "item_tag", 60, 255, $items_id, $catid = 0 ) );
+		}
+		// Image
+		$content_img = $this->getVar ( 'content_img' ) ? $this->getVar ( 'content_img' ) : 'blank.gif';
+		$uploadirectory_content_img = xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) );
+		$fileseltray_content_img = new XoopsFormElementTray ( _FMCONTENT_IMG, '<br />' );
+		$fileseltray_content_img->addElement ( new XoopsFormLabel ( '', "<img class='fromimage' src='" . XOOPS_URL . $uploadirectory_content_img . $content_img . "' name='image_content_img' id='image_content_img' alt='' />" ) );
+		if ($this->getVar ( 'content_img' )) {
+			$delete_img = new XoopsFormCheckBox ( '', 'deleteimage', 0 );
+			$delete_img->addOption ( 1, _DELETE );
+			$fileseltray_content_img->addElement ( $delete_img );
+		}
+		$fileseltray_content_img->addElement ( new XoopsFormFile ( _FMCONTENT_FORMUPLOAD, 'content_img', xoops_getModuleOption ( 'img_size', $forMods->getVar ( 'dirname' ) ) ), false );
+		$form->addElement ( $fileseltray_content_img );
+		// Metas
+		$form->addElement ( new XoopsFormTextArea ( 'Metas Keyword', 'content_words', $this->getVar ( 'content_words', 'e' ), 5, 90 ) );
+		$form->addElement ( new XoopsFormTextArea ( 'Metas Description', 'content_desc', $this->getVar ( 'content_desc', 'e' ), 5, 90 ) );
+		// Content author
+		$form->addElement ( new XoopsFormText ( _FMCONTENT_FORMAUTHOR, 'content_author', 50, 255, $this->getVar ( 'content_author', 'e' ) ), false );
+		// Content Source
+		$form->addElement ( new XoopsFormText ( _FMCONTENT_FORMSOURCE, 'content_source', 50, 255, $this->getVar ( 'content_source', 'e' ) ), false );
+		// Groups access
+		$form->addElement ( new XoopsFormSelectGroup ( _FMCONTENT_FORMGROUP, 'content_groups', true, $groups, 5, true ) );
+		// Next & prev
+		$content_Handler = xoops_getModuleHandler ( "page", "fmcontent" );
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'content_status', '1' ) );
+		$content = $content_Handler->getObjects ( $criteria );
+		$tree = new XoopsObjectTree ( $content, 'content_id', 'content_topic' );
+		ob_start ();
+		echo $tree->makeSelBox ( 'content_prev', 'content_title', '', $this->getVar ( 'content_prev', 'e' ), true );
+		$form->addElement ( new XoopsFormLabel ( _FMCONTENT_FORMPREV, ob_get_contents () ) );
+		ob_end_clean ();
+		ob_start ();
+		echo $tree->makeSelBox ( 'content_next', 'content_title', '', $this->getVar ( 'content_next', 'e' ), true );
+		$form->addElement ( new XoopsFormLabel ( _FMCONTENT_FORMNEXT, ob_get_contents () ) );
+		ob_end_clean ();
+		// Active
+		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_FORMACTIF, 'content_status', $this->getVar ( 'content_status', 'e' ) ) );
+		// Menu
+		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_FORMDISPLAY, 'content_display', $this->getVar ( 'content_display', 'e' ) ) );
+		// Default
+		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_FORMDEFAULT, 'content_default', $this->getVar ( 'content_default', 'e' ) ) );
+		// Submit buttons
+		$button_tray = new XoopsFormElementTray ( '', '' );
+		$submit_btn = new XoopsFormButton ( '', 'post', _SUBMIT, 'submit' );
+		$button_tray->addElement ( $submit_btn );
+		$cancel_btn = new XoopsFormButton ( '', 'cancel', _CANCEL, 'cancel' );
+		$cancel_btn->setExtra ( 'onclick="javascript:history.go(-1);"' );
+		$button_tray->addElement ( $cancel_btn );
+		$form->addElement ( $button_tray );
+		$form->display ();
+		
+		return $form;
+	}
+	
+	function getContentSimpleForm($forMods, $content_type = 'content') {
+		$form = new XoopsThemeForm ( _FMCONTENT_FORM, 'content', 'submit.php', 'post' );
+		$form->setExtra ( 'enctype="multipart/form-data"' );
+		
+		if ($this->isNew ()) {
+			$groups = xoops_getModuleOption ( 'groups', $forMods->getVar ( 'dirname', 'e' ) );
+			$form->addElement ( new XoopsFormHidden ( 'op', 'add' ) );
+			$form->addElement ( new XoopsFormHidden ( 'content_uid', $GLOBALS ['xoopsUser']->getVar ( 'uid' ) ) );
+		} else {
+			$groups = explode ( " ", $this->getVar ( 'content_groups', 'e' ) );
+			$form->addElement ( new XoopsFormHidden ( 'op', 'edit' ) );
+			$content_type = $this->getVar ( 'content_type', 'e' );
+		}
+		// Content Id
+		$form->addElement ( new XoopsFormHidden ( 'content_id', $this->getVar ( 'content_id', 'e' ) ) );
+		// Module Id
+		$form->addElement ( new XoopsFormHidden ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		// Content type
+		$form->addElement ( new XoopsFormHidden ( 'content_type', $content_type ) );
+		// Content title
+		$form->addElement ( new XoopsFormText ( _FMCONTENT_FORMTITLE, 'content_title', 50, 255, $this->getVar ( 'content_title', 'e' ) ), true );
+		// Topic
+		$topic_Handler = xoops_getModuleHandler ( "topic", "fmcontent" );
+		$perm_handler = fmcontentPermission::getHandler ();
+		$topics = fmcontent_MygetItemIds ( 'fmcontent_submit', $forMods->getVar ( 'dirname' ) );
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		global $xoopsUser;
+		if ($xoopsUser) {
+			if (! $xoopsUser->isAdmin ( $forMods->getVar ( 'mid' ) )) {
+				$criteria->add ( new Criteria ( 'topic_id', '(' . implode ( ',', $topics ) . ')', 'IN' ) );
+			}
+		} else {
+			$criteria->add ( new Criteria ( 'topic_id', '(' . implode ( ',', $topics ) . ')', 'IN' ) );
+		}
+		$topic = $topic_Handler->getObjects ( $criteria );
+		$tree = new XoopsObjectTree ( $topic, 'topic_id', 'topic_pid' );
+		ob_start ();
+		echo $tree->makeSelBox ( 'content_topic', 'topic_title', '--', $this->getVar ( 'content_topic', 'e' ), true );
+		$topic_sel = new XoopsFormLabel ( _FMCONTENT_CONTENT_TOPIC, ob_get_contents () );
+		$topic_sel->setDescription ( _FMCONTENT_CONTENT_TOPIC_DESC );
+		$form->addElement ( $topic_sel );
+		ob_end_clean ();
+		// Short
+		$form->addElement ( new XoopsFormTextArea ( _FMCONTENT_SHORT, 'content_short', $this->getVar ( 'content_short', 'e' ), 5, 80 ) );
+		// Editor
+		$editor_tray = new XoopsFormElementTray ( _FMCONTENT_FORMTEXT, '<br />' );
+		if (class_exists ( 'XoopsFormEditor' )) {
+			$configs = array ('name' => 'content_desc', 'value' => $this->getVar ( 'content_text', 'e' ), 'rows' => 15, 'cols' => 80, 'width' => '95%', 'height' => '250px', 'editor' => xoops_getModuleOption ( 'form_editor', $forMods->getVar ( 'dirname', 'e' ) ) );
+			$editor_tray->addElement ( new XoopsFormEditor ( '', 'content_text', $configs, false, $onfailure = 'textarea' ) );
+		} else {
+			$editor_tray->addElement ( new XoopsFormDhtmlTextArea ( '', 'content_text', $this->getVar ( 'content_text', 'e' ), '100%', '100%' ) );
+		}
+		$editor_tray->setDescription ( _FMCONTENT_FORMTEXT_DESC );
+		// Editor and options
+		$form->addElement ( $editor_tray );
+		if (! fmcontent_isEditorHTML ( $forMods->getVar ( 'dirname', 'e' ) )) {
+			$form->addElement ( new xoopsFormHidden ( 'dohtml', 0 ) );
+			$form->addElement ( new xoopsFormHidden ( 'dobr', 1 ) );
+		} else {
+			$form->addElement ( new xoopsFormHidden ( 'dohtml', 1 ) );
+			$form->addElement ( new xoopsFormHidden ( 'dobr', 0 ) );
+		}
+		$form->addElement ( new xoopsFormHidden ( 'doimage', 1 ) );
+		$form->addElement ( new xoopsFormHidden ( 'doxcode', 1 ) );
+		$form->addElement ( new xoopsFormHidden ( 'dosmiley', 1 ) );
+		//tag
+		if ((xoops_getModuleOption ( 'usetag', $forMods->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
+			$items_id = $this->isNew () ? 0 : $this->getVar ( "content_id" );
+			include_once XOOPS_ROOT_PATH . "/modules/tag/include/formtag.php";
+			$form->addElement ( new XoopsFormTag ( "item_tag", 60, 255, $items_id, $catid = 0 ) );
+		}
+		// Image
+		$content_img = $this->getVar ( 'content_img' ) ? $this->getVar ( 'content_img' ) : 'blank.gif';
+		$uploadirectory_content_img = xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) );
+		$fileseltray_content_img = new XoopsFormElementTray ( _FMCONTENT_IMG, '<br />' );
+		$fileseltray_content_img->addElement ( new XoopsFormLabel ( '', "<img class='fromimage' src='" . XOOPS_URL . $uploadirectory_content_img . $content_img . "' name='image_content_img' id='image_content_img' alt='' />" ) );
+		$fileseltray_content_img->addElement ( new XoopsFormFile ( _FMCONTENT_FORMUPLOAD, 'content_img', xoops_getModuleOption ( 'img_size', $forMods->getVar ( 'dirname' ) ) ), false );
+		$form->addElement ( $fileseltray_content_img );
+		// Submit buttons
+		$button_tray = new XoopsFormElementTray ( '', '' );
+		$submit_btn = new XoopsFormButton ( '', 'post', _SUBMIT, 'submit' );
+		$button_tray->addElement ( $submit_btn );
+		$cancel_btn = new XoopsFormButton ( '', 'cancel', _CANCEL, 'cancel' );
+		$cancel_btn->setExtra ( 'onclick="javascript:history.go(-1);"' );
+		$button_tray->addElement ( $cancel_btn );
+		$form->addElement ( $button_tray );
+		$form->display ();
+		
+		return $form;
+	}
+	
+	function getMenuForm($forMods, $content_type = 'link') {
+		$form = new XoopsThemeForm ( _FMCONTENT_FORM, 'link', 'backend.php', 'post' );
+		$form->setExtra ( 'enctype="multipart/form-data"' );
+		
+		if ($this->isNew ()) {
+			$groups = xoops_getModuleOption ( 'groups', $forMods->getVar ( 'dirname', 'e' ) );
+			$form->addElement ( new XoopsFormHidden ( 'op', 'add' ) );
+			$form->addElement ( new XoopsFormHidden ( 'content_uid', $GLOBALS ['xoopsUser']->getVar ( 'uid' ) ) );
+		} else {
+			$groups = explode ( " ", $this->getVar ( 'content_groups', 'e' ) );
+			$form->addElement ( new XoopsFormHidden ( 'op', 'edit' ) );
+			$content_type = $this->getVar ( 'content_type', 'e' );
+		}
+		// Content Id
+		$form->addElement ( new XoopsFormHidden ( 'content_id', $this->getVar ( 'content_id', 'e' ) ) );
+		// Module Id
+		$form->addElement ( new XoopsFormHidden ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		// Display menu
+		$form->addElement ( new XoopsFormHidden ( 'content_display', '1' ) );
+		// Content type
+		$form->addElement ( new XoopsFormHidden ( 'content_type', $content_type ) );
+		// Content menumenu
+		$form->addElement ( new XoopsFormText ( _FMCONTENT_CONTENT_MENU, 'content_menu', 50, 255, $this->getVar ( 'content_menu', 'e' ) ), true );
+		// Link
+		$form->addElement ( new XoopsFormText ( _FMCONTENT_FORMLINK, 'content_link', 50, 255, $this->getVar ( 'content_link', 'e' ) ), true );
+		// Topic
+		$topic_Handler = xoops_getModuleHandler ( "topic", "fmcontent" );
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		$topic = $topic_Handler->getObjects ( $criteria );
+		$tree = new XoopsObjectTree ( $topic, 'topic_id', 'topic_pid' );
+		ob_start ();
+		echo $tree->makeSelBox ( 'content_topic', 'topic_title', '--', $this->getVar ( 'content_topic', 'e' ), true );
+		$form->addElement ( new XoopsFormLabel ( _FMCONTENT_CONTENT_TOPIC, ob_get_contents () ) );
+		ob_end_clean ();
+		// Groups access
+		$form->addElement ( new XoopsFormSelectGroup ( _FMCONTENT_FORMGROUP, 'content_groups', true, $groups, 5, true ) );
+		// Options
+		$options = new XoopsFormElementTray ( _FMCONTENT_FORMOPTION );
+		// Active
+		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_FORMACTIF, 'content_status', $this->getVar ( 'content_status', 'e' ) ) );
+		
+		$button_tray = new XoopsFormElementTray ( '', '' );
+		$submit_btn = new XoopsFormButton ( '', 'post', _SUBMIT, 'submit' );
+		$button_tray->addElement ( $submit_btn );
+		$cancel_btn = new XoopsFormButton ( '', 'cancel', _CANCEL, 'cancel' );
+		$cancel_btn->setExtra ( 'onclick="javascript:history.go(-1);"' );
+		$button_tray->addElement ( $cancel_btn );
+		$form->addElement ( $button_tray );
+		$form->display ();
+		
+		return $form;
+	}
+	
+	/**
+	 * Check if content alias already exist
+	 *
+	 * @param   String  $alias
+	 * @return  boolean
+	 **/
+	function existAlias($alias) {
+		$query = "SELECT `content_id` FROM " . $this->table . " WHERE `content_alias` = '" . $alias . "'";
+		$result = $this->db->query ( $query );
+		$count = $this->db->getRowsNum ( $result );
+		if ($count == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	/**
+	 * Returns an array representation of the object
+	 *
+	 * @return array
+	 **/
+	function toArray() {
+		$ret = array ();
+		$vars = $this->getVars ();
+		foreach ( array_keys ( $vars ) as $i ) {
+			$ret [$i] = $this->getVar ( $i );
+		}
+		return $ret;
+	}
 
 }
 
@@ -414,309 +398,308 @@ class fmcontent_content extends XoopsObject {
  *
  **/
 class fmcontentPageHandler extends XoopsPersistableObjectHandler {
-
-    function fmcontentPageHandler($db) {
-        parent::XoopsPersistableObjectHandler($db, 'fmcontent_content', 'fmcontent_content', 'content_id', 'content_alias');
-    }
-
-    function getId($alias) {
-        if ($alias != '') {
-            $criteria = new Criteria($this->identifierName, $alias);
-            $criteria->setLimit(1);
-            $obj_array = $this->getObjects($criteria, false, false);
-            if (count($obj_array) != 1) {
-                $obj = $this->create();
-                return $obj;
-            }
-            return $obj_array[0][$this->keyName];
-        } else {
-            $criteria = new CriteriaCompo();
-            $criteria = new Criteria('default_content', 1);
-            $criteria->setLimit(1);
-            $obj_array = $this->getObjects($criteria, false, false);
-            if (count($obj_array) != 1) {
-                return 0;
-            }
-            return $obj_array[0][$this->keyName];
-        }
-    }
-
-    function getDefault($criteria = null) {
-        $obj_array = $this->getObjects($criteria, false, false);
-        if (count($obj_array) != 1) {
-            return 0;
-        }
-        return $obj_array[0][$this->keyName];
-    }
-
-    function getContentList($forMods, $content_infos) {
-        $ret = array();
-        if (!isset($criteria)) {
-            $criteria = new CriteriaCompo();
-        }
-        if (isset($criteria)) {
-            $criteria->add(new Criteria('content_status', $content_infos['content_status']));
-            if ($content_infos['content_static']) {
-                $criteria->add(new Criteria('content_topic', '0', '>'));
-            }
-            if (!$content_infos['admin_side']) {
-                $access_topic = fmcontent_MygetItemIds('fmcontent_access', $forMods->getVar('dirname'));
-                $criteria->add(new Criteria('content_topic', '(' . implode(',', $access_topic) . ')', 'IN'));
-                $criteria->add(new Criteria('content_type', 'content'));
-            }
-            $criteria->add(new Criteria('content_modid', $forMods->getVar('mid')));
-            $criteria->add(new Criteria('content_topic', $content_infos['content_topic']));
-            $criteria->add(new Criteria('content_uid', $content_infos['content_user']));
-            $criteria->setSort($content_infos['content_sort']);
-            $criteria->setOrder($content_infos['content_order']);
-            $criteria->setLimit($content_infos['content_limit']);
-            $criteria->setStart($content_infos['content_start']);
-        }
-
-        $obj = $this->getObjects($criteria, false);
-        if ($obj) {
-            foreach ($obj as $root) {
-                $tab = array();
-                $tab = $root->toArray();
-                $tab['owner'] = XoopsUser::getUnameFromId($root->getVar('content_uid'));
-
-                if (is_array($content_infos['topics'])) {
-                    foreach (array_keys($content_infos['topics']) as $i) {
-                        $list[$i]['topic_title'] = $content_infos['topics'][$i]->getVar("topic_title");
-                    }
-                    if ($root->getVar('content_topic')) {
-                        $tab['topic'] = $list[$root->getVar('content_topic')]['topic_title'];
-                    }
-                } else {
-                    $tab['topic'] = $content_infos['topics'];
-                }
-
-                $tab['url'] = fmcontent_Url($forMods->getVar('dirname'), $tab);
-                $tab['content_create'] = formatTimestamp($root->getVar('content_create'), _MEDIUMDATESTRING);
-                $tab['content_update'] = formatTimestamp($root->getVar('content_update'), _MEDIUMDATESTRING);
-                $tab['imgurl'] = XOOPS_URL . xoops_getModuleOption('img_dir', $forMods->getVar('dirname')) . $root->getVar('content_img');
-                $ret[] = $tab;
-            }
-        }
-        return $ret;
-    }
-
-
-    function getMenuList($forMods, $content_infos) {
-        $ret = array();
-        if (!isset($criteria)) {
-            $criteria = new CriteriaCompo();
-        }
-        if (isset($criteria)) {
-            $criteria->add(new Criteria('content_display', '1'));
-            $criteria->add(new Criteria('content_modid', $forMods->getVar('mid')));
-            if($content_infos['menu_id'] != '-1') {
-                $criteria->add(new Criteria('content_topic', $content_infos['menu_id']));
-            }
-            $criteria->setSort($content_infos['menu_sort']);
-            $criteria->setOrder($content_infos['menu_order']);
-        }
-
-        $obj = $this->getObjects($criteria, false);
-        if ($obj) {
-            foreach ($obj as $root) {
-                $tab = array();
-                $tab = $root->toArray();
-                $tab['topic'] = fmcontentTopicHandler::getTopicFromId($root->getVar('content_topic'));
-                $tab['url'] = fmcontent_Url($forMods->getVar('dirname'), $tab);
-                //$tab['child'] = $this->getMenuList( $forMods , $menu_id , $menu_limit, $menu_start, $root->getVar('content_id') );
-                $ret[] = $tab;
-            }
-        }
-        return $ret;
-    }
-
-    function getContentBlockList($forMods, $content_limit, $content_sort, $content_order, $options, $lenght_title) {
-        $ret = array();
-        include_once 'topic.php';
-        if (!isset($criteria)) {
-            $criteria = new CriteriaCompo();
-        }
-        if (isset($criteria)) {
-            $criteria->add(new Criteria('content_type', 'content'));
-            $criteria->add(new Criteria('content_status', '1'));
-            $access_topic = fmcontent_MygetItemIds('fmcontent_access', $forMods->getVar('dirname'));
-            $criteria->add(new Criteria('content_topic', '(' . implode(',', $access_topic) . ')', 'IN'));
-            if (!(count($options) == 1 && $options[0] == 0)) {
-                $criteria->add(new Criteria('content_topic', '(' . implode(',', $options) . ')', 'IN'));
-            }
-            $criteria->add(new Criteria('content_modid', $forMods->getVar('mid')));
-            $criteria->setSort($content_sort);
-            $criteria->setOrder($content_order);
-            $criteria->setLimit($content_limit);
-        }
-
-        $obj = $this->getObjects($criteria, false);
-        if ($obj) {
-            foreach ($obj as $root) {
-                $tab = array();
-                $tab = $root->toArray();
-                $tab['owner'] = XoopsUser::getUnameFromId($root->getVar('content_uid'));
-                $tab['topic'] = fmcontentTopicHandler::getTopicFromId($root->getVar('content_topic'));
-                $tab['url'] = fmcontent_Url($forMods->getVar('dirname'), $tab);
-                $tab['title'] = mb_strlen($root->getVar('content_title'), 'utf-8') > $lenght_title ? mb_substr($root->getVar('content_title'), 0, ($lenght_title), 'utf-8') . "..." : $root->getVar('content_title');
-                $tab['date'] = formatTimestamp($root->getVar('content_create'), _MEDIUMDATESTRING);
-                $ret[] = $tab;
-            }
-        }
-        return $ret;
-    }
-
-    function getContentCount($forMods, $content_infos) {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('content_modid', $forMods->getVar('mid')));
-        $criteria->add(new Criteria('content_topic', $content_infos['content_topic']));
-        if ($content_infos['content_static']) {
-            $criteria->add(new Criteria('content_topic', '0', '>'));
-        }
-        //$criteria->add(new Criteria('content_type','content')); //-> check
-        return $this->getCount($criteria);
-    }
-
-    function getMenuItemCount($forMods, $topic_id) {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('content_modid', $forMods->getVar('mid')));
-        $criteria->add(new Criteria('content_display', '1'));
-        $criteria->add(new Criteria('content_topic', $topic_id));
-        $content_handler = xoops_getmodulehandler('page', 'fmcontent');
-        $getcount = $content_handler->getCount($criteria);
-        return $getcount;
-    }
-
-    function getContentItemCount($forMods, $topic_id) {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('content_modid', $forMods->getVar('mid')));
-        $criteria->add(new Criteria('content_topic', $topic_id));
-        $content_handler = xoops_getmodulehandler('page', 'fmcontent');
-        $getcount = $content_handler->getCount($criteria);
-        return $getcount;
-    }
-
-    function getLastContent($forMods, $content_infos) {
-        $ret = array();
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('content_modid', $forMods->getVar('mid')));
-        $obj = $this->getObjects($criteria, false);
-        if ($obj) {
-            foreach ($obj as $root) {
-                $tab = array();
-                $tab = $root->toArray();
-                $tab['topic'] = fmcontentTopicHandler::getTopicFromId($root->getVar('content_topic'));
-                $tab['url'] = fmcontent_Url($forMods->getVar('dirname'), $tab);
-                $ret[] = $tab;
-            }
-        }
-        return $ret;
-    }
-
-    /**
-     *
-     * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
-     * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-     * @author      Hervé Thouzard (ttp://www.instant-zero.com)
-     * @package     Oledrion
-     * @version     $Id$
-     */
-
-    function updateHits($content_id) {
-        $sql = 'UPDATE ' . $this->table . ' SET content_hits = content_hits + 1 WHERE content_id= ' . intval($content_id);
-        return $this->db->queryF($sql);
-    }
-
-    /**
-     *
-     * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
-     * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-     * @author      Zoullou (http://www.zoullou.net)
-     * @package     ExtGallery
-     * @version     $Id$
-     */
-    function getSearchedContent($queryArray, $condition, $limit, $start, $userId) {
-        $ret = array();
-        include_once 'topic.php';
-        $criteria = new CriteriaCompo();
-        if ($userId > 0)
-            $criteria->add(new Criteria('content_uid', $userId));
-        $criteria->add(new Criteria('content_status', 1));
-        if (is_array($queryArray) && count($queryArray) > 0) {
-            $subCriteria = new CriteriaCompo();
-            foreach ($queryArray as $keyWord) {
-                $keyWordCriteria = new CriteriaCompo();
-                $keyWordCriteria->add(new Criteria('content_title', '%' . $keyWord . '%', 'LIKE'));
-                $keyWordCriteria->add(new Criteria('content_text', '%' . $keyWord . '%', 'LIKE'), 'OR');
-                $keyWordCriteria->add(new Criteria('content_short', '%' . $keyWord . '%', 'LIKE'), 'OR');
-                $keyWordCriteria->add(new Criteria('content_words', '%' . $keyWord . '%', 'LIKE'), 'OR');
-                $keyWordCriteria->add(new Criteria('content_desc', '%' . $keyWord . '%', 'LIKE'), 'OR');
-                $subCriteria->add($keyWordCriteria, $condition);
-                unset($keyWordCriteria);
-            }
-            $criteria->add($subCriteria);
-        }
-        $criteria->setStart($start);
-        $criteria->setLimit($limit);
-        $criteria->setSort('content_create');
-
-        $contents = $this->getObjects($criteria);
-
-        $ret = array();
-        foreach ($contents as $content) {
-            $data = array();
-            $data = $content->toArray();
-            $data['image'] = 'images/forum.gif';
-            $data['topic'] = fmcontentTopicHandler::getTopicFromId($content->getVar('content_topic'));
-            $data['link'] = fmcontent_Url('fmcontent', $data);
-            $data['title'] = $content->getVar('content_title');
-            $data['time'] = $content->getVar('content_create');
-            $data['uid'] = $content->getVar('content_uid');
-            $ret[] = $data;
-        }
-
-        return $ret;
-    }
-
-    /**
-     * Generate function for update user post
-     *
-     * @ Update user post count after send approve content
-     * @ Update user post count after change status content
-     * @ Update user post count after delete content
-     */
-    function updateposts($content_uid, $content_status, $content_action) {
-        switch ($content_action) {
-            case 'add':
-                if ($content_uid && $content_status) {
-                    $user = new xoopsUser($content_uid);
-                    $member_handler =& xoops_gethandler('member');
-                    $member_handler->updateUserByField($user, 'posts', $user->getVar('posts') + 1);
-                }
-                break;
-
-            case 'delete':
-                if ($content_uid && $content_status) {
-                    $user = new xoopsUser($content_uid);
-                    $member_handler =& xoops_gethandler('member');
-                    $member_handler->updateUserByField($user, 'posts', $user->getVar('posts') - 1);
-                }
-                break;
-
-            case 'status':
-                if ($content_uid) {
-                    $user = new xoopsUser($content_uid);
-                    $member_handler =& xoops_gethandler('member');
-                    if ($content_status) {
-                        $member_handler->updateUserByField($user, 'posts', $user->getVar('posts') - 1);
-                    } else {
-                        $member_handler->updateUserByField($user, 'posts', $user->getVar('posts') + 1);
-                    }
-                }
-                break;
-        }
-    }
+	
+	function fmcontentPageHandler($db) {
+		parent::XoopsPersistableObjectHandler ( $db, 'fmcontent_content', 'fmcontent_content', 'content_id', 'content_alias' );
+	}
+	
+	function getId($alias) {
+		if ($alias != '') {
+			$criteria = new Criteria ( $this->identifierName, $alias );
+			$criteria->setLimit ( 1 );
+			$obj_array = $this->getObjects ( $criteria, false, false );
+			if (count ( $obj_array ) != 1) {
+				$obj = $this->create ();
+				return $obj;
+			}
+			return $obj_array [0] [$this->keyName];
+		} else {
+			$criteria = new CriteriaCompo ();
+			$criteria = new Criteria ( 'default_content', 1 );
+			$criteria->setLimit ( 1 );
+			$obj_array = $this->getObjects ( $criteria, false, false );
+			if (count ( $obj_array ) != 1) {
+				return 0;
+			}
+			return $obj_array [0] [$this->keyName];
+		}
+	}
+	
+	function getDefault($criteria = null) {
+		$obj_array = $this->getObjects ( $criteria, false, false );
+		if (count ( $obj_array ) != 1) {
+			return 0;
+		}
+		return $obj_array [0] [$this->keyName];
+	}
+	
+	function getContentList($forMods, $content_infos) {
+		$ret = array ();
+		if (! isset ( $criteria )) {
+			$criteria = new CriteriaCompo ();
+		}
+		if (isset ( $criteria )) {
+			$criteria->add ( new Criteria ( 'content_status', $content_infos ['content_status'] ) );
+			if ($content_infos ['content_static']) {
+				$criteria->add ( new Criteria ( 'content_topic', '0', '>' ) );
+			}
+			if (! $content_infos ['admin_side']) {
+				$access_topic = fmcontent_MygetItemIds ( 'fmcontent_access', $forMods->getVar ( 'dirname' ) );
+				$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
+				$criteria->add ( new Criteria ( 'content_type', 'content' ) );
+			}
+			$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+			$criteria->add ( new Criteria ( 'content_topic', $content_infos ['content_topic'] ) );
+			$criteria->add ( new Criteria ( 'content_uid', $content_infos ['content_user'] ) );
+			$criteria->setSort ( $content_infos ['content_sort'] );
+			$criteria->setOrder ( $content_infos ['content_order'] );
+			$criteria->setLimit ( $content_infos ['content_limit'] );
+			$criteria->setStart ( $content_infos ['content_start'] );
+		}
+		
+		$obj = $this->getObjects ( $criteria, false );
+		if ($obj) {
+			foreach ( $obj as $root ) {
+				$tab = array ();
+				$tab = $root->toArray ();
+				$tab ['owner'] = XoopsUser::getUnameFromId ( $root->getVar ( 'content_uid' ) );
+				
+				if (is_array ( $content_infos ['topics'] )) {
+					foreach ( array_keys ( $content_infos ['topics'] ) as $i ) {
+						$list [$i] ['topic_title'] = $content_infos ['topics'] [$i]->getVar ( "topic_title" );
+					}
+					if ($root->getVar ( 'content_topic' )) {
+						$tab ['topic'] = $list [$root->getVar ( 'content_topic' )] ['topic_title'];
+					}
+				} else {
+					$tab ['topic'] = $content_infos ['topics'];
+				}
+				
+				$tab ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $tab );
+				$tab ['content_create'] = formatTimestamp ( $root->getVar ( 'content_create' ), _MEDIUMDATESTRING );
+				$tab ['content_update'] = formatTimestamp ( $root->getVar ( 'content_update' ), _MEDIUMDATESTRING );
+				$tab ['imgurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . $root->getVar ( 'content_img' );
+				$ret [] = $tab;
+			}
+		}
+		return $ret;
+	}
+	
+	function getMenuList($forMods, $content_infos) {
+		$ret = array ();
+		if (! isset ( $criteria )) {
+			$criteria = new CriteriaCompo ();
+		}
+		if (isset ( $criteria )) {
+			$criteria->add ( new Criteria ( 'content_display', '1' ) );
+			$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+			if ($content_infos ['menu_id'] != '-1') {
+				$criteria->add ( new Criteria ( 'content_topic', $content_infos ['menu_id'] ) );
+			}
+			$criteria->setSort ( $content_infos ['menu_sort'] );
+			$criteria->setOrder ( $content_infos ['menu_order'] );
+		}
+		
+		$obj = $this->getObjects ( $criteria, false );
+		if ($obj) {
+			foreach ( $obj as $root ) {
+				$tab = array ();
+				$tab = $root->toArray ();
+				$tab ['topic'] = fmcontentTopicHandler::getTopicFromId ( $root->getVar ( 'content_topic' ) );
+				$tab ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $tab );
+				//$tab['child'] = $this->getMenuList( $forMods , $menu_id , $menu_limit, $menu_start, $root->getVar('content_id') );
+				$ret [] = $tab;
+			}
+		}
+		return $ret;
+	}
+	
+	function getContentBlockList($forMods, $content_limit, $content_sort, $content_order, $options, $lenght_title) {
+		$ret = array ();
+		include_once 'topic.php';
+		if (! isset ( $criteria )) {
+			$criteria = new CriteriaCompo ();
+		}
+		if (isset ( $criteria )) {
+			$criteria->add ( new Criteria ( 'content_type', 'content' ) );
+			$criteria->add ( new Criteria ( 'content_status', '1' ) );
+			$access_topic = fmcontent_MygetItemIds ( 'fmcontent_access', $forMods->getVar ( 'dirname' ) );
+			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
+			if (! (count ( $options ) == 1 && $options [0] == 0)) {
+				$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $options ) . ')', 'IN' ) );
+			}
+			$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+			$criteria->setSort ( $content_sort );
+			$criteria->setOrder ( $content_order );
+			$criteria->setLimit ( $content_limit );
+		}
+		
+		$obj = $this->getObjects ( $criteria, false );
+		if ($obj) {
+			foreach ( $obj as $root ) {
+				$tab = array ();
+				$tab = $root->toArray ();
+				$tab ['owner'] = XoopsUser::getUnameFromId ( $root->getVar ( 'content_uid' ) );
+				$tab ['topic'] = fmcontentTopicHandler::getTopicFromId ( $root->getVar ( 'content_topic' ) );
+				$tab ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $tab );
+				$tab ['title'] = mb_strlen ( $root->getVar ( 'content_title' ), 'utf-8' ) > $lenght_title ? mb_substr ( $root->getVar ( 'content_title' ), 0, ($lenght_title), 'utf-8' ) . "..." : $root->getVar ( 'content_title' );
+				$tab ['date'] = formatTimestamp ( $root->getVar ( 'content_create' ), _MEDIUMDATESTRING );
+				$ret [] = $tab;
+			}
+		}
+		return $ret;
+	}
+	
+	function getContentCount($forMods, $content_infos) {
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'content_topic', $content_infos ['content_topic'] ) );
+		if ($content_infos ['content_static']) {
+			$criteria->add ( new Criteria ( 'content_topic', '0', '>' ) );
+		}
+		//$criteria->add(new Criteria('content_type','content')); //-> check
+		return $this->getCount ( $criteria );
+	}
+	
+	function getMenuItemCount($forMods, $topic_id) {
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'content_display', '1' ) );
+		$criteria->add ( new Criteria ( 'content_topic', $topic_id ) );
+		$content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
+		$getcount = $content_handler->getCount ( $criteria );
+		return $getcount;
+	}
+	
+	function getContentItemCount($forMods, $topic_id) {
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'content_topic', $topic_id ) );
+		$content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
+		$getcount = $content_handler->getCount ( $criteria );
+		return $getcount;
+	}
+	
+	function getLastContent($forMods, $content_infos) {
+		$ret = array ();
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$obj = $this->getObjects ( $criteria, false );
+		if ($obj) {
+			foreach ( $obj as $root ) {
+				$tab = array ();
+				$tab = $root->toArray ();
+				$tab ['topic'] = fmcontentTopicHandler::getTopicFromId ( $root->getVar ( 'content_topic' ) );
+				$tab ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $tab );
+				$ret [] = $tab;
+			}
+		}
+		return $ret;
+	}
+	
+	/**
+	 *
+	 * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+	 * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+	 * @author      Hervé Thouzard (ttp://www.instant-zero.com)
+	 * @package     Oledrion
+	 * @version     $Id$
+	 */
+	
+	function updateHits($content_id) {
+		$sql = 'UPDATE ' . $this->table . ' SET content_hits = content_hits + 1 WHERE content_id= ' . intval ( $content_id );
+		return $this->db->queryF ( $sql );
+	}
+	
+	/**
+	 *
+	 * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+	 * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+	 * @author      Zoullou (http://www.zoullou.net)
+	 * @package     ExtGallery
+	 * @version     $Id$
+	 */
+	function getSearchedContent($queryArray, $condition, $limit, $start, $userId) {
+		$ret = array ();
+		include_once 'topic.php';
+		$criteria = new CriteriaCompo ();
+		if ($userId > 0)
+			$criteria->add ( new Criteria ( 'content_uid', $userId ) );
+		$criteria->add ( new Criteria ( 'content_status', 1 ) );
+		if (is_array ( $queryArray ) && count ( $queryArray ) > 0) {
+			$subCriteria = new CriteriaCompo ();
+			foreach ( $queryArray as $keyWord ) {
+				$keyWordCriteria = new CriteriaCompo ();
+				$keyWordCriteria->add ( new Criteria ( 'content_title', '%' . $keyWord . '%', 'LIKE' ) );
+				$keyWordCriteria->add ( new Criteria ( 'content_text', '%' . $keyWord . '%', 'LIKE' ), 'OR' );
+				$keyWordCriteria->add ( new Criteria ( 'content_short', '%' . $keyWord . '%', 'LIKE' ), 'OR' );
+				$keyWordCriteria->add ( new Criteria ( 'content_words', '%' . $keyWord . '%', 'LIKE' ), 'OR' );
+				$keyWordCriteria->add ( new Criteria ( 'content_desc', '%' . $keyWord . '%', 'LIKE' ), 'OR' );
+				$subCriteria->add ( $keyWordCriteria, $condition );
+				unset ( $keyWordCriteria );
+			}
+			$criteria->add ( $subCriteria );
+		}
+		$criteria->setStart ( $start );
+		$criteria->setLimit ( $limit );
+		$criteria->setSort ( 'content_create' );
+		
+		$contents = $this->getObjects ( $criteria );
+		
+		$ret = array ();
+		foreach ( $contents as $content ) {
+			$data = array ();
+			$data = $content->toArray ();
+			$data ['image'] = 'images/forum.gif';
+			$data ['topic'] = fmcontentTopicHandler::getTopicFromId ( $content->getVar ( 'content_topic' ) );
+			$data ['link'] = fmcontent_Url ( 'fmcontent', $data );
+			$data ['title'] = $content->getVar ( 'content_title' );
+			$data ['time'] = $content->getVar ( 'content_create' );
+			$data ['uid'] = $content->getVar ( 'content_uid' );
+			$ret [] = $data;
+		}
+		
+		return $ret;
+	}
+	
+	/**
+	 * Generate function for update user post
+	 *
+	 * @ Update user post count after send approve content
+	 * @ Update user post count after change status content
+	 * @ Update user post count after delete content
+	 */
+	function updateposts($content_uid, $content_status, $content_action) {
+		switch ($content_action) {
+			case 'add' :
+				if ($content_uid && $content_status) {
+					$user = new xoopsUser ( $content_uid );
+					$member_handler = & xoops_gethandler ( 'member' );
+					$member_handler->updateUserByField ( $user, 'posts', $user->getVar ( 'posts' ) + 1 );
+				}
+				break;
+			
+			case 'delete' :
+				if ($content_uid && $content_status) {
+					$user = new xoopsUser ( $content_uid );
+					$member_handler = & xoops_gethandler ( 'member' );
+					$member_handler->updateUserByField ( $user, 'posts', $user->getVar ( 'posts' ) - 1 );
+				}
+				break;
+			
+			case 'status' :
+				if ($content_uid) {
+					$user = new xoopsUser ( $content_uid );
+					$member_handler = & xoops_gethandler ( 'member' );
+					if ($content_status) {
+						$member_handler->updateUserByField ( $user, 'posts', $user->getVar ( 'posts' ) - 1 );
+					} else {
+						$member_handler->updateUserByField ( $user, 'posts', $user->getVar ( 'posts' ) + 1 );
+					}
+				}
+				break;
+		}
+	}
 
 }
 
