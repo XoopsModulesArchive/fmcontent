@@ -63,7 +63,7 @@ if (isset($content_topic) && $content_topic > 0) {
     }
 
     // Check the access permission
-    $perm_handler = fmcontentPermission::getHandler();
+    $perm_handler = fmcontentPermHandler::getHandler();
     if (!$perm_handler->isAllowed($xoopsUser, 'fmcontent_access', $view_topic->getVar('topic_id'), $forMods)) {
         redirect_header("index.php", 3, _NOPERM);
         exit;
@@ -76,6 +76,7 @@ if (isset($content_topic) && $content_topic > 0) {
         redirect_header("index.php", 3, _NOPERM);
         exit;
     }
+
 }
 
 $page['title'] = $obj->getVar('content_title');
@@ -94,8 +95,9 @@ $betterthings = array("", "", "->", "\n", "'", "'", "'", "'", "->", "oe",
 $contentmain = str_replace($smallthings, $betterthings, $contentmain);
 
 $pdf_config['slogan'] = $myts->displayTarea($xoopsConfig['sitename'] . ' - ' . $xoopsConfig['slogan']);
-$pdf_data['title'] = $xoopsConfig['sitename'];
-$pdf_data['subtitle'] = $myts->htmlSpecialChars($page['title']);
+//$pdf_data['title'] = $xoopsConfig['sitename'];
+//$pdf_data['title'] = $myts->htmlSpecialChars($page['title']);
+$pdf_data['title'] = str_replace("&#039;", "'", $page['title']);
 $pdf_data['subsubtitle'] = '';
 $pdf_data['date'] = formatTimestamp($obj->getVar('content_create'), _MEDIUMDATESTRING);
 $pdf_data['filename'] = preg_replace("/[^0-9a-z\-_\.]/i", '', $page['alias']);
@@ -106,6 +108,23 @@ $pdf_data['author'] = XoopsUser::getUnameFromId($obj->getVar('content_uid'));
 $puff = '<br />';
 $puffer = '<br /><br /><br />';
 
+//Date / Author display
+if (isset($content_topic) && $content_topic > 0  &&  $view_topic->getVar('topic_showtype') != '0') {
+  if ($view_topic->getVar('topic_showdate')) {
+      $page_date = $pdf_data['date'];
+  }
+  if ($view_topic->getVar('topic_showauthor')) {
+       $page_author = ' - '.$pdf_data['author'];
+  }
+}else {
+  if (xoops_getModuleOption('disp_date', $forMods->getVar('dirname'))) {
+      $page_date = $pdf_data['date'];
+  }
+  if (xoops_getModuleOption('disp_author', $forMods->getVar('dirname'))) {
+      $page_author = ' - '.$pdf_data['author'];
+  }
+}
+
 //create the A4-PDF...
 $pdf = new PDF();
 if (method_exists($pdf, "encoding")) {
@@ -113,8 +132,8 @@ if (method_exists($pdf, "encoding")) {
 }
 $pdf->SetCreator($pdf_config['creator']);
 $pdf->SetTitle($pdf_data['title']);
-$pdf->SetAuthor($pdf_config['url']);
-$pdf->SetSubject($pdf_data['author']);
+$pdf->SetAuthor($pdf_data['author']);
+$pdf->SetSubject();
 $out = $pdf_config['url'] . ', ' . $pdf_data['author'] . ', ' . $pdf_data['title'] . ', ' . $pdf_data['subtitle'] . ', ' . $pdf_data['subsubtitle'];
 $pdf->SetKeywords($out);
 $pdf->SetAutoPageBreak(true, 25);
@@ -144,17 +163,18 @@ if ($pdf_data['subsubtitle'] != '') {
 }
 $pdf->WriteHTML($puff, $pdf_config['scale']);
 $pdf->SetFont($pdf_config['font']['author']['family'], $pdf_config['font']['author']['style'], $pdf_config['font']['author']['size']);
-$out = _FMCONTENT_AUTHOR;
-$out .= $pdf_data['author'];
+//$out = _FMCONTENT_AUTHOR.': ';
+$out = $page_date;
+$out .= $page_author;
 $pdf->WriteHTML($out, $pdf_config['scale']);
 $pdf->WriteHTML($puff, $pdf_config['scale']);
-$out = _FMCONTENT_DATE;
-$out .= $pdf_data['date'];
-$pdf->WriteHTML($out, $pdf_config['scale']);
-$pdf->WriteHTML($puff, $pdf_config['scale']);
+//$out = _FMCONTENT_DATE.': ';
+//$out = $pdf_data['date'];
+//$pdf->WriteHTML($out, $pdf_config['scale']);
+//$pdf->WriteHTML($puff, $pdf_config['scale']);
 
 $pdf->SetTextColor(0, 0, 0);
-$pdf->WriteHTML($puffer, $pdf_config['scale']);
+$pdf->WriteHTML($puff, $pdf_config['scale']);
 
 $pdf->SetFont($pdf_config['font']['content']['family'], $pdf_config['font']['content']['style'], $pdf_config['font']['content']['size']);
 $pdf->WriteHTML($pdf_data['content'], $pdf_config['scale']);
