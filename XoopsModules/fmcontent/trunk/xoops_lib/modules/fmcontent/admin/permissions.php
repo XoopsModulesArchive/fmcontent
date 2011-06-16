@@ -44,18 +44,6 @@ $module_id = $forMods->getVar("mid");
 switch ($permtoset)
 {
     case 1:
-        $title_of_form = _FMCONTENT_PERMISSIONS_ACCESS;
-        $perm_name = "fmcontent_access";
-        $perm_desc = "";
-        break;
-
-    case 2:
-        $title_of_form = _FMCONTENT_PERMISSIONS_SUBMIT;
-        $perm_name = "fmcontent_submit";
-        $perm_desc = "";
-        break;
-
-    case 3:
         $title_of_form = _FMCONTENT_PERMISSIONS_GLOBAL;
         $perm_name = "fmcontent_ac";
         $perm_desc = "";
@@ -65,14 +53,26 @@ switch ($permtoset)
             '16' => _FMCONTENT_PERMISSIONS_GLOBAL_16
         );
         break;
+    case 2:
+        $title_of_form = _FMCONTENT_PERMISSIONS_ACCESS;
+        $perm_name = "fmcontent_access";
+        $perm_desc = "";
+        break;
+
+    case 3:
+        $title_of_form = _FMCONTENT_PERMISSIONS_SUBMIT;
+        $perm_name = "fmcontent_submit";
+        $perm_desc = "";
+        break;
 }
 
 $permform = new XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, "admin/permissions.php");
 
-if ($permtoset == 3) {
+if ($permtoset == 1) {
     foreach ($global_perms_array as $perm_id => $perm_name) {
         $permform->addItem($perm_id, $perm_name);
     }
+    $xoopsTpl->assign('permform', $permform->render());
 } else {
     $xt = new XoopsTopic($xoopsDB -> prefix("fmcontent_topic"));
     $alltopics =& $xt->getTopicsList();
@@ -80,19 +80,20 @@ if ($permtoset == 3) {
     foreach ($alltopics as $topic_id => $topic) {
         $permform->addItem($topic_id, $topic["title"], $topic["pid"]);
     }
+    
+    //check if topics exist before rendering the form and redirect, if there are no topics   
+    if ($topic_handler->getTopicCount($forMods)) {
+        $xoopsTpl->assign('permform', $permform->render());
+	 } else {
+	     fmcontent_Redirect ( 'topic.php?op=new_topic', 02, _FMCONTENT_MSG_NOPERMSSET );
+	     // Include footer
+	     xoops_cp_footer ();
+	     exit ();
+	 }
 }
 
 $xoopsTpl->assign('navigation', 'permission');
 $xoopsTpl->assign('navtitle', _FMCONTENT_PERM);
-
-//check if topics exist before rendering the form and redirect, if there are no topics    
-
-if ($topic_handler->getTopicCount($forMods)) {
-    $xoopsTpl->assign('permform', $permform->render());
-} else {
-    redirect_header("topic.php", 2, _FMCONTENT_MSG_NOPERMSSET, false);
-}
-
 $xoopsTpl->assign('fmcontent_tips', _FMCONTENT_PERMISSIONS_TIPS);
 
 // Call template file

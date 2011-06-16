@@ -7,6 +7,8 @@
 - Add Breadcrumb function in utils class (Voltan)
 - Add contentDefault function in page class (Voltan)
 - Add homepage function in utils class for manage module index page (Voltan) - [Not complated yet]
+- Improve permission page (Voltan)
+
 1.05
 =================================
 - Improve blocks (ianez - Voltan) 
