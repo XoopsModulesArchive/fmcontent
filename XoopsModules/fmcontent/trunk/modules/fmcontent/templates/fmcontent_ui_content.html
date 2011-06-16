@@ -39,8 +39,10 @@
 				<{$smarty.const._FMCONTENT_SOURCE}><a href="<{$content.content_source}>" title="<{$smarty.const._FMCONTENT_SOURCE}><{$content.content_author}>" rel="external"><{$content.content_author}></a>
 			</div>
 			<{/if}> 
+			<{if $link.date}>
 			<{if $content.content_update != $content.content_create}>
 			<div class="itemPostDate"><{$smarty.const._FMCONTENT_UPDATE}>: <{$content.content_update}></div>
+			<{/if}>
 			<{/if}> 
     </div>
 
