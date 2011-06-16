@@ -10,7 +10,7 @@
 */
 
 /**
- * FmContent page class
+ * FmContent Utils class
  *
  * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
@@ -20,6 +20,12 @@
 
 class fmcontentUtils {
 	
+	/**
+	 * Uploadimg function
+	 *
+	 * For manage all upload parts for images
+	 * Add topic , Edit topic , Add content , Edit content
+	 */
 	function uploadimg($forMods, $type, $obj, $image) {
 		include_once XOOPS_ROOT_PATH . "/class/uploader.php";
 		$uploader_img = new XoopsMediaUploader ( XOOPS_ROOT_PATH . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ), xoops_getModuleOption ( 'img_mime', $forMods->getVar ( 'dirname' ) ), xoops_getModuleOption ( 'img_size', $forMods->getVar ( 'dirname' ) ), xoops_getModuleOption ( 'img_maxwidth', $forMods->getVar ( 'dirname' ) ), xoops_getModuleOption ( 'img_maxheight', $forMods->getVar ( 'dirname' ) ) );
@@ -39,6 +45,12 @@ class fmcontentUtils {
 		}
 	}
 	
+	/**
+	 * Deleteimg function
+	 *
+	 * For Deleteing uploaded images
+	 * Edit topic ,Edit content
+	 */
 	function deleteimg($forMods, $type, $obj) {
 		if ($obj->getVar ( $type )) {
 			$currentPicture = XOOPS_ROOT_PATH . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . $obj->getVar ( $type );
@@ -51,6 +63,14 @@ class fmcontentUtils {
 		$obj->setVar ( $type, '' );
 	}
 	
+	/**
+	 *
+	 * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+	 * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+	 * @author      Gregory Mage (Aka Mage)
+	 * @package     TDMDownload
+	 * @version     $Id$
+	 */
 	function breadcrumb($forMods, $lasturl, $breadcrumbtitle, $topic_id, $prefix = ' &raquo; ', $title = 'topic_title') {
 		$breadcrumb = '';
 		include_once XOOPS_TRUST_PATH . '/modules/fmcontent/class/topic.php';
@@ -72,6 +92,14 @@ class fmcontentUtils {
 		return $breadcrumb;
 	}
 	
+	/**
+	 *
+	 * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+	 * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+	 * @author      Gregory Mage (Aka Mage)
+	 * @package     TDMDownload
+	 * @version     $Id$
+	 */
 	function PathTreeUrl($mytree, $key, $topic_array, $title, $prefix = ' &raquo; ', $link = false, $order = 'ASC', $lasturl = false, $modname) {
 		global $xoopsModule;
 		$topic_parent = $mytree->getAllParent ( $key );
@@ -117,6 +145,69 @@ class fmcontentUtils {
 		}
 		return $Path;
 	}
-
+	
+	/**
+	 * Homepage function
+	 *
+	 * For management module index page
+	 * 
+	 */
+	function homepage($forMods, $content_infos, $type) {
+		
+		$content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
+		$topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
+		if (! $type) {
+			$type = 'type1';
+		}
+		$contents = array ();
+		
+		switch ($type) {
+			
+			// list all contents from all topics whit out topic list
+			case 'type1' :
+				$contents ['content'] = $content_handler->getContentList ( $forMods, $content_infos );
+				$contents ['numrows'] = $content_handler->getContentCount ( $forMods, $content_infos );
+				if ($contents ['numrows'] > $content_infos ['content_limit']) {
+					if ($content_topic) {
+						$content_pagenav = new XoopsPageNav ( $contents ['numrows'], $content_infos ['content_limit'], $content_infos ['content_start'], 'start', 'limit=' . $content_infos ['content_limit'] . '&topic=' . $content_infos ['content_topic'] );
+					} else {
+						$content_pagenav = new XoopsPageNav ( $contents ['numrows'], $content_infos ['content_limit'], $content_infos ['content_start'], 'start', 'limit=' . $content_infos ['content_limit'] );
+					}
+					$contents ['pagenav'] = $content_pagenav->renderNav ( 4 );
+				} else {
+					$contents ['pagenav'] = '';
+				}
+				break;
+			
+			// List all topics
+			case 'type2' :
+				
+				break;
+			
+			// List all static pages
+			case 'type3' :
+				
+				break;
+			
+			// Show selected static content
+			case 'type4' :
+				$criteria = new CriteriaCompo ();
+				$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+				$criteria->add ( new Criteria ( 'content_default', 1 ) );
+				$criteria->add ( new Criteria ( 'content_topic', 0 ) );
+				$default = $content_handler->getDefault ( $criteria );
+				$obj = $content_handler->get ( $default );
+				$contentdefault = $obj->toArray ();
+				$contentdefault ['content_create'] = formatTimestamp ( $contentdefault ['content_create'], _MEDIUMDATESTRING );
+				$contentdefault ['imgurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . $contentdefault ['content_img'];
+				$contentdefault ['topic'] = xoops_getModuleOption ( 'static_name', $forMods->getVar ( 'dirname' ) );
+				$contentdefault ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $contentdefault );
+				if (isset ( $contentdefault ['content_id'] )) {
+					$contents ['content'] = $contentdefault;
+				}
+				break;
+		}
+		return $contents;
+	}
 }
 ?>

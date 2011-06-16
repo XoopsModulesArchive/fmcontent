@@ -1,6 +1,8 @@
 <{include file="db:fmcontent_header.html"}>
 <div class="fmcontent">
-    <{if $default}>
+
+    <{if $type == type1}>
+<{if $default}>
     <div class="ui-widget-content ui-corner-all" id="default">
   		<div class="ui-widget-header ui-corner-all"><h1><{$default.content_title}></h1></div>
   		<div class="ui-widget-content ui-corner-all">
@@ -266,5 +268,64 @@
     <{if $content_pagenav}>
     <div class="pagenave"><{$content_pagenav}></div>
     <{/if}>
+    <{/if}>
     
+    <{if $type == type2}>
+    
+    <{/if}>
+    
+    <{if $type == type3}>
+    
+    <{/if}>
+    
+    <{if $type == type4}>
+<{if $contents}>
+    <div class="ui-widget-content ui-corner-all" id="default">
+  		<div class="ui-widget-header ui-corner-all"><h1><{$contents.content_title}></h1></div>
+  		<div class="ui-widget-content ui-corner-all">
+				<{if $contents.content_short}>
+        	<{if $contents.content_img}>						
+					<div class="itemImg gallery">
+					  <{if $img_lightbox}>
+					  <a href="<{$contents.imgurl}>" >
+					    <img width="<{$imgwidth}>" class="<{$imgfloat}> content_img" src="<{$contents.imgurl}>" alt="<{$contents.content_title}>"/>
+					  </a>
+					  <{else}>
+					  <img width="<{$imgwidth}>" class="<{$imgfloat}> content_img" src="<{$contents.imgurl}>" alt="<{$contents.content_title}>"/>
+					  <{/if}>
+					</div>
+					<{/if}>
+					<{$contents.content_short}>
+        	<div class="endline spacer"></div>
+        	<a class="itemMore" href="<{$contents.url}>" title="<{$smarty.const._FMCONTENT_MORE}>"><{$smarty.const._FMCONTENT_MORE}></a>
+        <{else}>
+        	<{if $contents.content_img}>						
+					<div class="gallery">
+					  <{if $img_lightbox}>
+					  <a href="<{$contents.imgurl}>" >
+					    <img width="<{$imgwidth}>" class="<{$imgfloat}> content_img" src="<{$contents.imgurl}>" alt="<{$contents.content_title}>"/>
+					  </a>
+					  <{else}>
+					  <img width="<{$imgwidth}>" class="<{$imgfloat}> content_img" src="<{$contents.imgurl}>" alt="<{$contents.content_title}>"/>
+					  <{/if}>
+					</div>
+					<{/if}>
+        	<{$contents.content_text}>
+					<div class="endline"></div>
+        <{/if}>  
+	    </div>
+	    
+			<div class="ui-state-default ui-corner-all right">
+				<span class="left"><{$smarty.const._FMCONTENT_DATE}>: <{$contents.content_create}></span>
+				<{if $xoops_isadmin}>
+				<span>
+				    &nbsp;<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/content.php?op=edit_content&amp;content_id=<{$contents.content_id}>" title="<{$smarty.const._FMCONTENT_EDIT}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/edit.png" alt="<{$smarty.const._CONTENT_EDIT}>"/></a>
+				    <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/content.php?op=delete&amp;content_id=<{$contents.content_id}>" title="<{$smarty.const._FMCONTENT_DELETE}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/delete.png" alt="<{$smarty.const._CONTENT_DELETE}>"/></a>
+				</span>        
+				<{/if}>
+			</div>
+    </div>
+    <{/if}>
+    <{/if}>
+
 </div>
