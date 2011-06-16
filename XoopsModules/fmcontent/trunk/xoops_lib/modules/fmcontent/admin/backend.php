@@ -49,7 +49,9 @@ switch ($op) {
         fmcontentUtils::uploadimg($forMods, 'topic_img' , $obj,$_REQUEST['topic_img']);
 
         if (!$topic_handler->insert($obj)) {
-            echo 'error';
+            fmcontent_Redirect('onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR);
+            xoops_cp_footer();
+            exit();
         }
 
         $topic_id = $obj->db->getInsertId();
@@ -82,7 +84,9 @@ switch ($op) {
             fmcontentPermission::setpermission($forMods,'fmcontent_submit',$_POST['groups_submit'] ,$topic_id,false);
 
             if (!$topic_handler->insert($obj)) {
-                echo 'error';
+            fmcontent_Redirect('onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR);
+            xoops_cp_footer();
+            exit();
             }
         }
 
@@ -99,7 +103,7 @@ switch ($op) {
         $obj = $content_handler->create();
         $obj->setVars($_REQUEST);
 
-        if($_REQUEST['content_type'] = 'link') {
+        if($_REQUEST['content_type'] == 'link') {
 	         $obj->setVar('content_title', $_REQUEST['content_menu']);	  
         }
         	
@@ -124,7 +128,9 @@ switch ($op) {
         $content_handler->updateposts($_REQUEST['content_uid'], $_REQUEST['content_status'], $content_action = 'add');
 
         if (!$content_handler->insert($obj)) {
-            echo 'error';
+            fmcontent_Redirect('onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR);
+            xoops_cp_footer();
+            exit();
         }
 
         if ((xoops_getModuleOption('usetag', $forMods->getVar('dirname'))) and (is_dir(XOOPS_ROOT_PATH . '/modules/tag'))) {
@@ -147,7 +153,7 @@ switch ($op) {
             $obj = $content_handler->get($content_id);
             $obj->setVars($_REQUEST);
 
-	         if($_REQUEST['content_type'] = 'link') {
+	         if($_REQUEST['content_type'] == 'link') {
 		          $obj->setVar('content_title', $_REQUEST['content_menu']);	  
 	         }
         
@@ -182,7 +188,9 @@ switch ($op) {
 		}
 
             if (!$content_handler->insert($obj)) {
-                echo 'error';
+            fmcontent_Redirect('onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR);
+            xoops_cp_footer();
+            exit();
             }
 
             //tag
