@@ -106,7 +106,11 @@ class fmcontentUtils {
 		if ($order == 'ASC') {
 			$topic_parent = array_reverse ( $topic_parent );
 			if ($link == true && $modname) {
-				$Path = '<a href="index.php">' . $xoopsModule->name () . '</a>' . $prefix;
+				if($key) {
+					$Path = '<a href="index.php">' . $xoopsModule->name () . '</a>' . $prefix;
+				} else {
+					$Path = '<a href="index.php">' . $xoopsModule->name () . '</a>';
+				}
 			} elseif ($modname) {
 				$Path = $xoopsModule->name () . $prefix;
 			}
