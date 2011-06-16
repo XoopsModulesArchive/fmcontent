@@ -104,13 +104,15 @@ class fmcontent_content extends XoopsObject {
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
 		$topic = $topic_Handler->getObjects ( $criteria );
-		$tree = new XoopsObjectTree ( $topic, 'topic_id', 'topic_pid' );
-		ob_start ();
-		echo $tree->makeSelBox ( 'content_topic', 'topic_title', '--', $this->getVar ( 'content_topic', 'e' ), true );
-		$topic_sel = new XoopsFormLabel ( _FMCONTENT_CONTENT_TOPIC, ob_get_contents () );
-		$topic_sel->setDescription ( _FMCONTENT_CONTENT_TOPIC_DESC );
-		$form->addElement ( $topic_sel );
-		ob_end_clean ();
+		if ($topic) {
+			$tree = new XoopsObjectTree ( $topic, 'topic_id', 'topic_pid' );
+			ob_start ();
+			echo $tree->makeSelBox ( 'content_topic', 'topic_title', '--', $this->getVar ( 'content_topic', 'e' ), true );
+			$topic_sel = new XoopsFormLabel ( _FMCONTENT_CONTENT_TOPIC, ob_get_contents () );
+			$topic_sel->setDescription ( _FMCONTENT_CONTENT_TOPIC_DESC );
+			$form->addElement ( $topic_sel );
+			ob_end_clean ();
+		}
 		// Short
 		$form->addElement ( new XoopsFormTextArea ( _FMCONTENT_SHORT, 'content_short', $this->getVar ( 'content_short', 'e' ), 5, 90 ) );
 		// Editor
@@ -250,13 +252,15 @@ class fmcontent_content extends XoopsObject {
 			$criteria->add ( new Criteria ( 'topic_id', '(' . implode ( ',', $topics ) . ')', 'IN' ) );
 		}
 		$topic = $topic_Handler->getObjects ( $criteria );
-		$tree = new XoopsObjectTree ( $topic, 'topic_id', 'topic_pid' );
-		ob_start ();
-		echo $tree->makeSelBox ( 'content_topic', 'topic_title', '--', $this->getVar ( 'content_topic', 'e' ), true );
-		$topic_sel = new XoopsFormLabel ( _FMCONTENT_CONTENT_TOPIC, ob_get_contents () );
-		$topic_sel->setDescription ( _FMCONTENT_CONTENT_TOPIC_DESC );
-		$form->addElement ( $topic_sel );
-		ob_end_clean ();
+		if ($topic) {
+			$tree = new XoopsObjectTree ( $topic, 'topic_id', 'topic_pid' );
+			ob_start ();
+			echo $tree->makeSelBox ( 'content_topic', 'topic_title', '--', $this->getVar ( 'content_topic', 'e' ), true );
+			$topic_sel = new XoopsFormLabel ( _FMCONTENT_CONTENT_TOPIC, ob_get_contents () );
+			$topic_sel->setDescription ( _FMCONTENT_CONTENT_TOPIC_DESC );
+			$form->addElement ( $topic_sel );
+			ob_end_clean ();
+		}
 		// Short
 		$form->addElement ( new XoopsFormTextArea ( _FMCONTENT_SHORT, 'content_short', $this->getVar ( 'content_short', 'e' ), 5, 80 ) );
 		// Editor
