@@ -109,6 +109,16 @@ switch ($op) {
 			$obj->setVar ( 'content_title', $_REQUEST ['content_menu'] );
 		}
 		
+		if(!$_REQUEST ['content_default'] && $_REQUEST ['content_topic'] == 0) {
+			$criteria = new CriteriaCompo ();
+		   $criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		   $criteria->add ( new Criteria ( 'content_topic', 0) );
+		   $criteria->add ( new Criteria ( 'content_default', 1 ) );
+		   if(!$content_handler->getCount ( $criteria )) {
+		   	$obj->setVar ( 'content_default', '1' );
+		   }	
+		}	
+		
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
 		$criteria->setSort ( 'content_order' );
