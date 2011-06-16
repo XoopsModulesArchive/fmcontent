@@ -195,20 +195,8 @@ class fmcontentUtils {
 			
 			// Show selected static content
 			case 'type4' :
-				$criteria = new CriteriaCompo ();
-				$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
-				$criteria->add ( new Criteria ( 'content_default', 1 ) );
-				$criteria->add ( new Criteria ( 'content_topic', 0 ) );
-				$default = $content_handler->getDefault ( $criteria );
-				$obj = $content_handler->get ( $default );
-				$contentdefault = $obj->toArray ();
-				$contentdefault ['content_create'] = formatTimestamp ( $contentdefault ['content_create'], _MEDIUMDATESTRING );
-				$contentdefault ['imgurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . $contentdefault ['content_img'];
-				$contentdefault ['topic'] = xoops_getModuleOption ( 'static_name', $forMods->getVar ( 'dirname' ) );
-				$contentdefault ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $contentdefault );
-				if (isset ( $contentdefault ['content_id'] )) {
-					$contents ['content'] = $contentdefault;
-				}
+					$default_info = array('id'=> 0 , 'title' => xoops_getModuleOption ( 'static_name', $forMods->getVar ( 'dirname' )));
+					$contents ['content'] = $content_handler->contentDefault($forMods, $default_info);
 				break;
 		}
 		return $contents;
