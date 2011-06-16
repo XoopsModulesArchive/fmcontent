@@ -5,6 +5,7 @@
 - Add upload image for topics (Voltan)
 - Add delete option for images (Voltan)
 - Add Breadcrumb function in utils class (Voltan)
+- Add contentDefault function in page class (Voltan)
 
 1.05
 =================================

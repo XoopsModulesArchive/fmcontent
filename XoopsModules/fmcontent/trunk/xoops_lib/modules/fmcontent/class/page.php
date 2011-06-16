@@ -433,6 +433,24 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 		return $obj_array [0] [$this->keyName];
 	}
 	
+	function contentDefault($forMods, $default_info) {
+		$contentdefault = array ();
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'content_default', 1 ) );
+		$criteria->add ( new Criteria ( 'content_topic', $default_info ['id'] ) );
+		$default = self::getDefault ( $criteria );
+		$obj = self::get ( $default );
+		$contentdefault = $obj->toArray ();
+		$contentdefault ['content_create'] = formatTimestamp ( $contentdefault ['content_create'], _MEDIUMDATESTRING );
+		$contentdefault ['imgurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . $contentdefault ['content_img'];
+		$contentdefault ['topic'] = $default_info ['title'];
+		$contentdefault ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $contentdefault );
+		if (isset ( $contentdefault ['content_id'] )) {
+			return $contentdefault;
+		}
+	}
+	
 	function getContentList($forMods, $content_infos) {
 		$ret = array ();
 		if (! isset ( $criteria )) {
