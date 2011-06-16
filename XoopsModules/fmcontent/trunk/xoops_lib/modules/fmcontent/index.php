@@ -90,8 +90,9 @@ if (isset ( $content_topic )) {
 	}
 	
 	// get topic information
-	$topics = $view_topic->getVar ( 'topic_title' );
-	$topic_id = $view_topic->getVar ( 'topic_id' );
+	$topics = $default_title = $view_topic->getVar ( 'topic_title' );
+	$topic_id = $default_id = $view_topic->getVar ( 'topic_id' );
+	
 	$xoopsTpl->assign ( 'topic_title', $topics );
 	$xoopsTpl->assign ( 'xoops_pagetitle', $topics );
 	
@@ -112,16 +113,19 @@ if (isset ( $content_topic )) {
 	} else {
 		$content_perpage = xoops_getModuleOption ( 'perpage', $forMods->getVar ( 'dirname' ) );
 	}
+	$type = 'type1';
 
 } else {
 	
 	// get all topic informations
 	$topics = $topic_handler->getall ( $content_topic );
-	
+	$default_title = xoops_getModuleOption ( 'static_name', $forMods->getVar ( 'dirname' ) );
+	$default_id = '0';
 	// get module configs
 	$showtype = xoops_getModuleOption ( 'showtype', $forMods->getVar ( 'dirname' ) );
 	$columns = xoops_getModuleOption ( 'columns', $forMods->getVar ( 'dirname' ) );
 	$content_perpage = xoops_getModuleOption ( 'perpage', $forMods->getVar ( 'dirname' ) );
+	$type = xoops_getModuleOption ( 'homepage', $forMods->getVar ( 'dirname' ) );
 }
 
 // get module configs
@@ -144,19 +148,8 @@ if (isset ( $_REQUEST ['start'] )) {
 
 $content_infos = array ('topics' => $topics, 'content_limit' => $content_limit, 'content_topic' => $content_topic, 'content_user' => $content_user, 'content_start' => $content_start, 'content_order' => $content_order, 'content_sort' => $content_sort, 'content_status' => '1', 'content_static' => true, 'admin_side' => false );
 
-$contents = $content_handler->getContentList ( $forMods, $content_infos );
-$content_numrows = $content_handler->getContentCount ( $forMods, $content_infos );
-
-if ($content_numrows > $content_limit) {
-	if ($content_topic) {
-		$content_pagenav = new XoopsPageNav ( $content_numrows, $content_limit, $content_start, 'start', 'limit=' . $content_limit . '&topic=' . $content_topic );
-	} else {
-		$content_pagenav = new XoopsPageNav ( $content_numrows, $content_limit, $content_start, 'start', 'limit=' . $content_limit );
-	}
-	$content_pagenav = $content_pagenav->renderNav ( 4 );
-} else {
-	$content_pagenav = '';
-}
+// Get Information for Show in indexpage or topic pages
+$contents = fmcontentUtils::homepage ( $forMods, $content_infos, $type );
 
 if (isset ( $content_topic ) && $content_topic > 0 && $view_topic->getVar ( 'topic_showtype' ) != '0') { // The option for select setting from topic or module options must be added
 	if ($view_topic->getVar ( 'topic_showauthor' )) {
@@ -193,24 +186,6 @@ if (isset ( $content_topic ) && $content_topic > 0 && $view_topic->getVar ( 'top
 	}
 }
 
-//get Default
-if (isset ( $content_topic )) {
-	$criteria = new CriteriaCompo ();
-	$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
-	$criteria->add ( new Criteria ( 'content_default', 1 ) );
-	$criteria->add ( new Criteria ( 'content_topic', $content_topic ) );
-	$default = $content_handler->getDefault ( $criteria );
-	$obj = $content_handler->get ( $default );
-	$contentdefault = $obj->toArray ();
-	$contentdefault ['content_create'] = formatTimestamp ( $contentdefault ['content_create'], _MEDIUMDATESTRING );
-	$contentdefault ['imgurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . $contentdefault ['content_img'];
-	$contentdefault ['topic'] = $view_topic->getVar ( 'topic_title' );
-	$contentdefault ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $contentdefault );
-	if (isset ( $contentdefault ['content_id'] )) {
-		$xoopsTpl->assign ( 'default', $contentdefault );
-	}
-}
-
 if (xoops_getModuleOption ( 'img_lightbox', $forMods->getVar ( 'dirname' ) )) {
 	// Add scripts
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/jquery.js' );
@@ -231,19 +206,25 @@ if (xoops_getModuleOption ( 'bc_show', $forMods->getVar ( 'dirname' ) )) {
 	$breadcrumb = fmcontentUtils::breadcrumb ( $forMods, false, '', $topic_id, ' &raquo; ', 'topic_title' );
 }
 
+// Get default content
+$default_info = array ('id' => $default_id, 'title' => $default_title );
+$default = $content_handler->contentDefault ( $forMods, $default_info );
+
 $xoopsTpl->assign ( 'content_topic', $content_topic );
 $xoopsTpl->assign ( 'content_limit', $content_limit );
 $xoopsTpl->assign ( 'showtype', $showtype );
 $xoopsTpl->assign ( 'columns', $columns );
-$xoopsTpl->assign ( 'content_pagenav', $content_pagenav );
+$xoopsTpl->assign ( 'content_pagenav', $contents ['pagenav'] );
 $xoopsTpl->assign ( 'info', $info );
-$xoopsTpl->assign ( 'contents', $contents );
+$xoopsTpl->assign ( 'contents', $contents ['content'] );
 $xoopsTpl->assign ( 'modname', $forMods->getVar ( 'name' ) );
 $xoopsTpl->assign ( 'rss', xoops_getModuleOption ( 'rss_show', $forMods->getVar ( 'dirname' ) ) );
 $xoopsTpl->assign ( 'imgwidth', xoops_getModuleOption ( 'imgwidth', $forMods->getVar ( 'dirname' ) ) );
 $xoopsTpl->assign ( 'imgfloat', xoops_getModuleOption ( 'imgfloat', $forMods->getVar ( 'dirname' ) ) );
 $xoopsTpl->assign ( 'alluserpost', xoops_getModuleOption ( 'alluserpost', $forMods->getVar ( 'dirname' ) ) );
 $xoopsTpl->assign ( 'breadcrumb', $breadcrumb );
+$xoopsTpl->assign ( 'type', $type );
+$xoopsTpl->assign ( 'default', $default );
 
 // include Xoops footer
 include XOOPS_ROOT_PATH . '/footer.php';

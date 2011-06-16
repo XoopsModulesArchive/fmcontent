@@ -255,13 +255,22 @@ $modversion['config'][] = array(
     'default' => 'head');
 
 $modversion['config'][] = array(
+    'name' => 'homepage',
+    'title' => '_FMCONTENT_HOMEPAGE',
+    'description' => '_FMCONTENT_HOMEPAGE_DESC',
+    'formtype' => 'select',
+    'valuetype' => 'text',
+    'options' => array(_FMCONTENT_HOMEPAGE_1 => 'type1', _FMCONTENT_HOMEPAGE_2 => 'type2', _FMCONTENT_HOMEPAGE_3 => 'type3', _FMCONTENT_HOMEPAGE_4 => 'type4'),
+    'default' => 'type1');
+    
+$modversion['config'][] = array(
     'name' => 'template',
     'title' => '_FMCONTENT_TEMPLATE',
     'description' => '_FMCONTENT_TEMPLATE_DESC',
     'formtype' => 'select',
     'valuetype' => 'text',
     'options' => array(_FMCONTENT_TEMPLATE_1 => 'legacy', _FMCONTENT_TEMPLATE_2 => 'ui', _FMCONTENT_TEMPLATE_3 => 'html5'),
-    'default' => 'legacy');
+    'default' => 'legacy');    
 
 $modversion['config'][] = array(
     'name' => 'disp_option',

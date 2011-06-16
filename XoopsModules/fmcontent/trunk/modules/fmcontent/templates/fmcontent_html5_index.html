@@ -1,7 +1,8 @@
 <{include file="db:fmcontent_header.html"}>
 <section class="fmcontent">
-    
-    <{if $default}>
+
+    <{if $type == type1}>
+<{if $default}>
 		<article id="default-content" class="item">
 	    <header>
 	    	<div class="itemTitle "><h1><{$default.content_title}></h1></div>
@@ -301,6 +302,70 @@
 
     <{if $content_pagenav}>
     <div class="pagenave"><{$content_pagenav}></div>
+    <{/if}>
+    <{/if}>
+    
+    <{if $type == type2}>
+    
+    <{/if}>
+    
+    <{if $type == type3}>
+    
+    <{/if}>
+    
+    <{if $type == type4}>
+<article id="default-content" class="item">
+	    <header>
+	    	<div class="itemTitle "><h1><{$contents.content_title}></h1></div>
+	    	<div class="itemPostDate"><{$smarty.const._FMCONTENT_DATE}>: <time datetime="<{$contents.content_create}>" pubdate><{$contents.content_create}></time>
+	    		<{if $xoops_isadmin}>
+	        <span class="itemAdminLink">
+	            &nbsp;<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/content.php?op=edit_content&amp;content_id=<{$contents.content_id}>" title="<{$smarty.const._FMCONTENT_EDIT}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/edit.png" alt="<{$smarty.const._CONTENT_EDIT}>"/></a>
+	            <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/content.php?op=delete&amp;content_id=<{$contents.content_id}>" title="<{$smarty.const._FMCONTENT_DELETE}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/delete.png" alt="<{$smarty.const._CONTENT_DELETE}>"/></a>
+					</span>        
+	        <{/if}>
+				</div>
+	    </header>
+    	<{if $contents.content_short}>
+			<div class="itemShort">
+	    	<{if $contents.content_img}>
+				<figure class="<{$imgfloat}>">						
+					<div class="itemImg gallery">
+					  <{if $img_lightbox}>
+					  <a href="<{$contents.imgurl}>" title="<{$content.content_title}>">
+					    <img width="<{$imgwidth}>" class="content_img" src="<{$contents.imgurl}>" alt="<{$contents.content_title}>"/>
+					  </a>
+					  <{else}>
+					  <img width="<{$imgwidth}>" class="content_img" src="<{$contents.imgurl}>" alt="<{$contents.content_title}>"/>
+					  <{/if}>
+					</div>
+					<figcaption><{$contents.content_title}></figcaption>
+				</figure>
+				<{/if}>
+				<{$contents.content_short}><a class="itemMore" href="<{$contents.url}>" title="<{$smarty.const._FMCONTENT_MORE}>"><{$smarty.const._FMCONTENT_MORE}></a> 
+				<div class="endline"></div>			
+			</div>			    
+			<{else}>
+      <div class="itemText"> 
+      	<{if $contents.content_img}>
+				<figure class="<{$imgfloat}>">						
+					<div class="gallery">
+					  <{if $img_lightbox}>
+					  <a href="<{$contents.imgurl}>" >
+					    <img width="<{$imgwidth}>" class="content_img" src="<{$contents.imgurl}>" alt="<{$contents.content_title}>"/>
+					  </a>
+					  <{else}>
+					  <img width="<{$imgwidth}>" class="content_img" src="<{$contents.imgurl}>" alt="<{$contents.content_title}>"/>
+					  <{/if}>
+					</div>
+					<figcaption><{$contents.content_title}></figcaption>
+				</figure>	
+				<{/if}>
+      	<{$contents.content_text}>
+				<div class="endline"></div>								
+    	</div>
+			<{/if}>
+		</article>
     <{/if}>
     
 </section>
