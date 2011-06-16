@@ -40,7 +40,7 @@ if (!defined('_FMCONTENT_NEXT')) {
     define('_FMCONTENT_DELETE', 'Delete page');
     define('_FMCONTENT_PRINT', 'Printable version');
     define('_FMCONTENT_PDF', 'Convert to PDF');
-    define('_FMCONTENT_MAIL', 'Reccomend by eMail');
+    define('_FMCONTENT_MAIL', 'Recommend by eMail');
     define('_FMCONTENT_COMS', 'Comments');
     define('_FMCONTENT_NOCOMS', '0 comment');
 // Pdf
