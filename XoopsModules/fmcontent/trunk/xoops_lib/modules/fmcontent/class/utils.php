@@ -190,7 +190,22 @@ class fmcontentUtils {
 			
 			// List all static pages
 			case 'type3' :
-				
+			   $content_infos ['content_topic'] = 0;
+            $content_infos ['content_static'] = 0;
+            $content_infos ['admin_side'] = 1;
+            
+				$contents ['content'] = $content_handler->getContentList ( $forMods, $content_infos );
+				$contents ['numrows'] = $content_handler->getContentCount ( $forMods, $content_infos );
+				if ($contents ['numrows'] > $content_infos ['content_limit']) {
+					if ($content_topic) {
+						$content_pagenav = new XoopsPageNav ( $contents ['numrows'], $content_infos ['content_limit'], $content_infos ['content_start'], 'start', 'limit=' . $content_infos ['content_limit'] . '&topic=' . $content_infos ['content_topic'] );
+					} else {
+						$content_pagenav = new XoopsPageNav ( $contents ['numrows'], $content_infos ['content_limit'], $content_infos ['content_start'], 'start', 'limit=' . $content_infos ['content_limit'] );
+					}
+					$contents ['pagenav'] = $content_pagenav->renderNav ( 4 );
+				} else {
+					$contents ['pagenav'] = '';
+				}
 				break;
 			
 			// Show selected static content

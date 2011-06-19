@@ -1,7 +1,7 @@
 <{include file="db:fmcontent_header.html"}>
 <div class="fmcontent">
 
-    <{if $type == type1}>
+    <{if $type == type1 || $type == type3}>
 <{if $default}>
     <div class="ui-widget-content ui-corner-all" id="default">
   		<div class="ui-widget-header ui-corner-all"><h1><{$default.content_title}></h1></div>
@@ -68,7 +68,7 @@
     <div class="ui-widget-content ui-corner-all">
         <div class="ui-widget-header ui-corner-all">
 					<h2>
-						<a href="<{$content.url}>" title="<{$content.content_title}>"><{$content.content_title}></a><{if $info.showtopic}> | <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php?topic=<{$content.content_topic}>" title="<{$smarty.const._FMCONTENT_PUBTOPIC}> <{$content.topic}>"><{$content.topic}></a><{/if}>
+						<a href="<{$content.url}>" title="<{$content.content_title}>"><{$content.content_title}></a><{if $info.showtopic && $content.content_topic}> | <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php?topic=<{$content.content_topic}>" title="<{$smarty.const._FMCONTENT_PUBTOPIC}> <{$content.topic}>"><{$content.topic}></a><{/if}>
 					</h2>
         </div>
         <div class="ui-widget-content ui-corner-all" id="content_<{$content.content_id}>">
