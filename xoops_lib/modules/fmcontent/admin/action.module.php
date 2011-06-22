@@ -108,6 +108,16 @@ function xoops_module_pre_install_fmcontent(&$module) {
 
 function xoops_module_update_fmcontent(&$module, $version) {
     $db =& $GLOBALS["xoopsDB"];
+    
+    // Add topic_alias table in DB
+	 if (!fmcontentUtils::FieldExists('topic_alias',$db->prefix('fmcontent_topic'))) {
+		 fmcontentUtils::AddField("`topic_alias` VARCHAR( 255 ) NOT NULL ", $db->prefix('fmcontent_topic'));
+	 }
+	
+	 // Add topic_homepage table in DB
+	 if (!fmcontentUtils::FieldExists('topic_homepage',$db->prefix('fmcontent_topic'))) {
+		 fmcontentUtils::AddField("`topic_homepage` TINYINT( 4 ) NOT NULL ", $db->prefix('fmcontent_topic'));
+	 }
 
 }
 

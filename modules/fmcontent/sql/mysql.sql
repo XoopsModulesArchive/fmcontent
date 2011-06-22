@@ -62,7 +62,8 @@ CREATE TABLE `fmcontent_topic` (
 `topic_shownav` tinyint (1)   NOT NULL default '1',
 `topic_showhits` tinyint (1)   NOT NULL default '1',
 `topic_showcoms` tinyint (1)   NOT NULL default '1',
-
+`topic_alias` varchar(255) NOT NULL,
+`topic_homepage` tinyint (4)   NOT NULL ,
 PRIMARY KEY (`topic_id`,`topic_modid`),
 UNIQUE KEY `topic_id` (`topic_id`,`topic_modid`)
 ) ENGINE=MyISAM;

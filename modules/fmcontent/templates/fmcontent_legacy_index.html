@@ -296,7 +296,7 @@
 				<tr class="odd">
 					<td class="width5"><img src="images/icons/puce.png" alt="<{$topic.topic_title}>" /><{$topic.topic_id}></td>
 					<td class="txtcenter bold"><a title="<{$topic.topic_title}>" href="index.php?topic=<{$topic.topic_id}>"><{$topic.topic_title}></a></td>
-					<td><{$topic.topic_desc}></td>
+					<td <{if !$topic.topic_img}>colspan="2"<{/if}>><{$topic.topic_desc}></td>
 					<{if $topic.topic_img}><td><img src="<{$topic.imgurl}>" alt="<{$topic.topic_title}>" /></td><{/if}>
 				</tr>
 				<{/foreach}>
