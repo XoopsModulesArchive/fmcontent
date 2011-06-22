@@ -196,6 +196,7 @@ class fmcontentTopicHandler extends XoopsPersistableObjectHandler {
 				$tab = $root->toArray ();
 				//$tab['contentcount'] = fmcontentPageHandler::getContentItemCount($forMods, $root->getVar('topic_id'));
 				//$tab['menutcount'] = fmcontentPageHandler::getMenuItemCount($forMods, $root->getVar('topic_id'));
+				$tab ['imgurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . $root->getVar ( 'topic_img' );
 				$ret [] = $tab;
 			}
 		}
