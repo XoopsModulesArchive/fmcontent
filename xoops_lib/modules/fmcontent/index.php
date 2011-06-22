@@ -120,7 +120,7 @@ if (isset ( $content_topic )) {
 	// get all topic informations
 	$topics = $topic_handler->getall ( $content_topic );
 	$default_title = xoops_getModuleOption ( 'static_name', $forMods->getVar ( 'dirname' ) );
-	$default_id = '0';
+	$topic_id = $default_id = '0';
 	// get module configs
 	$showtype = xoops_getModuleOption ( 'showtype', $forMods->getVar ( 'dirname' ) );
 	$columns = xoops_getModuleOption ( 'columns', $forMods->getVar ( 'dirname' ) );
