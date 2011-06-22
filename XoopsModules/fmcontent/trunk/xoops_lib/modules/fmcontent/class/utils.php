@@ -219,5 +219,36 @@ class fmcontentUtils {
 		}
 		return $contents;
 	}
+	
+/**
+    * Verify that a field exists inside a mysql table
+	 * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+	 * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+	 * @author      Hervé Thouzard (ttp://www.instant-zero.com)
+	 * @package     News
+	 * @version     $Id$
+*/
+function FieldExists($fieldname,$table)
+{
+	global $xoopsDB;
+	$result=$xoopsDB->queryF("SHOW COLUMNS FROM	$table LIKE '$fieldname'");
+	return($xoopsDB->getRowsNum($result) > 0);
+}
+
+/**
+ * Add a field to a mysql table
+	 * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+	 * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+	 * @author      Hervé Thouzard (ttp://www.instant-zero.com)
+	 * @package     News
+	 * @version     $Id$
+ */
+function AddField($field, $table)
+{
+	global $xoopsDB;
+	$result=$xoopsDB->queryF('ALTER TABLE ' . $table . ' ADD ' . $field);
+	return $result;
+}	
+	
 }
 ?>

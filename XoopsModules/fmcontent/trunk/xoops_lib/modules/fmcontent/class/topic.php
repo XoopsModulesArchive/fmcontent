@@ -52,6 +52,8 @@ class fmcontent_topic extends XoopsObject {
 		$this->initVar ( "topic_showcoms", XOBJ_DTYPE_INT, 1 );
 		$this->initVar ( "topic_perpage", XOBJ_DTYPE_INT, 0 );
 		$this->initVar ( "topic_columns", XOBJ_DTYPE_INT, 0 );
+		$this->initVar ( "topic_alias", XOBJ_DTYPE_TXTBOX, '' );
+		$this->initVar ( "topic_homepage", XOBJ_DTYPE_INT, 1 );
 		
 		// Pour autoriser le html
 		$this->initVar ( "dohtml", XOBJ_DTYPE_INT, 1, false );
@@ -77,6 +79,7 @@ class fmcontent_topic extends XoopsObject {
 		$form->addElement ( new XoopsFormHidden ( 'topic_submitter', $GLOBALS ['xoopsUser']->getVar ( 'uid' ) ) );
 		$form->addElement ( new XoopsFormHidden ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
 		$form->addElement ( new XoopsFormText ( _FMCONTENT_TOPIC_NAME, "topic_title", 50, 255, $this->getVar ( "topic_title" ) ), true );
+		$form->addElement ( new XoopsFormText ( _FMCONTENT_TOPIC_ALIAS, "topic_alias", 50, 255, $this->getVar ( "topic_alias" ) ), true );
 		
 		$topic_Handler = xoops_getModuleHandler ( "topic", "fmcontent" );
 		$criteria = new CriteriaCompo ();
@@ -106,6 +109,15 @@ class fmcontent_topic extends XoopsObject {
 		
 		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_TOPIC_ONLINE, 'topic_online', $this->getVar ( 'topic_online', 'e' ) ) );
 		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_TOPIC_MENU, 'topic_asmenu', $this->getVar ( 'topic_asmenu', 'e' ) ) );
+		$form->addElement ( new XoopsFormLabel ( _FMCONTENT_TOPIC_SETTING, _FMCONTENT_TOPIC_SETTING_DESC, '' ) );
+		$homepage = new XoopsFormSelect ( _FMCONTENT_TOPIC_HOMEPAGE_, 'topic_homepage', $this->getVar ( "topic_homepage" ) );
+		$homepage->addOption ( '1', _FMCONTENT_TOPIC_HOMEPAGE_1 );
+		$homepage->addOption ( '2', _FMCONTENT_TOPIC_HOMEPAGE_2 );
+		$homepage->addOption ( '3', _FMCONTENT_TOPIC_HOMEPAGE_3 );
+		$homepage->addOption ( '4', _FMCONTENT_TOPIC_HOMEPAGE_4 );
+		$homepage->setDescription ( _FMCONTENT_TOPIC_HOMEPAGE_DESC );
+		$form->addElement ( $homepage );
+		
 		$showtype = new XoopsFormSelect ( _FMCONTENT_TOPIC_SHOWTYPE, 'topic_showtype', $this->getVar ( "topic_showtype" ) );
 		$showtype->addOption ( '0', _FMCONTENT_SHOWTYPE_0 );
 		$showtype->addOption ( '1', _FMCONTENT_SHOWTYPE_1 );
@@ -114,6 +126,7 @@ class fmcontent_topic extends XoopsObject {
 		$showtype->addOption ( '4', _FMCONTENT_SHOWTYPE_4 );
 		$showtype->setDescription ( _FMCONTENT_TOPIC_SHOWTYPE_DESC );
 		$form->addElement ( $showtype );
+		
 		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_TOPIC_SHOWTOPIC, 'topic_showtopic', $this->getVar ( 'topic_showtopic', 'e' ) ) );
 		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_TOPIC_SHOWAUTHOR, 'topic_showauthor', $this->getVar ( 'topic_showauthor', 'e' ) ) );
 		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_TOPIC_SHOWDATE, 'topic_showdate', $this->getVar ( 'topic_showdate', 'e' ) ) );
