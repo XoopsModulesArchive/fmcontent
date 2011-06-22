@@ -53,6 +53,14 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     define('_FMCONTENT_TOPIC_SHOWNAV', 'Display Prev/Next navigation');
     define('_FMCONTENT_TOPIC_SHOWHITS', 'Display Hits');
     define('_FMCONTENT_TOPIC_SHOWCOMS', 'Display Comments count');
+    define('_FMCONTENT_TOPIC_HOMEPAGE', 'Topic homepage seting');
+    define('_FMCONTENT_TOPIC_HOMEPAGE_DESC', 'Seting content show type in topic pages');
+    define('_FMCONTENT_TOPIC_HOMEPAGE_1', 'List all contents from all topics');
+    define('_FMCONTENT_TOPIC_HOMEPAGE_2', 'List all topics');
+    define('_FMCONTENT_TOPIC_HOMEPAGE_3', 'List all static pages');
+    define('_FMCONTENT_TOPIC_HOMEPAGE_4', 'Show selected static content');
+    define('_FMCONTENT_TOPIC_OPTIONS', ' ');
+    define('_FMCONTENT_TOPIC_OPTIONS_DESC', ' ');
 // Content page
     define('_FMCONTENT_FORM', 'Manage Content');
     define('_FMCONTENT_FORMTYPE', 'Type');

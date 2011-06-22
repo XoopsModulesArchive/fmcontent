@@ -109,8 +109,8 @@ class fmcontent_topic extends XoopsObject {
 		
 		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_TOPIC_ONLINE, 'topic_online', $this->getVar ( 'topic_online', 'e' ) ) );
 		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_TOPIC_MENU, 'topic_asmenu', $this->getVar ( 'topic_asmenu', 'e' ) ) );
-		$form->addElement ( new XoopsFormLabel ( _FMCONTENT_TOPIC_SETTING, _FMCONTENT_TOPIC_SETTING_DESC, '' ) );
-		$homepage = new XoopsFormSelect ( _FMCONTENT_TOPIC_HOMEPAGE_, 'topic_homepage', $this->getVar ( "topic_homepage" ) );
+		$form->addElement ( new XoopsFormLabel ( _FMCONTENT_TOPIC_OPTIONS, _FMCONTENT_TOPIC_OPTIONS_DESC, '' ) );
+		$homepage = new XoopsFormSelect ( _FMCONTENT_TOPIC_HOMEPAGE, 'topic_homepage', $this->getVar ( "topic_homepage" ) );
 		$homepage->addOption ( '1', _FMCONTENT_TOPIC_HOMEPAGE_1 );
 		$homepage->addOption ( '2', _FMCONTENT_TOPIC_HOMEPAGE_2 );
 		$homepage->addOption ( '3', _FMCONTENT_TOPIC_HOMEPAGE_3 );

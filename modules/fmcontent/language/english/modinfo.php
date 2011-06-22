@@ -290,7 +290,7 @@ if (!defined('_MI_FMCONTENT_NAME')) {
 // homepage   
     define('_FMCONTENT_HOMEPAGE', 'Homepage seting');
     define('_FMCONTENT_HOMEPAGE_DESC', 'Seting content show type in module index page');
-    define('_FMCONTENT_HOMEPAGE_1', 'list all contents from all topics');
+    define('_FMCONTENT_HOMEPAGE_1', 'List all contents from all topics');
     define('_FMCONTENT_HOMEPAGE_2', 'List all topics');
     define('_FMCONTENT_HOMEPAGE_3', 'List all static pages');
     define('_FMCONTENT_HOMEPAGE_4', 'Show selected static content');
