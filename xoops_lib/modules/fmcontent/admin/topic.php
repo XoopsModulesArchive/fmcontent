@@ -29,9 +29,10 @@ $op = fmcontent_CleanVars($_REQUEST, 'op', '', 'string');
 // Initialize content handler
 $topic_handler = xoops_getmodulehandler('topic', 'fmcontent');
 $content_handler = xoops_getmodulehandler('page', 'fmcontent');
-
+// Define scripts
 $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
 $xoTheme->addScript('browse.php?Frameworks/jquery/plugins/jquery.ui.js');
+$xoTheme->addScript('browse.php?modules/' . $forMods->getVar('dirname') . '/js/order.js');
 $xoTheme->addScript('browse.php?modules/' . $forMods->getVar('dirname') . '/js/admin.js');
 // Add module stylesheet
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $forMods->getVar('dirname') . '/css/admin.css');

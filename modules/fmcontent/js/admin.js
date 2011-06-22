@@ -18,6 +18,7 @@ $(document).ready(function() {
     $('input[id=content_title]').change(fmcontent_setMenu);
     $('input[id=content_title]').change(fmcontent_setWords);
     $('input[id=content_title]').change(fmcontent_setDesc);
+    $('input[id=topic_title]').change(fmcontent_setTopicAlias);
 });
 
 /**
@@ -82,6 +83,18 @@ function fmcontent_setAlias() {
             function(reponse, textStatus) {
                 if (textStatus == 'success') {
                     $('input[id^=content_alias]').val(reponse);
+                }
+            });
+
+}
+
+function fmcontent_setTopicAlias() {
+    var text = $(this).val().toLowerCase();
+    //alert($(this).id);
+    $.post('ajax.php', { type:'filter', value:text },
+            function(reponse, textStatus) {
+                if (textStatus == 'success') {
+                    $('input[id^=topic_alias]').val(reponse);
                 }
             });
 
