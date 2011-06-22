@@ -25,8 +25,6 @@ if (!defined('_FMCONTENT_NEXT')) {
     define('_FMCONTENT_PUBLICDATE', 'Date');
     define('_FMCONTENT_MORE', 'Read more');
     define('_FMCONTENT_HITS', 'Reads');
-  // define('_FMCONTENT_TOPIC', 'Topic');
-  // define('_FMCONTENT_HOME', 'Home');
     define("_FMCONTENT_SOURCE", "Source: ");
     define("_FMCONTENT_PUBTOPIC", "Published in");
     define("_FMCONTENT_AUTHOR_ALL", "Read all");
@@ -78,5 +76,10 @@ if (!defined('_FMCONTENT_NEXT')) {
     define("_FMCONTENT_BOOKMARK_TO_GOOLGEBUZZ", "Bookmark to Google Buzz");
     define("_FMCONTENT_BOOKMARK_TO_GOOLGEREADER", "Bookmark to Google Reader");
     define("_FMCONTENT_BOOKMARK_TO_GOOLGEBOOKMARKS", "Bookmark to Google Bookmarks");
+// topic 
+    define("_FMCONTENT_TOPIC_ID", "ID");
+    define("_FMCONTENT_TOPIC_NAME", "Title");
+    define("_FMCONTENT_TOPIC_DESC", "Description");
+    define("_FMCONTENT_TOPIC_IMG", "image");  
 }
 ?>

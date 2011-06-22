@@ -9,6 +9,15 @@
 - Add homepage function in utils class for manage module index page (Voltan) - [Not complated yet]
 - Improve permission page (Voltan)
 
+
+Language changes :
+
+main.php
++ _FMCONTENT_TOPIC_ID 
++ _FMCONTENT_TOPIC_NAME 
++ _FMCONTENT_TOPIC_DESC 
++ _FMCONTENT_TOPIC_IMG 
+
 1.05
 =================================
 - Improve blocks (ianez - Voltan) 

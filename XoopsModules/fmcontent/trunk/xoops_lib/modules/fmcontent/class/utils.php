@@ -188,6 +188,7 @@ class fmcontentUtils {
 			     $topic_order = xoops_getModuleOption('admin_showorder_topic', $forMods->getVar('dirname'));
               $topic_sort = xoops_getModuleOption('admin_showsort_topic', $forMods->getVar('dirname'));
 		        $contents ['content'] = $topic_handler->getTopics($forMods, null, 0, $topic_order, $topic_sort, null, 1);
+			     $contents ['pagenav'] = null;
 				break;
 			
 			// List all static pages
