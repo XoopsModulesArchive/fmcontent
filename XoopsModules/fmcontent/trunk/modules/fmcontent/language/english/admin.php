@@ -61,6 +61,7 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     define('_FMCONTENT_TOPIC_HOMEPAGE_4', 'Show selected static content');
     define('_FMCONTENT_TOPIC_OPTIONS', 'Sellect topic show options');
     define('_FMCONTENT_TOPIC_OPTIONS_DESC', 'Sellect topic show options');
+    define('_FMCONTENT_TOPIC_ALIAS', 'Alias (for url)');
 // Content page
     define('_FMCONTENT_FORM', 'Manage Content');
     define('_FMCONTENT_FORMTYPE', 'Type');

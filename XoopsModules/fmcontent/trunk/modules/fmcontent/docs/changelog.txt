@@ -27,6 +27,7 @@ admin.php
 + _FMCONTENT_TOPIC_HOMEPAGE_4
 + _FMCONTENT_TOPIC_OPTIONS
 + _FMCONTENT_TOPIC_OPTIONS_DESC
++ _FMCONTENT_TOPIC_ALIAS
 
 modinfo.php
 + _FMCONTENT_HOMEPAGE 
@@ -35,6 +36,7 @@ modinfo.php
 + _FMCONTENT_HOMEPAGE_2 
 + _FMCONTENT_HOMEPAGE_3 
 + _FMCONTENT_HOMEPAGE_4
+
 1.05
 =================================
 - Improve blocks (ianez - Voltan) 
