@@ -139,6 +139,41 @@ function fmcontent_Message($page, $message = '', $id) {
     //ob_flush();
 }
 
+function fmcontent_TopicUrl($module, $array) {
+    $lenght_id = xoops_getModuleOption('lenght_id', $module);
+    $friendly_url = xoops_getModuleOption('friendly_url', $module);
+    if ($lenght_id != 0) {
+        $id = $array['topic_id'];
+        while (strlen($id) < $lenght_id)
+            $id = "0" . $id;
+    } else {
+        $id = $array['topic_id'];
+    }
+
+    switch ($friendly_url) {
+
+        case 'none':
+            $rewrite_base = '/modules/';
+            $page = 'page=' . $array['topic_alias'];
+            return XOOPS_URL . $rewrite_base . $module . '/index.php?topic=' . $id . '&amp;' . $page;
+            break;
+
+        case 'friendly':
+
+            break;
+
+        case 'rewrite':
+            $rewrite_base = xoops_getModuleOption('rewrite_mode', $module);
+            $rewrite_ext = xoops_getModuleOption('rewrite_ext', $module);
+            $module_name = xoops_getModuleOption('rewrite_name', $module);
+            $page = $array['topic_alias'];
+            $type = 'topic';
+            return XOOPS_URL . $rewrite_base . $module_name . '/' . $type . '/' . $id . '/' . $page . $rewrite_ext;
+            break;
+    }
+    
+}
+
 function fmcontent_Url($module, $array, $type = 'content') {
     $comment = '';
     $lenght_id = xoops_getModuleOption('lenght_id', $module);

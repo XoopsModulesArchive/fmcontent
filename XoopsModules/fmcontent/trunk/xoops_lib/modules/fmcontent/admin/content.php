@@ -134,7 +134,8 @@ switch ($op)
         if (isset($_REQUEST['topic'])) {
             $content_topic = fmcontent_CleanVars($_REQUEST, 'topic', 0, 'int');
             if ($content_topic) {
-                $topics = $topic_title = fmcontentTopicHandler::getTopicFromId($content_topic);
+                $topics = $topic_handler->getall($content_topic);
+                $topic_title = fmcontentTopicHandler::getTopicFromId ( $content_topic );
             } else {
                 $topics = $topic_title = _FMCONTENT_STATICS;
             }

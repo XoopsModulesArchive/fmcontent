@@ -48,7 +48,7 @@
         </td>
         <td class="txtcenter width10 xo-actions">
             <img class="tooltip" onclick="display_dialog(<{$topic.topic_id}>, true, true, 'slide', 'slide', 280, 520);" src="<{xoAdminIcons display.png}>" alt="<{$smarty.const._PREVIEW}>" title="<{$smarty.const._PREVIEW}>" />
-            <a href="../index.php?topic=<{$topic.topic_id}>"><img class="tooltip" src="../images/icons/display.png" alt="<{$smarty.const._FMCONTENT_CONTENT_VIEW}>" title="<{$smarty.const._FMCONTENT_CONTENT_VIEW}>"/></a>
+            <a href="<{$topic.topicurl}>"><img class="tooltip" src="../images/icons/display.png" alt="<{$smarty.const._FMCONTENT_CONTENT_VIEW}>" title="<{$smarty.const._FMCONTENT_CONTENT_VIEW}>"/></a>
             <a href="topic.php?op=edit_topic&amp;topic_id=<{$topic.topic_id}>"><img class="tooltip" src="<{xoAdminIcons edit.png}>" alt="<{$smarty.const._EDIT}>" title="<{$smarty.const._EDIT}>"/></a>
             <a href="topic.php?op=delete_topic&amp;topic_id=<{$topic.topic_id}>"><img class="tooltip" src="<{xoAdminIcons delete.png}>" alt="<{$smarty.const._DELETE}>" title="<{$smarty.const._DELETE}>"/></a>
         </td>

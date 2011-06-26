@@ -1,5 +1,6 @@
 Options +FollowSymlinks
 RewriteEngine on
+RewriteRule   ^topic/([^./]+)/([^./]+)\.html$ index.php?topic=$1&page=$2 [L]
 RewriteRule   ^([^./]+)/([^./]+)/([^./]+)\.html$ content.php?id=$2&page=$3 [L]
 RewriteRule   ^print/([^./]+)/([^./]+)/([^./]+)\.html$ print.php?id=$2&page=$3 [L]
 RewriteRule   ^pdf/([^./]+)/([^./]+)/([^./]+)\.html$ pdf.php?id=$2&page=$3 [L]

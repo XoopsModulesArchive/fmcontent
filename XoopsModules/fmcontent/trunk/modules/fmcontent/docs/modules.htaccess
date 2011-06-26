@@ -1,5 +1,6 @@
 Options +FollowSymlinks
 RewriteEngine on
+RewriteRule   ^topic/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ index.php?topic=$1&page=$2 [L]
 RewriteRule   ^([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ content.php?id=$2&page=$3 [L]
 RewriteRule   ^print/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ print.php?id=$2&page=$3 [L]
 RewriteRule   ^pdf/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ pdf.php?id=$2&page=$3 [L]
