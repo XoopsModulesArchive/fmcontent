@@ -8,7 +8,7 @@
 - Add contentDefault function in page class (Voltan)
 - Add homepage function in utils class for manage module index page (Voltan) - [Not complated yet]
 - Improve permission page (Voltan)
-
+- Add topic URL function (Voltan)
 
 Language changes :
 

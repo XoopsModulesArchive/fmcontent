@@ -485,17 +485,17 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 				$tab = array ();
 				$tab = $root->toArray ();
 				$tab ['owner'] = XoopsUser::getUnameFromId ( $root->getVar ( 'content_uid' ) );
-				
-				if (is_array ( $content_infos ['topics'] )) {
+
 					foreach ( array_keys ( $content_infos ['topics'] ) as $i ) {
 						$list [$i] ['topic_title'] = $content_infos ['topics'] [$i]->getVar ( "topic_title" );
+						$list [$i] ['topic_id'] = $content_infos ['topics'] [$i]->getVar ( "topic_id" );
+						$list [$i] ['topic_alias'] = $content_infos ['topics'] [$i]->getVar ( "topic_alias" );
 					}
 					if ($root->getVar ( 'content_topic' )) {
 						$tab ['topic'] = $list [$root->getVar ( 'content_topic' )] ['topic_title'];
+						$tab ['topicurl'] = fmcontent_TopicUrl ( $forMods->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'content_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'content_topic' )] ['topic_alias'] ));
 					}
-				} else {
-					$tab ['topic'] = $content_infos ['topics'];
-				}
+
 				
 				$tab ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $tab );
 				$tab ['content_create'] = formatTimestamp ( $root->getVar ( 'content_create' ), _MEDIUMDATESTRING );

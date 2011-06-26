@@ -90,11 +90,12 @@ if (isset ( $content_topic )) {
 	}
 	
 	// get topic information
-	$topics = $default_title = $view_topic->getVar ( 'topic_title' );
+	$topics = $topic_handler->getall ( $content_topic );
+	$topic_title = $default_title = $view_topic->getVar ( 'topic_title' );
 	$topic_id = $default_id = $view_topic->getVar ( 'topic_id' );
 	
-	$xoopsTpl->assign ( 'topic_title', $topics );
-	$xoopsTpl->assign ( 'xoops_pagetitle', $topics );
+	$xoopsTpl->assign ( 'topic_title', $topic_title );
+	$xoopsTpl->assign ( 'xoops_pagetitle', $topic_title );
 	
 	if ($view_topic->getVar ( 'topic_showtype' ) > '0') {
 		$showtype = $view_topic->getVar ( 'topic_showtype' );

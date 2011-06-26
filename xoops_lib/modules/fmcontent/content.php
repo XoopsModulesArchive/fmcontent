@@ -81,6 +81,8 @@ $content_handler->updateHits ( $content_id );
 // set arrey
 $view_topic = $topic_handler->get ( $content_topic );
 $content ['topic'] = $view_topic->getVar ( 'topic_title' );
+$content ['topic_alias'] = $view_topic->getVar ( 'topic_alias' );
+$content ['topic_id'] = $view_topic->getVar ( 'topic_id' );
 $content ['content_create'] = formatTimestamp ( $content ['content_create'], _MEDIUMDATESTRING );
 $content ['content_update'] = formatTimestamp ( $content ['content_update'], _MEDIUMDATESTRING );
 $content ['imgurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . $content ['content_img'];
@@ -279,7 +281,9 @@ if ((xoops_getModuleOption ( 'usetag', $forMods->getVar ( 'dirname' ) )) and (is
 	$xoopsTpl->assign ( 'tags', false );
 }
 
+// Get URLs 
 $link ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $content );
+$link ['topicurl'] = fmcontent_TopicUrl ( $forMods->getVar ( 'dirname' ), $content );
 
 // breadcrumb
 if (xoops_getModuleOption ( 'bc_show', $forMods->getVar ( 'dirname' ) )) {

@@ -33,7 +33,7 @@
         <{if $data.content_type == 'content'}>
         <a href="<{$data.url}>"><img class="tooltip" src="../images/icons/display.png" alt="<{$smarty.const._FMCONTENT_CONTENT_VIEW}>" title="<{$smarty.const._FMCONTENT_CONTENT_VIEW}>"/></a>
         <{if $data.content_topic != 0}>
-        <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php?topic=<{$data.content_topic}>"><img class="tooltip" src="../images/icons/section.png" alt="<{$smarty.const._FMCONTENT_CONTENT_TOPIC}>" title="<{$smarty.const._FMCONTENT_CONTENT_TOPIC}>"/></a>
+        <a href="<{$data.topicurl}>"><img class="tooltip" src="../images/icons/section.png" alt="<{$smarty.const._FMCONTENT_CONTENT_TOPIC}>" title="<{$smarty.const._FMCONTENT_CONTENT_TOPIC}>"/></a>
         <{/if}>
         <a href="content.php?op=edit_content&amp;content_id=<{$data.content_id}>"><img class="tooltip" src="../images/icons/edit.png" alt="<{$smarty.const._EDIT}>"  title="<{$smarty.const._EDIT}>"/></a>
         <a href="content.php?op=delete&amp;content_id=<{$data.content_id}>"><img class="tooltip" src="../images/icons/delete.png" alt="<{$smarty.const._DELETE}>" title="<{$smarty.const._DELETE}>"/></a>

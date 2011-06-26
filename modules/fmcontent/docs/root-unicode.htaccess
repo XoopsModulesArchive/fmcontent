@@ -1,5 +1,6 @@
 Options +FollowSymlinks
 RewriteEngine on
+RewriteRule   ^fmcontent/topic/([^./]+)/([^./]+)\.html$ modules/fmcontent/index.php?topic=$1&page=$2 [L]
 RewriteRule   ^fmcontent/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/content.php?id=$2&page=$3 [L]
 RewriteRule   ^fmcontent/print/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/print.php?id=$2&page=$3 [L]
 RewriteRule   ^fmcontent/pdf/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/pdf.php?id=$2&page=$3 [L]

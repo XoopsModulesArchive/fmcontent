@@ -85,7 +85,7 @@ class fmcontentUtils {
 		if (xoops_getModuleOption ( 'bc_tohome', $forMods->getVar ( 'dirname' ) )) {
 			$breadcrumb = '<a href=' . XOOPS_URL . '>Home</a>' . $prefix;
 		}
-		$breadcrumb = $breadcrumb . self::PathTreeUrl ( $mytree, $topic_id, $topics_arr, $title, $prefix, true, 'ASC', $lasturl, xoops_getModuleOption ( 'bc_modname', $forMods->getVar ( 'dirname' ) ) );
+		$breadcrumb = $breadcrumb . self::PathTreeUrl ( $mytree, $topic_id, $topics_arr, $title, $prefix, true, 'ASC', $lasturl, xoops_getModuleOption ( 'bc_modname', $forMods->getVar ( 'dirname' ) ) , $forMods);
 		if ($lasturl) {
 			$breadcrumb = $breadcrumb . $prefix . $breadcrumbtitle;
 		}
@@ -100,16 +100,16 @@ class fmcontentUtils {
 	 * @package     TDMDownload
 	 * @version     $Id$
 	 */
-	function PathTreeUrl($mytree, $key, $topic_array, $title, $prefix = ' &raquo; ', $link = false, $order = 'ASC', $lasturl = false, $modname) {
+	function PathTreeUrl($mytree, $key, $topic_array, $title, $prefix = ' &raquo; ', $link = false, $order = 'ASC', $lasturl = false, $modname , $forMods) {
 		global $xoopsModule;
 		$topic_parent = $mytree->getAllParent ( $key );
 		if ($order == 'ASC') {
 			$topic_parent = array_reverse ( $topic_parent );
 			if ($link == true && $modname) {
 				if($key) {
-					$Path = '<a href="index.php">' . $xoopsModule->name () . '</a>' . $prefix;
+					$Path = '<a title="' . $xoopsModule->name () . '" href="'.XOOPS_URL.'/modules/'.$forMods->getVar ( 'dirname' ).'/index.php">' . $xoopsModule->name () . '</a>' . $prefix;
 				} else {
-					$Path = '<a href="index.php">' . $xoopsModule->name () . '</a>';
+					$Path = '<a title="' . $xoopsModule->name () . '" href="'.XOOPS_URL.'/modules/'.$forMods->getVar ( 'dirname' ).'/index.php">' . $xoopsModule->name () . '</a>';
 				}
 			} elseif ($modname) {
 				$Path = $xoopsModule->name () . $prefix;
@@ -124,7 +124,12 @@ class fmcontentUtils {
 		}
 		foreach ( array_keys ( $topic_parent ) as $j ) {
 			if ($link == true) {
-				$Path .= '<a href="index.php?topic=' . $topic_parent [$j]->getVar ( 'topic_id' ) . '">' . $topic_parent [$j]->getVar ( $title ) . '</a>' . $prefix;
+				$topic_info = array(
+				'topic_id'=>$topic_parent [$j]->getVar ( 'topic_id' ),
+				'topic_title'=>$topic_parent [$j]->getVar ( 'topic_title' ),
+            'topic_alias'=>$topic_parent [$j]->getVar ( 'topic_alias' ),
+				);
+				$Path .= '<a title="' . $topic_parent [$j]->getVar ( $title ) . '" href="'.fmcontent_TopicUrl($forMods->getVar ( 'dirname' ), $topic_info).'">' . $topic_parent [$j]->getVar ( $title ) . '</a>' . $prefix;
 			} else {
 				$Path .= $topic_parent [$j]->getVar ( $title ) . $prefix;
 			}
@@ -132,7 +137,7 @@ class fmcontentUtils {
 		if ($order == 'ASC') {
 			if (array_key_exists ( $key, $topic_array )) {
 				if ($lasturl == true) {
-					$first_category = '<a href="index.php?topic=' . $topic_array [$key]->getVar ( 'topic_id' ) . '">' . $topic_array [$key]->getVar ( $title ) . '</a>';
+					$first_category = '<a title="' . $topic_array [$key]->getVar ( $title ) . '" href="'.fmcontent_TopicUrl($forMods->getVar ( 'dirname' ), array('topic_id'=>$topic_array [$key]->getVar ( 'topic_id' ),'topic_alias'=>$topic_array [$key]->getVar ( 'topic_alias' ))).'">' . $topic_array [$key]->getVar ( $title ) . '</a>';
 				} else {
 					$first_category = $topic_array [$key]->getVar ( $title );
 				}
@@ -142,7 +147,7 @@ class fmcontentUtils {
 			$Path .= $first_category;
 		} else {
 			if ($link == true) {
-				$Path .= '<a href="index.php">' . $xoopsModule->name () . '</a>';
+				$Path .= '<a title="' . $xoopsModule->name () . '" href="'.XOOPS_URL.'/modules/'.$forMods->getVar ( 'dirname' ).'/index.php">' . $xoopsModule->name () . '</a>';
 			} else {
 				$Path .= $xoopsModule->name ();
 			}
