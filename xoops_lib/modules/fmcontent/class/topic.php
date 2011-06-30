@@ -238,6 +238,16 @@ class fmcontentTopicHandler extends XoopsPersistableObjectHandler {
 	function getInsertId() {
 		return $this->db->getInsertId ();
 	}
+	
+	function getSubTopics($forMods , $id ,$topics) {
+		$ret = array();
+			foreach ( $topics as $root ) {
+				if($root->getVar ( 'topic_pid' ) == $id) {
+            $ret [] =   $root->getVar ( 'topic_id' );
+            }
+			}
+		return $ret;
+	}	
 }
 
 ?>
