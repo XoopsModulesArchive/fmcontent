@@ -179,7 +179,7 @@ class fmcontentUtils {
 				$contents ['content'] = $content_handler->getContentList ( $forMods, $content_infos );
 				$contents ['numrows'] = $content_handler->getContentCount ( $forMods, $content_infos );
 				if ($contents ['numrows'] > $content_infos ['content_limit']) {
-					if ($content_topic) {
+					if ($content_infos ['content_topic']) {
 						$content_pagenav = new XoopsPageNav ( $contents ['numrows'], $content_infos ['content_limit'], $content_infos ['content_start'], 'start', 'limit=' . $content_infos ['content_limit'] . '&topic=' . $content_infos ['content_topic'] );
 					} else {
 						$content_pagenav = new XoopsPageNav ( $contents ['numrows'], $content_infos ['content_limit'], $content_infos ['content_start'], 'start', 'limit=' . $content_infos ['content_limit'] );
