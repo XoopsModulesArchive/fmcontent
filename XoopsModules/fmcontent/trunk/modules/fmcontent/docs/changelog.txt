@@ -9,6 +9,7 @@
 - Add homepage function in utils class for manage module index page (Voltan) - [Not complated yet]
 - Improve permission page (Voltan)
 - Add topic URL function (Voltan)
+- Add function for show subtopic contents in main topic (Voltan)
 
 Language changes :
 

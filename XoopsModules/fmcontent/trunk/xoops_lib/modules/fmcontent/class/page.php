@@ -472,6 +472,11 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 			}
 			$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
 			$criteria->add ( new Criteria ( 'content_topic', $content_infos ['content_topic'] ) );
+         if($content_infos ['content_subtopic']) {
+         	foreach ($content_infos ['content_subtopic'] as $subtopic){
+					$criteria->add ( new Criteria ( 'content_topic', $subtopic ) ,'OR');
+				}
+			}
 			$criteria->add ( new Criteria ( 'content_uid', $content_infos ['content_user'] ) );
 			$criteria->setSort ( $content_infos ['content_sort'] );
 			$criteria->setOrder ( $content_infos ['content_order'] );

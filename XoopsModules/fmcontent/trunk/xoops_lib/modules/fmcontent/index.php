@@ -65,8 +65,8 @@ $content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
 $topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
 
 if (isset ( $content_topic )) {
-	$view_topic = $topic_handler->get ( $content_topic );
-	
+	$topics = $topic_handler->getall ( $content_topic );
+	$view_topic = $topics[$content_topic];
 	if (! isset ( $view_topic )) {
 		redirect_header ( 'index.php', 3, _FMCONTENT_TOPIC_ERROR );
 		exit ();
@@ -90,7 +90,6 @@ if (isset ( $content_topic )) {
 	}
 	
 	// get topic information
-	$topics = $topic_handler->getall ( $content_topic );
 	$topic_title = $default_title = $view_topic->getVar ( 'topic_title' );
 	$topic_id = $default_id = $view_topic->getVar ( 'topic_id' );
 	
@@ -114,7 +113,9 @@ if (isset ( $content_topic )) {
 	} else {
 		$content_perpage = xoops_getModuleOption ( 'perpage', $forMods->getVar ( 'dirname' ) );
 	}
-	$type = 'type1';
+	$type = 'type'.$view_topic->getVar ( 'topic_homepage' );
+	
+	$content_subtopic = $topic_handler->getSubTopics($forMods , $content_topic , $topics);
 
 } else {
 	
@@ -147,7 +148,7 @@ if (isset ( $_REQUEST ['start'] )) {
 	$content_start = 0;
 }
 
-$content_infos = array ('topics' => $topics, 'content_limit' => $content_limit, 'content_topic' => $content_topic, 'content_user' => $content_user, 'content_start' => $content_start, 'content_order' => $content_order, 'content_sort' => $content_sort, 'content_status' => '1', 'content_static' => true, 'admin_side' => false );
+$content_infos = array ('topics' => $topics, 'content_limit' => $content_limit, 'content_topic' => $content_topic, 'content_user' => $content_user, 'content_start' => $content_start, 'content_order' => $content_order, 'content_sort' => $content_sort, 'content_status' => '1', 'content_static' => true, 'admin_side' => false , 'content_subtopic' => $content_subtopic);
 
 // Get Information for Show in indexpage or topic pages
 $contents = fmcontentUtils::homepage ( $forMods, $content_infos, $type );
