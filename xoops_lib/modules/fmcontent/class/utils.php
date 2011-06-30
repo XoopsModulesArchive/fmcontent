@@ -35,6 +35,8 @@ class fmcontentUtils {
 			if (! $uploader_img->upload ()) {
 				$errors = $uploader_img->getErrors ();
 				fmcontent_Redirect ( "javascript:history.go(-1)", 3, $errors );
+				xoops_cp_footer ();
+			   exit ();
 			} else {
 				$obj->setVar ( $type, $uploader_img->getSavedFileName () );
 			}
