@@ -119,17 +119,9 @@ switch ($op) {
 		   }	
 		}	
 		
-		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
-		$criteria->setSort ( 'content_order' );
-		$criteria->setOrder ( 'DESC' );
-		$criteria->setLimit ( 1 );
-		$last = $content_handler->getObjects ( $criteria );
-		$order = 1;
-		foreach ( $last as $item ) {
-			$order = $item->getVar ( 'content_order' ) + 1;
-		}
-		$obj->setVar ( 'content_order', $order );
+		$obj->setVar ( 'content_order', $content_handler->setorder($forMods) );
+		$obj->setVar ( 'content_next', $content_handler->setNext($forMods, $_REQUEST ['content_topic']) );
+		$obj->setVar ( 'content_prev', $content_handler->setPrevious($forMods, $_REQUEST ['content_topic']) );
 		$obj->setVar ( 'content_groups', $groups );
 		$obj->setVar ( 'content_create', time () );
 		$obj->setVar ( 'content_update', time () );
@@ -139,11 +131,16 @@ switch ($op) {
 		
 		$content_handler->updateposts ( $_REQUEST ['content_uid'], $_REQUEST ['content_status'], $content_action = 'add' );
 		
+		
 		if (! $content_handler->insert ( $obj )) {
 			fmcontent_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR );
 			xoops_cp_footer ();
 			exit ();
 		}
+		
+		// Reset next and previous content
+		$content_handler->resetNext($forMods, $_REQUEST ['content_topic'] , $obj->getVar ( 'content_id' ));
+		$content_handler->resetPrevious($forMods, $_REQUEST ['content_topic'] , $obj->getVar ( 'content_id' ));
 		
 		if ((xoops_getModuleOption ( 'usetag', $forMods->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
 			$tag_handler = xoops_getmodulehandler ( 'tag', 'tag' );
@@ -153,7 +150,7 @@ switch ($op) {
 		// Redirect page
 		fmcontent_Redirect ( 'content.php', 1, _FMCONTENT_MSG_WAIT );
 		xoops_cp_footer ();
-		exit ();
+	   exit ();
 		break;
 	
 	case 'edit' :

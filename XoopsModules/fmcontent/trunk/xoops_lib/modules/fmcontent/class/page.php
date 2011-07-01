@@ -183,20 +183,23 @@ class fmcontent_content extends XoopsObject {
 		// Groups access
 		$form->addElement ( new XoopsFormSelectGroup ( _FMCONTENT_FORMGROUP, 'content_groups', true, $groups, 5, true ) );
 		// Next & prev
-		$content_Handler = xoops_getModuleHandler ( "page", "fmcontent" );
-		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
-		$criteria->add ( new Criteria ( 'content_status', '1' ) );
-		$content = $content_Handler->getObjects ( $criteria );
-		$tree = new XoopsObjectTree ( $content, 'content_id', 'content_topic' );
-		ob_start ();
-		echo $tree->makeSelBox ( 'content_prev', 'content_title', '', $this->getVar ( 'content_prev', 'e' ), true );
-		$form->addElement ( new XoopsFormLabel ( _FMCONTENT_FORMPREV, ob_get_contents () ) );
-		ob_end_clean ();
-		ob_start ();
-		echo $tree->makeSelBox ( 'content_next', 'content_title', '', $this->getVar ( 'content_next', 'e' ), true );
-		$form->addElement ( new XoopsFormLabel ( _FMCONTENT_FORMNEXT, ob_get_contents () ) );
-		ob_end_clean ();
+		if (!$this->isNew ()) {
+			$content_Handler = xoops_getModuleHandler ( "page", "fmcontent" );
+			$criteria = new CriteriaCompo ();
+			$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+			$criteria->add ( new Criteria ( 'content_status', '1' ) );
+			$criteria->add ( new Criteria ( 'content_topic', $this->getVar ( 'content_topic', 'e' ) ) );
+			$content = $content_Handler->getObjects ( $criteria );
+			$tree = new XoopsObjectTree ( $content, 'content_id', 'content_topic' );
+			ob_start ();
+			echo $tree->makeSelBox ( 'content_prev', 'content_title', '', $this->getVar ( 'content_prev', 'e' ), true );
+			$form->addElement ( new XoopsFormLabel ( _FMCONTENT_FORMPREV, ob_get_contents () ) );
+			ob_end_clean ();
+			ob_start ();
+			echo $tree->makeSelBox ( 'content_next', 'content_title', '', $this->getVar ( 'content_next', 'e' ), true );
+			$form->addElement ( new XoopsFormLabel ( _FMCONTENT_FORMNEXT, ob_get_contents () ) );
+			ob_end_clean ();
+		}
 		// Active
 		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_FORMACTIF, 'content_status', $this->getVar ( 'content_status', 'e' ) ) );
 		// Menu
@@ -628,6 +631,76 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 		return $ret;
 	}
 	
+	function setNext($forMods, $topic_id , $next_id) {
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'content_topic', $topic_id ) );
+		$criteria->setSort ( 'content_id' );
+		$criteria->setOrder ( 'ASC' );
+		$criteria->setLimit ( 1 );
+		$previous = $this->getObjects ( $criteria );
+		foreach ( $previous as $item ) {
+			return $item->getVar ( 'content_id' );
+		}
+	}
+	
+	function setPrevious($forMods, $topic_id) {
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'content_topic', $topic_id ) );
+		$criteria->setSort ( 'content_id' );
+		$criteria->setOrder ( 'DESC' );
+		$criteria->setLimit ( 1 );
+		$previous = $this->getObjects ( $criteria );
+		foreach ( $previous as $item ) {
+			return $item->getVar ( 'content_id' );
+		}
+	}
+	
+	function resetNext($forMods, $topic_id , $next_id) {
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'content_topic', $topic_id ) );
+		$criteria->setSort ( 'content_id' );
+		$criteria->setOrder ( 'DESC' );
+		$criteria->setLimit ( 1 );
+		$criteria->setStart ( 1 );
+		$next = $this->getObjects ( $criteria );
+		foreach ( $next as $item ) {
+			$item->setVar ( 'content_next', $next_id );
+			return $this->insert ( $item );
+		}
+	}
+	
+	function resetPrevious($forMods, $topic_id , $prev_id) {
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'content_topic', $topic_id ) );
+		$criteria->setSort ( 'content_id' );
+		$criteria->setOrder ( 'ASC' );
+		$criteria->setLimit ( 1 );
+		$criteria->setStart ( 0 );
+		$prev = $this->getObjects ( $criteria );
+		foreach ( $prev as $item ) {
+			$item->setVar ( 'content_prev', $prev_id );
+			return $this->insert ( $item );
+		}
+	}
+	
+	function setorder($forMods) {
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->setSort ( 'content_order' );
+		$criteria->setOrder ( 'DESC' );
+		$criteria->setLimit ( 1 );
+		$last = $this->getObjects ( $criteria );
+		$order = 1;
+		foreach ( $last as $item ) {
+			$order = $item->getVar ( 'content_order' ) + 1;
+		}
+		return $order;
+	}
+		
 	/**
 	 *
 	 * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/

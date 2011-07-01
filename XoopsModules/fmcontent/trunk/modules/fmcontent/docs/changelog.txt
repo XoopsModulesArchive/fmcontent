@@ -11,6 +11,8 @@
 - Add topic URL function (Voltan)
 - Add function for show subtopic contents in main topic (Voltan)
 - Add Rebuild Alias function (Voltan)
+- Add Set and reset Next and Previous function automatically (Voltan)
+
 Language changes :
 
 main.php
