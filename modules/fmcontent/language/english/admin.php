@@ -128,6 +128,9 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     define('_FMCONTENT_FORMFOLDER_NAME', 'Folder name');
     define('_FMCONTENT_LOG_TITLE', 'Clone module log');
     define('_FMCONTENT_FORMPURGE_TITLE', 'Purge page of deleted clone');
+    define('_FMCONTENT_ALIAS_TITLE', 'Rebuild Alias');
+    define('_FMCONTENT_ALIAS_CONTENT', 'Rebuild content alias');
+    define('_FMCONTENT_ALIAS_TOPIC', 'Rebuild topic alias');
 // Permissions
     define('_FMCONTENT_PERMISSIONS_ACCESS', 'Access permissions');
     define('_FMCONTENT_PERMISSIONS_SUBMIT', 'Submit permissions');
