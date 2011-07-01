@@ -63,24 +63,13 @@ switch ($op) {
 		$obj = $content_handler->create ();
 		$obj->setVars ( $_REQUEST );
 		
-		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
-		$criteria->setSort ( 'content_order' );
-		$criteria->setOrder ( 'DESC' );
-		$criteria->setLimit ( 1 );
-		$last = $content_handler->getObjects ( $criteria );
-		$order = 1;
-		foreach ( $last as $item ) {
-			$order = $item->getVar ( 'content_order' ) + 1;
-		}
-		
-		$obj->setVar ( 'content_order', $order );
-		
+		$obj->setVar ( 'content_order', $content_handler->setorder($forMods) );
+		$obj->setVar ( 'content_next', $content_handler->setNext($forMods, $_REQUEST ['content_topic']) );
+		$obj->setVar ( 'content_prev', $content_handler->setPrevious($forMods, $_REQUEST ['content_topic']) );
 		$obj->setVar ( 'content_menu', fmcontent_AjaxFilter ( $_REQUEST ['content_title'] ) );
 		$obj->setVar ( 'content_alias', fmcontent_Filter ( $_REQUEST ['content_title'] ) );
 		$obj->setVar ( 'content_words', fmcontent_MetaFilter ( $_REQUEST ['content_title'] ) );
 		$obj->setVar ( 'content_desc', fmcontent_AjaxFilter ( $_REQUEST ['content_title'] ) );
-		
 		$obj->setVar ( 'content_create', time () );
 		$obj->setVar ( 'content_update', time () );
 		$obj->setVar ( 'content_groups', $groups );
@@ -98,6 +87,10 @@ switch ($op) {
 			include XOOPS_ROOT_PATH . '/footer.php';
 			exit ();
 		}
+		
+		// Reset next content for previous content
+		$content_handler->resetNext($forMods, $_REQUEST ['content_topic'] , $obj->getVar ( 'content_id' ));
+		$content_handler->resetPrevious($forMods, $_REQUEST ['content_topic'] , $obj->getVar ( 'content_id' ));
 		
 		if ((xoops_getModuleOption ( 'usetag', $forMods->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
 			$tag_handler = xoops_getmodulehandler ( 'tag', 'tag' );
