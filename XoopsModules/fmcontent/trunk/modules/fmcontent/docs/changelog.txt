@@ -10,7 +10,7 @@
 - Improve permission page (Voltan)
 - Add topic URL function (Voltan)
 - Add function for show subtopic contents in main topic (Voltan)
-
+- Add Rebuild Alias function (Voltan)
 Language changes :
 
 main.php
@@ -29,7 +29,10 @@ admin.php
 + _FMCONTENT_TOPIC_OPTIONS
 + _FMCONTENT_TOPIC_OPTIONS_DESC
 + _FMCONTENT_TOPIC_ALIAS
-
++ _FMCONTENT_ALIAS_TITLE
++ _FMCONTENT_ALIAS_CONTENT
++ _FMCONTENT_ALIAS_TOPIC
+    
 modinfo.php
 + _FMCONTENT_HOMEPAGE 
 + _FMCONTENT_HOMEPAGE_DESC 
