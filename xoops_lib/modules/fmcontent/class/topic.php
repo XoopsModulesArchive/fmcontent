@@ -248,6 +248,20 @@ class fmcontentTopicHandler extends XoopsPersistableObjectHandler {
 			}
 		return $ret;
 	}	
+	
+	function setorder($forMods) {
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->setSort ( 'topic_weight' );
+		$criteria->setOrder ( 'DESC' );
+		$criteria->setLimit ( 1 );
+		$last = $this->getObjects ( $criteria );
+		$order = 1;
+		foreach ( $last as $item ) {
+			$order = $item->getVar ( 'topic_weight' ) + 1;
+		}
+		return $order;
+	}
 }
 
 ?>

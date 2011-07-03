@@ -11,19 +11,21 @@
     </div>
 </div>
 
-<table id="xo-content-data" class="outer" cellspacing="1" width="100%">
+<table id="xo-topic-sort" class="outer" cellspacing="1" width="100%">
     <thead>
     <th><{$smarty.const._FMCONTENT_TOPIC_ID}></th>
+    <th><{$smarty.const._FMCONTENT_TOPIC_NUM}></th>
     <th><{$smarty.const._FMCONTENT_TOPIC_NAME}></th>
     <th><{$smarty.const._FMCONTENT_TOPIC_SHOWTYPE}></th>
     <th><{$smarty.const._FMCONTENT_TOPIC_MENU}></th>
     <th><{$smarty.const._FMCONTENT_TOPIC_ONLINE}></th>
     <th><{$smarty.const._FMCONTENT_TOPIC_ACTION}></th>
     </thead>
-    <tbody>
+    <tbody class="xo-topic">
     <{foreach item=topic from=$topics}>
-    <tr class="odd">
+    <tr class="odd" id="mod_<{$topic.topic_id}>">
         <td class="width5"><img src="../images/icons/puce.png" alt=""/><{$topic.topic_id}></td>
+        <td class="width5"><img src="../images/icons/puce.png" alt=""/><{$topic.topic_weight}></td>
         <td class="txtcenter width35 bold">
 	        <a href="content.php?topic=<{$topic.topic_id}>"><{$topic.topic_title}></a>
         </td>

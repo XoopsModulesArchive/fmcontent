@@ -19,12 +19,21 @@
 
 $(document).ready(
         function() {
-            // Controls Drag + Drop
-            $('#xo-module-sort tbody.xo-module').sortable({
+            // Controls Drag + Drop for contents
+            $('#xo-content-sort tbody.xo-content').sortable({
                 placeholder: 'ui-state-highlight',
                 update: function(event, ui) {
                     var list = $(this).sortable('serialize');
                     $.post('content.php?op=order', list);
+                }
+            }
+                    );
+           // Controls Drag + Drop for topics       
+           $('#xo-topic-sort tbody.xo-topic').sortable({
+                placeholder: 'ui-state-highlight',
+                update: function(event, ui) {
+                    var list = $(this).sortable('serialize');
+                    $.post('topic.php?op=order', list);
                 }
             }
                     );
