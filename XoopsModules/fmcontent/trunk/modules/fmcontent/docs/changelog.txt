@@ -12,6 +12,7 @@
 - Add function for show subtopic contents in main topic (Voltan)
 - Add Rebuild Alias function (Voltan)
 - Add Set and reset Next and Previous function automatically (Voltan)
+- Add change topic order whit AJAX (Voltan)
 
 Language changes :
 

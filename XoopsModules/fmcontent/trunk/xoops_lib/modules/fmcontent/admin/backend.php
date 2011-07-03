@@ -46,6 +46,7 @@ switch ($op) {
 		$obj->setVars ( $_REQUEST );
 		$obj->setVar ( 'topic_date_created', time () );
 		$obj->setVar ( 'topic_date_update', time () );
+		$obj->setVar ( 'topic_weight', $topic_handler->setorder($forMods) );
 		
 		//image
 		fmcontentUtils::uploadimg ( $forMods, 'topic_img', $obj, $_REQUEST ['topic_img'] );

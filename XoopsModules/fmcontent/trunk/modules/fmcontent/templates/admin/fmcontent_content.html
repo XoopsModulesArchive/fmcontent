@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<table id="xo-module-sort" class="outer" cellspacing="1" width="100%">
+<table id="xo-content-sort" class="outer" cellspacing="1" width="100%">
     <thead>
     <th><{$smarty.const._FMCONTENT_CONTENT_ID}></th>
     <th><{$smarty.const._FMCONTENT_CONTENT_NUM}></th>
@@ -31,7 +31,7 @@
     <th><{$smarty.const._FMCONTENT_FORMDISPLAY}></th>
     <th><{$smarty.const._FMCONTENT_CONTENT_ACTION}></th>
     </thead>
-    <tbody class="xo-module">
+    <tbody class="xo-content">
     <{foreach item=item from=$contents}>
     <{includeq file="$xoops_rootpath/modules/fmcontent/templates/admin/fmcontent_level.html" data=$item level='level1'}>
 

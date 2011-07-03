@@ -66,6 +66,25 @@ switch ($op)
             // Display Admin footer
             xoops_cp_footer();
         }
+        
+            case 'order':
+        if (isset($_POST['mod'])) {
+            $i = 1;
+            foreach ($_POST['mod'] as $order) {
+                if ($order > 0) {
+                    $contentorder = $topic_handler->get($order);
+                    $contentorder->setVar('topic_weight', $i);
+                    if (!$topic_handler->insert($contentorder)) {
+                        $error = true;
+                    }
+                    $i++;
+                }
+            }
+        }
+        exit;
+        break;
+        
+        
     default:
 
         // get module configs
