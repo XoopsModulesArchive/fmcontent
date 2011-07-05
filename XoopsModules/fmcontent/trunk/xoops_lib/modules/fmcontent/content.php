@@ -21,7 +21,19 @@
 if (! isset ( $forMods ))
 	exit ( 'Module not found' );
 
-$content_id = fmcontent_CleanVars ( $_REQUEST, 'id', 0, 'int' );
+// Initialize content handler
+$content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
+$topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
+
+if(isset($_REQUEST['id'])) {
+	$content_id = fmcontent_CleanVars ( $_REQUEST, 'id', 0, 'int' );
+} else {
+	$content_alias = fmcontent_CleanVars ( $_REQUEST, 'page', 0, 'string' );
+	if($content_alias) {
+		$content_id = $content_handler->getId($content_alias);
+	}
+}
+
 // Include content template
 $template = xoops_getModuleOption ( 'template', $forMods->getVar ( 'dirname' ) );
 $xoopsOption ['template_main'] = 'fmcontent_' . $template . '_content.html';
@@ -46,9 +58,7 @@ switch ($template) {
 		break;
 }
 
-// Initialize content handler
-$content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
-$topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
+
 
 if (! $content_id) {
 	$criteria = new CriteriaCompo ();

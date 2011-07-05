@@ -411,25 +411,14 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 	}
 	
 	function getId($alias) {
-		if ($alias != '') {
-			$criteria = new Criteria ( $this->identifierName, $alias );
-			$criteria->setLimit ( 1 );
-			$obj_array = $this->getObjects ( $criteria, false, false );
-			if (count ( $obj_array ) != 1) {
-				$obj = $this->create ();
-				return $obj;
-			}
-			return $obj_array [0] [$this->keyName];
-		} else {
-			$criteria = new CriteriaCompo ();
-			$criteria = new Criteria ( 'default_content', 1 );
-			$criteria->setLimit ( 1 );
-			$obj_array = $this->getObjects ( $criteria, false, false );
-			if (count ( $obj_array ) != 1) {
-				return 0;
-			}
-			return $obj_array [0] [$this->keyName];
+		$criteria = new CriteriaCompo ();
+		$criteria = new Criteria ( 'content_alias', $alias );
+		$criteria->setLimit ( 1 );
+		$obj_array = $this->getObjects ( $criteria, false, false );
+		if (count ( $obj_array ) != 1) {
+			return 0;
 		}
+		return $obj_array [0] [$this->keyName];
 	}
 	
 	function getDefault($criteria = null) {
