@@ -182,7 +182,18 @@ class fmcontent_topic extends XoopsObject {
 class fmcontentTopicHandler extends XoopsPersistableObjectHandler {
 	
 	function fmcontentTopicHandler($db) {
-		parent::XoopsPersistableObjectHandler ( $db, 'fmcontent_topic', 'fmcontent_topic', 'topic_id', 'topic_title' );
+		parent::XoopsPersistableObjectHandler ( $db, 'fmcontent_topic', 'fmcontent_topic', 'topic_id', 'topic_alias' );
+	}
+	
+	function getId($alias) {
+		$criteria = new CriteriaCompo ();
+		$criteria = new Criteria ( 'topic_alias', $alias );
+		$criteria->setLimit ( 1 );
+		$obj_array = $this->getObjects ( $criteria, false, false );
+		if (count ( $obj_array ) != 1) {
+			return 0;
+		}
+		return $obj_array [0] [$this->keyName];
 	}
 	
 	function getTopics($forMods, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu, $topic_online) {

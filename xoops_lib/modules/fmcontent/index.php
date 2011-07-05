@@ -23,12 +23,14 @@ if (! isset ( $forMods ))
 
 include_once XOOPS_ROOT_PATH . "/class/pagenav.php";
 
+global $xoopsUser;
+
+$content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
+$topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
+
 // Include content template
 $template = xoops_getModuleOption ( 'template', $forMods->getVar ( 'dirname' ) );
 $xoopsOption ['template_main'] = 'fmcontent_' . $template . '_index.html';
-
-// include Xoops header
-include XOOPS_ROOT_PATH . '/header.php';
 
 if (isset ( $_REQUEST ["user"] )) {
 	$content_user = fmcontent_CleanVars ( $_REQUEST, 'user', 0, 'int' );
@@ -38,9 +40,15 @@ if (isset ( $_REQUEST ["user"] )) {
 
 if (isset ( $_REQUEST ["topic"] )) {
 	$content_topic = fmcontent_CleanVars ( $_REQUEST, 'topic', 0, 'int' );
+} elseif(isset ($_REQUEST ["page"])) {
+	$topic_alias = fmcontent_CleanVars ( $_REQUEST, 'page', 0, 'string' );
+	$content_topic = $topic_handler->getId($topic_alias);
 } else {
 	$content_topic = null;
 }
+
+// include Xoops header
+include XOOPS_ROOT_PATH . '/header.php';
 
 // Add Stylesheet
 $xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $forMods->getVar ( 'dirname' ) . '/css/style.css' );
@@ -58,11 +66,6 @@ switch ($template) {
 		$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $forMods->getVar ( 'dirname' ) . '/css/css3.css' );
 		break;
 }
-
-global $xoopsUser;
-
-$content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
-$topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
 
 if (isset ( $content_topic )) {
 	$topics = $topic_handler->getall ( $content_topic );
