@@ -92,7 +92,7 @@ class fmcontent_topic extends XoopsObject {
 		ob_end_clean ();
 		
 		$form->addElement ( new XoopsFormTextArea ( _FMCONTENT_TOPIC_DESC, "topic_desc", $this->getVar ( "topic_desc" ), 5, 47 ), false );
-		$form->addElement ( new XoopsFormText ( _FMCONTENT_TOPIC_WEIGHT, "topic_weight", 5, 11, $this->getVar ( "topic_weight" ) ), false );
+		//$form->addElement ( new XoopsFormText ( _FMCONTENT_TOPIC_WEIGHT, "topic_weight", 5, 11, $this->getVar ( "topic_weight" ) ), false );
 		
 		// Image
 		$topic_img = $this->getVar ( 'topic_img' ) ? $this->getVar ( 'topic_img' ) : 'blank.gif';
