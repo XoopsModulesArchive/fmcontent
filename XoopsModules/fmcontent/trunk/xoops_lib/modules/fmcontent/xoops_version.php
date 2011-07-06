@@ -192,8 +192,7 @@ $modversion['config'][] = array(
     'description' => '_FMCONTENT_FRIENDLYURL_DESC',
     'formtype' => 'select',
     'valuetype' => 'text',
-    'options' => array(_FMCONTENT_URL_STANDARD => 'none', /*_FMCONTENT_URL_FRIENDLY => 'friendly',*/
-        _FMCONTENT_URL_REWRITE => 'rewrite'),
+    'options' => array(_FMCONTENT_URL_STANDARD => 'none', _FMCONTENT_URL_REWRITE => 'rewrite' , _FMCONTENT_URL_SHORT => 'short'),
     'default' => 'none');
 
 $modversion['config'][] = array(

@@ -40,10 +40,13 @@ if (!defined('_MI_FMCONTENT_NAME')) {
     define("_FMCONTENT_FORM_EDITOR_DESC", "Select the editor to use for editing your content.");
 // Urls
     define('_FMCONTENT_FRIENDLYURL', 'URL rewrite method');
-    define('_FMCONTENT_FRIENDLYURL_DESC', 'Select the URL rewrite mode you want to use.');
+    define('_FMCONTENT_FRIENDLYURL_DESC', 'Select the URL rewrite mode you want to use.<ul>
+    <li>"Standard Mode": Module standard URL</li>
+    <li>"Rewrite Mode": you must use .htaccess file and edit .htaccess sample code if you change SEO / URL Rewrite options</li>
+    <li>"Short Rewrite": you can make URL whit out page id and module use alias for get page info. you must edit .htaccess, you can remove module name and Url extension and use Root base for have short URL</li></ul>');
     define('_FMCONTENT_URL_STANDARD', 'Standard Mode');
-    define('_FMCONTENT_URL_FRIENDLY', 'Friendly Mode');
     define('_FMCONTENT_URL_REWRITE', 'Rewrite Mode');
+    define('_FMCONTENT_URL_SHORT', 'Short Rewrite');
 // Rewrite Mode
     define('_FMCONTENT_REWRITEBASE', 'Rewrite Mode: .htaccess file position');
     define('_FMCONTENT_REWRITEBASE_DESC', '

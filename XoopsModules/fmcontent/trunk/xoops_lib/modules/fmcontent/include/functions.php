@@ -158,18 +158,30 @@ function fmcontent_TopicUrl($module, $array) {
             return XOOPS_URL . $rewrite_base . $module . '/index.php?topic=' . $id . '&amp;' . $page;
             break;
 
-        case 'friendly':
-
-            break;
-
         case 'rewrite':
             $rewrite_base = xoops_getModuleOption('rewrite_mode', $module);
             $rewrite_ext = xoops_getModuleOption('rewrite_ext', $module);
-            $module_name = xoops_getModuleOption('rewrite_name', $module);
+            $module_name = '';
+            if(xoops_getModuleOption('rewrite_name', $module)) {
+	            $module_name = xoops_getModuleOption('rewrite_name', $module) . '/';
+            }	
             $page = $array['topic_alias'];
-            $type = 'topic';
-            return XOOPS_URL . $rewrite_base . $module_name . '/' . $type . '/' . $id . '/' . $page . $rewrite_ext;
+            $type = 'topic/';
+            $id = $id . '/';
+            return XOOPS_URL . $rewrite_base . $module_name . $type . $id . $page . $rewrite_ext;
             break;
+            
+         case 'short':  
+            $rewrite_base = xoops_getModuleOption('rewrite_mode', $module);
+            $rewrite_ext = xoops_getModuleOption('rewrite_ext', $module);
+            $module_name = '';
+            if(xoops_getModuleOption('rewrite_name', $module)) {
+	            $module_name = xoops_getModuleOption('rewrite_name', $module) . '/';
+            }	
+            $page = $array['topic_alias'];
+            $type = 'topic/';
+            return XOOPS_URL . $rewrite_base . $module_name . $type . $page . $rewrite_ext;
+            break;   
     }
     
 }
@@ -204,34 +216,48 @@ function fmcontent_Url($module, $array, $type = 'content') {
             return XOOPS_URL . $rewrite_base . $module . '/' . $type . '.php?' . $topic_name . 'id=' . $id . '&amp;' . $page . $comment;
             break;
 
-        case 'friendly':
-            $rewrite_base = '/modules/';
-            $page = $array['content_alias'];
-            if($topic_name) {
-                $topic_name = fmcontent_Filter($topic_name);
-            }
-            if ($type == 'comment-edit' || $type == 'comment-reply' || $type == 'comment-delete') {
-                $comment = '/';
-            }
-            return XOOPS_URL . $rewrite_base . $module . '/' . $type . '.php/' . $id . '/' . $topic_name . '/' . $page . $comment;
-            break;
-
         case 'rewrite':
             if($topic_name) {
                 $topic_name = fmcontent_Filter($topic_name) . '/';
             }   
             $rewrite_base = xoops_getModuleOption('rewrite_mode', $module);
             $rewrite_ext = xoops_getModuleOption('rewrite_ext', $module);
-            $module_name = xoops_getModuleOption('rewrite_name', $module);
+            $module_name = '';
+            if(xoops_getModuleOption('rewrite_name', $module)) {
+	            $module_name = xoops_getModuleOption('rewrite_name', $module) . '/';
+            }	
+            $page = $array['content_alias'];
+            $type = $type . '/';
+            $id = $id . '/';
+            if ($type == 'content/') $type = '';
+
+            if ($type == 'comment-edit/' || $type == 'comment-reply/' || $type == 'comment-delete/') {
+                return XOOPS_URL . $rewrite_base . $module_name . $type . $id . '/';
+            }
+            
+            return XOOPS_URL . $rewrite_base . $module_name . $type . $topic_name  . $id . $page . $rewrite_ext;
+            break;
+            
+         case 'short':  
+            if($topic_name) {
+                $topic_name = fmcontent_Filter($topic_name) . '/';
+            }   
+            $rewrite_base = xoops_getModuleOption('rewrite_mode', $module);
+            $rewrite_ext = xoops_getModuleOption('rewrite_ext', $module);
+            $module_name = '';
+            if(xoops_getModuleOption('rewrite_name', $module)) {
+	            $module_name = xoops_getModuleOption('rewrite_name', $module) . '/';
+            }	
             $page = $array['content_alias'];
             $type = $type . '/';
             if ($type == 'content/') $type = '';
 
             if ($type == 'comment-edit/' || $type == 'comment-reply/' || $type == 'comment-delete/') {
-                return XOOPS_URL . $rewrite_base . $module_name . '/' . $type . $id . '/';
+                return XOOPS_URL . $rewrite_base . $module_name . $type . $id . '/';
             }
-            return XOOPS_URL . $rewrite_base . $module_name . '/' . $type . $topic_name  . $id . '/' . $page . $rewrite_ext;
-            break;
+            
+            return XOOPS_URL . $rewrite_base . $module_name . $type . $topic_name . $page . $rewrite_ext;
+            break; 
     }
 }
 

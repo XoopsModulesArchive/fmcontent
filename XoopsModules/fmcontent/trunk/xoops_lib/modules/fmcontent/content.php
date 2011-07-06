@@ -165,12 +165,14 @@ if (isset ( $content_topic ) && $content_topic > 0 && $view_topic->getVar ( 'top
 		if ($obj->getVar ( 'content_next' ) != 0) {
 			$next_obj = $content_handler->get ( $obj->getVar ( 'content_next' ) );
 			$next_link = $next_obj->toArray ();
+			$next_link ['topic'] = $content ['topic'];
 			$link ['next'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $next_link );
 			$link ['next_title'] = $next_link ['content_title'];
 		}
 		if ($obj->getVar ( 'content_prev' ) != 0) {
 			$prev_obj = $content_handler->get ( $obj->getVar ( 'content_prev' ) );
 			$prev_link = $prev_obj->toArray ();
+			$prev_link ['topic'] = $content ['topic'];
 			$link ['prev'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $prev_link );
 			$link ['prev_title'] = $prev_link ['content_title'];
 		}
@@ -220,12 +222,14 @@ if (isset ( $content_topic ) && $content_topic > 0 && $view_topic->getVar ( 'top
 		if ($obj->getVar ( 'content_next' ) != 0) {
 			$next_obj = $content_handler->get ( $obj->getVar ( 'content_next' ) );
 			$next_link = $next_obj->toArray ();
+			$next_link ['topic'] = $content ['topic'];
 			$link ['next'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $next_link );
 			$link ['next_title'] = $next_link ['content_title'];
 		}
 		if ($obj->getVar ( 'content_prev' ) != 0) {
 			$prev_obj = $content_handler->get ( $obj->getVar ( 'content_prev' ) );
 			$prev_link = $prev_obj->toArray ();
+			$prev_link ['topic'] = $content ['topic'];
 			$link ['prev'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $prev_link );
 			$link ['prev_title'] = $prev_link ['content_title'];
 		}
