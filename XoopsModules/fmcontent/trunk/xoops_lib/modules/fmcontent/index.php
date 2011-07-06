@@ -94,6 +94,7 @@ if (isset ( $content_topic )) {
 	
 	// get topic information
 	$topic_title = $default_title = $view_topic->getVar ( 'topic_title' );
+	$topic_alias = $default_alias = $view_topic->getVar ( 'topic_alias' );
 	$topic_id = $default_id = $view_topic->getVar ( 'topic_id' );
 	
 	$xoopsTpl->assign ( 'topic_title', $topic_title );
@@ -125,6 +126,7 @@ if (isset ( $content_topic )) {
 	// get all topic informations
 	$topics = $topic_handler->getall ( $content_topic );
 	$default_title = xoops_getModuleOption ( 'static_name', $forMods->getVar ( 'dirname' ) );
+	$default_alias = fmcontent_Filter($default_title)
 	$topic_id = $default_id = '0';
 	// get module configs
 	$showtype = xoops_getModuleOption ( 'showtype', $forMods->getVar ( 'dirname' ) );
@@ -212,7 +214,7 @@ if (xoops_getModuleOption ( 'bc_show', $forMods->getVar ( 'dirname' ) )) {
 }
 
 // Get default content
-$default_info = array ('id' => $default_id, 'title' => $default_title );
+$default_info = array ('id' => $default_id, 'title' => $default_title , 'alias' => $default_alias);
 $default = $content_handler->contentDefault ( $forMods, $default_info );
 
 $xoopsTpl->assign ( 'content_topic', $content_topic );

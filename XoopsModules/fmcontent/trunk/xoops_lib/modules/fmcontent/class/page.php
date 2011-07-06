@@ -441,6 +441,7 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 		$contentdefault ['content_create'] = formatTimestamp ( $contentdefault ['content_create'], _MEDIUMDATESTRING );
 		$contentdefault ['imgurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . $contentdefault ['content_img'];
 		$contentdefault ['topic'] = $default_info ['title'];
+		$contentdefault ['topic_alias'] = $default_info ['alias'];
 		$contentdefault ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $contentdefault );
 		if (isset ( $contentdefault ['content_id'] )) {
 			return $contentdefault;
@@ -490,10 +491,10 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 					}
 					if ($root->getVar ( 'content_topic' )) {
 						$tab ['topic'] = $list [$root->getVar ( 'content_topic' )] ['topic_title'];
+						$tab ['topic_alias'] = $list [$root->getVar ( 'content_topic' )] ['topic_alias'];
 						$tab ['topicurl'] = fmcontent_TopicUrl ( $forMods->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'content_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'content_topic' )] ['topic_alias'] ));
 					}
 
-				
 				$tab ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $tab );
 				$tab ['content_create'] = formatTimestamp ( $root->getVar ( 'content_create' ), _MEDIUMDATESTRING );
 				$tab ['content_update'] = formatTimestamp ( $root->getVar ( 'content_update' ), _MEDIUMDATESTRING );
@@ -524,9 +525,19 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 			foreach ( $obj as $root ) {
 				$tab = array ();
 				$tab = $root->toArray ();
-				$tab ['topic'] = fmcontentTopicHandler::getTopicFromId ( $root->getVar ( 'content_topic' ) );
+				
+					foreach ( array_keys ( $content_infos ['topics'] ) as $i ) {
+						$list [$i] ['topic_title'] = $content_infos ['topics'] [$i]->getVar ( "topic_title" );
+						$list [$i] ['topic_id'] = $content_infos ['topics'] [$i]->getVar ( "topic_id" );
+						$list [$i] ['topic_alias'] = $content_infos ['topics'] [$i]->getVar ( "topic_alias" );
+					}
+					if ($root->getVar ( 'content_topic' )) {
+						$tab ['topic'] = $list [$root->getVar ( 'content_topic' )] ['topic_title'];
+						$tab ['topic_alias'] = $list [$root->getVar ( 'content_topic' )] ['topic_alias'];
+						$tab ['topicurl'] = fmcontent_TopicUrl ( $forMods->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'content_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'content_topic' )] ['topic_alias'] ));
+					}
+				
 				$tab ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $tab );
-				//$tab['child'] = $this->getMenuList( $forMods , $menu_id , $menu_limit, $menu_start, $root->getVar('content_id') );
 				$ret [] = $tab;
 			}
 		}
@@ -559,7 +570,18 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 				$tab = array ();
 				$tab = $root->toArray ();
 				$tab ['owner'] = XoopsUser::getUnameFromId ( $root->getVar ( 'content_uid' ) );
-				$tab ['topic'] = fmcontentTopicHandler::getTopicFromId ( $root->getVar ( 'content_topic' ) );
+				
+					foreach ( array_keys ( $content_infos ['topics'] ) as $i ) {
+						$list [$i] ['topic_title'] = $content_infos ['topics'] [$i]->getVar ( "topic_title" );
+						$list [$i] ['topic_id'] = $content_infos ['topics'] [$i]->getVar ( "topic_id" );
+						$list [$i] ['topic_alias'] = $content_infos ['topics'] [$i]->getVar ( "topic_alias" );
+					}
+					if ($root->getVar ( 'content_topic' )) {
+						$tab ['topic'] = $list [$root->getVar ( 'content_topic' )] ['topic_title'];
+						$tab ['topic_alias'] = $list [$root->getVar ( 'content_topic' )] ['topic_alias'];
+						$tab ['topicurl'] = fmcontent_TopicUrl ( $forMods->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'content_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'content_topic' )] ['topic_alias'] ));
+					}
+				
 				$tab ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $tab );
 				$tab ['title'] = mb_strlen ( $root->getVar ( 'content_title' ), 'utf-8' ) > $lenght_title ? mb_substr ( $root->getVar ( 'content_title' ), 0, ($lenght_title), 'utf-8' ) . "..." : $root->getVar ( 'content_title' );
 				$tab ['date'] = formatTimestamp ( $root->getVar ( 'content_create' ), _MEDIUMDATESTRING );
@@ -613,6 +635,7 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 				$tab = array ();
 				$tab = $root->toArray ();
 				$tab ['topic'] = fmcontentTopicHandler::getTopicFromId ( $root->getVar ( 'content_topic' ) );
+            $tab ['topic_alias'] = $tab ['topic'];
 				$tab ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $tab );
 				$ret [] = $tab;
 			}
@@ -745,6 +768,7 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 			$data = $content->toArray ();
 			$data ['image'] = 'images/forum.gif';
 			$data ['topic'] = fmcontentTopicHandler::getTopicFromId ( $content->getVar ( 'content_topic' ) );
+			$data ['topic_alias'] = $data ['topic'];
 			$data ['link'] = fmcontent_Url ( 'fmcontent', $data );
 			$data ['title'] = $content->getVar ( 'content_title' );
 			$data ['time'] = $content->getVar ( 'content_create' );

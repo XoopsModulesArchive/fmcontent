@@ -199,17 +199,17 @@ function fmcontent_Url($module, $array, $type = 'content') {
         $id = $array['content_id'];
     }
 
-    if (isset($array['topic']) && $array['topic']) {
-        $topic_name = $array['topic'];
+    if (isset($array['topic_alias']) && $array['topic_alias']) {
+        $topic_name = $array['topic_alias'];
     } else {
-        $topic_name = xoops_getModuleOption('static_name', $module);
+        $topic_name = fmcontent_Filter(xoops_getModuleOption('static_name', $module));
     }
 
     switch ($friendly_url) {
 
         case 'none':
             if($topic_name) {
-	             $topic_name = 'topic=' . fmcontent_Filter($topic_name) . '&amp;';
+	             $topic_name = 'topic=' . $topic_name . '&amp;';
             }
             $rewrite_base = '/modules/';
             $page = 'page=' . $array['content_alias'];
@@ -218,7 +218,7 @@ function fmcontent_Url($module, $array, $type = 'content') {
 
         case 'rewrite':
             if($topic_name) {
-                $topic_name = fmcontent_Filter($topic_name) . '/';
+                $topic_name = $topic_name . '/';
             }   
             $rewrite_base = xoops_getModuleOption('rewrite_mode', $module);
             $rewrite_ext = xoops_getModuleOption('rewrite_ext', $module);
@@ -240,7 +240,7 @@ function fmcontent_Url($module, $array, $type = 'content') {
             
          case 'short':  
             if($topic_name) {
-                $topic_name = fmcontent_Filter($topic_name) . '/';
+                $topic_name = $topic_name . '/';
             }   
             $rewrite_base = xoops_getModuleOption('rewrite_mode', $module);
             $rewrite_ext = xoops_getModuleOption('rewrite_ext', $module);
