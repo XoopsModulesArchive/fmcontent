@@ -20,15 +20,22 @@
 
 if (!isset($forMods)) exit('Module not found');
 
-$content_id = fmcontent_CleanVars($_REQUEST, 'id', 0, 'int');
+// Initialize content handler
+$content_handler = xoops_getmodulehandler('page', 'fmcontent');$topic_handler = xoops_getmodulehandler('topic', 'fmcontent');
+
+if(isset($_REQUEST['id'])) {
+	$content_id = fmcontent_CleanVars ( $_REQUEST, 'id', 0, 'int' );
+} else {
+	$content_alias = fmcontent_CleanVars ( $_REQUEST, 'page', 0, 'string' );
+	if($content_alias) {
+		$content_id = $content_handler->getId($content_alias);
+	}
+}
 
 // Deprecate
 $myts =& MyTextSanitizer::getInstance();
 // Include pdf library
 require_once XOOPS_TRUST_PATH . '/modules/fmcontent/fpdf/fpdf.inc.php';
-// Initialize content handler
-$content_handler = xoops_getmodulehandler('page', 'fmcontent');
-$topic_handler = xoops_getmodulehandler('topic', 'fmcontent');
 $obj = $content_handler->get($content_id);
 // Get user right
 $group = is_object($xoopsUser) ? $xoopsUser->getGroups() : array(XOOPS_GROUP_ANONYMOUS);

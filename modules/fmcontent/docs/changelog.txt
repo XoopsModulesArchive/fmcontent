@@ -13,8 +13,12 @@
 - Add Rebuild Alias function (Voltan)
 - Add Set and reset Next and Previous function automatically (Voltan)
 - Add change topic order whit AJAX (Voltan)
+- Add new options for make URL (Voltan)
 
 Language changes :
++ Add
+- Remove
+* Edit
 
 main.php
 + _FMCONTENT_TOPIC_ID 
@@ -43,6 +47,11 @@ modinfo.php
 + _FMCONTENT_HOMEPAGE_2 
 + _FMCONTENT_HOMEPAGE_3 
 + _FMCONTENT_HOMEPAGE_4
++ _FMCONTENT_URL_SHORT
+
+* _FMCONTENT_FRIENDLYURL_DESC
+
+- _FMCONTENT_URL_FRIENDLY
 
 1.05
 =================================
