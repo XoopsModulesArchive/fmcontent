@@ -212,11 +212,13 @@ if (file_exists ( XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar ( 'dirname' )
 if (xoops_getModuleOption ( 'bc_show', $forMods->getVar ( 'dirname' ) )) {
 	$breadcrumb = fmcontentUtils::breadcrumb ( $forMods, false, '', $topic_id, ' &raquo; ', 'topic_title' );
 }
+$breadcrumb_modname = xoops_getModuleOption ( 'bc_modname', $forMods->getVar ( 'dirname' ) );
 
 // Get default content
 $default_info = array ('id' => $default_id, 'title' => $default_title , 'alias' => $default_alias);
 $default = $content_handler->contentDefault ( $forMods, $default_info );
 
+$xoopsTpl->assign ( 'breadcrumb_modname', $breadcrumb_modname );
 $xoopsTpl->assign ( 'content_topic', $content_topic );
 $xoopsTpl->assign ( 'content_limit', $content_limit );
 $xoopsTpl->assign ( 'showtype', $showtype );
