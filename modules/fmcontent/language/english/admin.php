@@ -28,6 +28,7 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
 // Topic page
     define('_FMCONTENT_FORM_TOPIC', 'Manage Topic');
     define('_FMCONTENT_TOPIC_ID', 'ID');
+    define('_FMCONTENT_TOPIC_NUM', 'Weight');
     define('_FMCONTENT_TOPIC_NAME', 'Title');
     define('_FMCONTENT_TOPIC_PARENT', 'Parent topic');
     define('_FMCONTENT_TOPIC_DESC', 'Description');
@@ -147,7 +148,8 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     define('_FMCONTENT_MSG_UPDATE_ERROR', 'Could not update database! Update content error');
     define('_FMCONTENT_MSG_INSERT_ERROR', 'Could not update database! Insert content error ');
     define('_FMCONTENT_MSG_CLONE_ERROR', 'This folder already exists !');
-    define("_FMCONTENT_MSG_NOPERMSSET", "Permission cannot be set: No Topics created yet! Please create a Topic first.");
+    define('_FMCONTENT_MSG_NOPERMSSET', 'Permission cannot be set: No Topics created yet! Please create a Topic first.');
+	 define('_FMCONTENT_MSG_ALIASERROR', 'Your selected Alais already taken. Please change it and try again');
 // Tips
     define('_FMCONTENT_HOME_TIPS',
     '<ul>
