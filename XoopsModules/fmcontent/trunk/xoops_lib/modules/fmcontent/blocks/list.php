@@ -21,22 +21,23 @@
  */
 function fmcontent_list_show($options) {
 
-    $content_handler = xoops_getmodulehandler('page', 'fmcontent');
+    $content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
+    $topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
 
     global $xoTheme;
 
     $block = array();
     $forMods = $options[0];
     $show = $options[1];
-    $content_limit = $options[2];
-    $lenght_title = $options[3];
+    $content_infos['content_limit'] = $options[2];
+    $content_infos['lenght_title'] = $options[3];
     $showimg = $options[4];
     $showdescription = $options[5];
     $showdate = $options[6];
-    $content_sort = $options[7];
+    $content_infos['content_sort'] = $options[7];
     $width = $options[8];
     $float = $options[9];
-    $content_order = $options[10];
+    $content_infos['content_order'] = $options[10];
 
     array_shift($options);
     array_shift($options);
@@ -54,8 +55,8 @@ function fmcontent_list_show($options) {
     $forMods = $module_handler->getByDirname($forMods);
 
     $options0 = $options[0];
-
-    $contents = $content_handler->getContentBlockList($forMods, $content_limit, $content_sort, $content_order, $options, $lenght_title);
+    $content_infos ['topics'] = $topic_handler->getall ();
+    $contents = $content_handler->getContentBlockList($forMods, $content_infos ,$options);
 
     // Add block data
 	 $block['show'] = $show;

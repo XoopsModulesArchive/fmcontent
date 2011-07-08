@@ -41,9 +41,10 @@ if (!function_exists('fmcontent_menu_show')) {
         $forMods = $module_handler->getByDirname($forMods);
 
         // Initialize content handler
-        $topic_handler = xoops_getmodulehandler('topic', 'fmcontent');
-        $content_handler = xoops_getmodulehandler('page', 'fmcontent');
-
+        $content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
+        $topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
+        
+        $content_infos ['topics'] = $topic_handler->getall ();
         $content = $content_handler->getMenuList($forMods, $content_infos);
 
         // Add block data

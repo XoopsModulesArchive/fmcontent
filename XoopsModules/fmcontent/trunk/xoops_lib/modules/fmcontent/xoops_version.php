@@ -26,7 +26,7 @@ $modversion = array(
     // Main setting
     'name' => _MI_FMCONTENT_NAME,
     'description' => _MI_FMCONTENT_DESC,
-    'version' => 1.05,
+    'version' => 1.06,
     'author' => 'Andricq Nicolas (AKA MusS)',
     'credits' => 'The XOOPS Project, Voltan, Mamba',
     'license' => 'GNU GPL 2.0',
