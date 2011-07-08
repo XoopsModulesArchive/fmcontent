@@ -544,9 +544,9 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 		return $ret;
 	}
 	
-	function getContentBlockList($forMods, $content_limit, $content_sort, $content_order, $options, $lenght_title) {
+	function getContentBlockList($forMods, $content_infos ,$options) {
 		$ret = array ();
-		include_once 'topic.php';
+
 		if (! isset ( $criteria )) {
 			$criteria = new CriteriaCompo ();
 		}
@@ -559,9 +559,9 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 				$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $options ) . ')', 'IN' ) );
 			}
 			$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
-			$criteria->setSort ( $content_sort );
-			$criteria->setOrder ( $content_order );
-			$criteria->setLimit ( $content_limit );
+			$criteria->setSort ( $content_infos ['content_sort'] );
+			$criteria->setOrder ( $content_infos ['content_order'] );
+			$criteria->setLimit ( $content_infos ['content_limit'] );
 		}
 		
 		$obj = $this->getObjects ( $criteria, false );
@@ -583,7 +583,7 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 					}
 				
 				$tab ['url'] = fmcontent_Url ( $forMods->getVar ( 'dirname' ), $tab );
-				$tab ['title'] = mb_strlen ( $root->getVar ( 'content_title' ), 'utf-8' ) > $lenght_title ? mb_substr ( $root->getVar ( 'content_title' ), 0, ($lenght_title), 'utf-8' ) . "..." : $root->getVar ( 'content_title' );
+				$tab ['title'] = mb_strlen ( $root->getVar ( 'content_title' ), 'utf-8' ) > $content_infos ['lenght_title'] ? mb_substr ( $root->getVar ( 'content_title' ), 0, ($content_infos ['lenght_title']), 'utf-8' ) . "..." : $root->getVar ( 'content_title' );
 				$tab ['date'] = formatTimestamp ( $root->getVar ( 'content_create' ), _MEDIUMDATESTRING );
 				$ret [] = $tab;
 			}

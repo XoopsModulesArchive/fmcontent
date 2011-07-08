@@ -24,11 +24,17 @@ function fmcontent_page_show($options) {
     $module_handler =& xoops_gethandler('module');
     $forMods =& $module_handler->getByDirname('fmcontent');
     // Initialize content handler
-    $content_handler = xoops_getmodulehandler('page', 'fmcontent');
+    $content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
+    $topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
     // Get the content menu
     $content = $content_handler->get($options[0]);
     // Add block data
     $block = $content->toArray();
+    $topic = $topic_handler->get($block['content_topic']);
+    $topic = $topic->toArray();
+    $block['topic_id'] = $topic['topic_id'];
+    $block['topic_title'] = $topic['topic_title'];
+    $block['topic_alias'] = $topic['topic_alias'];
     $block['link'] = fmcontent_Url( $forMods->getVar('dirname'), $block );
     $block['imgurl'] = XOOPS_URL . xoops_getModuleOption('img_dir', $forMods->getVar('dirname'));
     $block['width'] = xoops_getModuleOption('imgwidth', $forMods->getVar('dirname'));
