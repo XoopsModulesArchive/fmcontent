@@ -44,6 +44,13 @@ switch ($op) {
 	case 'add_topic' :
 		$obj = $topic_handler->create ();
 		$obj->setVars ( $_REQUEST );
+
+		if($obj->existAlias($_REQUEST['topic_alias'])) {
+	      fmcontent_Redirect ( "javascript:history.go(-1)", 3, _FMCONTENT_MSG_ALIASERROR );
+			xoops_cp_footer ();
+			exit ();
+		}	
+			
 		$obj->setVar ( 'topic_date_created', time () );
 		$obj->setVar ( 'topic_date_update', time () );
 		$obj->setVar ( 'topic_weight', $topic_handler->setorder($forMods) );
@@ -76,7 +83,13 @@ switch ($op) {
 			$obj = $topic_handler->get ( $topic_id );
 			$obj->setVars ( $_POST );
 			$obj->setVar ( 'topic_date_update', time () );
-			
+
+			if($obj->existAlias($_REQUEST['topic_alias'])) {
+		      fmcontent_Redirect ( "javascript:history.go(-1)", 3, _FMCONTENT_MSG_ALIASERROR );
+				xoops_cp_footer ();
+				exit ();
+			}	
+		
 			//image
 			fmcontentUtils::uploadimg ( $forMods, 'topic_img', $obj, $_REQUEST ['topic_img'] );
 			if (isset ( $_POST ['deleteimage'] ) && intval ( $_POST ['deleteimage'] ) == 1) {
@@ -105,6 +118,12 @@ switch ($op) {
 		
 		$obj = $content_handler->create ();
 		$obj->setVars ( $_REQUEST );
+		
+		if($obj->existAlias($_REQUEST['content_alias'])) {
+	      fmcontent_Redirect ( "javascript:history.go(-1)", 3, _FMCONTENT_MSG_ALIASERROR );
+			xoops_cp_footer ();
+			exit ();
+		}	
 		
 		if ($_REQUEST ['content_type'] == 'link') {
 			$obj->setVar ( 'content_title', $_REQUEST ['content_menu'] );
@@ -162,7 +181,13 @@ switch ($op) {
 			
 			$obj = $content_handler->get ( $content_id );
 			$obj->setVars ( $_REQUEST );
-			
+
+			if($obj->existAlias($_REQUEST['content_alias'])) {
+		      fmcontent_Redirect ( "javascript:history.go(-1)", 3, _FMCONTENT_MSG_ALIASERROR );
+				xoops_cp_footer ();
+				exit ();
+			}	
+		
 			if ($_REQUEST ['content_type'] == 'link') {
 				$obj->setVar ( 'content_title', $_REQUEST ['content_menu'] );
 			}

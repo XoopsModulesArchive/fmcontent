@@ -177,6 +177,38 @@ class fmcontent_topic extends XoopsObject {
 		return $form;
 	}
 
+	/**
+	 * Check if content alias already exist
+	 *
+	 * @param   String  $alias
+	 * @return  boolean
+	 **/
+	function existAlias($alias) {
+		$query = "SELECT `topic_id` FROM " . $this->table . " WHERE `topic_alias` = '" . $alias . "'";
+		$result = $this->db->query ( $query );
+		$count = $this->db->getRowsNum ( $result );
+		if ($count == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	/**
+	 * Returns an array representation of the object
+	 *
+	 * @return array
+	 **/
+	function toArray() {
+		$ret = array ();
+		$vars = $this->getVars ();
+		foreach ( array_keys ( $vars ) as $i ) {
+			$ret [$i] = $this->getVar ( $i );
+		}
+		return $ret;
+	}
+
+	
 }
 
 class fmcontentTopicHandler extends XoopsPersistableObjectHandler {
