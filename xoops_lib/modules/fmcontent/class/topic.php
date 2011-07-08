@@ -178,23 +178,6 @@ class fmcontent_topic extends XoopsObject {
 	}
 
 	/**
-	 * Check if content alias already exist
-	 *
-	 * @param   String  $alias
-	 * @return  boolean
-	 **/
-	function existAlias($alias) {
-		$query = "SELECT `topic_id` FROM " . $this->table . " WHERE `topic_alias` = '" . $alias . "'";
-		$result = $this->db->query ( $query );
-		$count = $this->db->getRowsNum ( $result );
-		if ($count == 0) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
-	/**
 	 * Returns an array representation of the object
 	 *
 	 * @return array
@@ -215,6 +198,27 @@ class fmcontentTopicHandler extends XoopsPersistableObjectHandler {
 	
 	function fmcontentTopicHandler($db) {
 		parent::XoopsPersistableObjectHandler ( $db, 'fmcontent_topic', 'fmcontent_topic', 'topic_id', 'topic_alias' );
+	}
+	
+	
+	/**
+	 * Check if content alias already exist
+	 *
+	 * @param   String  $alias
+	 * @return  boolean
+	 **/
+	function existAlias($forMods , $infos) {
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'topic_alias', $infos['topic_alias'] ) );
+		if($infos['topic_id']) {
+			$criteria->add ( new Criteria ( 'topic_id', $infos['topic_id'] ) , '!=');
+		}
+		if ($this->getCount ( $criteria ) == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	function getId($alias) {
