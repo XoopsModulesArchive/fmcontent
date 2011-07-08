@@ -45,7 +45,7 @@ switch ($op) {
 		$obj = $topic_handler->create ();
 		$obj->setVars ( $_REQUEST );
 
-		if($obj->existAlias($_REQUEST['topic_alias'])) {
+		if($topic_handler->existAlias($forMods,$_REQUEST)) {
 	      fmcontent_Redirect ( "javascript:history.go(-1)", 3, _FMCONTENT_MSG_ALIASERROR );
 			xoops_cp_footer ();
 			exit ();
@@ -84,7 +84,7 @@ switch ($op) {
 			$obj->setVars ( $_POST );
 			$obj->setVar ( 'topic_date_update', time () );
 
-			if($obj->existAlias($_REQUEST['topic_alias'])) {
+			if($topic_handler->existAlias($forMods,$_REQUEST)) {
 		      fmcontent_Redirect ( "javascript:history.go(-1)", 3, _FMCONTENT_MSG_ALIASERROR );
 				xoops_cp_footer ();
 				exit ();
@@ -119,7 +119,7 @@ switch ($op) {
 		$obj = $content_handler->create ();
 		$obj->setVars ( $_REQUEST );
 		
-		if($obj->existAlias($_REQUEST['content_alias'])) {
+		if($topic_handler->existAlias($forMods,$_REQUEST)) {
 	      fmcontent_Redirect ( "javascript:history.go(-1)", 3, _FMCONTENT_MSG_ALIASERROR );
 			xoops_cp_footer ();
 			exit ();
@@ -181,8 +181,10 @@ switch ($op) {
 			
 			$obj = $content_handler->get ( $content_id );
 			$obj->setVars ( $_REQUEST );
-
-			if($obj->existAlias($_REQUEST['content_alias'])) {
+         $obj->setVar ( 'content_groups', $groups );
+			$obj->setVar ( 'content_update', time () );
+			
+			if($content_handler->existAlias($forMods,$_REQUEST)) {
 		      fmcontent_Redirect ( "javascript:history.go(-1)", 3, _FMCONTENT_MSG_ALIASERROR );
 				xoops_cp_footer ();
 				exit ();
@@ -233,13 +235,7 @@ switch ($op) {
 				$tag_handler = xoops_getmodulehandler ( 'tag', 'tag' );
 				$tag_handler->updateByItem ( $_POST ["item_tag"], $content_id, $forMods->getVar ( "dirname" ), $catid = 0 );
 			}
-			
-			$obj->setVar ( 'content_groups', $groups );
-			$obj->setVar ( 'content_update', time () );
-			
-			if (! $content_handler->insert ( $obj )) {
-				echo 'error';
-			}
+
 		}
 		
 		// Redirect page
