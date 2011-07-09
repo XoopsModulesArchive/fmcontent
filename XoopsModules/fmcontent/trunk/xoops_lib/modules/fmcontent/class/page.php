@@ -405,7 +405,7 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'content_alias', $infos['content_alias'] ) );
 		if($infos['content_id']) {
-			$criteria->add ( new Criteria ( 'content_id', $infos['content_id'] ) , '!=');
+			$criteria->add ( new Criteria ( 'content_id', $infos['content_id'] , '!='));
 		}
 		if ($this->getCount ( $criteria ) == 0) {
 			return false;
