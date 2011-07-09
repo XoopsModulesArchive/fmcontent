@@ -212,7 +212,7 @@ class fmcontentTopicHandler extends XoopsPersistableObjectHandler {
 		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'topic_alias', $infos['topic_alias'] ) );
 		if($infos['topic_id']) {
-			$criteria->add ( new Criteria ( 'topic_id', $infos['topic_id'] ) , '!=');
+			$criteria->add ( new Criteria ( 'topic_id', $infos['topic_id'] , '!=') );
 		}
 		if ($this->getCount ( $criteria ) == 0) {
 			return false;
