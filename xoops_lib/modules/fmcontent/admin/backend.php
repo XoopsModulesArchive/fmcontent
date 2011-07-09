@@ -119,7 +119,7 @@ switch ($op) {
 		$obj = $content_handler->create ();
 		$obj->setVars ( $_REQUEST );
 		
-		if($topic_handler->existAlias($forMods,$_REQUEST)) {
+		if($content_handler->existAlias($forMods,$_REQUEST)) {
 	      fmcontent_Redirect ( "javascript:history.go(-1)", 3, _FMCONTENT_MSG_ALIASERROR );
 			xoops_cp_footer ();
 			exit ();
