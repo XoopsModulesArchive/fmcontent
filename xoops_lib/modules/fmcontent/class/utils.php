@@ -115,6 +115,8 @@ class fmcontentUtils {
 				}
 			} elseif ($modname) {
 				$Path = $xoopsModule->name () . $prefix;
+			} else {
+				$Path = '';
 			}
 		} else {
 			if (array_key_exists ( $key, $topic_array )) {
