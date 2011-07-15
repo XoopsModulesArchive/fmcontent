@@ -85,7 +85,7 @@ class fmcontentUtils {
 		$mytree = new XoopsObjectTree ( $topics_arr, 'topic_id', 'topic_pid' );
 		
 		if (xoops_getModuleOption ( 'bc_tohome', $forMods->getVar ( 'dirname' ) )) {
-			$breadcrumb = '<a title="' . _YOURHOME . '" href="' . XOOPS_URL . '">' . _YOURHOME . '</a>' . $prefix;
+			$breadcrumb = '<a title="' ._FMCONTENT_HOME . '" href="' . XOOPS_URL . '">' . _FMCONTENT_HOME . '</a>' . $prefix;
 		}
 		$breadcrumb = $breadcrumb . self::PathTreeUrl ( $mytree, $topic_id, $topics_arr, $title, $prefix, true, 'ASC', $lasturl, xoops_getModuleOption ( 'bc_modname', $forMods->getVar ( 'dirname' ) ) , $forMods);
 		if ($lasturl) {
