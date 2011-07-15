@@ -19,6 +19,7 @@
     <th><{$smarty.const._FMCONTENT_TOPIC_SHOWTYPE}></th>
     <th><{$smarty.const._FMCONTENT_TOPIC_ONLINE}></th>
     <th><{$smarty.const._FMCONTENT_TOPIC_MENU}></th>
+    <th><{$smarty.const._FMCONTENT_TOPIC_SHOW}></th>
     <th><{$smarty.const._FMCONTENT_TOPIC_ACTION}></th>
     </thead>
     <tbody class="xo-topic">
@@ -41,6 +42,9 @@
         </td>
         <td class="txtcenter width5 bold">
             <img class="cursorpointer" id="topic_asmenu<{$topic.topic_id}>" onclick="fmcontent_setAsmenu( { op: 'topic_asmenu', topic_id: <{$topic.topic_id}> }, 'topic_asmenu<{$topic.topic_id}>', 'backend.php' )" src="<{if $topic.topic_asmenu}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" class="tooltip" alt=""/>
+        </td>
+        <td class="txtcenter width5 bold">
+            <img class="cursorpointer" id="topic_show<{$topic.topic_id}>" onclick="fmcontent_setShow( { op: 'topic_show', topic_id: <{$topic.topic_id}> }, 'topic_show<{$topic.topic_id}>', 'backend.php' )" src="<{if $topic.topic_show}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" class="tooltip" alt=""/>
         </td>
         <td class="txtcenter width10 xo-actions">
             <img class="tooltip" onclick="display_dialog(<{$topic.topic_id}>, true, true, 'slide', 'slide', <{if $topic.topic_img}>300, 700<{else}>280, 520<{/if}>);" src="<{xoAdminIcons display.png}>" alt="<{$smarty.const._PREVIEW}>" title="<{$smarty.const._PREVIEW}>" />

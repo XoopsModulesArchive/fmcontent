@@ -40,6 +40,7 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     define('_FMCONTENT_TOPIC_COLUMNS', 'Columns');
     define('_FMCONTENT_TOPIC_ONLINE', 'Active');
     define('_FMCONTENT_TOPIC_MENU', 'Menu');
+	 define('_FMCONTENT_TOPIC_SHOW', 'Show');
     define('_FMCONTENT_TOPIC_ACTION', 'Actions');
     define('_FMCONTENT_TOPIC_PID', 'Parent');
     define('_FMCONTENT_TOPIC_COLOR', 'Topic color');
@@ -159,7 +160,7 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     '<ul>
 	<li>Reorder, view, edit or delete any topic</li>
 	<li>Display topic contents as a menu in block</li>
-	<!--<li>active, use manu topics with ajax</li>-->
+	<li>Show/hide topics in index and parent pages</li>
 	<li>Click on a topic title to see all contents for that topic</li>
 	</ul>');
     define('_FMCONTENT_CONTENT_TIPS',

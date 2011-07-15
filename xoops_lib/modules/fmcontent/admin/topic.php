@@ -106,7 +106,7 @@ switch ($op)
             $topic_start = 0;
         }
 
-        $topics = $topic_handler->getTopics($forMods, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu = null, $topic_online = null);
+        $topics = $topic_handler->getTopics($forMods, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu = null, $topic_online = null , $topic_parent = null);
         $topic_numrows = $topic_handler->getTopicCount($forMods);
 
         if ($topic_numrows > $topic_limit) {
