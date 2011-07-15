@@ -392,7 +392,7 @@ $modversion['config'][] = array(
     'formtype' => 'select',
     'valuetype' => 'text',
     'options' => array(_FMCONTENT_SHOWSORT_1 => 'content_id', _FMCONTENT_SHOWSORT_2 => 'content_create', _FMCONTENT_SHOWSORT_3 => 'content_update', _FMCONTENT_SHOWSORT_4 => 'content_title', _FMCONTENT_SHOWSORT_5 => 'content_order', _FMCONTENT_SHOWSORT_6 => 'RAND()'),
-    'default' => 1);
+    'default' => 'content_id');
 
 $modversion['config'][] = array(
     'name' => 'showorder',
@@ -401,14 +401,14 @@ $modversion['config'][] = array(
     'formtype' => 'select',
     'valuetype' => 'text',
     'options' => array(_FMCONTENT_DESC => 'DESC', _FMCONTENT_ASC => 'ASC'),
-    'default' => 1);
+    'default' => 'DESC');
 
 $modversion['config'][] = array(
     'name' => 'show_social_book',
     'title' => '_FMCONTENT_SOCIAL',
     'description' => '_FMCONTENT_SOCIAL_DESC',
     'formtype' => 'select',
-    'valuetype' => 'text',
+    'valuetype' => 'int',
     'options' => array(_FMCONTENT_NONE => 0, _FMCONTENT_SOCIALNETWORM => 1, _FMCONTENT_BOOKMARK => 2, _FMCONTENT_BOTH => 3),
     'default' => 0);
 
