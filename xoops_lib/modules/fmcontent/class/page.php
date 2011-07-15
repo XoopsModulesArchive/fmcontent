@@ -243,7 +243,7 @@ class fmcontent_content extends XoopsObject {
 		// Topic
 		$topic_Handler = xoops_getModuleHandler ( "topic", "fmcontent" );
 		$perm_handler = fmcontentPermission::getHandler ();
-		$topics = fmcontent_MygetItemIds ( 'fmcontent_submit', $forMods->getVar ( 'dirname' ) );
+		$topics = fmcontentPermission::getItemIds ( 'fmcontent_submit', $forMods );
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
 		global $xoopsUser;
@@ -463,7 +463,7 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 				$criteria->add ( new Criteria ( 'content_topic', '0', '>' ) );
 			}
 			if (! $content_infos ['admin_side']) {
-				$access_topic = fmcontent_MygetItemIds ( 'fmcontent_access', $forMods->getVar ( 'dirname' ) );
+				$access_topic = fmcontentPermission::getItemIds ( 'fmcontent_access', $forMods);
 				$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
 				$criteria->add ( new Criteria ( 'content_type', 'content' ) );
 			}
@@ -558,7 +558,7 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 		if (isset ( $criteria )) {
 			$criteria->add ( new Criteria ( 'content_type', 'content' ) );
 			$criteria->add ( new Criteria ( 'content_status', '1' ) );
-			$access_topic = fmcontent_MygetItemIds ( 'fmcontent_access', $forMods->getVar ( 'dirname' ) );
+			$access_topic = fmcontentPermission::getItemIds ( 'fmcontent_access', $forMods);
 			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
 			if (! (count ( $options ) == 1 && $options [0] == 0)) {
 				$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $options ) . ')', 'IN' ) );
