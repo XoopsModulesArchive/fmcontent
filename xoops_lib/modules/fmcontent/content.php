@@ -30,7 +30,7 @@ if(isset($_REQUEST['id'])) {
 } else {
 	$content_alias = fmcontent_CleanVars ( $_REQUEST, 'page', 0, 'string' );
 	if($content_alias) {
-		$content_id = $content_handler->getId($content_alias);
+		$_GET['id'] = $content_id = $content_handler->getId($content_alias);
 	}
 }
 
