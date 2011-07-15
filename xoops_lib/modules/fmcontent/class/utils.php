@@ -222,7 +222,16 @@ class fmcontentUtils {
 			
 			// Show selected static content
 			case 'type4' :
-					$default_info = array('id'=> 0 , 'title' => xoops_getModuleOption ( 'static_name', $forMods->getVar ( 'dirname' )));
+				   if($content_infos['id'] && $content_infos['title'] && $content_infos['alias']) {
+				   	$id = $content_infos['id'];
+				   	$title = $content_infos['title'];
+				   	$alias = $content_infos['alias'];
+				   } else {
+				   	$id = 0;
+				   	$title = xoops_getModuleOption ( 'static_name', $forMods->getVar ( 'dirname' ));
+				   	$alias = fmcontent_Filter(xoops_getModuleOption('static_name', $forMods->getVar ( 'dirname' )));
+				   }		
+					$default_info = array('id'=> $id , 'title' => $title , 'alias' => $alias);
 					$contents ['content'] = $content_handler->contentDefault($forMods, $default_info);
 				break;
 		}
