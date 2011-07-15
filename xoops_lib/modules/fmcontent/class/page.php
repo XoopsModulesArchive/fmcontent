@@ -454,32 +454,31 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 	
 	function getContentList($forMods, $content_infos) {
 		$ret = array ();
-		if (! isset ( $criteria )) {
-			$criteria = new CriteriaCompo ();
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_status', $content_infos ['content_status'] ) );
+		if ($content_infos ['content_static']) {
+			$criteria->add ( new Criteria ( 'content_topic', '0', '>' ) );
 		}
-		if (isset ( $criteria )) {
-			$criteria->add ( new Criteria ( 'content_status', $content_infos ['content_status'] ) );
-			if ($content_infos ['content_static']) {
-				$criteria->add ( new Criteria ( 'content_topic', '0', '>' ) );
-			}
-			if (! $content_infos ['admin_side']) {
-				$access_topic = fmcontentPermission::getItemIds ( 'fmcontent_access', $forMods);
-				$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
-				$criteria->add ( new Criteria ( 'content_type', 'content' ) );
-			}
-			$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
-			$criteria->add ( new Criteria ( 'content_topic', $content_infos ['content_topic'] ) );
-         if(isset($content_infos ['content_subtopic'])) {
-         	foreach ($content_infos ['content_subtopic'] as $subtopic){
-					$criteria->add ( new Criteria ( 'content_topic', $subtopic ) ,'OR');
-				}
-			}
-			$criteria->add ( new Criteria ( 'content_uid', $content_infos ['content_user'] ) );
-			$criteria->setSort ( $content_infos ['content_sort'] );
-			$criteria->setOrder ( $content_infos ['content_order'] );
-			$criteria->setLimit ( $content_infos ['content_limit'] );
-			$criteria->setStart ( $content_infos ['content_start'] );
+		if (! $content_infos ['admin_side']) {
+			$access_topic = fmcontentPermission::getItemIds ( 'fmcontent_access', $forMods);
+			$topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
+			$topic_show = $topic_handler->allVisible($forMods,$content_infos ['topics']);
+			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
+			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $topic_show ) . ')', 'IN' ) );
+			$criteria->add ( new Criteria ( 'content_type', 'content' ) );
 		}
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'content_topic', $content_infos ['content_topic'] ) );
+      if(isset($content_infos ['content_subtopic'])) {
+      	foreach ($content_infos ['content_subtopic'] as $subtopic){
+				$criteria->add ( new Criteria ( 'content_topic', $subtopic ) ,'OR');
+			}
+		}
+		$criteria->add ( new Criteria ( 'content_uid', $content_infos ['content_user'] ) );
+		$criteria->setSort ( $content_infos ['content_sort'] );
+		$criteria->setOrder ( $content_infos ['content_order'] );
+		$criteria->setLimit ( $content_infos ['content_limit'] );
+		$criteria->setStart ( $content_infos ['content_start'] );
 		
 		$obj = $this->getObjects ( $criteria, false );
 		if ($obj) {
@@ -512,18 +511,14 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 	
 	function getMenuList($forMods, $content_infos) {
 		$ret = array ();
-		if (! isset ( $criteria )) {
-			$criteria = new CriteriaCompo ();
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_display', '1' ) );
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		if ($content_infos ['menu_id'] != '-1') {
+			$criteria->add ( new Criteria ( 'content_topic', $content_infos ['menu_id'] ) );
 		}
-		if (isset ( $criteria )) {
-			$criteria->add ( new Criteria ( 'content_display', '1' ) );
-			$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
-			if ($content_infos ['menu_id'] != '-1') {
-				$criteria->add ( new Criteria ( 'content_topic', $content_infos ['menu_id'] ) );
-			}
-			$criteria->setSort ( $content_infos ['menu_sort'] );
-			$criteria->setOrder ( $content_infos ['menu_order'] );
-		}
+		$criteria->setSort ( $content_infos ['menu_sort'] );
+		$criteria->setOrder ( $content_infos ['menu_order'] );
 		
 		$obj = $this->getObjects ( $criteria, false );
 		if ($obj) {
@@ -551,23 +546,18 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 	
 	function getContentBlockList($forMods, $content_infos ,$options) {
 		$ret = array ();
-
-		if (! isset ( $criteria )) {
-			$criteria = new CriteriaCompo ();
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_type', 'content' ) );
+		$criteria->add ( new Criteria ( 'content_status', '1' ) );
+		$access_topic = fmcontentPermission::getItemIds ( 'fmcontent_access', $forMods);
+		$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
+		if (! (count ( $options ) == 1 && $options [0] == 0)) {
+			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $options ) . ')', 'IN' ) );
 		}
-		if (isset ( $criteria )) {
-			$criteria->add ( new Criteria ( 'content_type', 'content' ) );
-			$criteria->add ( new Criteria ( 'content_status', '1' ) );
-			$access_topic = fmcontentPermission::getItemIds ( 'fmcontent_access', $forMods);
-			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
-			if (! (count ( $options ) == 1 && $options [0] == 0)) {
-				$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $options ) . ')', 'IN' ) );
-			}
-			$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
-			$criteria->setSort ( $content_infos ['content_sort'] );
-			$criteria->setOrder ( $content_infos ['content_order'] );
-			$criteria->setLimit ( $content_infos ['content_limit'] );
-		}
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->setSort ( $content_infos ['content_sort'] );
+		$criteria->setOrder ( $content_infos ['content_order'] );
+		$criteria->setLimit ( $content_infos ['content_limit'] );
 		
 		$obj = $this->getObjects ( $criteria, false );
 		if ($obj) {
