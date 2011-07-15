@@ -133,6 +133,7 @@ if (isset ( $content_topic )) {
 	$columns = xoops_getModuleOption ( 'columns', $forMods->getVar ( 'dirname' ) );
 	$content_perpage = xoops_getModuleOption ( 'perpage', $forMods->getVar ( 'dirname' ) );
 	$type = xoops_getModuleOption ( 'homepage', $forMods->getVar ( 'dirname' ) );
+	$content_subtopic = null;
 }
 
 // get module configs

@@ -487,11 +487,12 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 				$tab = array ();
 				$tab = $root->toArray ();
 				$tab ['owner'] = XoopsUser::getUnameFromId ( $root->getVar ( 'content_uid' ) );
-
-					foreach ( array_keys ( $content_infos ['topics'] ) as $i ) {
-						$list [$i] ['topic_title'] = $content_infos ['topics'] [$i]->getVar ( "topic_title" );
-						$list [$i] ['topic_id'] = $content_infos ['topics'] [$i]->getVar ( "topic_id" );
-						$list [$i] ['topic_alias'] = $content_infos ['topics'] [$i]->getVar ( "topic_alias" );
+               if(is_array($content_infos ['topics'])) {
+						foreach ( array_keys ( $content_infos ['topics'] ) as $i ) {
+							$list [$i] ['topic_title'] = $content_infos ['topics'] [$i]->getVar ( "topic_title" );
+							$list [$i] ['topic_id'] = $content_infos ['topics'] [$i]->getVar ( "topic_id" );
+							$list [$i] ['topic_alias'] = $content_infos ['topics'] [$i]->getVar ( "topic_alias" );
+						}
 					}
 					if ($root->getVar ( 'content_topic' )) {
 						$tab ['topic'] = $list [$root->getVar ( 'content_topic' )] ['topic_title'];
