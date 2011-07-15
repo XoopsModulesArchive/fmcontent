@@ -232,7 +232,7 @@ class fmcontentTopicHandler extends XoopsPersistableObjectHandler {
 		return $obj_array [0] [$this->keyName];
 	}
 	
-	function getTopics($forMods, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu, $topic_online) {
+	function getTopics($forMods, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu, $topic_online , $topic_parent) {
 		$ret = array ();
 		if (! isset ( $criteria )) {
 			$criteria = new CriteriaCompo ();
@@ -242,6 +242,9 @@ class fmcontentTopicHandler extends XoopsPersistableObjectHandler {
 			$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
 			$criteria->add ( new Criteria ( 'topic_asmenu', $topic_menu ) );
 			$criteria->add ( new Criteria ( 'topic_online', $topic_online ) );
+			if(isset($topic_parent)) {
+				$criteria->add ( new Criteria ( 'topic_pid', $topic_parent ) );
+			}	
 			$criteria->setSort ( $topic_sort );
 			$criteria->setOrder ( $topic_order );
 			$criteria->setLimit ( $topic_limit );

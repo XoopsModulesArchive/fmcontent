@@ -289,7 +289,6 @@ if (!defined('_MI_FMCONTENT_NAME')) {
     define('_FMCONTENT_SQL_NOT_FOUND', 'SQL Database not found');
     define('_FMCONTENT_SQL_NOT_VALID', 'SQL Database not valid');
     define('_FMCONTENT_INSERT_DATA', 'Inserting data');
-    
 // homepage   
     define('_FMCONTENT_HOMEPAGE', 'Homepage seting');
     define('_FMCONTENT_HOMEPAGE_DESC', 'Seting content show type in module index page');
@@ -297,5 +296,8 @@ if (!defined('_MI_FMCONTENT_NAME')) {
     define('_FMCONTENT_HOMEPAGE_2', 'List all topics');
     define('_FMCONTENT_HOMEPAGE_3', 'List all static pages');
     define('_FMCONTENT_HOMEPAGE_4', 'Show selected static content');
+// topic name
+	 define('_FMCONTENT_TOPICNAME', 'Topic name');
+	 define('_FMCONTENT_TOPICNAME_DESC', 'Set topic name for URL');  
 }
 ?>

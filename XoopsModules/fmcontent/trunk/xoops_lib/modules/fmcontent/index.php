@@ -158,7 +158,11 @@ $content_infos = array ('topics' => $topics, 'content_limit' => $content_limit, 
 
 // Get Information for Show in indexpage or topic pages
 $contents = fmcontentUtils::homepage ( $forMods, $content_infos, $type );
-
+if(isset($contents ['pagenav'])) {
+	$pagenav = $contents ['pagenav'];
+} else {
+	$pagenav = null;
+}		
 if (isset ( $content_topic ) && $content_topic > 0 && $view_topic->getVar ( 'topic_showtype' ) != '0') { // The option for select setting from topic or module options must be added
 	if ($view_topic->getVar ( 'topic_showauthor' )) {
 		$info ['author'] = '1';
@@ -222,7 +226,7 @@ $xoopsTpl->assign ( 'content_topic', $content_topic );
 $xoopsTpl->assign ( 'content_limit', $content_limit );
 $xoopsTpl->assign ( 'showtype', $showtype );
 $xoopsTpl->assign ( 'columns', $columns );
-$xoopsTpl->assign ( 'content_pagenav', $contents ['pagenav'] );
+$xoopsTpl->assign ( 'content_pagenav', $pagenav );
 $xoopsTpl->assign ( 'info', $info );
 $xoopsTpl->assign ( 'contents', $contents ['content'] );
 $xoopsTpl->assign ( 'modname', $forMods->getVar ( 'name' ) );
