@@ -196,13 +196,17 @@ class fmcontentUtils {
 			case 'type2' :
 			     $topic_order = xoops_getModuleOption('admin_showorder_topic', $forMods->getVar('dirname'));
               $topic_sort = xoops_getModuleOption('admin_showsort_topic', $forMods->getVar('dirname'));
-		        $contents ['content'] = $topic_handler->getTopics($forMods, null, 0, $topic_order, $topic_sort, null, 1);
+              $topic_parent = $content_infos ['content_topic'];
+		        $contents ['content'] = $topic_handler->getTopics($forMods, null, 0, $topic_order, $topic_sort, null, 1 , $topic_parent);
 			     $contents ['pagenav'] = null;
 				break;
 			
 			// List all static pages
 			case 'type3' :
-			   $content_infos ['content_topic'] = 0;
+				if(!$content_infos ['content_topic']) {
+				   $content_infos ['content_topic'] = 0;
+				}
+				$content_infos ['content_subtopic'] = null;
             $content_infos ['content_static'] = 0;
             $content_infos ['admin_side'] = 1;
             
