@@ -312,7 +312,20 @@ switch ($op) {
 			echo $obj->getHtmlErrors ();
 		}
 		break;
-	
+
+	case 'topic_show' :
+		$topic_id = fmcontent_CleanVars ( $_REQUEST, 'topic_id', 0, 'int' );
+		if ($topic_id > 0) {
+			$obj = & $topic_handler->get ( $topic_id );
+			$old = $obj->getVar ( 'topic_show' );
+			$obj->setVar ( 'topic_show', ! $old );
+			if ($topic_handler->insert ( $obj )) {
+				exit ();
+			}
+			echo $obj->getHtmlErrors ();
+		}
+		break;
+		
 	case 'delete' :
 		$content_id = fmcontent_CleanVars ( $_REQUEST, 'content_id', 0, 'int' );
 		if ($content_id > 0) {

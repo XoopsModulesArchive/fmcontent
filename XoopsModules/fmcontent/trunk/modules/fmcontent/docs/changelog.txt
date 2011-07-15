@@ -14,6 +14,7 @@
 - Add Set and reset Next and Previous function automatically (Voltan)
 - Add change topic order whit AJAX (Voltan)
 - Add new options for make URL (Voltan)
+- Add Show/hide topic in index page (Voltan)
 
 Language changes :
 + Add
@@ -41,8 +42,10 @@ admin.php
 + _FMCONTENT_ALIAS_TOPIC
 + _FMCONTENT_TOPIC_NUM
 + _FMCONTENT_MSG_ALIASERROR
++ _FMCONTENT_TOPIC_SHOW
 
 * _FMCONTENT_TOPIC_ONLINE
+* _FMCONTENT_TOPIC_TIPS
 
 modinfo.php
 + _FMCONTENT_HOMEPAGE 

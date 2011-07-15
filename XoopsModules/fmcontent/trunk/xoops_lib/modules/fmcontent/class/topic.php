@@ -54,6 +54,7 @@ class fmcontent_topic extends XoopsObject {
 		$this->initVar ( "topic_columns", XOBJ_DTYPE_INT, 0 );
 		$this->initVar ( "topic_alias", XOBJ_DTYPE_TXTBOX, '' );
 		$this->initVar ( "topic_homepage", XOBJ_DTYPE_INT, 1 );
+		$this->initVar ( "topic_show", XOBJ_DTYPE_INT, 1 );
 		
 		// Pour autoriser le html
 		$this->initVar ( "dohtml", XOBJ_DTYPE_INT, 1, false );
@@ -109,6 +110,7 @@ class fmcontent_topic extends XoopsObject {
 		
 		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_TOPIC_ONLINE, 'topic_online', $this->getVar ( 'topic_online', 'e' ) ) );
 		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_TOPIC_MENU, 'topic_asmenu', $this->getVar ( 'topic_asmenu', 'e' ) ) );
+		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_TOPIC_SHOW, 'topic_show', $this->getVar ( 'topic_show', 'e' ) ) );
 		$form->addElement ( new XoopsFormLabel ( _FMCONTENT_TOPIC_OPTIONS, _FMCONTENT_TOPIC_OPTIONS_DESC, '' ) );
 		$homepage = new XoopsFormSelect ( _FMCONTENT_TOPIC_HOMEPAGE, 'topic_homepage', $this->getVar ( "topic_homepage" ) );
 		$homepage->addOption ( '1', _FMCONTENT_TOPIC_HOMEPAGE_1 );

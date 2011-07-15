@@ -118,6 +118,11 @@ function xoops_module_update_fmcontent(&$module, $version) {
 	 if (!fmcontentUtils::FieldExists('topic_homepage',$db->prefix('fmcontent_topic'))) {
 		 fmcontentUtils::AddField("`topic_homepage` TINYINT( 4 ) NOT NULL ", $db->prefix('fmcontent_topic'));
 	 }
+	 
+	 // Add topic_show table in DB
+	 if (!fmcontentUtils::FieldExists('topic_show',$db->prefix('fmcontent_topic'))) {
+		 fmcontentUtils::AddField("`topic_show` TINYINT( 1 ) NOT NULL default '1' ", $db->prefix('fmcontent_topic'));
+	 }
 
 }
 
