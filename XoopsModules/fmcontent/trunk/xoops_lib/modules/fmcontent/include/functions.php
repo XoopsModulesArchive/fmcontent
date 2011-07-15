@@ -285,16 +285,4 @@ function order_array_num($array, $key, $order = "ASC") {
     return $tmp2;
 }
 
-
-// form tdm modules    
-function fmcontent_MygetItemIds($permtype, $dirname) {
-    global $xoopsUser;
-    $module_handler =& xoops_gethandler('module');
-    $tdmModule =& $module_handler->getByDirname($dirname);
-    $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $gperm_handler =& xoops_gethandler('groupperm');
-    $categories = $gperm_handler->getItemIds($permtype, $groups, $tdmModule->getVar('mid'));
-    return $categories;
-}
-
 ?>
