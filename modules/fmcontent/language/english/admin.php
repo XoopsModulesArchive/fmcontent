@@ -38,7 +38,7 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     define('_FMCONTENT_TOPIC_SHOWTYPE_DESC', 'Contents display template for this topic<br />"Module based" will use display options defined in module preferences.');
     define('_FMCONTENT_TOPIC_PERPAGE', 'Per page');
     define('_FMCONTENT_TOPIC_COLUMNS', 'Columns');
-    define('_FMCONTENT_TOPIC_ONLINE', 'Online');
+    define('_FMCONTENT_TOPIC_ONLINE', 'Active');
     define('_FMCONTENT_TOPIC_MENU', 'Menu');
     define('_FMCONTENT_TOPIC_ACTION', 'Actions');
     define('_FMCONTENT_TOPIC_PID', 'Parent');

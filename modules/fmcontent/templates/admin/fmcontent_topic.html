@@ -17,8 +17,8 @@
     <th><{$smarty.const._FMCONTENT_TOPIC_NUM}></th>
     <th><{$smarty.const._FMCONTENT_TOPIC_NAME}></th>
     <th><{$smarty.const._FMCONTENT_TOPIC_SHOWTYPE}></th>
-    <th><{$smarty.const._FMCONTENT_TOPIC_MENU}></th>
     <th><{$smarty.const._FMCONTENT_TOPIC_ONLINE}></th>
+    <th><{$smarty.const._FMCONTENT_TOPIC_MENU}></th>
     <th><{$smarty.const._FMCONTENT_TOPIC_ACTION}></th>
     </thead>
     <tbody class="xo-topic">
@@ -37,10 +37,10 @@
             <{if $topic.topic_showtype == 4}><{$smarty.const._FMCONTENT_SHOWTYPE_4}><{/if}>
         </td>
         <td class="txtcenter width5 bold">
-            <img class="cursorpointer" id="topic_asmenu<{$topic.topic_id}>" onclick="fmcontent_setAsmenu( { op: 'topic_asmenu', topic_id: <{$topic.topic_id}> }, 'topic_asmenu<{$topic.topic_id}>', 'backend.php' )" src="<{if $topic.topic_asmenu}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" class="tooltip" alt=""/>
+            <img class="cursorpointer" id="topic_online<{$topic.topic_id}>" onclick="fmcontent_setOnline( { op: 'topic_online', topic_id: <{$topic.topic_id}> }, 'topic_online<{$topic.topic_id}>', 'backend.php' )" src="<{if $topic.topic_online}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" class="tooltip" alt=""/>
         </td>
         <td class="txtcenter width5 bold">
-            <img class="cursorpointer" id="topic_online<{$topic.topic_id}>" onclick="fmcontent_setOnline( { op: 'topic_online', topic_id: <{$topic.topic_id}> }, 'topic_online<{$topic.topic_id}>', 'backend.php' )" src="<{if $topic.topic_online}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" class="tooltip" alt=""/>
+            <img class="cursorpointer" id="topic_asmenu<{$topic.topic_id}>" onclick="fmcontent_setAsmenu( { op: 'topic_asmenu', topic_id: <{$topic.topic_id}> }, 'topic_asmenu<{$topic.topic_id}>', 'backend.php' )" src="<{if $topic.topic_asmenu}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" class="tooltip" alt=""/>
         </td>
         <td class="txtcenter width10 xo-actions">
             <img class="tooltip" onclick="display_dialog(<{$topic.topic_id}>, true, true, 'slide', 'slide', <{if $topic.topic_img}>300, 700<{else}>280, 520<{/if}>);" src="<{xoAdminIcons display.png}>" alt="<{$smarty.const._PREVIEW}>" title="<{$smarty.const._PREVIEW}>" />
