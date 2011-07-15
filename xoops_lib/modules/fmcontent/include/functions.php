@@ -166,7 +166,7 @@ function fmcontent_TopicUrl($module, $array) {
 	            $module_name = xoops_getModuleOption('rewrite_name', $module) . '/';
             }	
             $page = $array['topic_alias'];
-            $type = 'topic/';
+            $type = xoops_getModuleOption('topic_name', $module) . '/';
             $id = $id . '/';
             return XOOPS_URL . $rewrite_base . $module_name . $type . $id . $page . $rewrite_ext;
             break;
@@ -179,7 +179,7 @@ function fmcontent_TopicUrl($module, $array) {
 	            $module_name = xoops_getModuleOption('rewrite_name', $module) . '/';
             }	
             $page = $array['topic_alias'];
-            $type = 'topic/';
+            $type = xoops_getModuleOption('topic_name', $module) . '/';
             return XOOPS_URL . $rewrite_base . $module_name . $type . $page . $rewrite_ext;
             break;   
     }

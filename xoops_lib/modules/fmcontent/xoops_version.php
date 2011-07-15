@@ -236,6 +236,14 @@ $modversion['config'][] = array(
     'formtype' => 'textbox',
     'valuetype' => 'text',
     'default' => 'static');
+    
+$modversion['config'][] = array(
+    'name' => 'topic_name',
+    'title' => '_FMCONTENT_TOPICNAME',
+    'description' => '_FMCONTENT_TOPICNAME_DESC',
+    'formtype' => 'textbox',
+    'valuetype' => 'text',
+    'default' => 'topic');
 
 $modversion['config'][] = array(
     'name' => 'regular_expression',
