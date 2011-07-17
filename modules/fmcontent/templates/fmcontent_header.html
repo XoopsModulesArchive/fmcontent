@@ -40,22 +40,18 @@
 	</script>
 	<{/if}>
 	
-	<{if $breadcrumb_show || $rss}>
+	<{if $breadcrumb || $rss}>
 	<div class="fmcontent_top">
 		<{if $breadcrumb}>
 		<div class="breadcrumb floatleft">
 			<{$breadcrumb}>
 		</div>
 		<{/if}>
-		
 		<{if $rss}>
 		<div class="rss floatright">
 	    	<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/rss.php"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/rss.png" alt="" /></a>
 	   </div>
 		<{/if}>
-		
-		<{if $breadcrumb_show || $rss}>
 		<div class="endline"></div>
-		<{/if}>
 	</div>
 	<{/if}>

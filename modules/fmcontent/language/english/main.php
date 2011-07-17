@@ -31,6 +31,7 @@ if (!defined('_FMCONTENT_NEXT')) {
     define("_FMCONTENT_AUTHOR_ALL_DESC", "View all contributions by ");
     define('_FMCONTENT_COM', 'Comment');
     define('_FMCONTENT_RELATED', 'Related contents');
+    define("_FMCONTENT_HOME", "Home"); 
 // Link
     define('_FMCONTENT_NEXT', 'Next page');
     define('_FMCONTENT_PREV', 'Previous page');
@@ -48,6 +49,7 @@ if (!defined('_FMCONTENT_NEXT')) {
 // Error message
     define('_FMCONTENT_ERROR_DEFAULT', 'Module Error: You have not defined default page !');
     define('_FMCONTENT_ERROR_NOPAGE', 'You have not created any page yet');
+    define('_FMCONTENT_ERROR_STATUS', 'This page is diactive');
     define('_FMCONTENT_TOPIC_ERROR', 'Selected topic does not exist');
 // Light box
     define('_FMCONTENT_LIGHTBOX_IMAGE', 'Image');

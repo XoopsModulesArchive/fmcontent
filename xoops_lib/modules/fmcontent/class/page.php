@@ -590,6 +590,14 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'content_topic', $content_infos ['content_topic'] ) );
+		if (! $content_infos ['admin_side']) {
+			$access_topic = fmcontentPermission::getItemIds ( 'fmcontent_access', $forMods);
+			$topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
+			$topic_show = $topic_handler->allVisible($forMods,$content_infos ['topics']);
+			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
+			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $topic_show ) . ')', 'IN' ) );
+			$criteria->add ( new Criteria ( 'content_type', 'content' ) );
+		}
 		if(isset($content_infos ['content_subtopic'])) {
          foreach ($content_infos ['content_subtopic'] as $subtopic){
 				$criteria->add ( new Criteria ( 'content_topic', $subtopic ) ,'OR');

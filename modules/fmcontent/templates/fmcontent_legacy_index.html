@@ -143,10 +143,10 @@
 	          <!--<th><{$smarty.const._FMCONTENT_ID}></th>-->
 	          <th><{$smarty.const._FMCONTENT_TITLE}></th>
 	          <{if !$content_topic}><th><{$smarty.const._FMCONTENT_TOPIC}></th><{/if}>
-	          <th><{$smarty.const._FMCONTENT_AUTHOR}></th>
-	          <th><{$smarty.const._FMCONTENT_DATE}></th>
-	          <th><{$smarty.const._FMCONTENT_HITS}></th>
-	          <th><{$smarty.const._FMCONTENT_COMS}></th>
+	          <{if $info.author}><th><{$smarty.const._FMCONTENT_AUTHOR}></th><{/if}>
+	          <{if $info.date}><th><{$smarty.const._FMCONTENT_DATE}></th><{/if}>
+	          <{if $info.hits}><th><{$smarty.const._FMCONTENT_HITS}></th><{/if}>
+	          <{if $info.coms}><th><{$smarty.const._FMCONTENT_COMS}></th><{/if}>
 	        </tr>
 	      </thead>
 	      <tbody>
@@ -155,10 +155,10 @@
 	          <!--<td><{$content.content_id}></td>-->
 	          <td><a href="<{$content.url}>" title="<{$content.content_title}>"><{$content.content_title}></a></td>
 	          <{if !$content_topic}><td><a href="<{$content.topicurl}>" title="<{$content.topic}>"><{$content.topic}></a></td><{/if}>
-	          <td><a title="<{$content.owner}>" href="<{$xoops_url}>/user.php?id=<{$content.content_uid}>"><{$content.owner}></a></td>
-	          <td><{$content.content_create}></td>
-	          <td><{$content.content_hits}></td>
-	          <td><{$content.content_comments}></td>
+	          <{if $info.author}><td><a title="<{$content.owner}>" href="<{$xoops_url}>/user.php?id=<{$content.content_uid}>"><{$content.owner}></a></td><{/if}>
+	          <{if $info.date}><td><{$content.content_create}></td><{/if}>
+	          <{if $info.hits}><td><{$content.content_hits}></td><{/if}>
+	          <{if $info.coms}><td><{$content.content_comments}></td><{/if}>
 	        </tr>
 	        <{/foreach}>
 	      </tbody>
