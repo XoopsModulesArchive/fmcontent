@@ -138,10 +138,10 @@
           <!--<th><{$smarty.const._FMCONTENT_ID}></th>-->
           <th class="ui-widget-header"><{$smarty.const._FMCONTENT_TITLE}></th>
           <{if !$content_topic}><th class="ui-widget-header"><{$smarty.const._FMCONTENT_TOPIC}></th><{/if}>
-          <th class="ui-widget-header"><{$smarty.const._FMCONTENT_AUTHOR}></th>
-          <th class="ui-widget-header"><{$smarty.const._FMCONTENT_DATE}></th>
-          <th class="ui-widget-header"><{$smarty.const._FMCONTENT_HITS}></th>
-          <th class="ui-widget-header"><{$smarty.const._FMCONTENT_COMS}></th>
+          <{if $info.author}><th class="ui-widget-header"><{$smarty.const._FMCONTENT_AUTHOR}></th><{/if}>
+          <{if $info.date}><th class="ui-widget-header"><{$smarty.const._FMCONTENT_DATE}></th><{/if}>
+          <{if $info.hits}><th class="ui-widget-header"><{$smarty.const._FMCONTENT_HITS}></th><{/if}>
+          <{if $info.coms}><th class="ui-widget-header"><{$smarty.const._FMCONTENT_COMS}></th><{/if}>
         </tr>
       </thead>
       <tbody>
@@ -150,10 +150,10 @@
           <!--<td><{$content.content_id}></td>-->
           <td class="ui-widget-content"><a href="<{$content.url}>" title="<{$content.content_title}>"><{$content.content_title}></a></td>
           <{if !$content_topic}><td class="ui-widget-content"><a href="<{$content.topicurl}>" title="<{$content.topic}>"><{$content.topic}></a></td><{/if}>
-          <td class="ui-widget-content"><a title="<{$content.owner}>" href="<{$xoops_url}>/user.php?id=<{$content.content_uid}>"><{$content.owner}></a></td>
-          <td class="ui-widget-content"><{$content.content_create}></td>
-          <td class="ui-widget-content"><{$content.content_hits}></td>
-          <td class="ui-widget-content"><{$content.content_comments}></td>
+          <{if $info.author}><td class="ui-widget-content"><a title="<{$content.owner}>" href="<{$xoops_url}>/user.php?id=<{$content.content_uid}>"><{$content.owner}></a></td><{/if}>
+          <{if $info.date}><td class="ui-widget-content"><{$content.content_create}></td><{/if}>
+          <{if $info.hits}><td class="ui-widget-content"><{$content.content_hits}></td><{/if}>
+          <{if $info.coms}><td class="ui-widget-content"><{$content.content_comments}></td><{/if}>
         </tr>
         <{/foreach}>
       </tbody>

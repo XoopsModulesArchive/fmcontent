@@ -76,6 +76,11 @@ $obj = $content_handler->get ( $content_id );
 
 $content_topic = $obj->getVar ( 'content_topic' );
 
+if(!$obj->getVar ( 'content_status' )) {
+	redirect_header ( 'index.php', 3, _FMCONTENT_ERROR_STATUS );
+	exit ();
+}	
+	
 // Get user right
 $group = is_object ( $xoopsUser ) ? $xoopsUser->getGroups () : array (XOOPS_GROUP_ANONYMOUS );
 $groups = explode ( " ", $obj->getVar ( 'content_groups' ) );
