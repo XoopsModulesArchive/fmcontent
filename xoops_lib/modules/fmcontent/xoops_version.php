@@ -24,7 +24,7 @@ $module_dirname = basename(dirname(__FILE__));
 
 $modversion = array(
     // Main setting
-    'name' => _MI_FMCONTENT_NAME,
+    'name' => $modsDirname,
     'description' => _MI_FMCONTENT_DESC,
     'version' => 1.06,
     'author' => 'Andricq Nicolas (AKA MusS)',
