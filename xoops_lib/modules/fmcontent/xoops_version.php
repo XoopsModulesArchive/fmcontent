@@ -26,7 +26,7 @@ $modversion = array(
     // Main setting
     'name' => $modsDirname,
     'description' => _MI_FMCONTENT_DESC,
-    'version' => 1.06,
+    'version' => 1.1,
     'author' => 'Andricq Nicolas (AKA MusS)',
     'credits' => 'The XOOPS Project, Voltan, Mamba',
     'license' => 'GNU GPL 2.0',
@@ -52,8 +52,15 @@ $modversion = array(
     // Recherche
     'hasSearch' => 1,
     // Commentaires 
-    'hasComments' => 1
+    'hasComments' => 1,
+    // for module admin class
+    'min_php' => '5.2',
+    'min_xoops' => '2.5',
+    'dirmoduleadmin' => 'Frameworks/moduleclasses',
+	 'icons16' => 'Frameworks/moduleclasses/icons/16',
+	 'icons32' => 'Frameworks/moduleclasses/icons/32'
 );
+
 
 //Recherche
 $modversion["search"]["file"] = "include/search.inc.php";

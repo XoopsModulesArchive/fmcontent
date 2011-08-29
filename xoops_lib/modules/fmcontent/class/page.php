@@ -619,7 +619,7 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 		return $getcount;
 	}
 	
-	function getContentItemCount($forMods, $topic_id) {
+	function getContentItemCount($forMods, $topic_id = '') {
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'content_topic', $topic_id ) );

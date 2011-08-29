@@ -15,7 +15,7 @@
 - Add change topic order whit AJAX (Voltan)
 - Add new options for make URL (Voltan)
 - Add Show/hide topic in index page (Voltan)
-
+- Add support for module admin class (Voltan)
 Language changes :
 + Add
 - Remove
@@ -26,7 +26,6 @@ main.php
 + _FMCONTENT_TOPIC_NAME 
 + _FMCONTENT_TOPIC_DESC 
 + _FMCONTENT_TOPIC_IMG 
-+ _FMCONTENT_HOME
 
 admin.php
 + _FMCONTENT_TOPIC_HOMEPAGE
@@ -44,6 +43,10 @@ admin.php
 + _FMCONTENT_TOPIC_NUM
 + _FMCONTENT_MSG_ALIASERROR
 + _FMCONTENT_TOPIC_SHOW
++ _FMCONTENT_ADMENU1
++ _FMCONTENT_ADMENU2
++ _FMCONTENT_INDEX_TOPICS
++ _FMCONTENT_INDEX_CONTENTS
 
 * _FMCONTENT_TOPIC_ONLINE
 * _FMCONTENT_TOPIC_TIPS
