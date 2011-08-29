@@ -32,7 +32,8 @@ $content_handler = xoops_getmodulehandler('page', 'fmcontent');
 
 $folder = array(
 	XOOPS_ROOT_PATH . '/uploads/fmcontent/', 
-	XOOPS_ROOT_PATH . '/uploads/fmcontent/img'
+	XOOPS_ROOT_PATH . '/uploads/fmcontent/img',
+	XOOPS_ROOT_PATH . '/uploads/fmcontent/file'
 );
 
 $index_admin = new ModuleAdmin();

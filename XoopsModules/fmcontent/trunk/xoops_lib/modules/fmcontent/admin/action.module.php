@@ -37,17 +37,25 @@ function xoops_module_pre_install_fmcontent(&$module) {
     //Creation du fichier creator dans uploads
     $module_uploads = XOOPS_ROOT_PATH . "/uploads/fmcontent";
     if (!is_dir($module_uploads))
-        mkdir($module_uploads, 0777);
+    mkdir($module_uploads, 0777);
     chmod($module_uploads, 0777);
     copy($indexFile, XOOPS_ROOT_PATH . "/uploads/fmcontent/index.html");
 
     //Creation du fichier price dans uploads
     $module_uploads = XOOPS_ROOT_PATH . "/uploads/fmcontent/img";
     if (!is_dir($module_uploads))
-        mkdir($module_uploads, 0777);
+    mkdir($module_uploads, 0777);
     chmod($module_uploads, 0777);
     copy($indexFile, XOOPS_ROOT_PATH . "/uploads/fmcontent/img/index.html");
     copy($blankFile, XOOPS_ROOT_PATH . "/uploads/fmcontent/img/blank.gif");
+    
+    //Creation du fichier price dans uploads
+    $module_uploads = XOOPS_ROOT_PATH . "/uploads/fmcontent/file";
+    if (!is_dir($module_uploads))
+    mkdir($module_uploads, 0777);
+    chmod($module_uploads, 0777);
+    copy($indexFile, XOOPS_ROOT_PATH . "/uploads/fmcontent/file/index.html");
+    copy($blankFile, XOOPS_ROOT_PATH . "/uploads/fmcontent/file/blank.gif");
 
     if (is_array($sqlfile) && !empty($sqlfile[XOOPS_DB_TYPE])) {
         $sql_file_path = XOOPS_ROOT_PATH . "/modules/fmcontent/" . $sqlfile[XOOPS_DB_TYPE];
@@ -108,6 +116,8 @@ function xoops_module_pre_install_fmcontent(&$module) {
 
 function xoops_module_update_fmcontent(&$module, $version) {
     $db =& $GLOBALS["xoopsDB"];
+    $indexFile = XOOPS_ROOT_PATH . "/uploads/index.html";
+    $blankFile = XOOPS_ROOT_PATH . "/uploads/blank.gif";
     
     // Add topic_alias table in DB
 	 if (!fmcontentUtils::FieldExists('topic_alias',$db->prefix('fmcontent_topic'))) {
@@ -123,14 +133,43 @@ function xoops_module_update_fmcontent(&$module, $version) {
 	 if (!fmcontentUtils::FieldExists('topic_show',$db->prefix('fmcontent_topic'))) {
 		 fmcontentUtils::AddField("`topic_show` TINYINT( 1 ) NOT NULL default '1' ", $db->prefix('fmcontent_topic'));
 	 }
+	 
+	 // Add file table
+	 if(!fmcontentUtils::TableExists('fmcontent_file')) {
+	 	 fmcontentUtils::AddTable("
+				CREATE TABLE `" . $db->prefix('fmcontent_file') . "` (
+				`file_id` int (11) unsigned NOT NULL  auto_increment,
+				`file_modid` int(11) NOT NULL,
+				`file_title` varchar (255)   NOT NULL ,
+				`file_name` varchar (255)   NOT NULL ,
+				`file_content` int(11) NOT NULL,
+				`file_date` int(10) NOT NULL default '0',
+				`file_type` varchar(64) NOT NULL default '',
+				`file_status` tinyint(1) NOT NULL,
+				PRIMARY KEY (`file_id`,`file_modid`),
+				UNIQUE KEY `file_id` (`file_id`,`file_modid`)
+				) ENGINE=MyISAM;
+	 	 ");
+	 	 
+	 }	
 
+
+    if (!file_exists($GLOBALS['xoops']->path('/uploads/fmcontent/file/index.html'))) {
+	    //Creation du fichier price dans uploads
+	    $module_uploads = XOOPS_ROOT_PATH . "/uploads/fmcontent/file";
+	    if (!is_dir($module_uploads))
+	    mkdir($module_uploads, 0777);
+	    chmod($module_uploads, 0777);
+	    copy($indexFile, XOOPS_ROOT_PATH . "/uploads/fmcontent/file/index.html");
+	    copy($blankFile, XOOPS_ROOT_PATH . "/uploads/fmcontent/file/blank.gif");
+    }
 }
 
 function xoops_module_uninstall_fmcontent(&$module) {
     $db =& $GLOBALS["xoopsDB"];
 
     //$created_tables = array(0 => 'fmcontent');
-    $created_tables = array(0 => 'fmcontent_content', 1 => 'fmcontent_topic');
+    $created_tables = array(0 => 'fmcontent_content', 1 => 'fmcontent_topic' , 2 => 'fmcontent_file');
 
     foreach ($created_tables as $ct) {
         $db->query("DROP TABLE " . $db->prefix($ct));
