@@ -25,6 +25,10 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     define('_FMCONTENT_ADD_MENU', 'Add Link');
     define('_FMCONTENT_LAST_TOPIC', 'Last Topics');
     define('_FMCONTENT_LAST_CONTENTS', 'Last Contents');
+    define("_FMCONTENT_ADMENU1", "Topics");
+    define("_FMCONTENT_ADMENU2", "Contents");
+    define("_FMCONTENT_INDEX_TOPICS", "There are %s Topics in our database");
+	 define("_FMCONTENT_INDEX_CONTENTS", "There are %s Contents in our database");
 // Topic page
     define('_FMCONTENT_FORM_TOPIC', 'Manage Topic');
     define('_FMCONTENT_TOPIC_ID', 'ID');
@@ -177,9 +181,5 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     '<ul>
 	<li>Access, submit and global permissions for the module</li>
 	</ul>');
-// Configuration
-    define("_FMCONTENT_CONFIG_CHECK", "Configuration Check");
-    define("_FMCONTENT_CONFIG_PHP", "Minimum PHP required: %s (your version is %s)");
-    define("_FMCONTENT_CONFIG_XOOPS", "Minimum XOOPS required:  %s (your version is %s)");
 }
 ?>
