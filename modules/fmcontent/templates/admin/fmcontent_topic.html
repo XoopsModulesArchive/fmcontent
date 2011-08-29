@@ -63,7 +63,7 @@
 		<{$smarty.const._FMCONTENT_TOPIC_NAME}> : <span class="bold"> <{if $topic.contentcount == 0}><{$topic.topic_title}><{else}><a href="content.php?topic=<{$topic.topic_id}>"><{$topic.topic_title}></a><{/if}></span>
 	</div>
 	<div class="marg5 pad5 ui-state-highlight ui-corner-all">
-		<div class="pad5"><span class="bold"><{$smarty.const._FMCONTENT_TOPIC_DESC}> : </span><img class="ui-state-highlight right" src="<{$topic.imgurl}>" alt="<{$topic.topic_title}>" /><{$topic.topic_desc}></div>
+		<div class="pad5"><span class="bold"><{$smarty.const._FMCONTENT_TOPIC_DESC}> : </span><img class="ui-state-highlight right" width="200" src="<{$topic.imgurl}>" alt="<{$topic.topic_title}>" /><{$topic.topic_desc}></div>
 		<div class="pad5"><span class="bold"><{$smarty.const._FMCONTENT_TOPIC_SHOWTYPE}> : </span>
 		   <{if $topic.topic_showtype == 0}><{$smarty.const._FMCONTENT_SHOWTYPE_0}><{/if}>
 		   <{if $topic.topic_showtype == 1}><{$smarty.const._FMCONTENT_SHOWTYPE_1}><{/if}>
