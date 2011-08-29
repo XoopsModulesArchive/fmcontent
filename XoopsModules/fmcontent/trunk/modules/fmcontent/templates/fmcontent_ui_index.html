@@ -282,9 +282,9 @@
 				<{foreach item=topic from=$contents}>
 				<tr class="odd">
 					<td class="ui-widget-content width5"><img src="images/icons/puce.png" alt="<{$topic.topic_title}>" /><{$topic.topic_id}></td>
-					<td class="ui-widget-content"><a title="<{$topic.topic_title}>" href="<{$topic.topicurl}>"><{$topic.topic_title}></a></td>
-					<td class="ui-widget-content" <{if !$topic.topic_img}>colspan="2"<{/if}>><{$topic.topic_desc}></td>
-					<{if $topic.topic_img}><td class="ui-widget-content"><img src="<{$topic.imgurl}>" alt="<{$topic.topic_title}>" /></td><{/if}>
+					<td class="ui-widget-content top"><a title="<{$topic.topic_title}>" href="<{$topic.topicurl}>"><{$topic.topic_title}></a></td>
+					<td class="ui-widget-content top" <{if !$topic.topic_img}>colspan="2"<{/if}>><{$topic.topic_desc}></td>
+					<{if $topic.topic_img}><td class="ui-widget-content top"><img width="<{$imgwidth}>" class="<{$imgfloat}> content_img" src="<{$topic.imgurl}>" alt="<{$topic.topic_title}>" /></td><{/if}>
 				</tr>
 				<{/foreach}>
 			</tbody>
