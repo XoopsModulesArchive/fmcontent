@@ -272,5 +272,34 @@ function AddField($field, $table)
 	return $result;
 }	
 	
+/**
+    * Verify that a mysql table exists
+	 * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+	 * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+	 * @author      Hervé Thouzard (ttp://www.instant-zero.com)
+	 * @package     Oledrion
+	 * @version     $Id$
+*/
+function TableExists($tablename)
+{
+	global $xoopsDB;
+	$result = $xoopsDB->queryF("SHOW TABLES LIKE '$tablename'");
+	return($xoopsDB->getRowsNum($result) > 0);
+}
+
+/**
+    * Add a table
+	 * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+	 * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+	 * @author      Hervé Thouzard (ttp://www.instant-zero.com)
+	 * @package     Oledrion
+	 * @version     $Id$
+*/
+function AddTable($query) {
+	global $xoopsDB;
+	$result = $xoopsDB->queryF($query);
+	return $result;
+}
+
 }
 ?>

@@ -68,3 +68,16 @@ CREATE TABLE `fmcontent_topic` (
 PRIMARY KEY (`topic_id`,`topic_modid`),
 UNIQUE KEY `topic_id` (`topic_id`,`topic_modid`)
 ) ENGINE=MyISAM;
+
+CREATE TABLE `fmcontent_file` (
+`file_id` int (11) unsigned NOT NULL  auto_increment,
+`file_modid` int(11) NOT NULL,
+`file_title` varchar (255)   NOT NULL ,
+`file_name` varchar (255)   NOT NULL ,
+`file_content` int(11) NOT NULL,
+`file_date` int(10) NOT NULL default '0',
+`file_type` varchar(64) NOT NULL default '',
+`file_status` tinyint(1) NOT NULL,
+PRIMARY KEY (`file_id`,`file_modid`),
+UNIQUE KEY `file_id` (`file_id`,`file_modid`)
+) ENGINE=MyISAM;
