@@ -28,8 +28,16 @@ require_once $GLOBALS['xoops']->path('/class/tree.php');
 require_once $GLOBALS['xoops']->path('/modules/fmcontent/class/folder.php');
 
 require_once XOOPS_TRUST_PATH . '/modules/fmcontent/include/functions.php';
-require_once XOOPS_TRUST_PATH . '/modules/fmcontent/class/admin.php';
+//require_once XOOPS_TRUST_PATH . '/modules/fmcontent/class/admin.php';
 require_once XOOPS_TRUST_PATH . '/modules/fmcontent/class/utils.php';
+
+if ( file_exists($GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/moduleadmin.php'))){
+   include_once $GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/moduleadmin.php');
+   //return true;
+}else{
+   redirect_header("../../../admin.php", 5, _AM_MODULEADMIN_MISSING, false); 
+   //return false;
+}
 
 xoops_load('xoopsformloader');
 
