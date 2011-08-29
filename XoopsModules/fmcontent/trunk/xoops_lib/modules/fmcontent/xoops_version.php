@@ -278,7 +278,7 @@ $modversion['config'][] = array(
     'valuetype' => 'text',
     'options' => array(_FMCONTENT_TEMPLATE_1 => 'legacy', _FMCONTENT_TEMPLATE_2 => 'ui', _FMCONTENT_TEMPLATE_3 => 'html5'),
     'default' => 'legacy');    
-
+/*
 $modversion['config'][] = array(
     'name' => 'disp_option',
     'title' => '_FMCONTENT_DISP_OPTION',
@@ -287,7 +287,7 @@ $modversion['config'][] = array(
     'valuetype' => 'int',
     'options' => array(_FMCONTENT_DISP_OPTION_MODULE => '0', _FMCONTENT_DISP_OPTION_TOPIC => '1'),
     'default' => '0');
-
+*/
 $modversion['config'][] = array(
     'name' => 'showtype',
     'title' => '_FMCONTENT_SHOWTYPE',
