@@ -38,6 +38,7 @@ if (! isset ( $_POST ['post'] ) && isset ( $_POST ['content_type'] )) {
 // Initialize content handler
 $content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
 $topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
+$file_handler = xoops_getmodulehandler ( 'file', 'fmcontent' );
 
 switch ($op) {
 	
@@ -244,6 +245,46 @@ switch ($op) {
 		exit ();
 		break;
 	
+	case 'add_file' :
+	   
+	   $obj = $file_handler->create ();
+		$obj->setVars ( $_REQUEST );
+	   $obj->setVar ( 'file_date', time () );
+	   
+	   fmcontentUtils::uploadfile ( $forMods, 'file_name', $obj, $_REQUEST ['file_name'] );
+	   
+	   if (! $file_handler->insert ( $obj )) {
+				fmcontent_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR );
+				xoops_cp_footer ();
+				exit ();
+		}
+			
+		// Redirect page
+		fmcontent_Redirect ( 'file.php', 1, _FMCONTENT_MSG_WAIT );
+		xoops_cp_footer ();
+		exit ();
+		break;
+		
+	case 'edit_file' :
+
+	   $file_id = fmcontent_CleanVars ( $_REQUEST, 'file_id', 0, 'int' );
+		if ($file_id > 0) {
+
+		   $obj = $file_handler->get ( $file_id );
+			$obj->setVars ( $_REQUEST );
+			
+		   if (! $file_handler->insert ( $obj )) {
+					fmcontent_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR );
+					xoops_cp_footer ();
+					exit ();
+			}
+		}	
+		// Redirect page
+		fmcontent_Redirect ( 'file.php', 1, _FMCONTENT_MSG_WAIT );
+		xoops_cp_footer ();
+		exit ();
+		break;
+		
 	case 'status' :
 		$content_id = fmcontent_CleanVars ( $_REQUEST, 'content_id', 0, 'int' );
 		if ($content_id > 0) {
