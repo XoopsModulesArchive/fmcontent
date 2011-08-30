@@ -478,6 +478,42 @@ $modversion['config'][] = array(
 
 $modversion['config'][] = array(
     'name' => 'break',
+    'title' => '_FMCONTENT_BREAK_FILE',
+    'description' => '',
+    'formtype' => 'line_break',
+    'valuetype' => 'textbox',
+    'default' => 'head');
+    
+$modversion['config'][] = array(
+    'name' => 'file_dir',
+    'title' => '_FMCONTENT_FILE_DIR',
+    'description' => '_FMCONTENT_FILE_DIR_DESC',
+    'formtype' => 'textbox',
+    'valuetype' => 'text',
+    'default' => "/uploads/fmcontent/file/");
+ 
+$modversion['config'][] = array(
+    'name' => 'file_size',
+    'title' => '_FMCONTENT_FILE_SIZE',
+    'description' => '_FMCONTENT_FILE_SIZE_DESC',
+    'formtype' => 'textbox',
+    'valuetype' => 'text',
+    'default' => '1048576');  
+  
+$modversion['config'][] = array(
+    'name' => 'file_mime',
+    'title' => '_FMCONTENT_FILE_MIME',
+    'description' => '_FMCONTENT_FILE_MIME_DESC',
+    'formtype' => 'textarea',
+    'valuetype' => 'text',
+    'default' => 'image/gif|image/jpeg|image/pjpeg|image/x-png|image/png|application/x-zip-compressed|application/zip|application/rar|application/pdf|
+                                            application/x-gtar|application/x-tar|application/msword|application/vnd.ms-excel|application/vnd.oasis.opendocument.text|
+                                            application/vnd.oasis.opendocument.spreadsheet|application/vnd.oasis.opendocument.presentation|
+                                            application/vnd.oasis.opendocument.graphics|application/vnd.oasis.opendocument.chart|application/vnd.oasis.opendocument.formula|
+                                            application/vnd.oasis.opendocument.database|application/vnd.oasis.opendocument.image|application/vnd.oasis.opendocument.text-master');
+
+$modversion['config'][] = array(
+    'name' => 'break',
     'title' => '_FMCONTENT_BREAK_IMAGE',
     'description' => '',
     'formtype' => 'line_break',

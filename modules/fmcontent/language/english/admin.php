@@ -23,6 +23,7 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     define('_FMCONTENT_ADD_CONTENT', 'Add Content');
     define('_FMCONTENT_ADD_TOPIC', 'Add Topic');
     define('_FMCONTENT_ADD_MENU', 'Add Link');
+    define('_FMCONTENT_ADD_FILE', 'Add File');
     define('_FMCONTENT_LAST_TOPIC', 'Last Topics');
     define('_FMCONTENT_LAST_CONTENTS', 'Last Contents');
     define("_FMCONTENT_ADMENU1", "Topics");
@@ -144,6 +145,16 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     define('_FMCONTENT_PERMISSIONS_GLOBAL_4', 'Rate');
     define('_FMCONTENT_PERMISSIONS_GLOBAL_8', 'Submit from user side');
     define('_FMCONTENT_PERMISSIONS_GLOBAL_16', 'Auto approve');
+// Attach files
+	 define('_FMCONTENT_FILE_ID', 'ID');
+	 define('_FMCONTENT_FILE_ONLINE', 'Online');
+	 define('_FMCONTENT_FILE_ACTION', 'Action');
+    define('_FMCONTENT_FORM_FILE', 'Attach file');
+	 define('_FMCONTENT_FILE_TITLE', 'Title');
+	 define('_FMCONTENT_FILE_CONTENT', 'File Content');
+	 define('_FMCONTENT_STATUS', 'Active');
+	 define('_FMCONTENT_FILE', 'File');
+	 define('_FMCONTENT_SELECT_FILE', 'Select your file');
 // Admin message
     define('_FMCONTENT_MSG_DBUPDATE', 'Database updated successfully!');
     define('_FMCONTENT_MSG_ERRORDELETE', 'You cannot delete this content! <br />Please move or delete all child of this content');
@@ -181,5 +192,10 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     '<ul>
 	<li>Access, submit and global permissions for the module</li>
 	</ul>');
+	define('_FMCONTENT_FILE_TIPS',
+    '<ul>
+	<li>Not yet</li>
+	</ul>');
+
 }
 ?>

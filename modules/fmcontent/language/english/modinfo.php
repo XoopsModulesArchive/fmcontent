@@ -257,6 +257,13 @@ if (!defined('_MI_FMCONTENT_NAME')) {
     define('_FMCONTENT_BREADCRUMB_SHOW', 'Display Breadcrumb');
     define('_FMCONTENT_BREADCRUMB_MODNAME', 'Display Module name');
     define('_FMCONTENT_BREADCRUMB_TOHOME', 'Display Homepage link');
+// Files
+    define('_FMCONTENT_FILE_DIR', 'File upload path');
+    define('_FMCONTENT_FILE_DIR_DESC', 'Upload path for files attached to content');
+    define('_FMCONTENT_FILE_SIZE', 'file size (in bytes)');
+    define('_FMCONTENT_FILE_SIZE_DESC', 'Max allowed size for file (1048576 bytes = 1 MegaByte)');
+    define('_FMCONTENT_FILE_MIME', 'File mime types');
+    define('_FMCONTENT_FILE_MIME_DESC', 'Allowed myme-types for file upload');
 // break 
     define('_FMCONTENT_BREAK_GENERAL', 'General');
     define('_FMCONTENT_BREAK_SEO', 'SEO / URL Rewrite');
@@ -267,6 +274,7 @@ if (!defined('_MI_FMCONTENT_NAME')) {
     define('_FMCONTENT_BREAK_PRINT', 'Print');
     define('_FMCONTENT_BREAK_BREADCRUMB', 'Breadcrumb');
     define('_FMCONTENT_BREAK_COMNOTI', 'Comments and notifications');
+    define('_FMCONTENT_BREAK_FILE', 'File');
 // about	
     define('_FMCONTENT_ADMIN_ABOUT', 'About');
     define('_FMCONTENT_ABOUT_DESCRIPTION', 'Description:');
