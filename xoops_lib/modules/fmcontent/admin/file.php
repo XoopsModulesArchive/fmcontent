@@ -97,7 +97,7 @@ switch ($op)
         
         $file_numrows = $file_handler->getFileCount($forMods);
 
-        if ($file_numrows > $file_limit) {
+        if ($file_numrows > $file['limit']) {
             $file_pagenav = new XoopsPageNav($file_numrows, $file['limit'], $file['start'], 'start', 'limit=' . $file['limit']);
             $file_pagenav = $file_pagenav->renderNav(4);
         } else {

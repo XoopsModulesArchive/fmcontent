@@ -104,9 +104,14 @@ class fmcontentFileHandler extends XoopsPersistableObjectHandler {
 		$ret = array ();
 			$criteria = new CriteriaCompo ();
 			$criteria->add ( new Criteria ( 'file_modid', $forMods->getVar ( 'mid' ) ) );
+			if(isset($file['content'])) {
+				$criteria->add ( new Criteria ( 'file_content', $file['content'] ) );
+			}	
 			$criteria->setSort ( $file['sort'] );
 			$criteria->setOrder ( $file['order'] );
+			if(isset($file['limit'])) {
 			$criteria->setLimit ( $file['limit'] );
+			}
 			$criteria->setStart ( $file['start'] );
 		
 		$files = $this->getObjects ( $criteria, false );
