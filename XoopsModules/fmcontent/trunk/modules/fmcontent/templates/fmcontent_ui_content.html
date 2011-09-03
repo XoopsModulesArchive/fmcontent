@@ -98,9 +98,18 @@
 			<{/if}>	
     </div>  
 
-	  <{if $tags}>
-	  <div class="tagbar"><{include file="db:tag_bar.html"}></div>
-	  <{/if}>	  
+	 <{if $tags}>
+	 <div class="tagbar"><{include file="db:tag_bar.html"}></div>
+	 <{/if}>
+	  
+	 <{if $content.content_file}>
+	 <ul>
+	 <{foreach item=file from=$files}>
+		 <li><a title="<{$file.file_title}>" href="<{$file.fileurl}>" ><{$file.file_title}></a></li>
+	 <{/foreach}>
+	 </ul>
+	 <{/if}>
+	 	  
 	  <div class="bookmark"><{include file="db:fmcontent_bookmarkme.html"}></div>
 	</div>
 	

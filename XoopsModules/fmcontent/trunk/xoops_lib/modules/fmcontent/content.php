@@ -24,6 +24,7 @@ if (! isset ( $forMods ))
 // Initialize content handler
 $content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
 $topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
+$file_handler = xoops_getmodulehandler('file', 'fmcontent');
 
 if(isset($_REQUEST['id'])) {
 	$content_id = fmcontent_CleanVars ( $_REQUEST, 'id', 0, 'int' );
@@ -309,6 +310,17 @@ if (xoops_getModuleOption ( 'bc_show', $forMods->getVar ( 'dirname' ) )) {
 	$breadcrumb = fmcontentUtils::breadcrumb ( $forMods, true, $content ['content_title'], $content ['content_topic'], ' &raquo; ', 'topic_title' );
 }
 
+
+// Get Attached files information
+if($content ['content_file'] > 0) {
+	$file = array();
+	$file['order'] = 'DESC';
+   $file['sort'] = 'file_id';
+	$file['start'] = 0;
+	$file['content'] = $content_id;
+	$view_file = $file_handler->getFiles($forMods, $file);
+	$xoopsTpl->assign ( 'files', $view_file );
+}	
 $xoopsTpl->assign ( 'content', $content );
 $xoopsTpl->assign ( 'link', $link );
 $xoopsTpl->assign ( 'modname', $forMods->getVar ( 'name' ) );
