@@ -62,7 +62,7 @@ switch ($op)
         if ($topic_id > 0) {
             $topic = $topic_handler->get($topic_id);
             // Prompt message
-            fmcontent_Message('backend.php', sprintf(_FMCONTENT_MSG_DELETE, '"' . $topic->getVar('topic_title') . '"'), $topic_id);
+            fmcontent_Message('backend.php', sprintf(_FMCONTENT_MSG_DELETE, '"' . $topic->getVar('topic_title') . '"'), $topic_id, 'topic');
             // Display Admin footer
             xoops_cp_footer();
         }

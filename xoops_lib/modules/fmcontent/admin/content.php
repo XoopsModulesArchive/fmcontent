@@ -80,7 +80,7 @@ switch ($op)
         if ($content_id > 0) {
             $content = $content_handler->get($content_id);
             // Prompt message
-            fmcontent_Message('backend.php', sprintf(_FMCONTENT_MSG_DELETE, $content->getVar('content_type') . ': "' . $content->getVar('content_title') . '"'), $content_id);
+            fmcontent_Message('backend.php', sprintf(_FMCONTENT_MSG_DELETE, $content->getVar('content_type') . ': "' . $content->getVar('content_title') . '"'), $content_id, 'content');
             // Display Admin footer
             xoops_cp_footer();
         }

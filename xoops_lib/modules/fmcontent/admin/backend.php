@@ -368,13 +368,31 @@ switch ($op) {
 		break;
 		
 	case 'delete' :
-		$content_id = fmcontent_CleanVars ( $_REQUEST, 'content_id', 0, 'int' );
-		if ($content_id > 0) {
-			$obj = $content_handler->get ( $content_id );
-			$content_handler->updateposts ( $obj->getVar ( 'content_uid' ), $obj->getVar ( 'content_status' ), $content_action = 'delete' );
-			if (! $content_handler->delete ( $obj )) {
-				echo $obj->getHtmlErrors ();
-			}
+	   //print_r($_POST);
+		$id = fmcontent_CleanVars ( $_REQUEST, 'id', 0, 'int' );
+		$handler = fmcontent_CleanVars ( $_REQUEST, 'handler', 0, 'string' );
+		if ($id > 0 && $handler) {
+			switch($handler) {
+				case 'content':
+					$obj = $content_handler->get ( $id );
+					$content_handler->updateposts ( $obj->getVar ( 'content_uid' ), $obj->getVar ( 'content_status' ), $content_action = 'delete' );
+					if (! $content_handler->delete ( $obj )) {
+						echo $obj->getHtmlErrors ();
+					}
+				break;
+				case 'topic':
+					$obj = $topic_handler->get ( $id );
+					if (! $topic_handler->delete ( $obj )) {
+						echo $obj->getHtmlErrors ();
+					}
+				break;
+				case 'file':
+					$obj = $file_handler->get ( $id );
+					if (! $file_handler->delete ( $obj )) {
+						echo $obj->getHtmlErrors ();
+					}
+				break;
+			}	
 		}
 		
 		// Redirect page
