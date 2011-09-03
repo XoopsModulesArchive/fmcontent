@@ -498,7 +498,7 @@ $modversion['config'][] = array(
     'description' => '_FMCONTENT_FILE_SIZE_DESC',
     'formtype' => 'textbox',
     'valuetype' => 'text',
-    'default' => '1048576');  
+    'default' => '10485760');  
   
 $modversion['config'][] = array(
     'name' => 'file_mime',
@@ -530,7 +530,7 @@ $modversion['config'][] = array(
     'description' => '_FMCONTENT_IMAGE_SIZE_DESC',
     'formtype' => 'textbox',
     'valuetype' => 'text',
-    'default' => '1048576');
+    'default' => '5242880');
 
 $modversion['config'][] = array(
     'name' => 'img_maxwidth',
