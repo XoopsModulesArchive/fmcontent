@@ -266,12 +266,17 @@ switch ($op) {
 		break;
 		
 	case 'edit_file' :
-
+      print_r($_REQUEST);
 	   $file_id = fmcontent_CleanVars ( $_REQUEST, 'file_id', 0, 'int' );
 		if ($file_id > 0) {
 
 		   $obj = $file_handler->get ( $file_id );
 			$obj->setVars ( $_REQUEST );
+			
+			if($_REQUEST['file_content'] != $_REQUEST['file_previous']) {
+				$content_handler->contentfile('add', $_REQUEST['file_content']);
+				$content_handler->contentfile('delete',$_REQUEST['file_previous']);
+			}
 			
 		   if (! $file_handler->insert ( $obj )) {
 					fmcontent_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR );

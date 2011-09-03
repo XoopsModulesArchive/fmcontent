@@ -820,19 +820,25 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 		}
 	}
 	
-	function contentfile($action , $id) {
+	function contentfile($action , $id , $previous = null) {
 		switch($action) {
 			case 'add':
 				$sql = 'UPDATE ' . $this->table . ' SET content_file = content_file + 1 WHERE content_id= ' . intval ( $id );
-			break;
+			   break;
 			
 			case 'delete':
 				$sql = 'UPDATE ' . $this->table . ' SET content_file = content_file - 1 WHERE content_id= ' . intval ( $id );
-			break;
+			   break;
 		}
 		return $this->db->queryF ( $sql );	
 	}	
-
+	
+	function getfile($forMods) {
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'content_file', '0', '>' ) );
+		return $this->getAll ( $criteria );
+	}	
 }
 
 ?> 

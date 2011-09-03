@@ -42,6 +42,7 @@ class fmcontent_file extends XoopsObject {
 			$form->addElement ( new XoopsFormHidden ( 'op', 'add_file' ) );
 		} else {
 			$form->addElement ( new XoopsFormHidden ( 'op', 'edit_file' ) );
+			$form->addElement ( new XoopsFormHidden ( 'file_previous', $this->getVar ( "file_content" ) ) );
 		}
 		$form->addElement ( new XoopsFormHidden ( 'file_id', $this->getVar ( 'file_id', 'e' ) ) );
 		$form->addElement ( new XoopsFormHidden ( 'file_modid', $forMods->getVar ( 'mid' ) ) );
@@ -102,7 +103,7 @@ class fmcontentFileHandler extends XoopsPersistableObjectHandler {
 		parent::XoopsPersistableObjectHandler ( $db, 'fmcontent_file', 'fmcontent_file', 'file_id', 'file_title' );
 	}
 
-	function getFiles($forMods, $file) {
+	function getFiles($forMods, $file , $content) {
 		$ret = array ();
 			$criteria = new CriteriaCompo ();
 			$criteria->add ( new Criteria ( 'file_modid', $forMods->getVar ( 'mid' ) ) );
@@ -116,13 +117,25 @@ class fmcontentFileHandler extends XoopsPersistableObjectHandler {
 			$criteria->setLimit ( $file['limit'] );
 			}
 			$criteria->setStart ( $file['start'] );
-		
 		$files = $this->getObjects ( $criteria, false );
 		if ($files) {
 			
 			foreach ( $files as $root ) {
 				$tab = array ();
 				$tab = $root->toArray ();
+				if(is_array($content)) {
+					foreach ( array_keys ( $content ) as $i ) {
+						$list [$i] ['file_title'] = $content [$i]->getVar ( "content_title" );
+						$list [$i] ['file_id'] = $content [$i]->getVar ( "content_id" );
+					}
+					if ($root->getVar ( 'file_content' )) {
+						$tab ['content'] = $list [$root->getVar ( 'file_content' )] ['file_title'];
+						$tab ['contentid'] = $list [$root->getVar ( 'file_content' )] ['file_id'];
+					}
+				}
+					
+				//$tab ['content'] = 'df ' . $root->getVar ( 'file_content' );
+				
 				$tab ['fileurl'] = XOOPS_URL . xoops_getModuleOption ( 'file_dir', $forMods->getVar ( 'dirname' ) ) . $root->getVar ( 'file_name' );
 				$ret [] = $tab;
 			}
