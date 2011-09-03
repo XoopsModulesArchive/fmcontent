@@ -52,11 +52,13 @@ class fmcontent_file extends XoopsObject {
 		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'content_status', '1' ) );
 		$content = $content_Handler->getObjects ( $criteria );
-		$tree = new XoopsObjectTree ( $content, 'content_id', 'content_topic' );
-		ob_start ();
-		echo $tree->makeSelBox ( 'file_content', 'content_title', '', $this->getVar ( 'file_content', 'e' ), true );
-		$form->addElement ( new XoopsFormLabel ( _FMCONTENT_FILE_CONTENT, ob_get_contents () ) );
-		ob_end_clean ();
+		
+		$select_content = new XoopsFormSelect(_FMCONTENT_FILE_CONTENT, 'file_content', $this->getVar("file_content"));
+      foreach (array_keys($content) as $i) {
+          $select_content->addOption($content[$i]->getVar("content_id"), $content[$i]->getVar("content_title"));
+      }  
+      $form->addElement ( $select_content ); 
+
 		$form->addElement ( new XoopsFormRadioYN ( _FMCONTENT_STATUS, 'file_status', $this->getVar ( 'file_status', 'e' ) ) );
 		
 		if ($this->isNew ()) {

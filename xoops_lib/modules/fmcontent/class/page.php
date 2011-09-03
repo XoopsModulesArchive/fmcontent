@@ -56,8 +56,6 @@ class fmcontent_content extends XoopsObject {
 		$this->initVar ( 'content_modid', XOBJ_DTYPE_INT, '' );
 		$this->initVar ( 'content_hits', XOBJ_DTYPE_INT, '' );
 		$this->initVar ( 'content_img', XOBJ_DTYPE_TXTBOX, '' );
-		$this->initVar ( 'content_rating', XOBJ_DTYPE_OTHER, '' );
-		$this->initVar ( 'content_votes', XOBJ_DTYPE_INT, '' );
 		$this->initVar ( 'content_comments', XOBJ_DTYPE_INT, '' );
 		$this->initVar ( 'content_file', XOBJ_DTYPE_INT, '' );
 		$this->initVar ( 'dohtml', XOBJ_DTYPE_INT, 1 );
