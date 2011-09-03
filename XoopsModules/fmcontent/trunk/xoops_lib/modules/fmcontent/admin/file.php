@@ -60,7 +60,7 @@ switch ($op)
         if ($file_id > 0) {
             $file = $file_handler->get($file_id);
             // Prompt message
-            fmcontent_Message('backend.php', sprintf(_FMCONTENT_MSG_DELETE, '"' . $file->getVar('file_title') . '"'), $file_id);
+            fmcontent_Message('backend.php', sprintf(_FMCONTENT_MSG_DELETE, '"' . $file->getVar('file_title') . '"'), $file_id, 'file');
             // Display Admin footer
             xoops_cp_footer();
         }  

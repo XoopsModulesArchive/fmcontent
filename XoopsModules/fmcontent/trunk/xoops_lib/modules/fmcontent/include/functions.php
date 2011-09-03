@@ -127,13 +127,14 @@ function fmcontent_Redirect($url, $time = 3, $message = '') {
     header("refresh: " . $time . "; url=" . $url);
 }
 
-function fmcontent_Message($page, $message = '', $id) {
+function fmcontent_Message($page, $message = '', $id , $handler) {
     global $xoopsModule;
     $tpl = new XoopsTpl();
     //ob_start();
     $tpl->assign('message', $message);
     $tpl->assign('id', $id);
     $tpl->assign('url', $page);
+    $tpl->assign('handler', $handler);
     $tpl->assign('ifnotreload', sprintf(_IFNOTRELOAD, $page));
     echo $tpl->fetch(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/templates/admin/fmcontent_confirm.html');
     //ob_flush();
