@@ -93,7 +93,8 @@ switch ($op)
             $file['start'] = 0;
         }
 
-        $files = $file_handler->getFiles($forMods, $file);
+        $content = $content_handler->getfile($forMods);
+        $files = $file_handler->getFiles($forMods, $file , $content);
         
         $file_numrows = $file_handler->getFileCount($forMods);
 

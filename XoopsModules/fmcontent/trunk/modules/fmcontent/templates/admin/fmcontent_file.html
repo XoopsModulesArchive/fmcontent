@@ -13,7 +13,7 @@
     <tr class="odd" id="mod_<{$file.file_id}>">
         <td class="width5"><img src="../images/icons/puce.png" alt=""/><{$file.file_id}></td>
         <td class="txtcenter width35 bold"><{$file.file_title}></td>
-        <td class="txtcenter bold"><{$file.file_content}></td>
+        <td class="txtcenter bold"><{$file.content}></td>
         <td class="txtcenter width5 bold">
            <img class="cursorpointer" id="file_status<{$file.file_id}>" onclick="fmcontent_setFileOnline( { op: 'file_status', file_id: <{$file.file_id}> }, 'file_status<{$file.file_id}>', 'backend.php' )" src="<{if $file.file_status}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" class="tooltip" alt=""/>
         </td>
