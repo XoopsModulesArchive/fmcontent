@@ -59,6 +59,7 @@ class fmcontent_content extends XoopsObject {
 		$this->initVar ( 'content_rating', XOBJ_DTYPE_OTHER, '' );
 		$this->initVar ( 'content_votes', XOBJ_DTYPE_INT, '' );
 		$this->initVar ( 'content_comments', XOBJ_DTYPE_INT, '' );
+		$this->initVar ( 'content_file', XOBJ_DTYPE_INT, '' );
 		$this->initVar ( 'dohtml', XOBJ_DTYPE_INT, 1 );
 		$this->initVar ( 'doxcode', XOBJ_DTYPE_INT, 1 );
 		$this->initVar ( 'dosmiley', XOBJ_DTYPE_INT, 1 );
@@ -820,6 +821,19 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 				break;
 		}
 	}
+	
+	function contentfile($action , $id) {
+		switch($action) {
+			case 'add':
+				$sql = 'UPDATE ' . $this->table . ' SET content_file = content_file + 1 WHERE content_id= ' . intval ( $id );
+			break;
+			
+			case 'delete':
+				$sql = 'UPDATE ' . $this->table . ' SET content_file = content_file - 1 WHERE content_id= ' . intval ( $id );
+			break;
+		}
+		return $this->db->queryF ( $sql );	
+	}	
 
 }
 

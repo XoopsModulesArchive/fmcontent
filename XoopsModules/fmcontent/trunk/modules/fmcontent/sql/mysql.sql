@@ -27,6 +27,7 @@ CREATE TABLE `fmcontent_content` (
 `content_hits` int(11) NOT NULL,
 `content_img` varchar(255) NOT NULL,
 `content_comments` int(11) unsigned NOT NULL default '0',
+`content_file` tinyint(3) NOT NULL,
 `dohtml` tinyint(1) NOT NULL,
 `dobr` tinyint(1) NOT NULL,
 `doimage` tinyint(1) NOT NULL,

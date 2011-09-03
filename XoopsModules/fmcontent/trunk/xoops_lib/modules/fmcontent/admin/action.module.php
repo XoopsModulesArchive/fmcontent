@@ -134,6 +134,11 @@ function xoops_module_update_fmcontent(&$module, $version) {
 		 fmcontentUtils::AddField("`topic_show` TINYINT( 1 ) NOT NULL default '1' ", $db->prefix('fmcontent_topic'));
 	 }
 	 
+	 // Add content_file content in DB
+	 if (!fmcontentUtils::FieldExists('content_file',$db->prefix('fmcontent_content'))) {
+		 fmcontentUtils::AddField("`content_file` TINYINT( 3 ) NOT NULL default '0' AFTER `content_comments` ", $db->prefix('fmcontent_content'));
+	 }
+	 
 	 // Add file table
 	 if(!fmcontentUtils::TableExists('fmcontent_file')) {
 	 	 fmcontentUtils::AddTable("

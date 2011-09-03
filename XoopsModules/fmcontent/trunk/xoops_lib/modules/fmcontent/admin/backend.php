@@ -252,7 +252,7 @@ switch ($op) {
 	   $obj->setVar ( 'file_date', time () );
 	   
 	   fmcontentUtils::uploadfile ( $forMods, 'file_name', $obj, $_REQUEST ['file_name'] );
-	   
+	   $content_handler->contentfile('add',$_REQUEST['file_content']);
 	   if (! $file_handler->insert ( $obj )) {
 				fmcontent_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR );
 				xoops_cp_footer ();
@@ -375,6 +375,7 @@ switch ($op) {
 			switch($handler) {
 				case 'content':
 					$obj = $content_handler->get ( $id );
+					$url = 'content.php';
 					$content_handler->updateposts ( $obj->getVar ( 'content_uid' ), $obj->getVar ( 'content_status' ), $content_action = 'delete' );
 					if (! $content_handler->delete ( $obj )) {
 						echo $obj->getHtmlErrors ();
@@ -382,12 +383,15 @@ switch ($op) {
 				break;
 				case 'topic':
 					$obj = $topic_handler->get ( $id );
+					$url = 'topic.php';
 					if (! $topic_handler->delete ( $obj )) {
 						echo $obj->getHtmlErrors ();
 					}
 				break;
 				case 'file':
 					$obj = $file_handler->get ( $id );
+					$url = 'file.php';
+					$content_handler->contentfile('delete',$obj->getVar ( 'file_content' ));
 					if (! $file_handler->delete ( $obj )) {
 						echo $obj->getHtmlErrors ();
 					}
@@ -396,7 +400,7 @@ switch ($op) {
 		}
 		
 		// Redirect page
-		fmcontent_Redirect ( 'content.php', 1, _FMCONTENT_MSG_WAIT );
+		fmcontent_Redirect ( $url , 1, _FMCONTENT_MSG_WAIT );
 		xoops_cp_footer ();
 		exit ();
 		break;
