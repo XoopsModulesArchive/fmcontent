@@ -15,7 +15,7 @@
         <td class="txtcenter width35 bold"><{$file.file_title}></td>
         <td class="txtcenter bold"><{$file.file_content}></td>
         <td class="txtcenter width5 bold">
-           
+           <img class="cursorpointer" id="file_status<{$file.file_id}>" onclick="fmcontent_setFileOnline( { op: 'file_status', file_id: <{$file.file_id}> }, 'file_status<{$file.file_id}>', 'backend.php' )" src="<{if $file.file_status}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" class="tooltip" alt=""/>
         </td>
         <td class="txtcenter width10 xo-actions">
             <a href="<{$file.fileurl}>"><img class="tooltip" src="../images/icons/display.png" alt="<{$smarty.const._FMCONTENT_CONTENT_VIEW}>" title="<{$smarty.const._FMCONTENT_CONTENT_VIEW}>"/></a>
@@ -28,4 +28,4 @@
 </table>
 
 
-<div><{$file_pagenav}></div> 
+<div class="pagenav"><{$file_pagenav}></div>

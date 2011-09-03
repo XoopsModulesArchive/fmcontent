@@ -181,6 +181,21 @@ function fmcontent_setShow(data, img, file) {
             });
 }
 
+function fmcontent_setFileOnline(data, img, file) {
+    // Post request
+    $.post(file, data,
+            function(reponse, textStatus) {
+                if (textStatus == 'success') {
+                    // Change image src
+                    if ($('img#' + img).attr("src") == "../images/icons/ok.png") {
+                        $('img#' + img).attr("src", "../images/icons/cancel.png");
+                    } else {
+                        $('img#' + img).attr("src", "../images/icons/ok.png");
+                    }
+                }
+            });
+}
+
 function display_dialog(id, bgiframe, modal, hide, show, height, width) {
     $(document).ready(function() {
         $("#dialog" + id).dialog({
