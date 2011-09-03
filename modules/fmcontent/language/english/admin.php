@@ -153,7 +153,6 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
 	 define('_FMCONTENT_FILE_TITLE', 'Title');
 	 define('_FMCONTENT_FILE_CONTENT', 'File Content');
 	 define('_FMCONTENT_STATUS', 'Active');
-	 define('_FMCONTENT_FILE', 'File');
 	 define('_FMCONTENT_SELECT_FILE', 'Select your file');
 // Admin message
     define('_FMCONTENT_MSG_DBUPDATE', 'Database updated successfully!');

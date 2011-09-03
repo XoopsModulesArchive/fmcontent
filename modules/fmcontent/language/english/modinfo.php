@@ -31,6 +31,7 @@ if (!defined('_MI_FMCONTENT_NAME')) {
     define('_FMCONTENT_ABOUT', 'About');
     define('_FMCONTENT_HELP', 'Help');
     define('_FMCONTENT_SUBMIT', 'Submit');
+    define('_FMCONTENT_FILE', 'File');
 // Block
     define('_FMCONTENT_MENU', 'Content menu');
     define('_FMCONTENT_PAGE', 'Content page');
