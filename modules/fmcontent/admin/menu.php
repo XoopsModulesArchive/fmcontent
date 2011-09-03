@@ -32,14 +32,14 @@ $adminmenu[$i] = array(
 	 'icon' => 'images/admin/content.png');
 $i++;
 $adminmenu[$i] = array(
-    'title' => _FMCONTENT_TOOLS,
-    'link' => 'admin/tools.php',
-	 'icon' => 'images/admin/administration.png');
-$i++;
-$adminmenu[$i] = array(
     'title' => _FMCONTENT_FILE,
     'link' => 'admin/file.php',
 	 'icon' => 'images/admin/file.png');
+$i++;
+$adminmenu[$i] = array(
+    'title' => _FMCONTENT_TOOLS,
+    'link' => 'admin/tools.php',
+	 'icon' => 'images/admin/administration.png');
 $i++;
 $adminmenu[$i] = array(
     'title' => _FMCONTENT_PERM,
