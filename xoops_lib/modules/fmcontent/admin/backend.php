@@ -366,7 +366,20 @@ switch ($op) {
 			echo $obj->getHtmlErrors ();
 		}
 		break;
-		
+	
+	case 'file_status' :
+		$file_id = fmcontent_CleanVars ( $_REQUEST, 'file_id', 0, 'int' );
+		if ($file_id > 0) {
+			$obj = & $file_handler->get ( $file_id );
+			$old = $obj->getVar ( 'file_status' );
+			$obj->setVar ( 'file_status', ! $old );
+			if ($file_handler->insert ( $obj )) {
+				exit ();
+			}
+			echo $obj->getHtmlErrors ();
+		}
+		break;
+			
 	case 'delete' :
 	   //print_r($_POST);
 		$id = fmcontent_CleanVars ( $_REQUEST, 'id', 0, 'int' );
