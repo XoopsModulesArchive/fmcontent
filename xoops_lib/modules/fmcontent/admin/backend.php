@@ -266,7 +266,6 @@ switch ($op) {
 		break;
 		
 	case 'edit_file' :
-      print_r($_REQUEST);
 	   $file_id = fmcontent_CleanVars ( $_REQUEST, 'file_id', 0, 'int' );
 		if ($file_id > 0) {
 
