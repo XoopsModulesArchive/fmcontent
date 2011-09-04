@@ -72,24 +72,22 @@ class fmcontentUtils {
 	 */
 	function uploadfile($forMods, $type, $obj, $file) {   
       include_once XOOPS_ROOT_PATH . "/class/uploader.php";
-		$uploader_file = new XoopsMediaUploader(XOOPS_ROOT_PATH . xoops_getModuleOption ( 'file_dir', $forMods->getVar ( 'dirname' ) ), explode('|',xoops_getModuleOption ( 'file_mime', $forMods->getVar ( 'dirname' ) )), xoops_getModuleOption ( 'file_size', $forMods->getVar ( 'dirname' ) ), null, null);
-		if ($uploader_file->fetchMedia ( $type )) {
-			$uploader_file->setPrefix ( $type . '_' );
-			$uploader_file->fetchMedia ( $type );
-			if (! $uploader_file->upload ()) {
-				$errors = $uploader_file->getErrors ();
-				fmcontent_Redirect ( "javascript:history.go(-1)", 3, $errors );
-				xoops_cp_footer ();
-			   exit ();
+		$uploader = new XoopsMediaUploader(XOOPS_ROOT_PATH . xoops_getModuleOption ( 'file_dir', $forMods->getVar ( 'dirname' ) ), explode('|',xoops_getModuleOption ( 'file_mime', $forMods->getVar ( 'dirname' ) )), xoops_getModuleOption ( 'file_size', $forMods->getVar ( 'dirname' ) ));
+      if ($uploader->fetchMedia($type)) {
+      	$uploader->setPrefix ( $type . '_' );
+			$uploader->fetchMedia ( $type );
+			if ($uploader->upload()) {
+				$obj->setVar ( $type, $uploader->getSavedFileName () );
 			} else {
-				$obj->setVar ( $type, $uploader_file->getSavedFileName () );
+				echo _AM_UPLOAD_ERROR. ' ' . $uploader->getErrors();
 			}
 		} else {
-			if (isset ( $file )) {
-				$obj->setVar ( $type, $file );
-			}
-		}        
-	}
+			$errors = $uploader->getErrors ();
+			fmcontent_Redirect ( "javascript:history.go(-1)", 3, $errors );
+			xoops_cp_footer ();
+		   exit ();
+		}
+ 	}
 	
 	/**
 	 *
