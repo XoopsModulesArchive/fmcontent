@@ -78,6 +78,7 @@ class fmcontentUtils {
 			$uploader->fetchMedia ( $type );
 			if ($uploader->upload()) {
 				$obj->setVar ( $type, $uploader->getSavedFileName () );
+				$obj->setVar ( 'file_type', preg_replace('/^.*\./', '', $uploader->getSavedFileName ()));
 			} else {
 				echo _AM_UPLOAD_ERROR. ' ' . $uploader->getErrors();
 			}
