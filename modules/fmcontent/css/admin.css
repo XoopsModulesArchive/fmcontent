@@ -149,6 +149,10 @@ div.rmmenuicon a:hover span {
 	background-image: url(../images/admin/about.png);
 }
 
+.moduleicons #file {
+	background-image: url(../images/admin/file.png);
+}
+
 .txtchangelog {
 	height: 350px;
 	overflow: auto;
