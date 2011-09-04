@@ -154,6 +154,7 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
 	 define('_FMCONTENT_FILE_CONTENT', 'File Content');
 	 define('_FMCONTENT_STATUS', 'Active');
 	 define('_FMCONTENT_SELECT_FILE', 'Select your file');
+	 define('_FMCONTENT_FILE_TYPE', 'Type');
 // Admin message
     define('_FMCONTENT_MSG_DBUPDATE', 'Database updated successfully!');
     define('_FMCONTENT_MSG_ERRORDELETE', 'You cannot delete this content! <br />Please move or delete all child of this content');

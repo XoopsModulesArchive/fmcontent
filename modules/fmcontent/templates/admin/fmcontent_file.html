@@ -5,6 +5,7 @@
     <th><{$smarty.const._FMCONTENT_FILE_ID}></th>
     <th><{$smarty.const._FMCONTENT_FILE_TITLE}></th>
     <th><{$smarty.const._FMCONTENT_FILE_CONTENT}></th>
+    <th><{$smarty.const._FMCONTENT_FILE_TYPE}></th>
     <th><{$smarty.const._FMCONTENT_FILE_ONLINE}></th>
     <th><{$smarty.const._FMCONTENT_FILE_ACTION}></th>
     </thead>
@@ -12,8 +13,9 @@
     <{foreach item=file from=$files}>
     <tr class="odd" id="mod_<{$file.file_id}>">
         <td class="width5"><img src="../images/icons/puce.png" alt=""/><{$file.file_id}></td>
-        <td class="txtcenter width35 bold"><{$file.file_title}></td>
+        <td class="txtcenter bold"><{$file.file_title}></td>
         <td class="txtcenter bold"><{$file.content}></td>
+        <td class="txtcenter width10 bold"><{$file.file_type}></td>
         <td class="txtcenter width5 bold">
            <img class="cursorpointer" id="file_status<{$file.file_id}>" onclick="fmcontent_setFileOnline( { op: 'file_status', file_id: <{$file.file_id}> }, 'file_status<{$file.file_id}>', 'backend.php' )" src="<{if $file.file_status}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" class="tooltip" alt=""/>
         </td>
