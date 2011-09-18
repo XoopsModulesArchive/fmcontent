@@ -103,7 +103,7 @@ class fmcontentFileHandler extends XoopsPersistableObjectHandler {
 		parent::XoopsPersistableObjectHandler ( $db, 'fmcontent_file', 'fmcontent_file', 'file_id', 'file_title' );
 	}
 
-	function getFiles($forMods, $file , $content) {
+	function getFiles($forMods, $file , $content = null) {
 		$ret = array ();
 			$criteria = new CriteriaCompo ();
 			$criteria->add ( new Criteria ( 'file_modid', $forMods->getVar ( 'mid' ) ) );
@@ -123,7 +123,7 @@ class fmcontentFileHandler extends XoopsPersistableObjectHandler {
 			foreach ( $files as $root ) {
 				$tab = array ();
 				$tab = $root->toArray ();
-				if(is_array($content)) {
+				if($content || is_array($content)) {
 					foreach ( array_keys ( $content ) as $i ) {
 						$list [$i] ['file_title'] = $content [$i]->getVar ( "content_title" );
 						$list [$i] ['file_id'] = $content [$i]->getVar ( "content_id" );
@@ -133,9 +133,6 @@ class fmcontentFileHandler extends XoopsPersistableObjectHandler {
 						$tab ['contentid'] = $list [$root->getVar ( 'file_content' )] ['file_id'];
 					}
 				}
-					
-				//$tab ['content'] = 'df ' . $root->getVar ( 'file_content' );
-				
 				$tab ['fileurl'] = XOOPS_URL . xoops_getModuleOption ( 'file_dir', $forMods->getVar ( 'dirname' ) ) . $root->getVar ( 'file_name' );
 				$ret [] = $tab;
 			}
