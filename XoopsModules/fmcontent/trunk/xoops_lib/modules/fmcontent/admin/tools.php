@@ -43,6 +43,14 @@ switch ($op) {
         $form->addElement(new XoopsFormHidden('op', 'alias'));
         $form->addElement(new XoopsFormButton('', 'post', _SUBMIT, 'submit'));
         $xoopsTpl->assign('alias', $form->render());
+        
+        // meta alias
+        $form = new XoopsThemeForm(_FMCONTENT_META_TITLE, 'tools', 'tools.php', 'post');  
+        $form->addElement(new XoopsFormRadioYN ( _FMCONTENT_META_KEYWORD, 'keyword', "1" ));
+        $form->addElement(new XoopsFormRadioYN ( _FMCONTENT_META_DESCRIPTION, 'description', "1" ));
+        $form->addElement(new XoopsFormHidden('op', 'meta'));
+        $form->addElement(new XoopsFormButton('', 'post', _SUBMIT, 'submit'));
+        $xoopsTpl->assign('meta', $form->render());
 
         // Add clone
         $form = new XoopsThemeForm(_FMCONTENT_FORMFOLDER_TITLE, 'tools', 'tools.php', 'post');
@@ -120,7 +128,7 @@ switch ($op) {
 				$topic_id = '1';
 		      while ($topic_id <= $last_id) {
 		        	  $obj = $topic_handler->get ( $topic_id );
-			        if($obj->getVar ( 'topic_id', 'e' )) {
+			        if($obj) {
 			        		$obj->setVar ( 'topic_alias', fmcontent_Filter($obj->getVar ( 'topic_title', 'e' )));
 			        		$topic_handler->insert ( $obj );
 			        }
@@ -140,7 +148,7 @@ switch ($op) {
 				$content_id = '1';
 		        while ($content_id <= $last_id) {
 		        	  $obj = $content_handler->get ( $content_id );
-			        if($obj->getVar ( 'content_id', 'e' )) {
+			        if($obj) {
 			        		$obj->setVar ( 'content_alias', fmcontent_Filter($obj->getVar ( 'content_title', 'e' )));
 			        		$content_handler->insert ( $obj );
 			        }
@@ -148,7 +156,42 @@ switch ($op) {
 		        }
 	        }	
         fmcontent_Redirect('tools.php', 1, _FMCONTENT_MSG_WAIT);
-    break;  
+    break; 
+    
+    case 'meta': 
+         $criteria = new CriteriaCompo ();
+			$criteria->setSort ( 'content_id' );
+			$criteria->setOrder ( 'DESC' );
+			$criteria->setLimit ( 1 );
+			$last = $content_handler->getObjects ( $criteria );
+		   foreach ( $last as $item ) {
+				$last_id = $item->getVar ( 'content_id' );
+			}
+			$content_id = '1';
+			
+	      if($_POST['keyword']) {
+		     	 while ($content_id <= $last_id) {
+		     	     $obj = $content_handler->get ( $content_id );
+			        if($obj) {
+			        		$obj->setVar ( 'content_words', fmcontent_MetaFilter($obj->getVar ( 'content_title', 'e' )));
+			        		$content_handler->insert ( $obj );
+			        }
+			        $content_id = $content_id + 1;
+		     	 }	
+	      }
+	     
+	      if($_POST['description']) {
+		     	 while ($content_id <= $last_id) {
+		     	 	  $obj = $content_handler->get ( $content_id );
+			        if($obj) {
+			        		$obj->setVar ( 'content_desc', fmcontent_AjaxFilter($obj->getVar ( 'content_title', 'e' )));
+			        		$content_handler->insert ( $obj );
+			        }
+			        $content_id = $content_id + 1;
+   	       }	
+	      }
+	      fmcontent_Redirect('tools.php', 1, _FMCONTENT_MSG_WAIT);
+    break;
 }
 
 $xoopsTpl->assign('navigation', 'tools');
