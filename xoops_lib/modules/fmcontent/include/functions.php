@@ -58,9 +58,10 @@ function fmcontent_isEditorHTML($module) {
  */
 function fmcontent_Filter($url, $type = '', $module = 'fmcontent') {
 
-    // Get regular expression from module setting. default setting is : `[^a-z0-9۰-۹آا-ی]`i
+    // Get regular expression from module setting. default setting is : `[^a-z0-9]`i
     $regular_expression = xoops_getModuleOption('regular_expression', $module);
-
+    
+    $url = strip_tags($url);
     $url = preg_replace("`\[.*\]`U", "", $url);
     $url = preg_replace('`&(amp;)?#?[a-z0-9]+;`i', '-', $url);
     $url = htmlentities($url, ENT_COMPAT, 'utf-8');
@@ -79,9 +80,10 @@ function fmcontent_Filter($url, $type = '', $module = 'fmcontent') {
  */
 function fmcontent_MetaFilter($meta, $type = '', $module = 'fmcontent') {
 
-    // Get regular expression from module setting. default setting is : `[^a-z0-9۰-۹آا-ی]`u
+    // Get regular expression from module setting. default setting is : `[^a-z0-9]`i
     $regular_expression = xoops_getModuleOption('regular_expression', $module);
-
+    
+    $meta = strip_tags($meta);
     $meta = preg_replace("`\[.*\]`U", "", $meta);
     $meta = preg_replace('`&(amp;)?#?[a-z0-9]+;`i', ',', $meta);
     $meta = htmlentities($meta, ENT_COMPAT, 'utf-8');
@@ -99,6 +101,7 @@ function fmcontent_MetaFilter($meta, $type = '', $module = 'fmcontent') {
  * @return  $text
  */
 function fmcontent_AjaxFilter($text, $type = '') {
+	 $text = strip_tags($text);
     $text = preg_replace("`\[.*\]`U", "", $text);
     $text = preg_replace('`&(amp;)?#?[a-z0-9]+;`i', '-', $text);
     $text = htmlentities($text, ENT_COMPAT, 'utf-8');
