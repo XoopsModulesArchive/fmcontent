@@ -22,7 +22,7 @@
 	      <{if $link.date || $link.hits || $content.content_comments || $link.topicshow}> &bull;<{/if}>
 				<{/if}>          
 	      <{if $link.date}>
-				<span class="itemPostDate"><time datetime="<{$content.content_create}>" pubdate><{$content.content_create}></time></span>
+				<span class="itemPostDate"><{$smarty.const._FMCONTENT_DATE}>:  <time datetime="<{$content.content_create}>" pubdate><{$content.content_create}></time></span>
 				<{if $link.hits || $content.content_comments || $link.topicshow}> &bull;<{/if}>
 	      <{/if}>
 	      <{if $link.hits}>
@@ -99,12 +99,13 @@
 	      <{/if}>
 	    </div>
 			<div class="floatright">
-	      <{if $link.prev}>
-	      <a href="<{$link.prev}>" title="<{$smarty.const._FMCONTENT_PREV}> : <{$link.prev_title}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/prev.png" alt="<{$smarty.const._FMCONTENT_PREV}>"/></a>
-	      <{/if}>
-	      <{if $link.next}>
-	      <a href="<{$link.next}>" title="<{$smarty.const._FMCONTENT_NEXT}> : <{$link.next_title}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/next.png" alt="<{$smarty.const._FMCONTENT_NEXT}>"/></a>
-	      <{/if}>
+				<{if $link.prev}>
+				<span class="floatright"><a href="<{$link.prev}>" title="<{$smarty.const._FMCONTENT_PREV}> : <{$link.prev_title}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/prev.png" alt="<{$smarty.const._FMCONTENT_PREV}>"/></a></span>
+				<{/if}>
+				<{if $link.next}>
+				<span class="floatleft"><a href="<{$link.next}>" title="<{$smarty.const._FMCONTENT_NEXT}> : <{$link.next_title}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/next.png" alt="<{$smarty.const._FMCONTENT_NEXT}>"/></a></span>
+				<{/if}>
+				<div class="clear"></div>
 			</div>
 			<div class="clear"></div>		
     </footer>        
