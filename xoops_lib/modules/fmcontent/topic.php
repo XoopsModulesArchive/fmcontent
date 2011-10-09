@@ -10,7 +10,7 @@
 */
 
 /**
- * FmContent index file
+ * FmContent topic file
  *
  * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
@@ -19,6 +19,8 @@
  */
 if (! isset ( $forMods ))
 	exit ( 'Module not found' ); 
+
+include_once XOOPS_ROOT_PATH . "/class/pagenav.php";
 
 $content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
 $topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
@@ -64,7 +66,10 @@ if ($topic_numrows > $topic_limit) {
 $xoopsTpl->assign('topics', $topics);
 $xoopsTpl->assign('topic_pagenav', $topic_pagenav);
 $xoopsTpl->assign('xoops_dirname', $forMods->getVar('dirname'));
-        
+$xoopsTpl->assign ( 'advertisement', xoops_getModuleOption ( 'advertisement', $forMods->getVar ( 'dirname' ) ) );
+$xoopsTpl->assign ( 'imgwidth', xoops_getModuleOption ( 'imgwidth', $forMods->getVar ( 'dirname' ) ) );
+$xoopsTpl->assign ( 'imgfloat', xoops_getModuleOption ( 'imgfloat', $forMods->getVar ( 'dirname' ) ) );  
+    
 // include Xoops footer
 include XOOPS_ROOT_PATH . '/footer.php';
 ?>
