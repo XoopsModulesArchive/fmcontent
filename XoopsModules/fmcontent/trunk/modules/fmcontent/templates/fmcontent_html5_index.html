@@ -56,7 +56,9 @@
 			<{/if}>
 		</article>
     <{/if}>
-	
+	<{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
     <{if $showtype == 1 && ($content_limit != 0 || !$content_topic)}>
     <{if $default}>
     <div class="related">
@@ -154,6 +156,9 @@
 			<{/if}>
     </div>
     <{/if}>
+<{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
     <table summary="<{$topic_title}> <{$smarty.const._FMCONTENT_RELATED}>">
       <thead>
         <tr>
@@ -196,6 +201,9 @@
 		  <{/if}>
     </div>
     <{/if}>
+    <{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
     <{foreach item=content from=$contents}>
     <article class="item">
       <div class="itemBody" id="content_<{$content.content_id}>">
@@ -278,6 +286,9 @@
 		  <{/if}>
     </div>
     <{/if}>
+    <{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
     <nav>
       <ul>
         <{foreach item=content from=$contents}>
@@ -312,6 +323,9 @@
     <{/if}>
     
     <{if $type == type2}>
+    <{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
 		<table id="xo-content-data" class="outer" cellspacing="1" width="100%">
 			<thead>
 				<th><{$smarty.const._FMCONTENT_TOPIC_ID}></th>
@@ -333,6 +347,9 @@
     <{/if}>
     
     <{if $type == type4}>
+    <{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
 <article id="default-content" class="item">
 	    <header>
 	    	<div class="itemTitle "><h1><{$contents.content_title}></h1></div>

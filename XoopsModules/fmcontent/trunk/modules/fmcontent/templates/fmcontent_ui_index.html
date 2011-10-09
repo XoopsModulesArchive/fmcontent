@@ -49,7 +49,9 @@
 			</div>
     </div>
     <{/if}>
-	 
+	 <{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
     <{if $showtype == 1 && ($content_limit != 0 || !$content_topic)}>
     <{if $default}>
     <div class="related">
@@ -135,6 +137,9 @@
 			<{/if}>
     </div>
     <{/if}>
+    <{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
     <table class="ui-widget-content ui-corner-all" summary="<{$topic_title}> <{$smarty.const._FMCONTENT_RELATED}>">
       <thead>
         <tr >
@@ -177,6 +182,9 @@
 			<{/if}>
     </div>
     <{/if}>
+    <{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
     <{foreach item=content from=$contents}>
     <div class="ui-widget-content ui-corner-all">
         <div class="ui-widget-content ui-corner-all" id="content_<{$content.content_id}>">
@@ -245,6 +253,9 @@
 			<{/if}>
     </div>
     <{/if}>
+    <{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
     <ul class="ui-widget ui-helper-clearfix">
       <{foreach item=content from=$contents}>
       <li class="ui-state-default ui-corner-all">
@@ -277,6 +288,9 @@
     <{/if}>
     
     <{if $type == type2}>
+    <{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
 		<table id="xo-content-data" class="outer" cellspacing="1" width="100%">
 			<thead>
 				<th class="ui-widget-header"><{$smarty.const._FMCONTENT_TOPIC_ID}></th>
@@ -299,6 +313,9 @@
     
     <{if $type == type4}>
 <{if $contents}>
+<{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
     <div class="ui-widget-content ui-corner-all" id="default">
   		<div class="ui-widget-header ui-corner-all"><h1><{$contents.content_title}></h1></div>
   		<div class="ui-widget-content ui-corner-all">

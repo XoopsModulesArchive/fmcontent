@@ -239,6 +239,7 @@ $xoopsTpl->assign ( 'alluserpost', xoops_getModuleOption ( 'alluserpost', $forMo
 $xoopsTpl->assign ( 'breadcrumb', $breadcrumb );
 $xoopsTpl->assign ( 'type', $type );
 $xoopsTpl->assign ( 'default', $default );
+$xoopsTpl->assign ( 'advertisement', xoops_getModuleOption ( 'advertisement', $forMods->getVar ( 'dirname' ) ) );
 
 // include Xoops footer
 include XOOPS_ROOT_PATH . '/footer.php';
