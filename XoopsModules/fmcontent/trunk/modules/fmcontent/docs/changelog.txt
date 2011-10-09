@@ -18,6 +18,7 @@
 - Add support for module admin class (Voltan)
 - Add option for attach file for contents (Voltan)
 - Fix bug in delete pages (Voltan)
+- Add topic list page (Voltan)
 
 Language changes :
 + Add

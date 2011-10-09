@@ -83,11 +83,15 @@ $modversion['templates'][] = array('file' => 'fmcontent_ui_index.html', 'descrip
 $modversion['templates'][] = array('file' => 'fmcontent_rss.html', 'description' => '');
 $modversion['templates'][] = array('file' => 'fmcontent_bookmarkme.html', 'description' => '');
 $modversion['templates'][] = array('file' => 'fmcontent_header.html', 'description' => '');
+$modversion['templates'][] = array('file' => 'fmcontent_topic.html', 'description' => '');
 
 // Menu
 $modversion['sub'][] = array(
     'name' => _FMCONTENT_SUBMIT,
     'url' => 'submit.php');
+$modversion['sub'][] = array(
+    'name' => _FMCONTENT_TOPIC,
+    'url' => 'topic.php');
 
 // Blocks
 $modversion['blocks'][] = array(
