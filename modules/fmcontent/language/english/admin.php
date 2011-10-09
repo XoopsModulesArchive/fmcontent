@@ -138,6 +138,9 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     define('_FMCONTENT_ALIAS_TITLE', 'Rebuild Alias');
     define('_FMCONTENT_ALIAS_CONTENT', 'Rebuild content alias');
     define('_FMCONTENT_ALIAS_TOPIC', 'Rebuild topic alias');
+    define('_FMCONTENT_META_TITLE', 'Rebuild Metas');
+    define('_FMCONTENT_META_KEYWORD', 'Rebuild Meta keywords');
+    define('_FMCONTENT_META_DESCRIPTION', 'Rebuild Meta Description');
 // Permissions
     define('_FMCONTENT_PERMISSIONS_ACCESS', 'Access permissions');
     define('_FMCONTENT_PERMISSIONS_SUBMIT', 'Submit permissions');
