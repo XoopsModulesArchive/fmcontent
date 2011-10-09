@@ -53,7 +53,7 @@
 				<{if $link.date || $link.hits || $content.content_comments || $link.topicshow}> &bull;<{/if}>
 				<{/if}>          
 				<{if $link.date}>
-				<span class="itemPostDate"><{$content.content_create}></span>
+				<span class="itemPostDate"><{$smarty.const._FMCONTENT_DATE}>: <{$content.content_create}></span>
 				<{if $link.hits || $content.content_comments || $link.topicshow}> &bull;<{/if}>
 				<{/if}>
 				<{if $link.hits}>
@@ -70,7 +70,7 @@
 				<span class="itemPermaLink"><{$smarty.const._FMCONTENT_PUBTOPIC}>: <a title="<{$smarty.const._FMCONTENT_PUBTOPIC}> <{$link.topic}>" href="<{$link.topicurl}>"><{$link.topic}></a></span>
 				<{/if}>
 			</div>
-			<div class="itemIcons floatright">
+			<div class="itemIcons floatleft">
 				<{if $xoops_isadmin}>
 				<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/content.php?op=edit_content&amp;content_id=<{$content.content_id}>" title="<{$smarty.const._FMCONTENT_EDIT}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/edit.png" alt="<{$smarty.const._CONTENT_EDIT}>"/></a>
 				<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/content.php?op=delete&amp;content_id=<{$content.content_id}>" title="<{$smarty.const._FMCONTENT_DELETE}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/delete.png" alt="<{$smarty.const._CONTENT_DELETE}>"/>&nbsp;</a>
@@ -87,13 +87,14 @@
 			</div>
 			<div class="clear spacer"></div>
 			<{if $link.prev || $link.next}>
-			<div>	           
+			<div class="floatright">
 				<{if $link.prev}>
-				<a href="<{$link.prev}>" title="<{$smarty.const._FMCONTENT_PREV}> : <{$link.prev_title}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/prev.png" alt="<{$smarty.const._FMCONTENT_PREV}>"/></a>
+				<span class="floatright"><a href="<{$link.prev}>" title="<{$smarty.const._FMCONTENT_PREV}> : <{$link.prev_title}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/prev.png" alt="<{$smarty.const._FMCONTENT_PREV}>"/></a></span>
 				<{/if}>
 				<{if $link.next}>
-				<a href="<{$link.next}>" title="<{$smarty.const._FMCONTENT_NEXT}> : <{$link.next_title}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/next.png" alt="<{$smarty.const._FMCONTENT_NEXT}>"/></a>
-				<{/if}>				
+				<span class="floatleft"><a href="<{$link.next}>" title="<{$smarty.const._FMCONTENT_NEXT}> : <{$link.next_title}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/next.png" alt="<{$smarty.const._FMCONTENT_NEXT}>"/></a></span>
+				<{/if}>
+				<div class="clear"></div>
 			</div>
 			<{/if}>	
     </div>  
