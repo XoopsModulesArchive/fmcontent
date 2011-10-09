@@ -69,7 +69,7 @@
 		<div class="itemHead">
 			<div class="itemTitle">
 				<h2>
-					<a href="<{$content.url}>" title="<{$content.content_title}>"><{$content.content_title}></a><{if $info.showtopic && $content.content_topic}> : <a href="<{$content.topicurl}>" title="<{$smarty.const._FMCONTENT_PUBTOPIC}> <{$content.topic}>"><{$content.topic}></a><{/if}>
+					<a href="<{$content.url}>" title="<{$content.content_title}>"><{$content.content_title}></a>
 				</h2>
 			</div>		
 		</div>
@@ -88,6 +88,9 @@
 			<{/if}>
 			<{if $info.hits}>
 			<span class="itemStats"><{$content.content_hits}> <{$smarty.const._FMCONTENT_HITS}></span>
+			<{/if}>
+			<{if $info.showtopic && $content.content_topic}> 
+			<span class="itemPermaLink"> &bull; <{$smarty.const._FMCONTENT_PUBTOPIC}>: <a href="<{$content.topicurl}>" title="<{$smarty.const._FMCONTENT_PUBTOPIC}> <{$content.topic}>"><{$content.topic}></a></span>
 			<{/if}>
 		</div>
 		<div class="itemBody" id="content_<{$content.content_id}>">
@@ -199,7 +202,7 @@
 		<div class="itemHead">
 			<div class="itemTitle">
 				<h2>
-					<a href="<{$content.url}>" title="<{$content.content_title}>"><{$content.content_title}></a><{if !$content_topic}> 	: <a href="<{$content.topicurl}>" title="<{$smarty.const._FMCONTENT_PUBTOPIC}> <{$content.topic}>"><{$content.topic}></a><{/if}>
+					<a href="<{$content.url}>" title="<{$content.content_title}>"><{$content.content_title}></a>
 				</h2>
 			</div>
 		</div>
@@ -218,6 +221,9 @@
 			<{/if}>
 			<{if $info.hits}>
 			<span class="itemStats"><{$content.content_hits}> <{$smarty.const._FMCONTENT_HITS}></span>
+			<{/if}>
+			<{if $info.showtopic && $content.content_topic}> 
+			<span class="itemPermaLink"> &bull; <{$smarty.const._FMCONTENT_PUBTOPIC}>: <a href="<{$content.topicurl}>" title="<{$smarty.const._FMCONTENT_PUBTOPIC}> <{$content.topic}>"><{$content.topic}></a></span>
 			<{/if}>
 		</div>
 		<div class="itemFoot">

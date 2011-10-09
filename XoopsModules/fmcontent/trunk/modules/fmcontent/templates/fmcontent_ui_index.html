@@ -68,7 +68,7 @@
     <div class="ui-widget-content ui-corner-all">
         <div class="ui-widget-header ui-corner-all">
 					<h2>
-						<a href="<{$content.url}>" title="<{$content.content_title}>"><{$content.content_title}></a><{if $info.showtopic && $content.content_topic}> | <a href="<{$content.topicurl}>" title="<{$smarty.const._FMCONTENT_PUBTOPIC}> <{$content.topic}>"><{$content.topic}></a><{/if}>
+						<a href="<{$content.url}>" title="<{$content.content_title}>"><{$content.content_title}></a>
 					</h2>
         </div>
         <div class="ui-widget-content ui-corner-all" id="content_<{$content.content_id}>">
@@ -107,6 +107,9 @@
           <{if $info.coms}>
           <{if $content.content_comments}><{$content.content_comments}> <{$smarty.const._FMCONTENT_COMS}><{else}><{$smarty.const._FMCONTENT_NOCOMS}><{/if}>
           <{/if}>
+          <{if $info.showtopic && $content.content_topic}> 
+			  &bull; <{$smarty.const._FMCONTENT_PUBTOPIC}>: <a href="<{$content.topicurl}>" title="<{$smarty.const._FMCONTENT_PUBTOPIC}> <{$content.topic}>"><{$content.topic}></a>
+			<{/if}>
           <{if $xoops_isadmin}>
           <span>
               &nbsp;<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/content.php?op=edit_content&amp;content_id=<{$content.content_id}>" title="<{$smarty.const._FMCONTENT_EDIT}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/edit.png" alt="<{$smarty.const._CONTENT_EDIT}>"/></a>
@@ -194,7 +197,7 @@
         </div>
         <div class="ui-widget-header ui-corner-all">
 					<h2>
-						<a href="<{$content.url}>" title="<{$content.content_title}>"><{$content.content_title}></a><{if !$content_topic}> | <a href="<{$content.topicurl}>" title="<{$smarty.const._FMCONTENT_PUBTOPIC}> <{$content.topic}>"><{$content.topic}></a><{/if}>
+						<a href="<{$content.url}>" title="<{$content.content_title}>"><{$content.content_title}></a>
 					</h2>
         </div>
         <div class="ui-state-default ui-corner-all">
@@ -214,6 +217,9 @@
           <{if $info.coms}>
           <{if $content.content_comments}><{$content.content_comments}> <{$smarty.const._FMCONTENT_COMS}><{else}><{$smarty.const._FMCONTENT_NOCOMS}><{/if}>
           <{/if}>
+          <{if $info.showtopic && $content.content_topic}> 
+			  &bull; <{$smarty.const._FMCONTENT_PUBTOPIC}>: <a href="<{$content.topicurl}>" title="<{$smarty.const._FMCONTENT_PUBTOPIC}> <{$content.topic}>"><{$content.topic}></a> 
+			<{/if}>
           <{if $xoops_isadmin}>
           <span>
               &nbsp;<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/content.php?op=edit_content&amp;content_id=<{$content.content_id}>" title="<{$smarty.const._FMCONTENT_EDIT}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/edit.png" alt="<{$smarty.const._CONTENT_EDIT}>"/></a>
