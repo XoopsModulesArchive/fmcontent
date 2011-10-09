@@ -19,7 +19,7 @@
 					</div>
 					<{/if}>
 					<{$default.content_short}>
-        	<div class="endline spacer"></div>
+        	<div class="clear spacer"></div>
         	<a class="itemMore" href="<{$default.url}>" title="<{$smarty.const._FMCONTENT_MORE}>"><{$smarty.const._FMCONTENT_MORE}></a>
         <{else}>
         	<{if $default.content_img}>						
@@ -34,7 +34,7 @@
 					</div>
 					<{/if}>
         	<{$default.content_text}>
-					<div class="endline"></div>
+					<div class="clear"></div>
         <{/if}>  
 	    </div>
 	    
@@ -88,7 +88,7 @@
           <{else}>
           	<{$content.content_text|truncate:300}>
           <{/if}>
-					<div class="endline"></div>
+					<div class="clear"></div>
         </div>
         <div class="ui-state-default ui-corner-all right">
 	        <{if $info.author}>
@@ -309,7 +309,7 @@
 					</div>
 					<{/if}>
 					<{$contents.content_short}>
-        	<div class="endline spacer"></div>
+        	<div class="clear spacer"></div>
         	<a class="itemMore" href="<{$contents.url}>" title="<{$smarty.const._FMCONTENT_MORE}>"><{$smarty.const._FMCONTENT_MORE}></a>
         <{else}>
         	<{if $contents.content_img}>						
@@ -324,7 +324,7 @@
 					</div>
 					<{/if}>
         	<{$contents.content_text}>
-					<div class="endline"></div>
+					<div class="clear"></div>
         <{/if}>  
 	    </div>
 	    
