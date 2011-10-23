@@ -198,7 +198,7 @@ $xoopsTpl->assign('navigation', 'tools');
 $xoopsTpl->assign('navtitle', _FMCONTENT_TOOLS);
 
 // Call template file
-echo $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/fmcontent_tools.html');
+$xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/fmcontent_tools.html');
 
 // Display Xoops footer
 include "footer.php";

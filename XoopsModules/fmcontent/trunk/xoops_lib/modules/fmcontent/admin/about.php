@@ -53,7 +53,7 @@ $xoopsTpl->assign('module_website_url', $forMods->getInfo("module_website_url"))
 $xoopsTpl->assign('module_website_name', $forMods->getInfo("module_website_name"));
 
 // Call template file
-echo $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/fmcontent_about.html');
+$xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/fmcontent_about.html');
 
 include "footer.php";
 xoops_cp_footer();

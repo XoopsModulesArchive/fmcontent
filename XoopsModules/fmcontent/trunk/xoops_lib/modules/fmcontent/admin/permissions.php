@@ -97,7 +97,7 @@ $xoopsTpl->assign('navtitle', _FMCONTENT_PERM);
 $xoopsTpl->assign('fmcontent_tips', _FMCONTENT_PERMISSIONS_TIPS);
 
 // Call template file
-echo $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/fmcontent_permissions.html');
+$xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/fmcontent_permissions.html');
 unset ($permform);
 
 include "footer.php";
