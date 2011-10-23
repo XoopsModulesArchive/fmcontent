@@ -113,7 +113,7 @@ switch ($op)
         $xoopsTpl->assign('fmcontent_tips', _FMCONTENT_FILE_TIPS);
 
         // Call template file
-        echo $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/fmcontent_file.html');
+        $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/fmcontent_file.html');
 
         break;
 }

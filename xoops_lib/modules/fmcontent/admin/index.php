@@ -52,7 +52,7 @@ $xoopsTpl->assign('navtitle', _FMCONTENT_HOME);
 $xoopsTpl->assign('renderindex', $index_admin->renderIndex());
 
 // Call template file
-echo $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/fmcontent_index.html');
+$xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/fmcontent_index.html');
 
 // Display Xoops footer
 include "footer.php";
