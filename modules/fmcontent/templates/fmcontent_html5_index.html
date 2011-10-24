@@ -2,7 +2,7 @@
 <section class="fmcontent">
 
     <{if $type == type1 || $type == type3}>
-<{if $default}>
+     <{if $default}>
 		<article id="default-content" class="item">
 	    <header>
 	    	<div class="itemTitle "><h1><{$default.content_title}></h1></div>
@@ -56,11 +56,13 @@
 			<{/if}>
 		</article>
     <{/if}>
+    
 	<{if $advertisement}>
 	<div class="itemAde"><{$advertisement}></div>
 	<{/if}>
-    <{if $showtype == 1 && ($content_limit != 0 || !$content_topic)}>
-    <{if $default}>
+	
+	
+	<{if $default}>
     <div class="related">
      <h2><{$smarty.const._FMCONTENT_RELATED}></h2>
     </div>
@@ -93,6 +95,7 @@
 		</article>
 	<{/if}>
 	
+    <{if $showtype == 1 && ($content_limit != 0 || !$content_topic)}>
     <{foreach item=content from=$contents}>
     <article class="item">
       <header>
@@ -163,22 +166,6 @@
     <{/if}>
 
     <{if $showtype == 2 && ($content_limit != 0 || !$content_topic)}>
-    <{if $default}>
-    <div class="related">
-     <h2><{$smarty.const._FMCONTENT_RELATED}></h2>
-    </div>
-    <{else}>
-    <div class="topic_header">
-     	<{if !$content_topic}>
-		 	<h2><{$modname}></h2>
-			<{else}>
-			<h2><{$topic_title}></h2>
-			<{/if}>
-    </div>
-    <{/if}>
-<{if $advertisement}>
-	<div class="itemAde"><{$advertisement}></div>
-	<{/if}>
     <table summary="<{$topic_title}> <{$smarty.const._FMCONTENT_RELATED}>">
       <thead>
         <tr>
@@ -208,22 +195,6 @@
     <{/if}>
 
     <{if $showtype == 3 && ($content_limit != 0 || !$content_topic)}>
-    <{if $default}>
-    <div class="related">
-     <h2><{$smarty.const._FMCONTENT_RELATED}></h2>
-    </div>
-    <{else}>
-    <div class="topic_header">
-     	<{if !$content_topic}>
-		 	<h2><{$modname}></h2>
-			<{else}>
-			<h2><{$topic_title}></h2>
-		  <{/if}>
-    </div>
-    <{/if}>
-    <{if $advertisement}>
-	<div class="itemAde"><{$advertisement}></div>
-	<{/if}>
     <{foreach item=content from=$contents}>
     <article class="item">
       <div class="itemBody" id="content_<{$content.content_id}>">
@@ -293,22 +264,6 @@
     <{/if}>
 
     <{if $showtype == 4 && ($content_limit != 0 || !$content_topic)}>
-    <{if $default}>
-    <div class="related">
-     <h2><{$smarty.const._FMCONTENT_RELATED}></h2>
-    </div>
-    <{else}>
-    <div class="topic_header">
-     	<{if !$content_topic}>
-		 	<h2><{$modname}></h2>
-			<{else}>
-			<h2><{$topic_title}></h2>
-		  <{/if}>
-    </div>
-    <{/if}>
-    <{if $advertisement}>
-	<div class="itemAde"><{$advertisement}></div>
-	<{/if}>
     <nav>
       <ul>
         <{foreach item=content from=$contents}>
