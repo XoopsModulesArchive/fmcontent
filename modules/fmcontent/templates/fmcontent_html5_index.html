@@ -77,7 +77,7 @@
     <{/if}>
     
     <{if $topic_img || $topic_desc}>
-		<article class="item">	
+		<article class="itemBody">	
 		<{if $topic_img}>
 		<figure class="<{$imgfloat}>">	
  			<div class="itemImg gallery">
@@ -264,7 +264,7 @@
     <{/if}>
 
     <{if $showtype == 4 && ($content_limit != 0 || !$content_topic)}>
-    <nav>
+    <nav class="itemList">
       <ul>
         <{foreach item=content from=$contents}>
         <li>
