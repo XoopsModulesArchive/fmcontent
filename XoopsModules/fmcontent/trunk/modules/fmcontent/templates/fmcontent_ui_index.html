@@ -52,8 +52,7 @@
 	 <{if $advertisement}>
 	<div class="itemAde"><{$advertisement}></div>
 	<{/if}>
-    <{if $showtype == 1 && ($content_limit != 0 || !$content_topic)}>
-    <{if $default}>
+	<{if $default}>
     <div class="related">
      <h2><{$smarty.const._FMCONTENT_RELATED}></h2>
     </div>
@@ -82,6 +81,7 @@
 		<{$topic_desc}>
 	<{/if}>
 	
+    <{if $showtype == 1 && ($content_limit != 0 || !$content_topic)}>
     <{foreach item=content from=$contents}>
     <div class="ui-widget-content ui-corner-all">
         <div class="ui-widget-header ui-corner-all">
@@ -140,22 +140,6 @@
     <{/if}>
 
     <{if $showtype == 2 && ($content_limit != 0 || !$content_topic)}>
-    <{if $default}>
-    <div class="related">
-     <h2><{$smarty.const._FMCONTENT_RELATED}></h2>
-    </div>
-    <{else}>
-    <div class="topic_header">
-     	<{if !$content_topic}>
-		 	<h2><{$modname}></h2>
-			<{else}>
-			<h2><{$topic_title}></h2>
-			<{/if}>
-    </div>
-    <{/if}>
-    <{if $advertisement}>
-	<div class="itemAde"><{$advertisement}></div>
-	<{/if}>
     <table class="ui-widget-content ui-corner-all" summary="<{$topic_title}> <{$smarty.const._FMCONTENT_RELATED}>">
       <thead>
         <tr >
@@ -185,22 +169,6 @@
     <{/if}>
 
     <{if $showtype == 3 && ($content_limit != 0 || !$content_topic)}>
-    <{if $default}>
-    <div class="related">
-     <h2><{$smarty.const._FMCONTENT_RELATED}></h2>
-    </div>
-    <{else}>
-    <div class="topic_header">
-     	<{if !$content_topic}>
-		 	<h2><{$modname}></h2>
-			<{else}>
-			<h2><{$topic_title}></h2>
-			<{/if}>
-    </div>
-    <{/if}>
-    <{if $advertisement}>
-	<div class="itemAde"><{$advertisement}></div>
-	<{/if}>
     <{foreach item=content from=$contents}>
     <div class="ui-widget-content ui-corner-all">
         <div class="ui-widget-content ui-corner-all" id="content_<{$content.content_id}>">
@@ -256,22 +224,6 @@
     <{/if}>
 
     <{if $showtype == 4 && ($content_limit != 0 || !$content_topic)}>
-    <{if $default}>
-    <div class="related">
-     <h2><{$smarty.const._FMCONTENT_RELATED}></h2>
-    </div>
-    <{else}>
-    <div class="topic_header">
-     	<{if !$content_topic}>
-		 	<h2><{$modname}></h2>
-			<{else}>
-			<h2><{$topic_title}></h2>
-			<{/if}>
-    </div>
-    <{/if}>
-    <{if $advertisement}>
-	<div class="itemAde"><{$advertisement}></div>
-	<{/if}>
     <ul class="ui-widget ui-helper-clearfix">
       <{foreach item=content from=$contents}>
       <li class="ui-state-default ui-corner-all">
