@@ -66,6 +66,22 @@
 			<{/if}>
     </div>
     <{/if}>
+    
+    	<{if $topic_img || $topic_desc}>
+		<{if $topic_img}>
+			<div class="itemImg gallery">
+			<{if $img_lightbox}>
+				<a href="<{$topic_imgurl}>" title="<{$topic_title}>" >
+					<img width="<{$imgwidth}>" class="<{$imgfloat}> content_img" src="<{$topic_imgurl}>" alt="<{$topic_title}>"/>
+				</a>
+			<{else}>
+			 	<img width="<{$imgwidth}>" class="<{$imgfloat}> content_img" src="<{$topic_imgurl}>" alt="<{$topic_title}>"/>
+			<{/if}>
+			</div>
+		<{/if}>
+		<{$topic_desc}>
+	<{/if}>
+	
     <{foreach item=content from=$contents}>
     <div class="ui-widget-content ui-corner-all">
         <div class="ui-widget-header ui-corner-all">

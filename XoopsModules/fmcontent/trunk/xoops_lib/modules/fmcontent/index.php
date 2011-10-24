@@ -96,7 +96,13 @@ if (isset ( $content_topic )) {
 	$topic_title = $default_title = $view_topic->getVar ( 'topic_title' );
 	$topic_alias = $default_alias = $view_topic->getVar ( 'topic_alias' );
 	$topic_id = $default_id = $view_topic->getVar ( 'topic_id' );
+	$topic_img = $view_topic->getVar ( 'topic_img' );
+	$topic_imgurl = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . $view_topic->getVar ( 'topic_img' );
+	$topic_desc = $view_topic->getVar ( 'topic_desc' );
 	
+	$xoopsTpl->assign ( 'topic_desc', $topic_desc );
+   $xoopsTpl->assign ( 'topic_img', $topic_img );
+   $xoopsTpl->assign ( 'topic_imgurl', $topic_imgurl );
 	$xoopsTpl->assign ( 'topic_title', $topic_title );
 	$xoopsTpl->assign ( 'xoops_pagetitle', $topic_title );
 	
