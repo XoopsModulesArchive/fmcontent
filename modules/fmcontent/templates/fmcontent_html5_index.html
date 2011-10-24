@@ -5,7 +5,7 @@
      <{if $default}>
 		<article id="default-content" class="item">
 	    <header>
-	    	<div class="itemTitle "><h1><{$default.content_title}></h1></div>
+	    	<div class="itemTitle "><h2><{$default.content_title}></h2></div>
 	    	<div class="itemPostDate"><{$smarty.const._FMCONTENT_DATE}>: <time datetime="<{$default.content_create}>" pubdate><{$default.content_create}></time>
 	    		<{if $xoops_isadmin}>
 	        <span class="itemAdminLink">
@@ -327,7 +327,7 @@
 	<{/if}>
 <article id="default-content" class="item">
 	    <header>
-	    	<div class="itemTitle "><h1><{$contents.content_title}></h1></div>
+	    	<div class="itemTitle "><h2><{$contents.content_title}></h2></div>
 	    	<div class="itemPostDate"><{$smarty.const._FMCONTENT_DATE}>: <time datetime="<{$contents.content_create}>" pubdate><{$contents.content_create}></time>
 	    		<{if $xoops_isadmin}>
 	        <span class="itemAdminLink">
