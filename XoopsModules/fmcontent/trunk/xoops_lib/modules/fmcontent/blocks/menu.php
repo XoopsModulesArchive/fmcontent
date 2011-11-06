@@ -15,7 +15,7 @@
  * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      Andricq Nicolas (AKA MusS)
- * @version     $Id:$
+ * @version     $Id$
  */
 if (!function_exists('fmcontent_menu_show')) {
     function fmcontent_menu_show($options) {

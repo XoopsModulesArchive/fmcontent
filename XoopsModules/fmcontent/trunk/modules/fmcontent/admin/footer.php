@@ -15,7 +15,7 @@
  * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      Michael Beck (AKA Mamba)
- * @version     $Id:$
+ * @version     $Id$
  */
 
 echo "<div class='center pad5'><a class='tooltip' title='XOOPS' href='http://www.xoops.org' target='_blank'><img src='../images/admin/xoopsmicrobutton.gif' alt='XOOPS'></a></div>";

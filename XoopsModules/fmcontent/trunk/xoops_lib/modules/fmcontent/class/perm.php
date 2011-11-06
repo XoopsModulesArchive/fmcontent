@@ -16,7 +16,7 @@
  * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      Zoullou (http://www.zoullou.net)
  * @author      Hossein Azizabadi (AKA Voltan)
- * @version     $Id:$
+ * @version     $Id$
  */
 
 if (! defined ( "XOOPS_ROOT_PATH" )) {

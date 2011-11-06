@@ -12,7 +12,7 @@
  * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @since           2.0.0
- * @version         $Id: backend.php 4941 2010-07-22 17:13:36Z beckmi $
+ * @version         $Id$
  */
  
 include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'mainfile.php';
