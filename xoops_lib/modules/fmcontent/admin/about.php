@@ -17,7 +17,7 @@
  * @author      Gregory Mage (AKA Mage)
  * @author      Michael Beck (AKA Mamba)
  * @author      Hossein Azizabadi (AKA Voltan)
- * @version     $Id:$
+ * @version     $Id$
  */
 
 if (!isset($forMods)) exit('Module not found');

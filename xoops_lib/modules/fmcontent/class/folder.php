@@ -18,7 +18,7 @@
  * @subpackage      file
  * @since           2.3.0
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
- * @version         $Id: folder.php 3575 2009-09-05 19:35:11Z trabis $
+ * @version         $Id$
  */
 
 /**
@@ -40,9 +40,9 @@
  * @package cake
  * @subpackage cake.cake.libs
  * @since CakePHP(tm) v 0.2.9
- * @version $Revision: 6311 $
- * @modifiedby $LastChangedBy: phpnut $
- * @lastmodified $Date: 2008-01-02 00:33:52 -0600 (Wed, 02 Jan 2008) $
+ * @version $Revision$
+ * @modifiedby $LastChangedBy$
+ * @lastmodified $Date$
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 /**

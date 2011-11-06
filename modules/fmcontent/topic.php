@@ -15,7 +15,7 @@
  * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      Hossein Azizabadi (AKA Voltan)
- * @version     $Id:$
+ * @version     $Id$
  */
 
 require dirname(__FILE__) . '/header.php';

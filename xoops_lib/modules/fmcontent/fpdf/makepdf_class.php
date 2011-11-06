@@ -1,5 +1,5 @@
 <?php
-// $Id: makepdf_class.php,v 1.3 2007/07/16 12:12:12 aquaportail Exp $
+// $Id$
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //

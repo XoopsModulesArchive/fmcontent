@@ -17,7 +17,7 @@
  * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      Andricq Nicolas (AKA MusS)
  * @package     forcontent
- * @version     $Id:$
+ * @version     $Id$
  */
 
 require '../../../mainfile.php';

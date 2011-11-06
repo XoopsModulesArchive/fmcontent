@@ -17,7 +17,7 @@
  * @author      Andricq Nicolas (AKA MusS)
  * @author      Gregory Mage (Aka Mage)
  * @author      Hossein Azizabadi (Aka Voltan)
- * @version     $Id:$
+ * @version     $Id$
  */
 function fmcontent_list_show($options) {
 
