@@ -15,6 +15,7 @@
  * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
  * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      Andricq Nicolas (AKA MusS)
+ * @author      Hossein Azizabadi (AKA Voltan) 
  * @version     $Id$
  */
 
@@ -79,6 +80,10 @@ function xoops_module_pre_install_fmcontent(&$module) {
                     $error = true;
                     break;
                 }
+                
+                if (!isset($reservedTables)) {
+                	$reservedTables = array();
+                }	
                 // check if the table name is reserved
                 if (!in_array($prefixed_query[4], $reservedTables)) {
                     // not reserved, so try to create one

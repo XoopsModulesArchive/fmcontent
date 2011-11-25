@@ -32,6 +32,9 @@
         <img class="tooltip" onclick="display_dialog(<{$data.content_id}>, true, true, 'slide', 'slide', <{if $data.content_type == 'content'}>300, 700<{else}>110, 300<{/if}>);" src="<{xoAdminIcons display.png}>" alt="<{$smarty.const._PREVIEW}>" title="<{$smarty.const._PREVIEW}>" />
         <{if $data.content_type == 'content'}>
         <a href="<{$data.url}>"><img class="tooltip" src="../images/icons/display.png" alt="<{$smarty.const._FMCONTENT_CONTENT_VIEW}>" title="<{$smarty.const._FMCONTENT_CONTENT_VIEW}>"/></a>
+         <{if $data.content_file != 0}>
+        <a href="file.php?content=<{$data.content_id}>"><img class="tooltip" src="../images/icons/file.png" alt="<{$smarty.const._FMCONTENT_CONTENT_FILE}>" title="<{$smarty.const._FMCONTENT_CONTENT_FILE}>"/></a>
+        <{/if}>
         <{if $data.content_topic != 0}>
         <a href="<{$data.topicurl}>"><img class="tooltip" src="../images/icons/section.png" alt="<{$smarty.const._FMCONTENT_CONTENT_TOPIC}>" title="<{$smarty.const._FMCONTENT_CONTENT_TOPIC}>"/></a>
         <{/if}>

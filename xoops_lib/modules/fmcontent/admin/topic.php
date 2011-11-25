@@ -39,7 +39,6 @@ $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $forMods->getVar('dirname') . 
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/ui/' . xoops_getModuleOption('jquery_theme', 'system') . '/ui.all.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
 
-
 switch ($op)
 {
     case 'new_topic':

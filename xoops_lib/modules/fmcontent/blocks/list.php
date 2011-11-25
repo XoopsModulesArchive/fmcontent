@@ -96,6 +96,7 @@ function fmcontent_list_edit($options) {
     //$show_select->addOption("table", _FMCONTENT_SHOWTYPE_2);
     //$show_select->addOption("photo", _FMCONTENT_SHOWTYPE_3);
     $show_select->addOption("list", _FMCONTENT_SHOWTYPE_4);
+    $show_select->addOption("spotlight", _FMCONTENT_SHOWTYPE_5);
 	 $form .= _FMCONTENT_SHOWTYPE . " : " . $show_select->render() . '<br />';
 
     $form .= _MI_FMCONTENT_NUMBER . " : <input name=\"options[2]\" size=\"5\" maxlength=\"255\" value=\"" . $options[2] . "\" type=\"text\" /><br />\n";

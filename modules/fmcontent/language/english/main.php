@@ -31,7 +31,7 @@ if (!defined('_FMCONTENT_NEXT')) {
     define("_FMCONTENT_AUTHOR_ALL_DESC", "View all contributions by ");
     define('_FMCONTENT_COM', 'Comment');
     define('_FMCONTENT_RELATED', 'Related contents');
-    define("_FMCONTENT_HOME", "Home");
+    define("_FMCONTENT_XHOME", "Home");
 // Link
     define('_FMCONTENT_NEXT', 'Next page');
     define('_FMCONTENT_PREV', 'Previous page');
