@@ -137,6 +137,7 @@ if (!defined('_MI_FMCONTENT_NAME')) {
     define('_FMCONTENT_SHOWTYPE_2', 'Table type');
     define('_FMCONTENT_SHOWTYPE_3', 'Photo type');
     define('_FMCONTENT_SHOWTYPE_4', 'List type');
+    define('_FMCONTENT_SHOWTYPE_5', 'Spotlight');
 //Template
     define('_FMCONTENT_TEMPLATE', 'Template');
     define('_FMCONTENT_TEMPLATE_DESC', 'Set general template for the module');

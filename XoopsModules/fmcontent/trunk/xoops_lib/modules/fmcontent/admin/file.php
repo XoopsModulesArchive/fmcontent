@@ -92,9 +92,17 @@ switch ($op)
         } else {
             $file['start'] = 0;
         }
+        
+        // get content
+        if (isset($_REQUEST['content'])) {
+            $file['content'] = fmcontent_CleanVars($_REQUEST, 'content', 0, 'int');
+            $content = $content_handler->get($file['content']);
+        } else {
+            $content = $content_handler->getall();
+        }
 
-
-        $files = $file_handler->getFiles($forMods, $file);
+        
+        $files = $file_handler->getFiles($forMods, $file , $content);
         
         $file_numrows = $file_handler->getFileCount($forMods);
 
