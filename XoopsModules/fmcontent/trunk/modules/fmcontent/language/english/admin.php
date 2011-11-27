@@ -104,6 +104,7 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     define('_FMCONTENT_FORMUPLOAD', 'Select Image');
     define('_FMCONTENT_CONTENT_TITLE', 'Title');
     define('_FMCONTENT_CONTENT_MANAGER', 'Content manager');
+    define('_FMCONTENT_CONTENT_FILE', 'File');
     define('_FMCONTENT_CONTENT_ID', 'ID');
     define('_FMCONTENT_CONTENT_NUM', 'Weight');
     define('_FMCONTENT_CONTENT_PAGE', 'Page');
