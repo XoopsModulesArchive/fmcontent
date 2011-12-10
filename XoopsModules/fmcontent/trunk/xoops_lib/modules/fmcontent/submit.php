@@ -99,19 +99,21 @@ switch ($op) {
 		}
 		
 		// file
-		$fileobj = $file_handler->create ();
-	   $fileobj->setVar ( 'file_date', time () );
-	   $fileobj->setVar ( 'file_modid', $forMods->getVar ( 'mid' ) );
-		$fileobj->setVar ( 'file_title', $_REQUEST ['content_title'] );
-		$fileobj->setVar ( 'file_content', $obj->getVar ( 'content_id' ) );
-	   $fileobj->setVar ( 'file_status', 1 );
-	   
-	   fmcontentUtils::uploadfile ( $forMods, 'file_name', $fileobj, $_REQUEST ['file_name'] );
-	   $content_handler->contentfile('add',$obj->getVar ( 'content_id' ));
-	   if (! $file_handler->insert ( $fileobj )) {
-				fmcontent_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR );
-				xoops_cp_footer ();
-				exit ();
+		if($_REQUEST ['file_name']) {
+			$fileobj = $file_handler->create ();
+		   $fileobj->setVar ( 'file_date', time () );
+		   $fileobj->setVar ( 'file_modid', $forMods->getVar ( 'mid' ) );
+			$fileobj->setVar ( 'file_title', $_REQUEST ['content_title'] );
+			$fileobj->setVar ( 'file_content', $obj->getVar ( 'content_id' ) );
+		   $fileobj->setVar ( 'file_status', 1 );
+		   
+		   fmcontentUtils::uploadfile ( $forMods, 'file_name', $fileobj, $_REQUEST ['file_name'] );
+		   $content_handler->contentfile('add',$obj->getVar ( 'content_id' ));
+		   if (! $file_handler->insert ( $fileobj )) {
+					fmcontent_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR );
+					xoops_cp_footer ();
+					exit ();
+			}
 		}
 			
 		// Redirect page
