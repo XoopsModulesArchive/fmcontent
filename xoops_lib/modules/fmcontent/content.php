@@ -245,9 +245,9 @@ if (isset ( $content_topic ) && $content_topic > 0 && $view_topic->getVar ( 'top
 if (xoops_getModuleOption ( 'editinplace', $forMods->getVar ( 'dirname' ) ) && is_object ( $xoopsUser ) && ($xoopsUser->id () == $obj->getVar ( 'content_uid' ) || $xoopsUser->isAdmin ()) && $content ['dohtml']) {
 	// Add scripts
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/jquery.js' );
-	$xoTheme->addScript ( 'browse.php?modules/' . $forMods->getVar ( 'dirname' ) . '/js/jquery.wysiwyg.js' );
-	$xoTheme->addScript ( 'browse.php?modules/' . $forMods->getVar ( 'dirname' ) . '/js/jquery.jeditable.mini.js' );
-	$xoTheme->addScript ( 'browse.php?modules/' . $forMods->getVar ( 'dirname' ) . '/js/jquery.jeditable.wysiwyg.js' );
+	$xoTheme->addScript ( 'browse.php?modules/' . $forMods->getVar ( 'dirname' ) . '/js/jeditable/jquery.wysiwyg.js' );
+	$xoTheme->addScript ( 'browse.php?modules/' . $forMods->getVar ( 'dirname' ) . '/js/jeditable/jquery.jeditable.mini.js' );
+	$xoTheme->addScript ( 'browse.php?modules/' . $forMods->getVar ( 'dirname' ) . '/js/jeditable/jquery.jeditable.wysiwyg.js' );
 	// Add Stylesheet
 	$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $forMods->getVar ( 'dirname' ) . '/css/jquery.wysiwyg.css' );
 	$xoopsTpl->assign ( 'editinplace', true );
@@ -287,7 +287,6 @@ if (isset ( $xoTheme ) && is_object ( $xoTheme )) {
 // For social networks scripts
 if (xoops_getModuleOption ( 'show_social_book', $forMods->getVar ( 'dirname' ) ) == '1' || xoops_getModuleOption ( 'show_social_book', $forMods->getVar ( 'dirname' ) ) == '3') {
 	$xoTheme->addScript ( 'http://platform.twitter.com/widgets.js' );
-	$xoTheme->addScript ( 'http://www.google.com/buzz/api/button.js' );
 	$xoTheme->addScript ( 'http://connect.facebook.net/en_US/all.js#xfbml=1' );
 	$xoTheme->addScript ( 'https://apis.google.com/js/plusone.js' );
 }
