@@ -78,6 +78,38 @@
       <{if $advertisement && !$content.content_short}>
       <div class="itemAde"><{$advertisement}></div>
       <{/if}>
+      <{if $content.content_file}>
+		<div class="itemPlayer">
+			<{foreach item=file from=$files}>
+				<{if $file.file_type == flv}>
+				<div class="itemVideo">
+				<script type='text/javascript' src='<{$xoops_url}>/modules/<{$xoops_dirname}>/js/jwplayer/jwplayer.js'></script>
+				<div id='mediaspace<{$file.file_id}>'></div>
+				<script type='text/javascript'>
+				  jwplayer('mediaspace<{$file.file_id}>').setup({
+				    'flashplayer': '<{$xoops_url}>/modules/<{$xoops_dirname}>/js/jwplayer/player.swf',
+				    'file': '<{$file.fileurl}>',
+				    'title': '<{$file.file_title}>',
+				    'controlbar': 'bottom',
+				    'width': '<{$jwwidth}>',
+				    'height': '<{$jwheight}>'
+				  });
+				</script>
+			</div>
+	      <{elseif $file.file_type == mp3}>
+				<div class="itemMp3">
+					<object type="application/x-shockwave-flash" data="<{$xoops_url}>/modules/<{$xoops_dirname}>/js/audio/audio-player.swf" id="audioplayer1" height="35" width="400">
+						<param name="movie" value="<{$xoops_url}>/modules/<{$xoops_dirname}>/js/audio/audio-player.swf">
+						<param name="FlashVars" value="playerID=audioplayer1&soundFile=<{$file.fileurl}>">
+						<param name="quality" value="high">
+						<param name="menu" value="false">
+						<param name="wmode" value="transparent">
+					</object> 
+				</div>
+		      <{/if}>		
+		<{/foreach}>
+		</div>
+		<{/if}>
 		</div>
         
     <footer class="itemFoot">
@@ -117,9 +149,11 @@
 
 	 <{if $content.content_file}>
 	 <ul>
-	 <{foreach item=file from=$files}>
-		 <li><a title="<{$file.file_title}>" href="<{$file.fileurl}>" ><{$file.file_title}></a></li>
-	 <{/foreach}>
+		 <{foreach item=file from=$files}>
+		 <{if $file.file_type != flv && $file.file_type != mp3}>
+		 <li><a title="<{$file.file_title}>" href="<{$file.fileurl}>"><{$file.file_title}></a></li>
+	    <{/if}>		
+		 <{/foreach}>
 	 </ul>
 	 <{/if}>
 	 
