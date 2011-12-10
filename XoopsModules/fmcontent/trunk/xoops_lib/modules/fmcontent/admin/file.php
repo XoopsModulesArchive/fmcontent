@@ -102,7 +102,7 @@ switch ($op)
         }
 
         
-        $files = $file_handler->getFiles($forMods, $file , $content);
+        $files = $file_handler->getAdminFiles($forMods, $file , $content);
         
         $file_numrows = $file_handler->getFileCount($forMods);
 

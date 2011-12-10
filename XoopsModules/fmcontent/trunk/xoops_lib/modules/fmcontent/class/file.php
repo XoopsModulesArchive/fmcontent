@@ -103,23 +103,22 @@ class fmcontentFileHandler extends XoopsPersistableObjectHandler {
 		parent::XoopsPersistableObjectHandler ( $db, 'fmcontent_file', 'fmcontent_file', 'file_id', 'file_title' );
 	}
 
-	function getFiles($forMods, $file , $content = null) {
+	function getAdminFiles($forMods, $file , $content) {
 		$ret = array ();
-			$criteria = new CriteriaCompo ();
-			$criteria->add ( new Criteria ( 'file_modid', $forMods->getVar ( 'mid' ) ) );
-			if(isset($file['content'])) {
-				$criteria->add ( new Criteria ( 'file_content', $file['content'] ) );
-				$criteria->add ( new Criteria ( 'file_status', 1 ) );
-			}	
-			$criteria->setSort ( $file['sort'] );
-			$criteria->setOrder ( $file['order'] );
-			if(isset($file['limit'])) {
-			$criteria->setLimit ( $file['limit'] );
-			}
-			$criteria->setStart ( $file['start'] );
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'file_modid', $forMods->getVar ( 'mid' ) ) );
+		if(isset($file['content'])) {
+			$criteria->add ( new Criteria ( 'file_content', $file['content'] ) );
+			$criteria->add ( new Criteria ( 'file_status', 1 ) );
+		}	
+		$criteria->setSort ( $file['sort'] );
+		$criteria->setOrder ( $file['order'] );
+		if(isset($file['limit'])) {
+		$criteria->setLimit ( $file['limit'] );
+		}
+		$criteria->setStart ( $file['start'] );
 		$files = $this->getObjects ( $criteria, false );
 		if ($files) {
-			
 			foreach ( $files as $root ) {
 				$tab = array ();
 				$tab = $root->toArray ();
@@ -143,6 +142,27 @@ class fmcontentFileHandler extends XoopsPersistableObjectHandler {
 		return $ret;
 	}
 	
+	function getFiles($forMods, $file) {
+		$ret = array ();
+		$criteria = new CriteriaCompo ();
+		$criteria->add ( new Criteria ( 'file_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'file_content', $file['content'] ) );
+		$criteria->add ( new Criteria ( 'file_status', 1 ) );
+		$criteria->setSort ( $file['sort'] );
+		$criteria->setOrder ( $file['order'] );
+		$criteria->setStart ( $file['start'] );
+		$files = $this->getObjects ( $criteria, false );
+		if ($files) {
+			foreach ( $files as $root ) {
+				$tab = array ();
+				$tab = $root->toArray ();
+				$tab ['fileurl'] = XOOPS_URL . xoops_getModuleOption ( 'file_dir', $forMods->getVar ( 'dirname' ) ) . $root->getVar ( 'file_name' );
+				$ret [] = $tab;
+			}
+		}
+		return $ret;
+	}
+		
 	function getFileCount ($forMods) {
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'file_modid', $forMods->getVar ( 'mid' ) ) );
