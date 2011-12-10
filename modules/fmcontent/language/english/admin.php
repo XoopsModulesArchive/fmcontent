@@ -128,6 +128,7 @@ if (!defined('_FMCONTENT_PREFERENCES')) {
     define('_FMCONTENT_STATICS', 'Static pages');
     define('_FMCONTENT_ALL_ITEMS', 'All content/item list');
     define('_FMCONTENT_ALL_ITEMS_FROM', 'Item list filtered by: ');
+    define('_FMCONTENT_CONTENT_FILE_DESC', 'For add more files you must use admin file system in admin side');
 // Menu page
     define('_FMCONTENT_MENU_DEFAULT', 'Default');
     define('_FMCONTENT_CONTENT_CHILD', 'Child');
