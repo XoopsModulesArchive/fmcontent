@@ -58,7 +58,9 @@ $modversion = array(
     'min_xoops' => '2.5',
     'dirmoduleadmin' => 'Frameworks/moduleclasses',
 	 'icons16' => 'Frameworks/moduleclasses/icons/16',
-	 'icons32' => 'Frameworks/moduleclasses/icons/32'
+	 'icons32' => 'Frameworks/moduleclasses/icons/32',
+     'min_db' => array('mysql'=>'5.0.7', 'mysqli'=>'5.0.7'),
+     'min_admin' => '1.1'
 );
 
 
