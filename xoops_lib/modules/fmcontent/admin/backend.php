@@ -150,7 +150,7 @@ switch ($op) {
 		
 		//image
 		fmcontentUtils::uploadimg ( $forMods, 'content_img', $obj, $_REQUEST ['content_img'] );
-		
+
 		$content_handler->updateposts ( $_REQUEST ['content_uid'], $_REQUEST ['content_status'], $content_action = 'add' );
 		
 		
@@ -164,9 +164,26 @@ switch ($op) {
 		$content_handler->resetNext($forMods, $_REQUEST ['content_topic'] , $obj->getVar ( 'content_id' ));
 		$content_handler->resetPrevious($forMods, $_REQUEST ['content_topic'] , $obj->getVar ( 'content_id' ));
 		
+		// tag
 		if ((xoops_getModuleOption ( 'usetag', $forMods->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
 			$tag_handler = xoops_getmodulehandler ( 'tag', 'tag' );
 			$tag_handler->updateByItem ( $_POST ["item_tag"], $obj->getVar ( 'content_id' ), $forMods->getVar ( "dirname" ), 0 );
+		}
+				
+		// file
+		$fileobj = $file_handler->create ();
+	   $fileobj->setVar ( 'file_date', time () );
+	   $fileobj->setVar ( 'file_modid', $forMods->getVar ( 'mid' ) );
+		$fileobj->setVar ( 'file_title', $_REQUEST ['content_title'] );
+		$fileobj->setVar ( 'file_content', $obj->getVar ( 'content_id' ) );
+	   $fileobj->setVar ( 'file_status', 1 );
+	   
+	   fmcontentUtils::uploadfile ( $forMods, 'file_name', $fileobj, $_REQUEST ['file_name'] );
+	   $content_handler->contentfile('add',$obj->getVar ( 'content_id' ));
+	   if (! $file_handler->insert ( $fileobj )) {
+				fmcontent_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR );
+				xoops_cp_footer ();
+				exit ();
 		}
 		
 		// Redirect page
@@ -236,6 +253,22 @@ switch ($op) {
 			if ((xoops_getModuleOption ( 'usetag', $forMods->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
 				$tag_handler = xoops_getmodulehandler ( 'tag', 'tag' );
 				$tag_handler->updateByItem ( $_POST ["item_tag"], $content_id, $forMods->getVar ( "dirname" ), $catid = 0 );
+			}
+			
+			// file
+			$fileobj = $file_handler->create ();
+		   $fileobj->setVar ( 'file_date', time () );
+		   $fileobj->setVar ( 'file_modid', $forMods->getVar ( 'mid' ) );
+			$fileobj->setVar ( 'file_title', $_REQUEST ['content_title'] );
+			$fileobj->setVar ( 'file_content', $obj->getVar ( 'content_id' ) );
+		   $fileobj->setVar ( 'file_status', 1 );
+		   
+		   fmcontentUtils::uploadfile ( $forMods, 'file_name', $fileobj, $_REQUEST ['file_name'] );
+		   $content_handler->contentfile('add',$obj->getVar ( 'content_id' ));
+		   if (! $file_handler->insert ( $fileobj )) {
+					fmcontent_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR );
+					xoops_cp_footer ();
+					exit ();
 			}
 
 		}

@@ -111,7 +111,9 @@ class fmcontent_content extends XoopsObject {
 			$topic_sel->setDescription ( _FMCONTENT_CONTENT_TOPIC_DESC );
 			$form->addElement ( $topic_sel );
 			ob_end_clean ();
-		}
+		} else {
+			$form->addElement ( new XoopsFormHidden ( 'content_topic', 0 ) );
+		}	
 		// Short
 		$form->addElement ( new XoopsFormTextArea ( _FMCONTENT_SHORT, 'content_short', $this->getVar ( 'content_short', 'e' ), 5, 90 ) );
 		// Editor
@@ -172,6 +174,13 @@ class fmcontent_content extends XoopsObject {
 		}
 		$fileseltray_content_img->addElement ( new XoopsFormFile ( _FMCONTENT_FORMUPLOAD, 'content_img', xoops_getModuleOption ( 'img_size', $forMods->getVar ( 'dirname' ) ) ), false );
 		$form->addElement ( $fileseltray_content_img );
+		// Files
+		$uploadirectory_file = xoops_getModuleOption ( 'file_dir', $forMods->getVar ( 'dirname' ) );
+		$fileseltray_file = new XoopsFormFile ( _FMCONTENT_SELECT_FILE, 'file_name', xoops_getModuleOption ( 'file_size', $forMods->getVar ( 'dirname' ) ) );
+		$file = new XoopsFormElementTray ( _FMCONTENT_FILE );
+		$file->addElement ( $fileseltray_file );
+		$file->setDescription ( _FMCONTENT_CONTENT_FILE_DESC );
+		$form->addElement ($file);
 		// Metas
 		$form->addElement ( new XoopsFormTextArea ( 'Metas Keyword', 'content_words', $this->getVar ( 'content_words', 'e' ), 5, 90 ) );
 		$form->addElement ( new XoopsFormTextArea ( 'Metas Description', 'content_desc', $this->getVar ( 'content_desc', 'e' ), 5, 90 ) );
@@ -262,7 +271,9 @@ class fmcontent_content extends XoopsObject {
 			$topic_sel->setDescription ( _FMCONTENT_CONTENT_TOPIC_DESC );
 			$form->addElement ( $topic_sel );
 			ob_end_clean ();
-		}
+		} else {
+			$form->addElement ( new XoopsFormHidden ( 'content_topic', 0 ) );
+		}	
 		// Short
 		$form->addElement ( new XoopsFormTextArea ( _FMCONTENT_SHORT, 'content_short', $this->getVar ( 'content_short', 'e' ), 5, 80 ) );
 		// Editor
@@ -299,6 +310,13 @@ class fmcontent_content extends XoopsObject {
 		$fileseltray_content_img->addElement ( new XoopsFormLabel ( '', "<img class='fromimage' src='" . XOOPS_URL . $uploadirectory_content_img . $content_img . "' name='image_content_img' id='image_content_img' alt='' />" ) );
 		$fileseltray_content_img->addElement ( new XoopsFormFile ( _FMCONTENT_FORMUPLOAD, 'content_img', xoops_getModuleOption ( 'img_size', $forMods->getVar ( 'dirname' ) ) ), false );
 		$form->addElement ( $fileseltray_content_img );
+		// Files
+		$uploadirectory_file = xoops_getModuleOption ( 'file_dir', $forMods->getVar ( 'dirname' ) );
+		$fileseltray_file = new XoopsFormFile ( _FMCONTENT_SELECT_FILE, 'file_name', xoops_getModuleOption ( 'file_size', $forMods->getVar ( 'dirname' ) ) );
+		$file = new XoopsFormElementTray ( _FMCONTENT_FILE );
+		$file->addElement ( $fileseltray_file );
+		$file->setDescription ( _FMCONTENT_CONTENT_FILE_DESC );
+		$form->addElement ($file);
 		// Submit buttons
 		$button_tray = new XoopsFormElementTray ( '', '' );
 		$submit_btn = new XoopsFormButton ( '', 'post', _SUBMIT, 'submit' );
