@@ -31,6 +31,7 @@ include XOOPS_ROOT_PATH . '/header.php';
 
 $content_handler = xoops_getmodulehandler ( 'page', 'fmcontent' );
 $topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
+$file_handler = xoops_getmodulehandler ( 'file', 'fmcontent' );
 
 // Include language file
 xoops_loadLanguage ( 'admin', $forMods->getVar ( 'dirname', 'e' ) );
@@ -97,6 +98,22 @@ switch ($op) {
 			$tag_handler->updateByItem ( $_POST ["item_tag"], $obj->getVar ( 'content_id' ), $forMods->getVar ( "dirname" ), 0 );
 		}
 		
+		// file
+		$fileobj = $file_handler->create ();
+	   $fileobj->setVar ( 'file_date', time () );
+	   $fileobj->setVar ( 'file_modid', $forMods->getVar ( 'mid' ) );
+		$fileobj->setVar ( 'file_title', $_REQUEST ['content_title'] );
+		$fileobj->setVar ( 'file_content', $obj->getVar ( 'content_id' ) );
+	   $fileobj->setVar ( 'file_status', 1 );
+	   
+	   fmcontentUtils::uploadfile ( $forMods, 'file_name', $fileobj, $_REQUEST ['file_name'] );
+	   $content_handler->contentfile('add',$obj->getVar ( 'content_id' ));
+	   if (! $file_handler->insert ( $fileobj )) {
+				fmcontent_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _FMCONTENT_MSG_ERROR );
+				xoops_cp_footer ();
+				exit ();
+		}
+			
 		// Redirect page
 		fmcontent_Redirect ( 'index.php', 1, _FMCONTENT_MSG_WAIT );
 		include XOOPS_ROOT_PATH . '/footer.php';
