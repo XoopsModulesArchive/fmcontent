@@ -51,6 +51,7 @@ switch ($template) {
 	
 	case 'ui' :
 		$xoTheme->addStylesheet ( XOOPS_URL . '/modules/system/css/ui/' . xoops_getModuleOption ( 'jquery_theme', 'system' ) . '/ui.all.css' );
+		$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $forMods->getVar ( 'dirname' ) . '/css/ui.css' );
 		break;
 	
 	case 'html5' :
@@ -319,6 +320,8 @@ if($content ['content_file'] > 0) {
 	$file['content'] = $content_id;
 	$view_file = $file_handler->getFiles($forMods, $file);
 	$xoopsTpl->assign ( 'files', $view_file );
+	$xoopsTpl->assign ( 'jwwidth', '470' );
+	$xoopsTpl->assign ( 'jwheight', '320' );
 }	
 
 
