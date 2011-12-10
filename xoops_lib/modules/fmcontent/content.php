@@ -321,6 +321,8 @@ if($content ['content_file'] > 0) {
 	$view_file = $file_handler->getFiles($forMods, $file);
 	$xoopsTpl->assign ( 'files', $view_file );
 }	
+
+
 $xoopsTpl->assign ( 'content', $content );
 $xoopsTpl->assign ( 'link', $link );
 $xoopsTpl->assign ( 'modname', $forMods->getVar ( 'name' ) );
