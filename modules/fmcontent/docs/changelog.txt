@@ -19,6 +19,7 @@
 - Add option for attach file for contents (Voltan)
 - Fix bug in delete pages (Voltan)
 - Add topic list page (Voltan)
+- Add player for audio and video files (Voltan)
 
 Language changes :
 + Add
