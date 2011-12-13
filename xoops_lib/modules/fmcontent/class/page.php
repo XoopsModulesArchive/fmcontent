@@ -479,9 +479,9 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 		if (! $content_infos ['admin_side']) {
 			$access_topic = fmcontentPermission::getItemIds ( 'fmcontent_access', $forMods);
 			$topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
-			$topic_show = $topic_handler->allVisible($forMods,$content_infos ['topics']);
-			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
-			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $topic_show ) . ')', 'IN' ) );
+			$topic_show = $topic_handler->allVisible($forMods,$content_infos ['topics'],$content_infos ['content_topic']);
+         $topiclist = array_intersect($access_topic , $topic_show);
+			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $topiclist ) . ')', 'IN' ) );
 			$criteria->add ( new Criteria ( 'content_type', 'content' ) );
 		}
 		$criteria->add ( new Criteria ( 'content_modid', $forMods->getVar ( 'mid' ) ) );
@@ -610,9 +610,9 @@ class fmcontentPageHandler extends XoopsPersistableObjectHandler {
 		if (! $content_infos ['admin_side']) {
 			$access_topic = fmcontentPermission::getItemIds ( 'fmcontent_access', $forMods);
 			$topic_handler = xoops_getmodulehandler ( 'topic', 'fmcontent' );
-			$topic_show = $topic_handler->allVisible($forMods,$content_infos ['topics']);
-			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
-			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $topic_show ) . ')', 'IN' ) );
+			$topic_show = $topic_handler->allVisible($forMods,$content_infos ['topics'],$content_infos ['content_topic']);
+			$topiclist = array_intersect($access_topic , $topic_show);
+			$criteria->add ( new Criteria ( 'content_topic', '(' . implode ( ',', $topiclist ) . ')', 'IN' ) );
 			$criteria->add ( new Criteria ( 'content_type', 'content' ) );
 		}
 		if(isset($content_infos ['content_subtopic'])) {

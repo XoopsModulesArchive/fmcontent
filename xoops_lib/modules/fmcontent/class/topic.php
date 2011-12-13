@@ -315,8 +315,11 @@ class fmcontentTopicHandler extends XoopsPersistableObjectHandler {
 		return $order;
 	}
 	
-	function allVisible($forMods, $topics) {
+	function allVisible($forMods, $topics, $topic) {
 		$topic_show = array();
+		if($topic) {
+			$topic_show[] = $topic;
+		}
 		foreach ( array_keys ( $topics ) as $i ) {
 			if($topics [$i]->getVar ( "topic_show" )) {
 			$topic_show[] = $topics [$i]->getVar ( "topic_id" );
