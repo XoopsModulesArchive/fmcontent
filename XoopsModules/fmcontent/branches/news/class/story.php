@@ -504,24 +504,23 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		$ret = array ();
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'story_status', $story_infos ['story_status'] ) );
-		$criteria->add ( new Criteria ( 'story_topic', '0', '>' ) );
 		$access_topic = NewsPermission::getItemIds ( 'news_access', $forMods);
 		$topic_handler = xoops_getmodulehandler ( 'topic', 'news' );
 		$topic_show = $topic_handler->allVisible($forMods,$story_infos ['topics'],$story_infos ['story_topic']);
       $topiclist = array_intersect($access_topic , $topic_show);
 		$criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $topiclist ) . ')', 'IN' ) );
 		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_publish', time() , '<=' ));
+		$criteria->add ( new Criteria ( 'story_publish', 0 , '>' ));
+		$criteria->add ( new Criteria ( 'story_expire', time() , '>=' ));
+		$criteria->add ( new Criteria ( 'story_expire', 0 ) ,'OR');
+		$criteria->add ( new Criteria ( 'story_uid', $story_infos ['story_user'] ) );
 		$criteria->add ( new Criteria ( 'story_topic', $story_infos ['story_topic'] ) );
       if(isset($story_infos ['story_subtopic'])) {
       	foreach ($story_infos ['story_subtopic'] as $subtopic){
 				$criteria->add ( new Criteria ( 'story_topic', $subtopic ) ,'OR');
 			}
 		}
-		$criteria->add ( new Criteria ( 'story_publish', time() , '<=' ));
-		$criteria->add ( new Criteria ( 'story_publish', 0 , '>' ));
-		$criteria->add ( new Criteria ( 'story_expire', time() , '>=' ));
-		$criteria->add ( new Criteria ( 'story_expire', 0 ) ,'OR');
-		$criteria->add ( new Criteria ( 'story_uid', $story_infos ['story_user'] ) );
 		$criteria->setSort ( $story_infos ['story_sort'] );
 		$criteria->setOrder ( $story_infos ['story_order'] );
 		$criteria->setLimit ( $story_infos ['story_limit'] );
