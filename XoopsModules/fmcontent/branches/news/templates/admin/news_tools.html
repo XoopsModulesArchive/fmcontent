@@ -1,0 +1,21 @@
+<{if $header}><{includeq file="$xoops_rootpath/modules/news/templates/admin/news_header.html"}><{/if}>
+
+<div id="tools" class="marg5 pad5">
+	<!-- Display clone form -->
+	<{if $folder}><{$folder}><{/if}>
+	<{if $purge}><{$purge}><{/if}>
+	<{if $alias}><{$alias}><{/if}>
+	<{if $meta}><{$meta}><{/if}>
+	
+	<{if $messages}>
+	<div id="xo-module-log">
+	    <h4><{$smarty.const._NEWS_AM_TOOLS_LOG_TITLE}></h4>
+	    <br /><br />
+	    <div class="xo-logger">
+	        <{foreach item=log from=$messages}>
+	        <li><{$log}></li>
+	        <{/foreach}>
+	    </div>
+	</div>
+	<{/if}>
+</div>

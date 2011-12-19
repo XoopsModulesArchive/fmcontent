@@ -1,0 +1,10 @@
+Options +FollowSymlinks
+RewriteEngine on
+RewriteRule   ^fmcontent/topic/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ modules/fmcontent/index.php?topic=$1&page=$2 [L]
+RewriteRule   ^fmcontent/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ modules/fmcontent/content.php?id=$2&page=$3 [L]
+RewriteRule   ^fmcontent/print/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ modules/fmcontent/print.php?id=$2&page=$3 [L]
+RewriteRule   ^fmcontent/pdf/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ modules/fmcontent/pdf.php?id=$2&page=$3 [L]
+RewriteRule   ^fmcontent/comment-new/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ modules/fmcontent/comment-new.php?id=$2&page=$3 [L]
+RewriteRule   ^fmcontent/comment-edit/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ modules/fmcontent/comment-edit.php?id=$2&page=$3&com_id=$3 [L]
+RewriteRule   ^fmcontent/comment-reply/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ modules/fmcontent/comment-reply.php?id=$2&page=$3&com_id=$3 [L]
+RewriteRule   ^fmcontent/comment-delete/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)\.html$ modules/fmcontent/comment-delete.php?id=$2&page=$3&com_id=$3 [L]

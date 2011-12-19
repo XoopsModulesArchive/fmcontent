@@ -1,0 +1,83 @@
+<{includeq file="$xoops_rootpath/modules/news/templates/admin/news_header.html"}>
+
+<div class="moduleicons">
+    <div class="floatleft">
+        <div class="xo-buttons">
+            <a class="ui-corner-all tooltip" href="article.php" title="<{$smarty.const._NEWS_AM_CONTENT_ALL}>">
+                <img src="<{xoAdminIcons add.png}>" alt="<{$smarty.const._NEWS_AM_CONTENT_ALL}>"/>
+                <{$smarty.const._NEWS_AM_CONTENT_ALL}>
+            </a>
+            
+            <a class="ui-corner-all tooltip" href="article.php?topic=0" title="<{$smarty.const._NEWS_AM_CONTENT_STATICS}>">
+                <img src="<{xoAdminIcons add.png}>" alt="<{$smarty.const._NEWS_AM_CONTENT_STATICS}>"/>
+                <{$smarty.const._NEWS_AM_CONTENT_STATICS}>
+            </a>
+            
+            <a class="ui-corner-all tooltip" href="article.php?op=offline" title="<{$smarty.const._NEWS_AM_CONTENT_OFFLINE}>">
+                <img src="<{xoAdminIcons add.png}>" alt="<{$smarty.const._NEWS_AM_CONTENT_OFFLINE}>"/>
+                <{$smarty.const._NEWS_AM_CONTENT_OFFLINE}>
+            </a>
+            
+            <a class="ui-corner-all tooltip" href="article.php?op=expire" title="<{$smarty.const._NEWS_AM_CONTENT_EXPIRE}>">
+                <img src="<{xoAdminIcons add.png}>" alt="<{$smarty.const._NEWS_AM_CONTENT_EXPIRE}>"/>
+                <{$smarty.const._NEWS_AM_CONTENT_EXPIRE}>
+            </a>
+        </div>
+    </div>
+    <div class="floatright bold marg5">
+	    <{if $topic_title}>
+	        <{$smarty.const._NEWS_AM_CONTENT_ALL_ITEMS_FROM}><{$topic_title}>
+	    <{else}>
+	        <{$smarty.const._NEWS_AM_CONTENT_ALL_ITEMS}>
+	    <{/if}>
+    </div>
+</div>
+
+<table id="xo-content-sort" class="outer" cellspacing="1" width="100%">
+    <thead>
+    <th><{$smarty.const._NEWS_AM_CONTENT_ID}></th>
+    <th><{$smarty.const._NEWS_AM_CONTENT_NUM}></th>
+    <th><{$smarty.const._NEWS_AM_CONTENT_TITLE}></th>
+    <th><{$smarty.const._NEWS_AM_CONTENT_TOPIC}></th>
+    <th><{$smarty.const._NEWS_AM_CONTENT_TYPE}></th>
+    <th><{$smarty.const._NEWS_AM_CONTENT_OWNER}></th>
+    <th><{$smarty.const._NEWS_AM_CONTENT_ACTIF}></th>
+    <th><{$smarty.const._NEWS_AM_CONTENT_DEFAULT}></th>
+    <th><{$smarty.const._NEWS_AM_CONTENT_IMPORTANT}></th>
+    <th><{$smarty.const._NEWS_AM_CONTENT_ACTION}></th>
+    </thead>
+    <tbody class="xo-content">
+    <{foreach item=item from=$contents}>
+    <{includeq file="$xoops_rootpath/modules/news/templates/admin/news_level.html" data=$item level='level1'}>
+
+    <{foreach item=child from=$item.child}>
+    <{includeq file="$xoops_rootpath/modules/news/templates/admin/news_level.html" data=$child level='level2' }>
+
+    <{foreach item=sub from=$child.child}>
+    <{includeq file="$xoops_rootpath/modules/news/templates/admin/news_level.html" data=$sub level='level3'}>
+    <{/foreach}>
+
+    <{/foreach}>
+
+    <{/foreach}>
+    </tbody>
+</table>
+
+<{foreach item=item from=$contents}>
+	<div id="dialog<{$item.story_id}>" title="<{$item.story_title}>" style='display:none;'>
+		<div class="ui-state-active ui-corner-all pad5 bold">
+			<div class="bold"><{$smarty.const._NEWS_AM_CONTENT_TITLE}> : <a href="<{$item.url}>" ><{$item.story_title}></a></div>
+			<div class="bold"><{$smarty.const._NEWS_AM_CONTENT_TOPIC}> : 
+         <{if $item.topic}>
+	         <a href="article.php?topic=<{$item.story_topic}>"><{$item.topic}></a>
+         <{else}>
+	         <a href="article.php?topic=0"><{$smarty.const._NEWS_AM_CONTENT_STATIC}></a>
+         <{/if}>
+			</div>
+		</div>
+		<div class="pad5"><img class="ui-state-highlight left" width="200" src="<{$item.thumburl}>" alt="<{$item.story_title}>" /></div>
+		<div class="pad5"><{$item.story_short}></div>
+	 </div>	
+<{/foreach}>
+
+<div class="pagenav"><{$story_pagenav}></div>

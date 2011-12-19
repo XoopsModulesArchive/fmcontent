@@ -1,0 +1,168 @@
+1.10
+=================================
+- Add uploadimg function in utils class (Voltan)
+- Add setpermission function in perm class (Voltan)
+- Add upload image for topics (Voltan)
+- Add delete option for images (Voltan)
+- Add Breadcrumb function in utils class (Voltan)
+- Add contentDefault function in page class (Voltan)
+- Add homepage function in utils class for manage module index page (Voltan) - [Not complated yet]
+- Improve permission page (Voltan)
+- Add topic URL function (Voltan)
+- Add function for show subtopic contents in main topic (Voltan)
+- Add Rebuild Alias function (Voltan)
+- Add Set and reset Next and Previous function automatically (Voltan)
+- Add change topic order whit AJAX (Voltan)
+- Add new options for make URL (Voltan)
+- Add Show/hide topic in index page (Voltan)
+- Add support for module admin class (Voltan)
+- Add option for attach file for contents (Voltan)
+- Fix bug in delete pages (Voltan)
+- Add topic list page (Voltan)
+- Add player for audio and video files (Voltan)
+
+Language changes :
++ Add
+- Remove
+* Edit
+
+main.php
++ _FMCONTENT_TOPIC_ID 
++ _FMCONTENT_TOPIC_NAME 
++ _FMCONTENT_TOPIC_DESC 
++ _FMCONTENT_TOPIC_IMG 
+
+admin.php
++ _FMCONTENT_TOPIC_HOMEPAGE
++ _FMCONTENT_TOPIC_HOMEPAGE_DESC
++ _FMCONTENT_TOPIC_HOMEPAGE_1
++ _FMCONTENT_TOPIC_HOMEPAGE_2
++ _FMCONTENT_TOPIC_HOMEPAGE_3
++ _FMCONTENT_TOPIC_HOMEPAGE_4
++ _FMCONTENT_TOPIC_OPTIONS
++ _FMCONTENT_TOPIC_OPTIONS_DESC
++ _FMCONTENT_TOPIC_ALIAS
++ _FMCONTENT_ALIAS_TITLE
++ _FMCONTENT_ALIAS_CONTENT
++ _FMCONTENT_ALIAS_TOPIC
++ _FMCONTENT_TOPIC_NUM
++ _FMCONTENT_MSG_ALIASERROR
++ _FMCONTENT_TOPIC_SHOW
++ _FMCONTENT_ADMENU1
++ _FMCONTENT_ADMENU2
++ _FMCONTENT_INDEX_TOPICS
++ _FMCONTENT_INDEX_CONTENTS
++ _FMCONTENT_ADD_FILE
++ _FMCONTENT_ADMENU1
++ _FMCONTENT_ADMENU2
++ _FMCONTENT_INDEX_TOPICS
++ _FMCONTENT_INDEX_CONTENTS
++ _FMCONTENT_FILE_ID
++ _FMCONTENT_FILE_ONLINE
++ _FMCONTENT_FILE_ACTION
++ _FMCONTENT_FORM_FILE
++ _FMCONTENT_FILE_TITLE
++ _FMCONTENT_FILE_CONTENT
++ _FMCONTENT_STATUS
++ _FMCONTENT_SELECT_FILE
++ _FMCONTENT_FILE_TIPS
++ _FMCONTENT_FILE_TYPE
++ _FMCONTENT_META_TITLE
++ _FMCONTENT_META_KEYWORD
++ _FMCONTENT_META_DESCRIPTION
+    
+* _FMCONTENT_TOPIC_ONLINE
+* _FMCONTENT_TOPIC_TIPS
+
+modinfo.php
++ _FMCONTENT_HOMEPAGE 
++ _FMCONTENT_HOMEPAGE_DESC 
++ _FMCONTENT_HOMEPAGE_1 
++ _FMCONTENT_HOMEPAGE_2 
++ _FMCONTENT_HOMEPAGE_3 
++ _FMCONTENT_HOMEPAGE_4
++ _FMCONTENT_URL_SHORT
++ _FMCONTENT_TOPICNAME
++ _FMCONTENT_TOPICNAME_DESC   
++ _FMCONTENT_FILE
++ _FMCONTENT_FILE_DIR
++ _FMCONTENT_FILE_DIR_DESC
++ _FMCONTENT_FILE_SIZE
++ _FMCONTENT_FILE_SIZE_DESC
++ _FMCONTENT_FILE_MIME
++ _FMCONTENT_FILE_MIME_DESC
++ _FMCONTENT_BREAK_FILE
+
+* _FMCONTENT_FRIENDLYURL_DESC
+
+- _FMCONTENT_URL_FRIENDLY
+
+1.05
+=================================
+- Improve blocks (ianez - Voltan) 
+- Fix bug in getTopicCount (Voltan)
+- Fix menu block for show all contents (Voltan)
+- improve all templates (ianez)
+
+1.04
+=================================
+- Fix error on permissions when there is no topic (Mamba)
+- Fix some html errors in templates (Voltan)
+- Add page title for pages and topic (Voltan)
+- Fix Breadcrumb (ianez - Voltan)
+- Fix fmcontent_Url if topic title not exist (Voltan)
+- Fix fmcontent_AjaxFilter (ianez - Voltan)
+- improve all templates (ianez)
+
+1.03 
+=================================
+- Fix error if topic not exist (Voltan)
+- Fix error FolderHandler in tools.php (Voltan)
+- Change $tpl whit $xoopsTpl in admin pages (Voltan)
+- Fix fmcontent_Filter function for change capitalized (Voltan)
+- Fix topic name in menu block if select static pages (Voltan)
+- Rebuild about module page (Voltan)
+- Fix error in getContentList function (Voltan)
+- Fix list block title in utf-8 languages (Voltan)
+- Chage page block setting for select dynamic pages (Voltan)
+- Add Breadcrumb (Voltan)
+
+1.02 
+=================================
+- Rename module from forcontent to fmcontent (For Muss content)
+- Fix RSS bug (formuss)
+- Add topic name to URL (formuss - voltan)
+- Fix pdf and print file URL (formuss)
+- Edited backend.php for use this module RSS (Voltan)
+- Improve Queries (Voltan)
+- Add function for update user posts after add or delete or change status (Voltan)
+- Submit page in user side (Voltan)
+- Improve templates(Voltan)
+- Add some config options for print page (Voltan)
+- Set check permissions in pdf and print pages (Voltan)
+- Fix some bugs and improve block templates (Voltan)
+- Add option for add title to menu title and Meta Keywords and Meta Description whit ajax in submit page (Voltan)
+
+1.01 
+=================================
+- Add topic (Voltan)
+- Complate menu system (Voltan)
+- Add tag module support (Voltan)
+- Add Comment support (Voltan)
+- Improve templates and design (Voltan)
+- Support XOOPS search (Voltan)
+- RSS (Voltan)
+- Add Bookmark whit show/hide option (Voltan)
+- Add facebook/twitter/Google buze shear logo (Voltan)
+- Add some options for show/hide information in user side (Voltan)
+- Advertisement (Voltan)
+- improved blocks (Voltan)
+- Attach image whit some view options(Voltan)
+- hits (Voltan)
+- Permission system (Voltan)
+- Default content for each topic (Voltan)
+- adjusted Admin GUI to XOOPS Standard Module GUI (mamba)
+
+1.00 
+=================================
+Original release (For Muss)
