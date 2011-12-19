@@ -20,13 +20,15 @@
  * @version     $Id$
  */
  
-require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
- 
 function news_list_show($options) {
 
     $story_handler = xoops_getmodulehandler ( 'story', 'news' );
     $topic_handler = xoops_getmodulehandler ( 'topic', 'news' );
+    $module_handler = xoops_gethandler('module');
+    
+	 require_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
+	 require_once XOOPS_ROOT_PATH . '/modules/news/class/perm.php';
+	 require_once XOOPS_ROOT_PATH . '/modules/news/class/utils.php';
 
     global $xoTheme;
 
@@ -42,7 +44,11 @@ function news_list_show($options) {
     $width = $options[8];
     $float = $options[9];
     $story_infos['story_order'] = $options[10];
-
+    $block['showmore'] = $options[11];
+    $block['morelink'] = $options[12];
+    
+    array_shift($options);
+	 array_shift($options);
     array_shift($options);
     array_shift($options);
     array_shift($options);
@@ -55,8 +61,8 @@ function news_list_show($options) {
     array_shift($options);
     array_shift($options);
 
-    $module_handler = xoops_gethandler('module');
     $forMods = $module_handler->getByDirname($forMods);
+    
 
     $options0 = $options[0];
     $story_infos ['topics'] = $topic_handler->getall ();

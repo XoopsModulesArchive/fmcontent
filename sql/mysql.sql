@@ -35,9 +35,12 @@ CREATE TABLE `news_story` (
 `doimage` tinyint(1) NOT NULL,
 `dosmiley` tinyint(1) NOT NULL,
 `doxcode` tinyint(1) NOT NULL,
-PRIMARY KEY  (`story_id`,`story_modid`),
-UNIQUE KEY `story_id` (`story_id`,`story_modid`)
-) ENGINE=MyISAM ;
+PRIMARY KEY (`story_id`),
+KEY `idxstoriestopic` (`story_topic`),
+KEY `story_title` (`story_title`),
+KEY `story_create` (`story_create`),
+FULLTEXT KEY `search` (`story_title`,`story_short`,`story_text`,`story_subtitle`)
+) ENGINE=MyISAM;
 
 
 CREATE TABLE `news_topic` (
@@ -68,8 +71,11 @@ CREATE TABLE `news_topic` (
 `topic_alias` varchar(255) NOT NULL,
 `topic_homepage` tinyint (4)   NOT NULL ,
 `topic_show` tinyint (1)   NOT NULL default '1',
-PRIMARY KEY (`topic_id`,`topic_modid`),
-UNIQUE KEY `topic_id` (`topic_id`,`topic_modid`)
+  PRIMARY KEY (`story_id`),
+  KEY `idxstoriestopic` (`story_topic`),
+  KEY `story_title` (`story_title`),
+  KEY `story_create` (`story_create`),
+  FULLTEXT KEY `search` (`story_title`,`story_short`,`story_text`,`story_subtitle`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE `news_file` (
