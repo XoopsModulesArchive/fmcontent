@@ -1,0 +1,41 @@
+<tr class="odd <{$level}>" id="mod_<{$data.story_id}>">
+    <td class="width5"><img src="../images/icons/puce.png" alt=""/><{$data.story_id}></td>
+    <td class="width5 txtcenter"><span><img src="../images/icons/puce.png" alt=""/><{$data.story_order}></span></td>
+    <td class="width30 txtcenter">
+        <span><a href="<{$data.url}>"><{$data.story_title}></a></span>
+    </td>
+    <td class="txtcenter width10 bold">
+        <{if $data.topic}>
+        <a href="article.php?topic=<{$data.story_topic}>"><{$data.topic}></a>
+        <{else}>
+        <a href="article.php?topic=0"><{$smarty.const._NEWS_AM_CONTENT_STATIC}></a>
+        <{/if}>
+    </td>
+    <td class="txtcenter width10 bold">
+	     <img src="../images/icons/<{$data.story_type}>.png" alt=""/><{$data.story_type}>
+    </td>
+    <td class="txtcenter width10">
+        <a href="<{$xoops_url}>/userinfo.php?uid=<{$data.story_uid}>"><img class="tooltip" src="../images/icons/user.png" alt="<{$data.owner}>" title="<{$data.owner}>"/>&nbsp;<{$data.owner}></a>
+    </td>
+    <td class="txtcenter width5">
+        <img class="cursorpointer" id="status<{$data.story_id}>" onclick="news_setStatus( { op: 'status', story_id: <{$data.story_id}> }, 'status<{$data.story_id}>', 'backend.php' )" src="<{if $data.story_status}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" alt=""/>
+    </td>
+    <td class="txtcenter width5">
+        <img class="cursorpointer xo-defaultimg" id="default<{$data.story_id}>" onclick="news_setDefault( { op: 'default', story_id: <{$data.story_id}> , topic_id: <{$data.story_topic}> }, 'default<{$data.story_id}>', 'backend.php' )" src="<{if $data.story_default}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" alt=""/>
+    </td>
+    <td class="txtcenter width5">
+        <img class="cursorpointer" id="important<{$data.story_id}>" onclick="news_setImportant( { op: 'important', story_id: <{$data.story_id}> }, 'important<{$data.story_id}>', 'backend.php' )" src="<{if $data.story_important}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" alt=""/>
+    </td>
+    <td class="txtcenter xo-actions width15">
+        <img class="tooltip" onclick="display_dialog(<{$data.story_id}>, true, true, 'slide', 'slide', 300, 700);" src="<{xoAdminIcons display.png}>" alt="<{$smarty.const._PREVIEW}>" title="<{$smarty.const._PREVIEW}>" />
+        <a href="<{$data.url}>"><img class="tooltip" src="../images/icons/display.png" alt="<{$smarty.const._NEWS_AM_CONTENT_VIEW}>" title="<{$smarty.const._NEWS_AM_CONTENT_VIEW}>"/></a>
+        <{if $data.story_file != 0}>
+        <a href="file.php?content=<{$data.story_id}>"><img class="tooltip" src="../images/icons/file.png" alt="<{$smarty.const._NEWS_AM_CONTENT_FILE}>" title="<{$smarty.const._NEWS_AM_CONTENT_FILE}>"/></a>
+        <{/if}>
+        <{if $data.story_topic != 0}>
+        <a href="<{$data.topicurl}>"><img class="tooltip" src="../images/icons/section.png" alt="<{$smarty.const._NEWS_AM_CONTENT_TOPIC}>" title="<{$smarty.const._NEWS_AM_CONTENT_TOPIC}>"/></a>
+        <{/if}>
+        <a href="article.php?op=edit_content&amp;story_id=<{$data.story_id}>"><img class="tooltip" src="../images/icons/edit.png" alt="<{$smarty.const._EDIT}>"  title="<{$smarty.const._EDIT}>"/></a>
+        <a href="article.php?op=delete&amp;story_id=<{$data.story_id}>"><img class="tooltip" src="../images/icons/delete.png" alt="<{$smarty.const._DELETE}>" title="<{$smarty.const._DELETE}>"/></a>
+    </td>
+</tr>

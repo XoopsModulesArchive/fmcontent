@@ -1,0 +1,150 @@
+/**
+ * News module
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright    The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @license             http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package    News
+ * @since        2.5.0
+ * @author     voltan
+ * @version    $Id $
+ **/
+
+.itemImg img {
+	max-width: 200px;
+	max-height: 200px;
+	margin-top: 3px;
+}
+
+.itemVideo {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.itemVideo .itemPlayer {
+	padding: 5px;
+	margin: 5px;
+}
+
+.content_img {
+	max-width: 300px;
+	max-height: 300px;
+}
+
+#facebook {
+	margin-left: 8px;
+}
+
+#bookmarkme {
+	margin: 0;
+}
+
+#bookmarkmetitle {
+	text-align: center;
+}
+
+#bookmarkmeitems ul,#socialnetwork ul {
+	width: 100%;
+	height: 23px;
+	list-style-type: none;
+}
+
+#bookmarkmeitems ul li,#socialnetwork ul li {
+	display: inline;
+	float: left;
+	margin: 3px;
+}
+
+.onecolumn {
+	text-align: justify;
+	margin: 2px;
+	padding: 2px;
+}
+
+.twocolumn {
+	column-count: 2;
+	column-gap: 1.5em;
+	-moz-column-count: 2;
+	-moz-column-gap: 1.5em;
+	-webkit-column-count: 2;
+	-webkit-column-gap: 1.5em;
+	text-align: justify;
+	margin: 2px;
+	padding: 2px;
+}
+
+.threecolumn {
+	column-count: 3;
+	column-gap: 1.2em;
+	-moz-column-count: 3;
+	-moz-column-gap: 1.2em;
+	-webkit-column-count: 3;
+	-webkit-column-gap: 1.2em;
+	text-align: justify;
+	margin: 2px;
+	padding: 2px;
+}
+
+.forcolumn {
+	column-count: 4;
+	column-gap: 1.2em;
+	-moz-column-count: 4;
+	-moz-column-gap: 1.2em;
+	-webkit-column-count: 4;
+	-webkit-column-gap: 1.2em;
+	text-align: justify;
+	margin: 2px;
+	padding: 2px;
+}
+
+.news_top {
+	padding-bottom: 12px;
+}
+
+.breadcrumb {
+	line-height: 0.8em;
+	font-size: 1em;
+}
+
+.breadcrumb a {
+	font-weight: normal;
+}
+
+.breadcrumb a:hover {
+	text-decoration: underline;
+}
+
+.rss {
+	margin: 0;
+	padding: 0;
+}
+
+.floatleft,.floatright {
+	margin: 0;
+	padding: 0;
+}
+
+.topic_header h2 {
+	padding: 0px 0 6px 0;
+	margin: 0;
+}
+
+.comment_bar {
+	margin-top: 10px;
+}
+
+li h3 {
+	padding: 0;
+	margin: 0;
+}
+
+.news li.ui-state-default {
+	list-style: none;
+	margin: 0 0 5px 0;
+}

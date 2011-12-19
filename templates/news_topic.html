@@ -1,0 +1,37 @@
+<div class="fmcontent">
+   <{if $advertisement}>
+	<div class="itemAde"><{$advertisement}></div>
+	<{/if}>
+	<table id="xo-content-data" class="outer" cellspacing="1" width="100%">
+		<thead>
+			<th class="txtcenter"><{$smarty.const._NEWS_MD_TOPIC_NAME}></th>
+			<th class="txtcenter"><{$smarty.const._NEWS_MD_TOPIC_IMG}></th>
+		</thead>
+		<tbody>
+			<{foreach item=topic from=$topics}>
+			<tr class="odd">
+				<td<{if !$topic.topic_img}> colspan="2"<{/if}> class="top">
+					<div class=""><a title="<{$topic.topic_title}>" href="<{$topic.topicurl}>"><{$topic.topic_title}></a></div>
+					<div class=""><{$topic.topic_desc}></div>
+				</td>
+				<{if $topic.topic_img}>
+				<td class="top txtcenter">
+					<div class="gallery">
+					   <{if $img_lightbox}>
+						<a href="<{$topic.imageurl}>" title="<{$topic.topic_title}>" >
+							<img width="<{$imgwidth}>" class="<{$imgfloat}> story_img" src="<{$topic.thumburl}>" alt="<{$topic.topic_title}>" />
+						</a>
+						<{else}>
+							<img width="<{$imgwidth}>" class="<{$imgfloat}> story_img" src="<{$topic.thumburl}>" alt="<{$topic.topic_title}>" />
+						<{/if}>
+					</div>
+				</td>
+				<{/if}>
+			</tr>
+			<{/foreach}>
+		</tbody>
+	</table>
+	<{if $topic_pagenav}>
+	<div class="pagenave"><{$topic_pagenav}></div>
+	<{/if}>
+</div>
