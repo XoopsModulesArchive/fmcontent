@@ -563,18 +563,17 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	function getContentBlockList($forMods, $story_infos ,$options) {
 		$ret = array ();
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_type', 'news' ) );
 		$criteria->add ( new Criteria ( 'story_status', '1' ) );
-		$access_topic = NewsPermission::getItemIds ( 'news_access', $forMods);
-		$criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
-		if (! (count ( $options ) == 1 && $options [0] == 0)) {
-			$criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $options ) . ')', 'IN' ) );
-		}
 		$criteria->add ( new Criteria ( 'story_publish', time() , '<=' ));
 		$criteria->add ( new Criteria ( 'story_publish', 0 , '>' ));
 		$criteria->add ( new Criteria ( 'story_expire', time() , '>=' ));
 		$criteria->add ( new Criteria ( 'story_expire', 0 ) ,'OR');
 		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$access_topic = NewsPermission::getItemIds ( 'news_access', $forMods);
+		$criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
+		if (! (count ( $options ) == 1 && $options [0] == 0)) {
+			$criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $options ) . ')', 'IN' ) );
+		}
 		$criteria->setSort ( $story_infos ['story_sort'] );
 		$criteria->setOrder ( $story_infos ['story_order'] );
 		$criteria->setLimit ( $story_infos ['story_limit'] );
