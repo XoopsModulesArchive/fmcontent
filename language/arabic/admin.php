@@ -138,6 +138,7 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_TOOLS_META_TITLE', 'Rebuild Metas');
     define('_NEWS_AM_TOOLS_META_KEYWORD', 'Rebuild Meta keywords');
     define('_NEWS_AM_TOOLS_META_DESCRIPTION', 'Rebuild Meta Description');
+    define('_NEWS_AM_MSG_INPROC', 'Rebuilding ... ');
 // Permissions
     define('_NEWS_AM_PERMISSIONS_ACCESS', 'إتاحة العرض');
     define('_NEWS_AM_PERMISSIONS_SUBMIT', 'إتاحة الإرسال');
