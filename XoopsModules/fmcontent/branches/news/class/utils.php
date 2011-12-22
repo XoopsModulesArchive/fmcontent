@@ -379,6 +379,67 @@ class NewsUtils {
 	  }
 	  return true;
 	}
+   
+   /**
+    *  Rebuild
+	 */
+	function news_rebuild ($handler , $item_id , $op , $set , $get , $start_id, $end_id) {
+		// check last_id
+		$criteria = new CriteriaCompo ();
+		$criteria->setSort ( $item_id );
+		$criteria->setOrder ( 'DESC' );
+		$criteria->setLimit ( 1 );
+		$last = $handler->getObjects ( $criteria );
+	   foreach ( $last as $item ) {
+			$last_id = $item->getVar ( $item_id );
+		}
 
+		// set end_id
+		$end_id = $end_id + 100;
+		
+		// do rebuild
+		while ($start_id <= $end_id) {
+	      $obj = $handler->get ( $start_id );
+	      if($obj) {
+	      	$new = self::news_dorebuild ($op , $obj->getVar ( $get, 'e' ));
+		      $obj->setVar ( $set , $new); 
+	        	$handler->insert ( $obj );
+	      }
+		   $start_id = $start_id + 1;
+	   }
+	   
+	   
+	   // Redirect
+	   if($start_id <= $last_id) {
+	      News_Redirect('tools.php?op='.$op.'&start_id='.$start_id.'&end_id='.$end_id, 20, _NEWS_AM_MSG_INPROC);
+	      xoops_cp_footer ();
+         exit ();
+      }
+
+	}	
+	
+	/**
+    *  Make text for Rebuild
+	 */
+	function news_dorebuild ($op , $get) {
+		switch($op) {
+			case 'alias':
+				$item = News_Filter($get);
+				break;
+				
+			case 'topicalias':
+				$item = News_Filter($get);
+				break;
+				
+			case 'keyword':
+				$item = News_MetaFilter($get);
+				break;
+				
+			case 'description':
+				$item = News_AjaxFilter($get);
+				break;			
+		}	
+		return $item;
+	}	
 }
 ?>

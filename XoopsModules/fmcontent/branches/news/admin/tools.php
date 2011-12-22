@@ -38,22 +38,6 @@ switch ($op) {
     case 'display':
     default:
         
-        // rebuild alias
-        $form = new XoopsThemeForm(_NEWS_AM_TOOLS_ALIAS_TITLE, 'tools', 'tools.php', 'post');  
-        $form->addElement(new XoopsFormRadioYN ( _NEWS_AM_TOOLS_ALIAS_CONTENT, 'topic', "1" ));
-        $form->addElement(new XoopsFormRadioYN ( _NEWS_AM_TOOLS_ALIAS_TOPIC, 'content', "1" ));
-        $form->addElement(new XoopsFormHidden('op', 'alias'));
-        $form->addElement(new XoopsFormButton('', 'post', _SUBMIT, 'submit'));
-        $xoopsTpl->assign('alias', $form->render());
-        
-        // meta alias
-        $form = new XoopsThemeForm(_NEWS_AM_TOOLS_META_TITLE, 'tools', 'tools.php', 'post');  
-        $form->addElement(new XoopsFormRadioYN ( _NEWS_AM_TOOLS_META_KEYWORD, 'keyword', "1" ));
-        $form->addElement(new XoopsFormRadioYN ( _NEWS_AM_TOOLS_META_DESCRIPTION, 'description', "1" ));
-        $form->addElement(new XoopsFormHidden('op', 'meta'));
-        $form->addElement(new XoopsFormButton('', 'post', _SUBMIT, 'submit'));
-        $xoopsTpl->assign('meta', $form->render());
-
         // Add clone
         $form = new XoopsThemeForm(_NEWS_AM_TOOLS_FORMFOLDER_TITLE, 'tools', 'tools.php', 'post');
         $form->addElement(new XoopsFormText(_NEWS_AM_TOOLS_FORMFOLDER_NAME, 'folder_name', 50, 255, ''), true);
@@ -86,6 +70,34 @@ switch ($op) {
             $xoopsTpl->assign('purge', $form->render());
         }
         
+        // rebuild alias
+        $form = new XoopsThemeForm(_NEWS_AM_TOOLS_ALIAS_CONTENT, 'tools', 'tools.php', 'post');  
+        $form->addElement(new XoopsFormRadioYN ( _NEWS_AM_TOOLS_ALIAS_CONTENT, 'content', "1" ));
+        $form->addElement(new XoopsFormHidden('op', 'alias'));
+        $form->addElement(new XoopsFormButton('', 'post', _SUBMIT, 'submit'));
+        $xoopsTpl->assign('alias', $form->render());
+        
+        // rebuild topic alias
+        $form = new XoopsThemeForm(_NEWS_AM_TOOLS_ALIAS_TOPIC, 'tools', 'tools.php', 'post');  
+        $form->addElement(new XoopsFormRadioYN ( _NEWS_AM_TOOLS_ALIAS_TOPIC, 'topic', "1" ));
+        $form->addElement(new XoopsFormHidden('op', 'topicalias'));
+        $form->addElement(new XoopsFormButton('', 'post', _SUBMIT, 'submit'));
+        $xoopsTpl->assign('topicalias', $form->render());
+        
+        // rebuild description
+        $form = new XoopsThemeForm(_NEWS_AM_TOOLS_META_DESCRIPTION, 'tools', 'tools.php', 'post');  
+        $form->addElement(new XoopsFormRadioYN ( _NEWS_AM_TOOLS_META_DESCRIPTION, 'description', "1" ));
+        $form->addElement(new XoopsFormHidden('op', 'description'));
+        $form->addElement(new XoopsFormButton('', 'post', _SUBMIT, 'submit'));
+        $xoopsTpl->assign('description', $form->render());
+        
+        // rebuild keyword
+        $form = new XoopsThemeForm(_NEWS_AM_TOOLS_META_KEYWORD, 'tools', 'tools.php', 'post');  
+        $form->addElement(new XoopsFormRadioYN ( _NEWS_AM_TOOLS_META_KEYWORD, 'keyword', "1" ));
+        $form->addElement(new XoopsFormHidden('op', 'keyword'));
+        $form->addElement(new XoopsFormButton('', 'post', _SUBMIT, 'submit'));
+        $xoopsTpl->assign('keyword', $form->render());
+
         // other options  
         $xoopsTpl->assign('header', true );
         break;
@@ -112,88 +124,36 @@ switch ($op) {
             $story_handler->deleteAll(new Criteria('story_modid', $id));
             $topic_handler->deleteAll(new Criteria('topic_modid', $id));
         }
-        News_Redirect('tools.php', 1, _NEWS_AM_MSG_WAIT);
+        News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
         break;
-        
-    case 'alias':  
-
-        
-        if($_POST['topic']) {
-				$criteria = new CriteriaCompo ();
-				$criteria->setSort ( 'topic_id' );
-				$criteria->setOrder ( 'DESC' );
-				$criteria->setLimit ( 1 );
-				$last = $topic_handler->getObjects ( $criteria );
-			   foreach ( $last as $item ) {
-					$last_id = $item->getVar ( 'topic_id' );
-				}
-				$topic_id = '1';
-		      while ($topic_id <= $last_id) {
-		        	  $obj = $topic_handler->get ( $topic_id );
-			        if($obj) {
-			        		$obj->setVar ( 'topic_alias', News_Filter($obj->getVar ( 'topic_title', 'e' )));
-			        		$topic_handler->insert ( $obj );
-			        }
-			        $topic_id = $topic_id + 1;
-		        }
-        }
-        
-        if($_POST['content']) {
-				$criteria = new CriteriaCompo ();
-				$criteria->setSort ( 'story_id' );
-				$criteria->setOrder ( 'DESC' );
-				$criteria->setLimit ( 1 );
-				$last = $story_handler->getObjects ( $criteria );
-			   foreach ( $last as $item ) {
-					$last_id = $item->getVar ( 'story_id' );
-				}
-				$story_id = '1';
-		        while ($story_id <= $last_id) {
-		        	  $obj = $story_handler->get ( $story_id );
-			        if($obj) {
-			        		$obj->setVar ( 'story_alias', News_Filter($obj->getVar ( 'story_title', 'e' )));
-			        		$story_handler->insert ( $obj );
-			        }
-			        $story_id = $story_id + 1;
-		        }
-	        }	
-        News_Redirect('tools.php', 1, _NEWS_AM_MSG_WAIT);
-    break; 
+      
+    case 'alias':
+        $start_id = news_CleanVars($_REQUEST, 'start_id', '1', 'int');
+        $end_id = news_CleanVars($_REQUEST, 'end_id', '1', 'int');	
+        NewsUtils::news_rebuild ($story_handler , 'story_id' , 'alias' , 'story_alias' , 'story_title' , $start_id , $end_id);	   
+        News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+	     break;
+	         
+    case 'topicalias': 
+        $start_id = news_CleanVars($_REQUEST, 'start_id', '1', 'int');
+        $end_id = news_CleanVars($_REQUEST, 'end_id', '1', 'int');	
+        NewsUtils::news_rebuild ($topic_handler , 'topic_id' , 'topicalias' , 'topic_alias' , 'topic_title' , $start_id , $end_id);	   
+        News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+	     break; 
     
-    case 'meta': 
-         $criteria = new CriteriaCompo ();
-			$criteria->setSort ( 'story_id' );
-			$criteria->setOrder ( 'DESC' );
-			$criteria->setLimit ( 1 );
-			$last = $story_handler->getObjects ( $criteria );
-		   foreach ( $last as $item ) {
-				$last_id = $item->getVar ( 'story_id' );
-			}
-			$story_id = '1';
-			
-	      if($_POST['keyword']) {
-		     	 while ($story_id <= $last_id) {
-		     	     $obj = $story_handler->get ( $story_id );
-			        if($obj) {
-			        		$obj->setVar ( 'story_words', News_MetaFilter($obj->getVar ( 'story_title', 'e' )));
-			        		$story_handler->insert ( $obj );
-			        }
-			        $story_id = $story_id + 1;
-		     	 }	
-	      }
-	     
-	      if($_POST['description']) {
-		     	 while ($story_id <= $last_id) {
-		     	 	  $obj = $story_handler->get ( $story_id );
-			        if($obj) {
-			        		$obj->setVar ( 'story_desc', News_AjaxFilter($obj->getVar ( 'story_title', 'e' )));
-			        		$story_handler->insert ( $obj );
-			        }
-			        $story_id = $story_id + 1;
-   	       }	
-	      }
-	      News_Redirect('tools.php', 1, _NEWS_AM_MSG_WAIT);
-    break;
+    case 'keyword':
+        $start_id = news_CleanVars($_REQUEST, 'start_id', '1', 'int');
+        $end_id = news_CleanVars($_REQUEST, 'end_id', '1', 'int');	
+        NewsUtils::news_rebuild ($story_handler , 'story_id' , 'keyword' , 'story_words' , 'story_title' , $start_id , $end_id);  
+        News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+	     break; 
+       
+    case 'description':
+        $start_id = news_CleanVars($_REQUEST, 'start_id', '1', 'int');
+        $end_id = news_CleanVars($_REQUEST, 'end_id', '1', 'int');	
+        NewsUtils::news_rebuild ($story_handler , 'story_id' , 'description' , 'story_desc' , 'story_title' , $start_id , $end_id); 
+        News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+	     break; 
 }
 
 $xoopsTpl->assign('navigation', 'tools');
