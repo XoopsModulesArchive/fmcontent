@@ -19,12 +19,12 @@
  */
 
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 
 include_once XOOPS_ROOT_PATH . "/class/xoopsformloader.php";
 include_once XOOPS_ROOT_PATH . "/class/tree.php";
 
-$op = news_CleanVars ( $_REQUEST, 'op', '', 'string' );
+$op = NewsUtils::News_CleanVars ( $_REQUEST, 'op', '', 'string' );
 
 // include Xoops header
 include XOOPS_ROOT_PATH . '/header.php';
@@ -34,12 +34,12 @@ $topic_handler = xoops_getmodulehandler ( 'topic', 'news' );
 $file_handler = xoops_getmodulehandler ( 'file', 'news' );
 
 // Include language file
-xoops_loadLanguage ( 'admin', $forMods->getVar ( 'dirname', 'e' ) );
+xoops_loadLanguage ( 'admin', $NewsModule->getVar ( 'dirname', 'e' ) );
 
 // Check the access permission
 global $xoopsUser;
 $perm_handler = NewsPermission::getHandler ();
-if (! $perm_handler->isAllowed ( $xoopsUser, 'news_ac', '8', $forMods )) {
+if (! $perm_handler->News_IsAllowed ( $xoopsUser, 'news_ac', '8', $NewsModule )) {
 	redirect_header ( "index.php", 3, _NOPERM );
 	exit ();
 }
@@ -52,81 +52,81 @@ switch ($op) {
 			exit ();
 		}
 		
-		if ($_REQUEST ['story_modid'] != $forMods->getVar ( 'mid' )) {
+		if ($_REQUEST ['story_modid'] != $NewsModule->getVar ( 'mid' )) {
 			redirect_header ( 'index.php', 3, _NOPERM );
 			exit ();
 		}
 		
-		$groups = xoops_getModuleOption ( 'groups', $forMods->getVar ( 'dirname' ) );
+		$groups = xoops_getModuleOption ( 'groups', $NewsModule->getVar ( 'dirname' ) );
 		$groups = (isset ( $groups )) ? $groups : '';
 		$groups = (is_array ( $groups )) ? implode ( " ", $groups ) : '';
 		
 		$obj = $story_handler->create ();
 		$obj->setVars ( $_REQUEST );
 		
-		$obj->setVar ( 'story_order', $story_handler->setorder($forMods) );
-		$obj->setVar ( 'story_next', $story_handler->setNext($forMods, $_REQUEST ['story_topic']) );
-		$obj->setVar ( 'story_prev', $story_handler->setPrevious($forMods, $_REQUEST ['story_topic']) );
-		$obj->setVar ( 'story_menu', News_AjaxFilter ( $_REQUEST ['story_title'] ) );
-		$obj->setVar ( 'story_alias', News_Filter ( $_REQUEST ['story_title'] ) );
-		$obj->setVar ( 'story_words', News_MetaFilter ( $_REQUEST ['story_title'] ) );
-		$obj->setVar ( 'story_desc', News_AjaxFilter ( $_REQUEST ['story_title'] ) );
+		$obj->setVar ( 'story_order', $story_handler->News_SetContentOrder($NewsModule) );
+		$obj->setVar ( 'story_next', $story_handler->News_SetNext($NewsModule, $_REQUEST ['story_topic']) );
+		$obj->setVar ( 'story_prev', $story_handler->News_SetPrevious($NewsModule, $_REQUEST ['story_topic']) );
+		$obj->setVar ( 'story_menu', NewsUtils::News_AjaxFilter ( $_REQUEST ['story_title'] ) );
+		$obj->setVar ( 'story_alias', NewsUtils::News_AliasFilter ( $_REQUEST ['story_title'] ) );
+		$obj->setVar ( 'story_words', NewsUtils::News_MetaFilter ( $_REQUEST ['story_title'] ) );
+		$obj->setVar ( 'story_desc', NewsUtils::News_AjaxFilter ( $_REQUEST ['story_title'] ) );
 		$obj->setVar ( 'story_create', time () );
 		$obj->setVar ( 'story_update', time () );
 		$obj->setVar ( 'story_groups', $groups );
 		
 		//Form topic_img
-		NewsUtils::uploadimg ( $forMods, 'story_img', $obj, $_REQUEST ['story_img'] );
+		NewsUtils::News_UploadImg ( $NewsModule, 'story_img', $obj, $_REQUEST ['story_img'] );
 		
-		if ($perm_handler->isAllowed ( $xoopsUser, 'news_ac', '16', $forMods )) {
+		if ($perm_handler->News_IsAllowed ( $xoopsUser, 'news_ac', '16', $NewsModule )) {
 			$obj->setVar ( 'story_status', '1' );
-			$story_handler->updateposts ( $_REQUEST ['story_uid'], '1', $story_action = 'add' );
+			$story_handler->News_Updateposts ( $_REQUEST ['story_uid'], '1', $story_action = 'add' );
 		}
 		
 		if (! $story_handler->insert ( $obj )) {
-			News_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _NEWS_MD_MSG_ERROR );
+			NewsUtils::News_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _NEWS_MD_MSG_ERROR );
 			include XOOPS_ROOT_PATH . '/footer.php';
 			exit ();
 		}
 		
 		// Reset next content for previous content
-		$story_handler->resetNext($forMods, $_REQUEST ['story_topic'] , $obj->getVar ( 'story_id' ));
-		$story_handler->resetPrevious($forMods, $_REQUEST ['story_topic'] , $obj->getVar ( 'story_id' ));
+		$story_handler->News_ResetNext($NewsModule, $_REQUEST ['story_topic'] , $obj->getVar ( 'story_id' ));
+		$story_handler->News_ResetPrevious($NewsModule, $_REQUEST ['story_topic'] , $obj->getVar ( 'story_id' ));
 		
-		if ((xoops_getModuleOption ( 'usetag', $forMods->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
+		if ((xoops_getModuleOption ( 'usetag', $NewsModule->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
 			$tag_handler = xoops_getmodulehandler ( 'tag', 'tag' );
-			$tag_handler->updateByItem ( $_POST ["item_tag"], $obj->getVar ( 'story_id' ), $forMods->getVar ( "dirname" ), 0 );
+			$tag_handler->updateByItem ( $_POST ["item_tag"], $obj->getVar ( 'story_id' ), $NewsModule->getVar ( "dirname" ), 0 );
 		}
 		
 		// file
 		if($_REQUEST ['file_name']) {
 			$fileobj = $file_handler->create ();
 		   $fileobj->setVar ( 'file_date', time () );
-		   $fileobj->setVar ( 'file_modid', $forMods->getVar ( 'mid' ) );
+		   $fileobj->setVar ( 'file_modid', $NewsModule->getVar ( 'mid' ) );
 			$fileobj->setVar ( 'file_title', $_REQUEST ['story_title'] );
 			$fileobj->setVar ( 'file_content', $obj->getVar ( 'story_id' ) );
 		   $fileobj->setVar ( 'file_status', 1 );
 		   
-		   NewsUtils::uploadfile ( $forMods, 'file_name', $fileobj, $_REQUEST ['file_name'] );
-		   $story_handler->contentfile('add',$obj->getVar ( 'story_id' ));
+		   NewsUtils::News_UploadFile ( $NewsModule, 'file_name', $fileobj, $_REQUEST ['file_name'] );
+		   $story_handler->News_Contentfile('add',$obj->getVar ( 'story_id' ));
 		   if (! $file_handler->insert ( $fileobj )) {
-					News_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _NEWS_MD_MSG_ERROR );
+					NewsUtils::News_Redirect ( 'onclick="javascript:history.go(-1);"', 1, _NEWS_MD_MSG_ERROR );
 					xoops_cp_footer ();
 					exit ();
 			}
 		}
 			
 		// Redirect page
-		News_Redirect ( 'index.php', 1, _NEWS_MD_MSG_WAIT );
+		NewsUtils::News_Redirect ( 'index.php', 1, _NEWS_MD_MSG_WAIT );
 		include XOOPS_ROOT_PATH . '/footer.php';
 		exit ();
 		break;
 	
 	default :
 		
-		$story_type = news_CleanVars ( $_REQUEST, 'story_type', 'news', 'string' );
+		$story_type = NewsUtils::News_CleanVars ( $_REQUEST, 'story_type', 'news', 'string' );
 		$obj = $story_handler->create ();
-		$obj->getContentSimpleForm ( $forMods, $story_type );
+		$obj->News_GetContentSimpleForm ( $NewsModule, $story_type );
 		break;
 
 }

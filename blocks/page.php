@@ -19,13 +19,13 @@
  */
 
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 
 function news_page_show($options) {
     global $xoTheme, $xoopsTpl, $module_header;
     // Create Module Instance
     $module_handler =& xoops_gethandler('module');
-    $forMods =& $module_handler->getByDirname('news');
+    $NewsModule =& $module_handler->getByDirname('news');
     // Initialize content handler
     $story_handler = xoops_getmodulehandler ( 'story', 'news' );
     $topic_handler = xoops_getmodulehandler ( 'topic', 'news' );
@@ -38,13 +38,13 @@ function news_page_show($options) {
     $block['topic_id'] = $topic['topic_id'];
     $block['topic_title'] = $topic['topic_title'];
     $block['topic_alias'] = $topic['topic_alias'];
-    $block['link'] = News_Url( $forMods->getVar('dirname'), $block );
-    $block['imageurl'] = XOOPS_URL . xoops_getModuleOption('img_dir', $forMods->getVar('dirname')) . '/medium/';
-    $block['thumburl'] = XOOPS_URL . xoops_getModuleOption('img_dir', $forMods->getVar('dirname')) . '/thumb/';
-    $block['width'] = xoops_getModuleOption('imgwidth', $forMods->getVar('dirname'));
-    $block['float'] = xoops_getModuleOption('imgfloat', $forMods->getVar('dirname'));
+    $block['link'] = NewsUtils::News_Url( $NewsModule->getVar('dirname'), $block );
+    $block['imageurl'] = XOOPS_URL . xoops_getModuleOption('img_dir', $NewsModule->getVar('dirname')) . '/medium/';
+    $block['thumburl'] = XOOPS_URL . xoops_getModuleOption('img_dir', $NewsModule->getVar('dirname')) . '/thumb/';
+    $block['width'] = xoops_getModuleOption('imgwidth', $NewsModule->getVar('dirname'));
+    $block['float'] = xoops_getModuleOption('imgfloat', $NewsModule->getVar('dirname'));
     // Add styles
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $forMods->getVar('dirname') . '/css/blocks.css', null);
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $NewsModule->getVar('dirname') . '/css/blocks.css', null);
     // Return block array
     return $block;
 }

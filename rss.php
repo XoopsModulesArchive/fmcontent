@@ -20,7 +20,7 @@
  */
 
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 
 error_reporting(0);
 $GLOBALS['xoopsLogger']->activated = false;
@@ -31,13 +31,13 @@ if (function_exists('mb_http_output')) {
 header('Content-Type:text/xml; charset=utf-8');
 $xoopsTpl = new XoopsTpl();
 $xoopsTpl->xoops_setCaching(2);
-$xoopsTpl->xoops_setCacheTime(xoops_getModuleOption('rss_timecache', $forMods->getVar('dirname')) * 1);
+$xoopsTpl->xoops_setCacheTime(xoops_getModuleOption('rss_timecache', $NewsModule->getVar('dirname')) * 1);
 $myts = MyTextSanitizer::getInstance();
 if (!$xoopsTpl->is_cached('db:news_rss.html')) {
     if ($story_topic != 0) {
         $channel_category .= " > " . $topic_obj->getVar('topic_title');
     } else {
-        $channel_category = $forMods->getVar('dirname');
+        $channel_category = $NewsModule->getVar('dirname');
     }
     // Check if ML Hack is installed, and if yes, parse the $content in formatForML
     if (method_exists($myts, 'formatForML')) {
@@ -54,11 +54,11 @@ if (!$xoopsTpl->is_cached('db:news_rss.html')) {
     $xoopsTpl->assign('channel_webmaster', $xoopsConfig['adminmail']);
     $xoopsTpl->assign('channel_editor', $xoopsConfig['adminmail']);
     $xoopsTpl->assign('channel_category', htmlspecialchars($channel_category));
-    $xoopsTpl->assign('channel_generator', $forMods->getVar('dirname'));
+    $xoopsTpl->assign('channel_generator', $NewsModule->getVar('dirname'));
     $xoopsTpl->assign('channel_language', _LANGCODE);
     //$xoopsTpl->assign('pubDate', formatTimestamp($story_create, 'rss'));
-    $xoopsTpl->assign('image_url', XOOPS_URL . xoops_getModuleOption('rss_logo', $forMods->getVar('dirname')));
-    $dimention = getimagesize(XOOPS_ROOT_PATH . xoops_getModuleOption('rss_logo', $forMods->getVar('dirname')));
+    $xoopsTpl->assign('image_url', XOOPS_URL . xoops_getModuleOption('rss_logo', $NewsModule->getVar('dirname')));
+    $dimention = getimagesize(XOOPS_ROOT_PATH . xoops_getModuleOption('rss_logo', $NewsModule->getVar('dirname')));
 
     if (empty($dimention[0])) {
         $width = 140;
@@ -73,13 +73,13 @@ if (!$xoopsTpl->is_cached('db:news_rss.html')) {
     $xoopsTpl->assign('image_height', $height);
 
     if (isset($_REQUEST["user"])) {
-        $story_user = news_CleanVars($_REQUEST, 'user', 0, 'int');
+        $story_user = NewsUtils::News_CleanVars($_REQUEST, 'user', 0, 'int');
     } else {
         $story_user = null;
     }
 
     if (isset($_REQUEST["topic"])) {
-        $story_topic = news_CleanVars($_REQUEST, 'topic', 0, 'int');
+        $story_topic = NewsUtils::News_CleanVars($_REQUEST, 'topic', 0, 'int');
 
     } else {
         $story_topic = null;
@@ -92,14 +92,14 @@ if (!$xoopsTpl->is_cached('db:news_rss.html')) {
 
     if ($story_topic != 0) {
         $permHandler = NewsPermission::getHandler();
-        if ($permHandler->isAllowed($xoopsUser, 'news_access', $story_topic)) {
+        if ($permHandler->News_IsAllowed($xoopsUser, 'news_access', $story_topic)) {
             $topic_obj = $topic_handler->get($story_topic);
         }
     }
 
     $story_infos = array(
         'topics' => $topic_handler->getall($story_topic), // get all topic informations
-        'story_limit' => xoops_getModuleOption('rss_perpage', $forMods->getVar('dirname')),
+        'story_limit' => xoops_getModuleOption('rss_perpage', $NewsModule->getVar('dirname')),
         'story_topic' => $story_topic,
         'story_user' => $story_user,
         'story_start' => 0,
@@ -110,7 +110,7 @@ if (!$xoopsTpl->is_cached('db:news_rss.html')) {
         'admin_side' => false
     );
 
-    $contents = $story_handler->getContentList($forMods, $story_infos);
+    $contents = $story_handler->News_GetContentList($NewsModule, $story_infos);
 
     $xoopsTpl->assign('contents', $contents);
 }

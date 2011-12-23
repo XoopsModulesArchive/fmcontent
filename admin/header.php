@@ -39,6 +39,6 @@ if ( file_exists($GLOBALS['xoops']->path('/Frameworks/moduleclasses/moduleadmin/
 xoops_load('xoopsformloader');
 
 $module_handler = xoops_gethandler('module');
-$forMods = $module_handler->getByDirname(basename(dirname(dirname(__FILE__))));
+$NewsModule = $module_handler->getByDirname(basename(dirname(dirname(__FILE__))));
 
 ?>

@@ -20,17 +20,17 @@
  */
 
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 
 // Initialize content handler
 $story_handler = xoops_getmodulehandler('story', 'news');$topic_handler = xoops_getmodulehandler('topic', 'news');
 
 if(isset($_REQUEST['storyid'])) {
-	$story_id = news_CleanVars ( $_REQUEST, 'storyid', 0, 'int' );
+	$story_id = NewsUtils::News_CleanVars ( $_REQUEST, 'storyid', 0, 'int' );
 } else {
-	$story_alias = news_CleanVars ( $_REQUEST, 'story', 0, 'string' );
+	$story_alias = NewsUtils::News_CleanVars ( $_REQUEST, 'story', 0, 'string' );
 	if($story_alias) {
-		$story_id = $story_handler->getId($story_alias);
+		$story_id = $story_handler->News_GetId($story_alias);
 	}
 }
 
@@ -63,7 +63,7 @@ if (isset($story_topic) && $story_topic > 0) {
         exit();
     }
 
-    if ($view_topic->getVar('topic_modid') != $forMods->getVar('mid')) {
+    if ($view_topic->getVar('topic_modid') != $NewsModule->getVar('mid')) {
         redirect_header('index.php', 3, _NEWS_MD_TOPIC_ERROR);
         exit();
     }
@@ -75,15 +75,15 @@ if (isset($story_topic) && $story_topic > 0) {
 
     // Check the access permission
     $perm_handler = NewsPermission::getHandler();
-    if (!$perm_handler->isAllowed($xoopsUser, 'news_access', $view_topic->getVar('topic_id'), $forMods)) {
+    if (!$perm_handler->News_IsAllowed($xoopsUser, 'news_access', $view_topic->getVar('topic_id'), $NewsModule)) {
         redirect_header("index.php", 3, _NOPERM);
         exit;
     }
 
-    if (xoops_getModuleOption('disp_option', $forMods->getVar('dirname')) && $view_topic->getVar('topic_showprint') == '0') {
+    if (xoops_getModuleOption('disp_option', $NewsModule->getVar('dirname')) && $view_topic->getVar('topic_showprint') == '0') {
         redirect_header("index.php", 3, _NOPERM);
         exit;
-    } elseif (xoops_getModuleOption('disp_printlink', $forMods->getVar('dirname')) == '0') {
+    } elseif (xoops_getModuleOption('disp_printlink', $NewsModule->getVar('dirname')) == '0') {
         redirect_header("index.php", 3, _NOPERM);
         exit;
     }
@@ -94,15 +94,15 @@ $page['alias'] = $obj->getVar('story_alias');
 $page['short'] = $obj->getVar('story_short');
 $page['text'] = $obj->getVar('story_text');
 $page['img'] = $obj->getVar('story_img');
-$page['thumburl'] = XOOPS_URL . xoops_getModuleOption('img_dir', $forMods->getVar('dirname')) . '/thumb/' . $obj->getVar('story_img');
+$page['thumburl'] = XOOPS_URL . xoops_getModuleOption('img_dir', $NewsModule->getVar('dirname')) . '/thumb/' . $obj->getVar('story_img');
 $page['author'] = XoopsUser::getUnameFromId($obj->getVar('story_uid'));
 $page['date'] = formatTimestamp($obj->getVar('story_create'), _MEDIUMDATESTRING);
-$page['link'] = News_Url($forMods->getVar('dirname'), $page);
+$page['link'] = NewsUtils::News_Url($NewsModule->getVar('dirname'), $page);
 
 $xoopsTpl->assign('content', $page);
-$xoopsTpl->assign('module', $forMods->getVar('dirname'));
-$xoopsTpl->assign('imgwidth', xoops_getModuleOption('imgwidth', $forMods->getVar('dirname')));
-$xoopsTpl->assign('imgfloat', xoops_getModuleOption('imgfloat', $forMods->getVar('dirname')));
+$xoopsTpl->assign('module', $NewsModule->getVar('dirname'));
+$xoopsTpl->assign('imgwidth', xoops_getModuleOption('imgwidth', $NewsModule->getVar('dirname')));
+$xoopsTpl->assign('imgfloat', xoops_getModuleOption('imgfloat', $NewsModule->getVar('dirname')));
 
 // Index Variable
 $xoopsTpl->assign('xoops_sitename', $xoopsConfig['sitename']);
@@ -113,7 +113,7 @@ $xoopsTpl->assign('meta_keywords', $obj->getVar('story_words'));
 $xoopsTpl->assign('meta_description', $obj->getVar('story_desc'));
 
 // Set xoops page title
-$xoopsTpl->assign('xoops_pagetitle', $page['title'] . ' - ' . $forMods->getVar('name', 's'));
+$xoopsTpl->assign('xoops_pagetitle', $page['title'] . ' - ' . $NewsModule->getVar('name', 's'));
 
 // Set local style
 if (file_exists(XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/style.css')) {
@@ -123,17 +123,17 @@ if (file_exists(XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['langua
 }
 
 // Print page config
-$xoopsTpl->assign('print_logo', xoops_getModuleOption('print_logo', $forMods->getVar('dirname')));
-$xoopsTpl->assign('print_logofloat', xoops_getModuleOption('print_logofloat', $forMods->getVar('dirname')));
-$xoopsTpl->assign('print_logourl', XOOPS_URL . xoops_getModuleOption('print_logourl', $forMods->getVar('dirname')));
-$xoopsTpl->assign('print_img', xoops_getModuleOption('print_img', $forMods->getVar('dirname')));
-$xoopsTpl->assign('print_short', xoops_getModuleOption('print_short', $forMods->getVar('dirname')));
-$xoopsTpl->assign('print_text', xoops_getModuleOption('print_text', $forMods->getVar('dirname')));
-$xoopsTpl->assign('print_date', xoops_getModuleOption('print_date', $forMods->getVar('dirname')));
-$xoopsTpl->assign('print_author', xoops_getModuleOption('print_author', $forMods->getVar('dirname')));
-$xoopsTpl->assign('print_link', xoops_getModuleOption('print_link', $forMods->getVar('dirname')));
-$xoopsTpl->assign('print_title', xoops_getModuleOption('print_title', $forMods->getVar('dirname')));
-$xoopsTpl->assign('print_columns', xoops_getModuleOption('print_columns', $forMods->getVar('dirname')));
+$xoopsTpl->assign('print_logo', xoops_getModuleOption('print_logo', $NewsModule->getVar('dirname')));
+$xoopsTpl->assign('print_logofloat', xoops_getModuleOption('print_logofloat', $NewsModule->getVar('dirname')));
+$xoopsTpl->assign('print_logourl', XOOPS_URL . xoops_getModuleOption('print_logourl', $NewsModule->getVar('dirname')));
+$xoopsTpl->assign('print_img', xoops_getModuleOption('print_img', $NewsModule->getVar('dirname')));
+$xoopsTpl->assign('print_short', xoops_getModuleOption('print_short', $NewsModule->getVar('dirname')));
+$xoopsTpl->assign('print_text', xoops_getModuleOption('print_text', $NewsModule->getVar('dirname')));
+$xoopsTpl->assign('print_date', xoops_getModuleOption('print_date', $NewsModule->getVar('dirname')));
+$xoopsTpl->assign('print_author', xoops_getModuleOption('print_author', $NewsModule->getVar('dirname')));
+$xoopsTpl->assign('print_link', xoops_getModuleOption('print_link', $NewsModule->getVar('dirname')));
+$xoopsTpl->assign('print_title', xoops_getModuleOption('print_title', $NewsModule->getVar('dirname')));
+$xoopsTpl->assign('print_columns', xoops_getModuleOption('print_columns', $NewsModule->getVar('dirname')));
 
 // Display print page
 echo $xoopsTpl->fetch(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getInfo('dirname') . '/templates/news_print.html');

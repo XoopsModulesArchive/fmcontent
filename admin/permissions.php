@@ -27,7 +27,7 @@ require_once XOOPS_ROOT_PATH . '/modules/news/class/topic.php';
 // Display Admin header
 xoops_cp_header();
 // Add module stylesheet
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $forMods->getVar('dirname') . '/css/admin.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $NewsModule->getVar('dirname') . '/css/admin.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
 
 $topic_handler = xoops_getmodulehandler('topic', 'news'); //mb
@@ -40,7 +40,7 @@ $xoopsTpl->assign('selected0', $selected[0]);
 $xoopsTpl->assign('selected1', $selected[1]);
 $xoopsTpl->assign('selected2', $selected[2]);
 
-$module_id = $forMods->getVar("mid");
+$module_id = $NewsModule->getVar("mid");
 
 switch ($permtoset)
 {
@@ -76,17 +76,17 @@ if ($permtoset == 1) {
     $xoopsTpl->assign('permform', $permform->render());
 } else {
     $xt = new XoopsTopic($xoopsDB -> prefix("news_topic"));
-    $alltopics =& $xt->getTopicsList();
+    $alltopics =& $xt->News_GetTopicsList();
 
     foreach ($alltopics as $topic_id => $topic) {
         $permform->addItem($topic_id, $topic["title"], $topic["pid"]);
     }
     
     //check if topics exist before rendering the form and redirect, if there are no topics   
-    if ($topic_handler->getTopicCount($forMods)) {
+    if ($topic_handler->News_GetTopicCount($NewsModule)) {
         $xoopsTpl->assign('permform', $permform->render());
 	 } else {
-	     News_Redirect ( 'topic.php?op=new_topic', 02, _NEWS_AM_MSG_NOPERMSSET );
+	     NewsUtils::News_Redirect ( 'topic.php?op=new_topic', 02, _NEWS_AM_MSG_NOPERMSSET );
 	     // Include footer
 	     xoops_cp_footer ();
 	     exit ();
@@ -98,7 +98,7 @@ $xoopsTpl->assign('navtitle', _NEWS_MI_PERM);
 $xoopsTpl->assign('news_tips', _NEWS_AM_PERMISSIONS_TIPS);
 
 // Call template file
-$xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/news_permissions.html');
+$xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $NewsModule->getVar('dirname') . '/templates/admin/news_permissions.html');
 unset ($permform);
 
 include "footer.php";

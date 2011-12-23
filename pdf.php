@@ -19,7 +19,7 @@
  */
 
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 
 // PDF page must be change
 redirect_header('index.php', 2, _NOPERM);
@@ -30,11 +30,11 @@ exit();
 $story_handler = xoops_getmodulehandler('story', 'news');$topic_handler = xoops_getmodulehandler('topic', 'news');
 
 if(isset($_REQUEST['id'])) {
-	$story_id = news_CleanVars ( $_REQUEST, 'id', 0, 'int' );
+	$story_id = NewsUtils::News_CleanVars ( $_REQUEST, 'id', 0, 'int' );
 } else {
-	$story_alias = news_CleanVars ( $_REQUEST, 'story', 0, 'string' );
+	$story_alias = NewsUtils::News_CleanVars ( $_REQUEST, 'story', 0, 'string' );
 	if($story_alias) {
-		$story_id = $story_handler->getId($story_alias);
+		$story_id = $story_handler->News_GetId($story_alias);
 	}
 }
 
@@ -65,7 +65,7 @@ if (isset($story_topic) && $story_topic > 0) {
         exit();
     }
 
-    if ($view_topic->getVar('topic_modid') != $forMods->getVar('mid')) {
+    if ($view_topic->getVar('topic_modid') != $NewsModule->getVar('mid')) {
         redirect_header('index.php', 3, _NEWS_MD_TOPIC_ERROR);
         exit();
     }
@@ -77,15 +77,15 @@ if (isset($story_topic) && $story_topic > 0) {
 
     // Check the access permission
     $perm_handler = NewsPermission::getHandler();
-    if (!$perm_handler->isAllowed($xoopsUser, 'news_access', $view_topic->getVar('topic_id'), $forMods)) {
+    if (!$perm_handler->News_IsAllowed($xoopsUser, 'news_access', $view_topic->getVar('topic_id'), $NewsModule)) {
         redirect_header("index.php", 3, _NOPERM);
         exit;
     }
 
-    if (xoops_getModuleOption('disp_option', $forMods->getVar('dirname')) && $view_topic->getVar('topic_showpdf') == '0') {
+    if (xoops_getModuleOption('disp_option', $NewsModule->getVar('dirname')) && $view_topic->getVar('topic_showpdf') == '0') {
         redirect_header("index.php", 3, _NOPERM);
         exit;
-    } elseif (xoops_getModuleOption('disp_pdflink', $forMods->getVar('dirname')) == '0') {
+    } elseif (xoops_getModuleOption('disp_pdflink', $NewsModule->getVar('dirname')) == '0') {
         redirect_header("index.php", 3, _NOPERM);
         exit;
     }
@@ -130,10 +130,10 @@ if (isset($story_topic) && $story_topic > 0  &&  $view_topic->getVar('topic_show
        $page_author = ' - '.$pdf_data['author'];
   }
 }else {
-  if (xoops_getModuleOption('disp_date', $forMods->getVar('dirname'))) {
+  if (xoops_getModuleOption('disp_date', $NewsModule->getVar('dirname'))) {
       $page_date = $pdf_data['date'];
   }
-  if (xoops_getModuleOption('disp_author', $forMods->getVar('dirname'))) {
+  if (xoops_getModuleOption('disp_author', $NewsModule->getVar('dirname'))) {
       $page_author = ' - '.$pdf_data['author'];
   }
 }

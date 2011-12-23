@@ -33,7 +33,7 @@ function news_list_show($options) {
     global $xoTheme;
 
     $block = array();
-    $forMods = $options[0];
+    $NewsModule = $options[0];
     $show = $options[1];
     $story_infos['story_limit'] = $options[2];
     $story_infos['lenght_title'] = $options[3];
@@ -61,18 +61,18 @@ function news_list_show($options) {
     array_shift($options);
     array_shift($options);
 
-    $forMods = $module_handler->getByDirname($forMods);
+    $NewsModule = $module_handler->getByDirname($NewsModule);
     
 
     $options0 = $options[0];
     $story_infos ['topics'] = $topic_handler->getall ();
-    $contents = $story_handler->getContentBlockList($forMods, $story_infos ,$options);
+    $contents = $story_handler->News_GetContentBlockList($NewsModule, $story_infos ,$options);
 
     // Add block data
 	 $block['show'] = $show;
     $block['img'] = $showimg;
-    $block['imageurl'] = XOOPS_URL . xoops_getModuleOption('img_dir', $forMods->getVar('dirname')) . '/medium/';
-    $block['thumburl'] = XOOPS_URL . xoops_getModuleOption('img_dir', $forMods->getVar('dirname')) . '/thumb/';
+    $block['imageurl'] = XOOPS_URL . xoops_getModuleOption('img_dir', $NewsModule->getVar('dirname')) . '/medium/';
+    $block['thumburl'] = XOOPS_URL . xoops_getModuleOption('img_dir', $NewsModule->getVar('dirname')) . '/thumb/';
     $block['description'] = $showdescription;
     $block['date'] = $showdate;
     $block['contents'] = $contents;
@@ -80,7 +80,7 @@ function news_list_show($options) {
     $block['float'] = $float;
 
     // Add styles
-    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $forMods->getVar('dirname') . '/css/blocks.css', null);
+    $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $NewsModule->getVar('dirname') . '/css/blocks.css', null);
 
     return $block;
 
@@ -92,7 +92,7 @@ function news_list_edit($options) {
     $story_handler = xoops_getmodulehandler('story', 'news');
     $topic_handler = xoops_getmodulehandler('topic', 'news');
     $module_handler = xoops_gethandler('module');
-    $forMods = $module_handler->getByDirname($options[0]);
+    $NewsModule = $module_handler->getByDirname($options[0]);
 
     $criteria = new CriteriaCompo();
     $criteria->setSort('topic_weight ASC, topic_title');

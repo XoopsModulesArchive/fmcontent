@@ -19,7 +19,7 @@
  */
  
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 
 include_once XOOPS_ROOT_PATH . "/class/pagenav.php";
 
@@ -33,29 +33,29 @@ $xoopsOption ['template_main'] = 'news_topic.html';
 include XOOPS_ROOT_PATH . '/header.php';
 
 // Add Stylesheet
-$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $forMods->getVar ( 'dirname' ) . '/css/style.css' );
+$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/style.css' );
 
 // get module configs
-$topic_perpage = xoops_getModuleOption('admin_perpage_topic', $forMods->getVar('dirname'));
-$topic_order = xoops_getModuleOption('admin_showorder_topic', $forMods->getVar('dirname'));
-$topic_sort = xoops_getModuleOption('admin_showsort_topic', $forMods->getVar('dirname'));
+$topic_perpage = xoops_getModuleOption('admin_perpage_topic', $NewsModule->getVar('dirname'));
+$topic_order = xoops_getModuleOption('admin_showorder_topic', $NewsModule->getVar('dirname'));
+$topic_sort = xoops_getModuleOption('admin_showsort_topic', $NewsModule->getVar('dirname'));
 
 // get limited information
 if (isset($_REQUEST['limit'])) {
-   $topic_limit = news_CleanVars($_REQUEST, 'limit', 0, 'int');
+   $topic_limit = NewsUtils::News_CleanVars($_REQUEST, 'limit', 0, 'int');
 } else {
    $topic_limit = $topic_perpage;
 }
 
 // get start information
 if (isset($_REQUEST['start'])) {
-   $topic_start = news_CleanVars($_REQUEST, 'start', 0, 'int');
+   $topic_start = NewsUtils::News_CleanVars($_REQUEST, 'start', 0, 'int');
 } else {
    $topic_start = 0;
 }
 
-$topics = $topic_handler->getTopics($forMods, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu = null, $topic_online = null , $topic_parent = null);
-$topic_numrows = $topic_handler->getTopicCount($forMods);
+$topics = $topic_handler->News_GetTopics($NewsModule, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu = null, $topic_online = null , $topic_parent = null);
+$topic_numrows = $topic_handler->News_GetTopicCount($NewsModule);
 
 if ($topic_numrows > $topic_limit) {
    $topic_pagenav = new XoopsPageNav($topic_numrows, $topic_limit, $topic_start, 'start', 'limit=' . $topic_limit);
@@ -64,7 +64,7 @@ if ($topic_numrows > $topic_limit) {
    $topic_pagenav = '';
 }
         
-if (xoops_getModuleOption ( 'img_lightbox', $forMods->getVar ( 'dirname' ) )) {
+if (xoops_getModuleOption ( 'img_lightbox', $NewsModule->getVar ( 'dirname' ) )) {
 	// Add scripts
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/jquery.js' );
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/plugins/jquery.lightbox.js' );
@@ -75,10 +75,10 @@ if (xoops_getModuleOption ( 'img_lightbox', $forMods->getVar ( 'dirname' ) )) {
         
 $xoopsTpl->assign('topics', $topics);
 $xoopsTpl->assign('topic_pagenav', $topic_pagenav);
-$xoopsTpl->assign('xoops_dirname', $forMods->getVar('dirname'));
-$xoopsTpl->assign ( 'advertisement', xoops_getModuleOption ( 'advertisement', $forMods->getVar ( 'dirname' ) ) );
-$xoopsTpl->assign ( 'imgwidth', xoops_getModuleOption ( 'imgwidth', $forMods->getVar ( 'dirname' ) ) );
-$xoopsTpl->assign ( 'imgfloat', xoops_getModuleOption ( 'imgfloat', $forMods->getVar ( 'dirname' ) ) );  
+$xoopsTpl->assign('xoops_dirname', $NewsModule->getVar('dirname'));
+$xoopsTpl->assign ( 'advertisement', xoops_getModuleOption ( 'advertisement', $NewsModule->getVar ( 'dirname' ) ) );
+$xoopsTpl->assign ( 'imgwidth', xoops_getModuleOption ( 'imgwidth', $NewsModule->getVar ( 'dirname' ) ) );
+$xoopsTpl->assign ( 'imgfloat', xoops_getModuleOption ( 'imgfloat', $NewsModule->getVar ( 'dirname' ) ) );  
     
 // include Xoops footer
 include XOOPS_ROOT_PATH . '/footer.php';

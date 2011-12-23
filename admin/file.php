@@ -19,23 +19,23 @@
  */
 
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 include_once XOOPS_ROOT_PATH . "/class/pagenav.php";
 
 // Display Admin header
 xoops_cp_header();
 // Define default value
-$op = news_CleanVars($_REQUEST, 'op', '', 'string');
+$op = NewsUtils::News_CleanVars($_REQUEST, 'op', '', 'string');
 // Initialize content handler
 $file_handler = xoops_getmodulehandler('file', 'news');
 $story_handler = xoops_getmodulehandler('story', 'news');
 // Define scripts
 $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
 $xoTheme->addScript('browse.php?Frameworks/jquery/plugins/jquery.ui.js');
-$xoTheme->addScript('browse.php?modules/' . $forMods->getVar('dirname') . '/js/order.js');
-$xoTheme->addScript('browse.php?modules/' . $forMods->getVar('dirname') . '/js/admin.js');
+$xoTheme->addScript('browse.php?modules/' . $NewsModule->getVar('dirname') . '/js/order.js');
+$xoTheme->addScript('browse.php?modules/' . $NewsModule->getVar('dirname') . '/js/admin.js');
 // Add module stylesheet
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $forMods->getVar('dirname') . '/css/admin.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $NewsModule->getVar('dirname') . '/css/admin.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/ui/' . xoops_getModuleOption('jquery_theme', 'system') . '/ui.all.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
 
@@ -43,25 +43,25 @@ switch ($op)
 {
     case 'new_file':
 		$obj = $file_handler->create();
-		$obj->getForm($forMods);
+		$obj->getForm($NewsModule);
 		break;
 		
 	 case 'edit_file':
-        $file_id = news_CleanVars($_REQUEST, 'file_id', 0, 'int');
+        $file_id = NewsUtils::News_CleanVars($_REQUEST, 'file_id', 0, 'int');
         if ($file_id > 0) {
             $obj = $file_handler->get($file_id);
-            $obj->getForm($forMods);
+            $obj->getForm($NewsModule);
         } else {
-            News_Redirect('file.php', 1, _NEWS_AM_MSG_EDIT_ERROR);
+            NewsUtils::News_Redirect('file.php', 1, _NEWS_AM_MSG_EDIT_ERROR);
         }
         break;
      
     case 'delete_file':
-        $file_id = news_CleanVars($_REQUEST, 'file_id', 0, 'int');
+        $file_id = NewsUtils::News_CleanVars($_REQUEST, 'file_id', 0, 'int');
         if ($file_id > 0) {
             $file = $file_handler->get($file_id);
             // Prompt message
-            News_Message('backend.php', sprintf(_NEWS_AM_MSG_DELETE, '"' . $file->getVar('file_title') . '"'), $file_id, 'file');
+            NewsUtils::News_Message('backend.php', sprintf(_NEWS_AM_MSG_DELETE, '"' . $file->getVar('file_title') . '"'), $file_id, 'file');
             // Display Admin footer
             xoops_cp_footer();
         }  
@@ -71,9 +71,9 @@ switch ($op)
         // get module configs
         
         /*
-        $file['perpage'] = xoops_getModuleOption('admin_perpage_file', $forMods->getVar('dirname'));
-        $file['order'] = xoops_getModuleOption('admin_showorder_file', $forMods->getVar('dirname'));
-        $file['sort'] = xoops_getModuleOption('admin_showsort_file', $forMods->getVar('dirname'));
+        $file['perpage'] = xoops_getModuleOption('admin_perpage_file', $NewsModule->getVar('dirname'));
+        $file['order'] = xoops_getModuleOption('admin_showorder_file', $NewsModule->getVar('dirname'));
+        $file['sort'] = xoops_getModuleOption('admin_showsort_file', $NewsModule->getVar('dirname'));
         */
         
         $file['perpage'] = '10';
@@ -82,30 +82,30 @@ switch ($op)
         
         // get limited information
         if (isset($_REQUEST['limit'])) {
-            $file['limit'] = news_CleanVars($_REQUEST, 'limit', 0, 'int');
+            $file['limit'] = NewsUtils::News_CleanVars($_REQUEST, 'limit', 0, 'int');
         } else {
             $file['limit'] = $file['perpage'];
         }
 
         // get start information
         if (isset($_REQUEST['start'])) {
-            $file['start'] = news_CleanVars($_REQUEST, 'start', 0, 'int');
+            $file['start'] = NewsUtils::News_CleanVars($_REQUEST, 'start', 0, 'int');
         } else {
             $file['start'] = 0;
         }
         
         // get content
         if (isset($_REQUEST['content'])) {
-            $file['content'] = news_CleanVars($_REQUEST, 'content', 0, 'int');
+            $file['content'] = NewsUtils::News_CleanVars($_REQUEST, 'content', 0, 'int');
             $content = $story_handler->get($file['content']);
         } else {
             $content = $story_handler->getall();
         }
 
         
-        $files = $file_handler->getAdminFiles($forMods, $file , $content);
+        $files = $file_handler->News_GetAdminFiles($NewsModule, $file , $content);
         
-        $file_numrows = $file_handler->getFileCount($forMods);
+        $file_numrows = $file_handler->News_GetFileCount($NewsModule);
 
         if ($file_numrows > $file['limit']) {
             $file_pagenav = new XoopsPageNav($file_numrows, $file['limit'], $file['start'], 'start', 'limit=' . $file['limit']);
@@ -118,11 +118,11 @@ switch ($op)
         $xoopsTpl->assign('navtitle', _NEWS_MI_FILE);
         $xoopsTpl->assign('files', $files);
         $xoopsTpl->assign('file_pagenav', $file_pagenav);
-        $xoopsTpl->assign('xoops_dirname', $forMods->getVar('dirname'));
+        $xoopsTpl->assign('xoops_dirname', $NewsModule->getVar('dirname'));
         $xoopsTpl->assign('news_tips', _NEWS_AM_FILE_TIPS);
 
         // Call template file
-        $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/news_file.html');
+        $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $NewsModule->getVar('dirname') . '/templates/admin/news_file.html');
 
         break;
 }

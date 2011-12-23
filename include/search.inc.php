@@ -27,7 +27,7 @@ function news_search($queryarray, $andor, $limit, $offset, $userid) {
 
     $story_handler = xoops_getmodulehandler('story', 'news');
 
-    return $story_handler->getSearchedContent($queryarray, $andor, $limit, $offset, $userid);
+    return $story_handler->News_GetSearchedContent($queryarray, $andor, $limit, $offset, $userid);
 
 }
 
