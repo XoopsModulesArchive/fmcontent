@@ -19,7 +19,7 @@
  */
 
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 
 // Initialize content handler
 $story_handler = xoops_getmodulehandler ( 'story', 'news' );
@@ -27,31 +27,31 @@ $topic_handler = xoops_getmodulehandler ( 'topic', 'news' );
 $file_handler = xoops_getmodulehandler('file', 'news');
 
 if(isset($_REQUEST['storyid'])) {
-	$story_id = news_CleanVars ( $_REQUEST, 'storyid', 0, 'int' );
+	$story_id = NewsUtils::News_CleanVars ( $_REQUEST, 'storyid', 0, 'int' );
 } else {
-	$story_alias = news_CleanVars ( $_REQUEST, 'story', 0, 'string' );
+	$story_alias = NewsUtils::News_CleanVars ( $_REQUEST, 'story', 0, 'string' );
 	if($story_alias) {
-		$_GET['storyid'] = $story_id = $story_handler->getId($story_alias);
+		$_GET['storyid'] = $story_id = $story_handler->News_GetId($story_alias);
 	}
 }
 
 // Include content template
-$template = xoops_getModuleOption ( 'template', $forMods->getVar ( 'dirname' ) );
+$template = xoops_getModuleOption ( 'template', $NewsModule->getVar ( 'dirname' ) );
 $xoopsOption ['template_main'] = 'news_article.html';
 
 // include Xoops header
 include XOOPS_ROOT_PATH . '/header.php';
 
 // Add Stylesheet
-$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $forMods->getVar ( 'dirname' ) . '/css/style.css' );
-$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $forMods->getVar ( 'dirname' ) . '/css/legacy.css' );
+$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/style.css' );
+$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/legacy.css' );
 
 if (! $story_id) {
 	$criteria = new CriteriaCompo ();
-	$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+	$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 	$criteria->add ( new Criteria ( 'story_default', 1 ) );
 	$criteria->add ( new Criteria ( 'story_topic', 0 ) );
-	$story_id = $story_handler->getDefault ( $criteria );
+	$story_id = $story_handler->News_GetDefault ( $criteria );
 	if (! $story_id) {
 		$xoopsTpl->assign ( 'story_error', _NEWS_MD_ERROR_DEFAULT );
 	}
@@ -82,7 +82,7 @@ if (count ( array_intersect ( $group, $groups ) ) <= 0) {
 $content = $obj->toArray ();
 
 // Update content hits
-$story_handler->updateHits ( $story_id );
+$story_handler->News_UpdateHits ( $story_id );
 
 // set arrey
 $view_topic = $topic_handler->get ( $story_topic );
@@ -91,8 +91,8 @@ $content ['topic_alias'] = $view_topic->getVar ( 'topic_alias' );
 $content ['topic_id'] = $view_topic->getVar ( 'topic_id' );
 $content ['story_create'] = formatTimestamp ( $content ['story_create'], _MEDIUMDATESTRING );
 $content ['story_update'] = formatTimestamp ( $content ['story_update'], _MEDIUMDATESTRING );
-$content ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/medium/' . $content ['story_img'];
-$content ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/thumb/' . $content ['story_img'];
+$content ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $content ['story_img'];
+$content ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $content ['story_img'];
 
 if (isset ( $story_topic ) && $story_topic > 0) {
 	
@@ -101,7 +101,7 @@ if (isset ( $story_topic ) && $story_topic > 0) {
 		exit ();
 	}
 	
-	if ($view_topic->getVar ( 'topic_modid' ) != $forMods->getVar ( 'mid' )) {
+	if ($view_topic->getVar ( 'topic_modid' ) != $NewsModule->getVar ( 'mid' )) {
 		redirect_header ( 'index.php', 3, _NEWS_MD_TOPIC_ERROR );
 		exit ();
 	}
@@ -113,7 +113,7 @@ if (isset ( $story_topic ) && $story_topic > 0) {
 	
 	// Check the access permission
 	$perm_handler = NewsPermission::getHandler ();
-	if (! $perm_handler->isAllowed ( $xoopsUser, 'news_access', $view_topic->getVar ( 'topic_id' ), $forMods )) {
+	if (! $perm_handler->News_IsAllowed ( $xoopsUser, 'news_access', $view_topic->getVar ( 'topic_id' ), $NewsModule )) {
 		redirect_header ( "index.php", 3, _NOPERM );
 		exit ();
 	}
@@ -137,10 +137,10 @@ if (isset ( $story_topic ) && $story_topic > 0 && $view_topic->getVar ( 'topic_s
 		$link ['date'] = '1';
 	}
 	if ($view_topic->getVar ( 'topic_showpdf' )) {
-		$link ['pdf'] = News_Url ( $forMods->getVar ( 'dirname' ), $content, 'pdf' );
+		$link ['pdf'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $content, 'pdf' );
 	}
 	if ($view_topic->getVar ( 'topic_showprint' )) {
-		$link ['print'] = News_Url ( $forMods->getVar ( 'dirname' ), $content, 'print' );
+		$link ['print'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $content, 'print' );
 	}
 	if ($view_topic->getVar ( 'topic_showhits' )) {
 		$link ['hits'] = '1';
@@ -151,8 +151,8 @@ if (isset ( $story_topic ) && $story_topic > 0 && $view_topic->getVar ( 'topic_s
 	if ($view_topic->getVar ( 'topic_showmail' )) {
 		// Mail link & label
 		$link ['mail_subject'] = $content ['story_title'] . ' - ' . $xoopsConfig ['sitename'];
-		$link ['mail_linkto'] = News_Url ( $forMods->getVar ( 'dirname' ), $content );
-		if (xoops_getModuleOption ( 'tellafriend', $forMods->getVar ( 'dirname' ) )) {
+		$link ['mail_linkto'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $content );
+		if (xoops_getModuleOption ( 'tellafriend', $NewsModule->getVar ( 'dirname' ) )) {
 			$link ['mail'] = "mailto:|xoops_tellafriend:" . $link ['mail_subject'];
 		} else {
 			$link ['mail'] = "mailto:?subject=" . $link ['mail_subject'] . "&amp;body=" . $link ['mail_linkto'];
@@ -163,14 +163,14 @@ if (isset ( $story_topic ) && $story_topic > 0 && $view_topic->getVar ( 'topic_s
 			$next_obj = $story_handler->get ( $obj->getVar ( 'story_next' ) );
 			$next_link = $next_obj->toArray ();
 			$next_link ['topic'] = $content ['topic'];
-			$link ['next'] = News_Url ( $forMods->getVar ( 'dirname' ), $next_link );
+			$link ['next'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $next_link );
 			$link ['next_title'] = $next_link ['story_title'];
 		}
 		if ($obj->getVar ( 'story_prev' ) != 0) {
 			$prev_obj = $story_handler->get ( $obj->getVar ( 'story_prev' ) );
 			$prev_link = $prev_obj->toArray ();
 			$prev_link ['topic'] = $content ['topic'];
-			$link ['prev'] = News_Url ( $forMods->getVar ( 'dirname' ), $prev_link );
+			$link ['prev'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $prev_link );
 			$link ['prev_title'] = $prev_link ['story_title'];
 		}
 	}
@@ -178,7 +178,7 @@ if (isset ( $story_topic ) && $story_topic > 0 && $view_topic->getVar ( 'topic_s
 } else {
 	
 	// get topic config from module option
-	if (xoops_getModuleOption ( 'disp_topic', $forMods->getVar ( 'dirname' ) )) {
+	if (xoops_getModuleOption ( 'disp_topic', $NewsModule->getVar ( 'dirname' ) )) {
 		$link ['topic'] = $view_topic->getVar ( 'topic_title' );
 		$link ['topicid'] = $story_topic;
 		if ($story_topic) {
@@ -187,64 +187,64 @@ if (isset ( $story_topic ) && $story_topic > 0 && $view_topic->getVar ( 'topic_s
 			$link ['topicshow'] = '0';
 		}
 	}
-	if (xoops_getModuleOption ( 'disp_date', $forMods->getVar ( 'dirname' ) )) {
+	if (xoops_getModuleOption ( 'disp_date', $NewsModule->getVar ( 'dirname' ) )) {
 		$link ['date'] = XoopsUser::getUnameFromId ( $obj->getVar ( 'story_create' ) );
 	}
-	if (xoops_getModuleOption ( 'disp_author', $forMods->getVar ( 'dirname' ) )) {
+	if (xoops_getModuleOption ( 'disp_author', $NewsModule->getVar ( 'dirname' ) )) {
 		$content ['author'] = XoopsUser::getUnameFromId ( $obj->getVar ( 'story_uid' ) );
 	}
-	if (xoops_getModuleOption ( 'disp_pdflink', $forMods->getVar ( 'dirname' ) )) {
-		$link ['pdf'] = News_Url ( $forMods->getVar ( 'dirname' ), $content, 'pdf' );
+	if (xoops_getModuleOption ( 'disp_pdflink', $NewsModule->getVar ( 'dirname' ) )) {
+		$link ['pdf'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $content, 'pdf' );
 	}
-	if (xoops_getModuleOption ( 'disp_printlink', $forMods->getVar ( 'dirname' ) )) {
-		$link ['print'] = News_Url ( $forMods->getVar ( 'dirname' ), $content, 'print' );
+	if (xoops_getModuleOption ( 'disp_printlink', $NewsModule->getVar ( 'dirname' ) )) {
+		$link ['print'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $content, 'print' );
 	}
-	if (xoops_getModuleOption ( 'disp_hits', $forMods->getVar ( 'dirname' ) )) {
+	if (xoops_getModuleOption ( 'disp_hits', $NewsModule->getVar ( 'dirname' ) )) {
 		$link ['hits'] = '1';
 	}
-	if (xoops_getModuleOption ( 'disp_coms', $forMods->getVar ( 'dirname' ) )) {
+	if (xoops_getModuleOption ( 'disp_coms', $NewsModule->getVar ( 'dirname' ) )) {
 		$link ['coms'] = '1';
 	}
-	if (xoops_getModuleOption ( 'disp_maillink', $forMods->getVar ( 'dirname' ) )) {
+	if (xoops_getModuleOption ( 'disp_maillink', $NewsModule->getVar ( 'dirname' ) )) {
 		// Mail link & label
 		$link ['mail_subject'] = $content ['story_title'] . ' - ' . $xoopsConfig ['sitename'];
-		$link ['mail_linkto'] = News_Url ( $forMods->getVar ( 'dirname' ), $content );
-		if (xoops_getModuleOption ( 'tellafriend', $forMods->getVar ( 'dirname' ) )) {
+		$link ['mail_linkto'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $content );
+		if (xoops_getModuleOption ( 'tellafriend', $NewsModule->getVar ( 'dirname' ) )) {
 			$link ['mail'] = "mailto:|xoops_tellafriend:" . $link ['mail_subject'];
 		} else {
 			$link ['mail'] = "mailto:?subject=" . $link ['mail_subject'] . "&amp;body=" . $link ['mail_linkto'];
 		}
 	}
-	if (xoops_getModuleOption ( 'disp_navlink', $forMods->getVar ( 'dirname' ) )) {
+	if (xoops_getModuleOption ( 'disp_navlink', $NewsModule->getVar ( 'dirname' ) )) {
 		if ($obj->getVar ( 'story_next' ) != 0) {
 			$next_obj = $story_handler->get ( $obj->getVar ( 'story_next' ) );
 			$next_link = $next_obj->toArray ();
 			$next_link ['topic'] = $content ['topic'];
-			$link ['next'] = News_Url ( $forMods->getVar ( 'dirname' ), $next_link );
+			$link ['next'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $next_link );
 			$link ['next_title'] = $next_link ['story_title'];
 		}
 		if ($obj->getVar ( 'story_prev' ) != 0) {
 			$prev_obj = $story_handler->get ( $obj->getVar ( 'story_prev' ) );
 			$prev_link = $prev_obj->toArray ();
 			$prev_link ['topic'] = $content ['topic'];
-			$link ['prev'] = News_Url ( $forMods->getVar ( 'dirname' ), $prev_link );
+			$link ['prev'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $prev_link );
 			$link ['prev_title'] = $prev_link ['story_title'];
 		}
 	}
 }
 
-if (xoops_getModuleOption ( 'editinplace', $forMods->getVar ( 'dirname' ) ) && is_object ( $xoopsUser ) && ($xoopsUser->id () == $obj->getVar ( 'story_uid' ) || $xoopsUser->isAdmin ()) && $content ['dohtml']) {
+if (xoops_getModuleOption ( 'editinplace', $NewsModule->getVar ( 'dirname' ) ) && is_object ( $xoopsUser ) && ($xoopsUser->id () == $obj->getVar ( 'story_uid' ) || $xoopsUser->isAdmin ()) && $content ['dohtml']) {
 	// Add scripts
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/jquery.js' );
-	$xoTheme->addScript ( 'browse.php?modules/' . $forMods->getVar ( 'dirname' ) . '/js/jeditable/jquery.wysiwyg.js' );
-	$xoTheme->addScript ( 'browse.php?modules/' . $forMods->getVar ( 'dirname' ) . '/js/jeditable/jquery.jeditable.mini.js' );
-	$xoTheme->addScript ( 'browse.php?modules/' . $forMods->getVar ( 'dirname' ) . '/js/jeditable/jquery.jeditable.wysiwyg.js' );
+	$xoTheme->addScript ( 'browse.php?modules/' . $NewsModule->getVar ( 'dirname' ) . '/js/jeditable/jquery.wysiwyg.js' );
+	$xoTheme->addScript ( 'browse.php?modules/' . $NewsModule->getVar ( 'dirname' ) . '/js/jeditable/jquery.jeditable.mini.js' );
+	$xoTheme->addScript ( 'browse.php?modules/' . $NewsModule->getVar ( 'dirname' ) . '/js/jeditable/jquery.jeditable.wysiwyg.js' );
 	// Add Stylesheet
-	$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $forMods->getVar ( 'dirname' ) . '/css/jquery.wysiwyg.css' );
+	$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/jquery.wysiwyg.css' );
 	$xoopsTpl->assign ( 'editinplace', true );
 }
 
-if (xoops_getModuleOption ( 'img_lightbox', $forMods->getVar ( 'dirname' ) )) {
+if (xoops_getModuleOption ( 'img_lightbox', $NewsModule->getVar ( 'dirname' ) )) {
 	// Add scripts
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/jquery.js' );
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/plugins/jquery.lightbox.js' );
@@ -253,7 +253,7 @@ if (xoops_getModuleOption ( 'img_lightbox', $forMods->getVar ( 'dirname' ) )) {
 	$xoopsTpl->assign ( 'img_lightbox', true );
 }
 
-if (file_exists ( XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar ( 'dirname' ) . '/language/' . $GLOBALS ['xoopsConfig'] ['language'] . '/main.php' )) {
+if (file_exists ( XOOPS_ROOT_PATH . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/language/' . $GLOBALS ['xoopsConfig'] ['language'] . '/main.php' )) {
 	$xoopsTpl->assign ( 'xoops_language', $GLOBALS ['xoopsConfig'] ['language'] );
 } else {
 	$xoopsTpl->assign ( 'xoops_language', 'english' );
@@ -276,14 +276,14 @@ if (isset ( $xoTheme ) && is_object ( $xoTheme )) {
 }
 
 // For social networks scripts
-if (xoops_getModuleOption ( 'show_social_book', $forMods->getVar ( 'dirname' ) ) == '1' || xoops_getModuleOption ( 'show_social_book', $forMods->getVar ( 'dirname' ) ) == '3') {
+if (xoops_getModuleOption ( 'show_social_book', $NewsModule->getVar ( 'dirname' ) ) == '1' || xoops_getModuleOption ( 'show_social_book', $NewsModule->getVar ( 'dirname' ) ) == '3') {
 	$xoTheme->addScript ( 'http://platform.twitter.com/widgets.js' );
 	$xoTheme->addScript ( 'http://connect.facebook.net/en_US/all.js#xfbml=1' );
 	$xoTheme->addScript ( 'https://apis.google.com/js/plusone.js' );
 }
 
 // For xoops tag
-if ((xoops_getModuleOption ( 'usetag', $forMods->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
+if ((xoops_getModuleOption ( 'usetag', $NewsModule->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
 	include_once XOOPS_ROOT_PATH . "/modules/tag/include/tagbar.php";
 	$xoopsTpl->assign ( 'tagbar', tagBar ( $content ['story_id'], $catid = 0 ) );
 	$xoopsTpl->assign ( 'tags', true );
@@ -292,12 +292,12 @@ if ((xoops_getModuleOption ( 'usetag', $forMods->getVar ( 'dirname' ) )) and (is
 }
 
 // Get URLs 
-$link ['url'] = News_Url ( $forMods->getVar ( 'dirname' ), $content );
-$link ['topicurl'] = News_TopicUrl ( $forMods->getVar ( 'dirname' ), $content );
+$link ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $content );
+$link ['topicurl'] = NewsUtils::News_TopicUrl ( $NewsModule->getVar ( 'dirname' ), $content );
 
 // breadcrumb
-if (xoops_getModuleOption ( 'bc_show', $forMods->getVar ( 'dirname' ) )) {
-	$breadcrumb = NewsUtils::breadcrumb ( $forMods, true, $content ['story_title'], $content ['story_topic'], ' &raquo; ', 'topic_title' );
+if (xoops_getModuleOption ( 'bc_show', $NewsModule->getVar ( 'dirname' ) )) {
+	$breadcrumb = NewsUtils::News_Breadcrumb ( $NewsModule, true, $content ['story_title'], $content ['story_topic'], ' &raquo; ', 'topic_title' );
 }
 
 
@@ -308,33 +308,33 @@ if($content ['story_file'] > 0) {
    $file['sort'] = 'file_id';
 	$file['start'] = 0;
 	$file['content'] = $story_id;
-	$view_file = $file_handler->getFiles($forMods, $file);
+	$view_file = $file_handler->News_GetFiles($NewsModule, $file);
 	$xoopsTpl->assign ( 'files', $view_file );
 	$xoopsTpl->assign ( 'jwwidth', '470' );
 	$xoopsTpl->assign ( 'jwheight', '320' );
 }	
 
 // Get related contents
-if(xoops_getModuleOption ( 'related', $forMods->getVar ( 'dirname' ) )) {
+if(xoops_getModuleOption ( 'related', $NewsModule->getVar ( 'dirname' ) )) {
 	$related_infos ['story_id'] = $obj->getVar ( 'story_id' );
 	$related_infos ['story_topic'] = $obj->getVar ( 'story_topic' );
-	$related_infos ['story_limit'] = xoops_getModuleOption ( 'related_limit', $forMods->getVar ( 'dirname' ) );
+	$related_infos ['story_limit'] = xoops_getModuleOption ( 'related_limit', $NewsModule->getVar ( 'dirname' ) );
 	$related_infos ['topic_alias'] = $view_topic->getVar ( 'topic_alias' );
-	$related = $story_handler->relatedContent($forMods, $related_infos);
+	$related = $story_handler->News_RelatedContent($NewsModule, $related_infos);
 	$xoopsTpl->assign ( 'related', $related );	
 }	
  
 $xoopsTpl->assign ( 'content', $content );
 $xoopsTpl->assign ( 'link', $link );
-$xoopsTpl->assign ( 'modname', $forMods->getVar ( 'name' ) );
+$xoopsTpl->assign ( 'modname', $NewsModule->getVar ( 'name' ) );
 $xoopsTpl->assign ( 'xoops_pagetitle', $content ['story_title'] );
-$xoopsTpl->assign ( 'rss', xoops_getModuleOption ( 'rss_show', $forMods->getVar ( 'dirname' ) ) );
-$xoopsTpl->assign ( 'multiple_columns', xoops_getModuleOption ( 'multiple_columns', $forMods->getVar ( 'dirname' ) ) );
-$xoopsTpl->assign ( 'show_social_book', xoops_getModuleOption ( 'show_social_book', $forMods->getVar ( 'dirname' ) ) );
-$xoopsTpl->assign ( 'advertisement', xoops_getModuleOption ( 'advertisement', $forMods->getVar ( 'dirname' ) ) );
-$xoopsTpl->assign ( 'imgwidth', xoops_getModuleOption ( 'imgwidth', $forMods->getVar ( 'dirname' ) ) );
-$xoopsTpl->assign ( 'imgfloat', xoops_getModuleOption ( 'imgfloat', $forMods->getVar ( 'dirname' ) ) );
-$xoopsTpl->assign ( 'alluserpost', xoops_getModuleOption ( 'alluserpost', $forMods->getVar ( 'dirname' ) ) );
+$xoopsTpl->assign ( 'rss', xoops_getModuleOption ( 'rss_show', $NewsModule->getVar ( 'dirname' ) ) );
+$xoopsTpl->assign ( 'multiple_columns', xoops_getModuleOption ( 'multiple_columns', $NewsModule->getVar ( 'dirname' ) ) );
+$xoopsTpl->assign ( 'show_social_book', xoops_getModuleOption ( 'show_social_book', $NewsModule->getVar ( 'dirname' ) ) );
+$xoopsTpl->assign ( 'advertisement', xoops_getModuleOption ( 'advertisement', $NewsModule->getVar ( 'dirname' ) ) );
+$xoopsTpl->assign ( 'imgwidth', xoops_getModuleOption ( 'imgwidth', $NewsModule->getVar ( 'dirname' ) ) );
+$xoopsTpl->assign ( 'imgfloat', xoops_getModuleOption ( 'imgfloat', $NewsModule->getVar ( 'dirname' ) ) );
+$xoopsTpl->assign ( 'alluserpost', xoops_getModuleOption ( 'alluserpost', $NewsModule->getVar ( 'dirname' ) ) );
 $xoopsTpl->assign ( 'breadcrumb', $breadcrumb );
 
 // include Xoops footer

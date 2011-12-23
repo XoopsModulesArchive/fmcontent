@@ -31,5 +31,5 @@ require_once XOOPS_ROOT_PATH . '/class/template.php';
 $modsDirname = basename(dirname(__FILE__));
 
 $module_handler =& xoops_gethandler('module');
-$forMods =& $module_handler->getByDirname($modsDirname);
+$NewsModule =& $module_handler->getByDirname($modsDirname);
 ?>

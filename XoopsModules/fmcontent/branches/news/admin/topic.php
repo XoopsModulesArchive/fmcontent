@@ -20,23 +20,23 @@
  */
 
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 include_once XOOPS_ROOT_PATH . "/class/pagenav.php";
 
 // Display Admin header
 xoops_cp_header();
 // Define default value
-$op = news_CleanVars($_REQUEST, 'op', '', 'string');
+$op = NewsUtils::News_CleanVars($_REQUEST, 'op', '', 'string');
 // Initialize content handler
 $topic_handler = xoops_getmodulehandler('topic', 'news');
 $story_handler = xoops_getmodulehandler('story', 'news');
 // Define scripts
 $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
 $xoTheme->addScript('browse.php?Frameworks/jquery/plugins/jquery.ui.js');
-$xoTheme->addScript('browse.php?modules/' . $forMods->getVar('dirname') . '/js/order.js');
-$xoTheme->addScript('browse.php?modules/' . $forMods->getVar('dirname') . '/js/admin.js');
+$xoTheme->addScript('browse.php?modules/' . $NewsModule->getVar('dirname') . '/js/order.js');
+$xoTheme->addScript('browse.php?modules/' . $NewsModule->getVar('dirname') . '/js/admin.js');
 // Add module stylesheet
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $forMods->getVar('dirname') . '/css/admin.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $NewsModule->getVar('dirname') . '/css/admin.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/ui/' . xoops_getModuleOption('jquery_theme', 'system') . '/ui.all.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
 
@@ -44,25 +44,25 @@ switch ($op)
 {
     case 'new_topic':
         $obj = $topic_handler->create();
-        $obj->getForm($forMods);
+        $obj->getForm($NewsModule);
         break;
 
     case 'edit_topic':
-        $topic_id = news_CleanVars($_REQUEST, 'topic_id', 0, 'int');
+        $topic_id = NewsUtils::News_CleanVars($_REQUEST, 'topic_id', 0, 'int');
         if ($topic_id > 0) {
             $obj = $topic_handler->get($topic_id);
-            $obj->getForm($forMods);
+            $obj->getForm($NewsModule);
         } else {
-            News_Redirect('topic.php', 1, _NEWS_AM_MSG_EDIT_ERROR);
+            NewsUtils::News_Redirect('topic.php', 1, _NEWS_AM_MSG_EDIT_ERROR);
         }
         break;
 
     case 'delete_topic':
-        $topic_id = news_CleanVars($_REQUEST, 'topic_id', 0, 'int');
+        $topic_id = NewsUtils::News_CleanVars($_REQUEST, 'topic_id', 0, 'int');
         if ($topic_id > 0) {
             $topic = $topic_handler->get($topic_id);
             // Prompt message
-            News_Message('backend.php', sprintf(_NEWS_AM_MSG_DELETE, '"' . $topic->getVar('topic_title') . '"'), $topic_id, 'topic');
+            NewsUtils::News_Message('backend.php', sprintf(_NEWS_AM_MSG_DELETE, '"' . $topic->getVar('topic_title') . '"'), $topic_id, 'topic');
             // Display Admin footer
             xoops_cp_footer();
         }
@@ -88,26 +88,26 @@ switch ($op)
     default:
 
         // get module configs
-        $topic_perpage = xoops_getModuleOption('admin_perpage_topic', $forMods->getVar('dirname'));
-        $topic_order = xoops_getModuleOption('admin_showorder_topic', $forMods->getVar('dirname'));
-        $topic_sort = xoops_getModuleOption('admin_showsort_topic', $forMods->getVar('dirname'));
+        $topic_perpage = xoops_getModuleOption('admin_perpage_topic', $NewsModule->getVar('dirname'));
+        $topic_order = xoops_getModuleOption('admin_showorder_topic', $NewsModule->getVar('dirname'));
+        $topic_sort = xoops_getModuleOption('admin_showsort_topic', $NewsModule->getVar('dirname'));
 
         // get limited information
         if (isset($_REQUEST['limit'])) {
-            $topic_limit = news_CleanVars($_REQUEST, 'limit', 0, 'int');
+            $topic_limit = NewsUtils::News_CleanVars($_REQUEST, 'limit', 0, 'int');
         } else {
             $topic_limit = $topic_perpage;
         }
 
         // get start information
         if (isset($_REQUEST['start'])) {
-            $topic_start = news_CleanVars($_REQUEST, 'start', 0, 'int');
+            $topic_start = NewsUtils::News_CleanVars($_REQUEST, 'start', 0, 'int');
         } else {
             $topic_start = 0;
         }
 
-        $topics = $topic_handler->getTopics($forMods, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu = null, $topic_online = null , $topic_parent = null);
-        $topic_numrows = $topic_handler->getTopicCount($forMods);
+        $topics = $topic_handler->News_GetTopics($NewsModule, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu = null, $topic_online = null , $topic_parent = null);
+        $topic_numrows = $topic_handler->News_GetTopicCount($NewsModule);
 
         if ($topic_numrows > $topic_limit) {
             $topic_pagenav = new XoopsPageNav($topic_numrows, $topic_limit, $topic_start, 'start', 'limit=' . $topic_limit);
@@ -120,11 +120,11 @@ switch ($op)
         $xoopsTpl->assign('navtitle', _NEWS_MI_TOPIC);
         $xoopsTpl->assign('topics', $topics);
         $xoopsTpl->assign('topic_pagenav', $topic_pagenav);
-        $xoopsTpl->assign('xoops_dirname', $forMods->getVar('dirname'));
+        $xoopsTpl->assign('xoops_dirname', $NewsModule->getVar('dirname'));
         $xoopsTpl->assign('news_tips', _NEWS_AM_TOPIC_TIPS);
 
         // Call template file
-        $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/news_topic.html');
+        $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $NewsModule->getVar('dirname') . '/templates/admin/news_topic.html');
 
         break;
 }

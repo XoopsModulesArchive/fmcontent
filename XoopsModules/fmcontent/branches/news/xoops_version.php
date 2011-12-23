@@ -20,7 +20,7 @@
  */
 
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 
 $modversion = array(
     // Main setting

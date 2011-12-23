@@ -66,13 +66,13 @@ class news_topic extends XoopsObject {
 	/**
 	 * Topic form
 	 */
-	function getForm($forMods) {
+	function getForm($NewsModule) {
 		
 		$form = new XoopsThemeForm ( _NEWS_AM_TOPIC_FORM, 'topic', 'backend.php', 'post' );
 		$form->setExtra ( 'enctype="multipart/form-data"' );
 		
 		if ($this->isNew ()) {
-			$groups = xoops_getModuleOption ( 'groups', $forMods->getVar ( 'dirname', 'e' ) );
+			$groups = xoops_getModuleOption ( 'groups', $NewsModule->getVar ( 'dirname', 'e' ) );
 			$form->addElement ( new XoopsFormHidden ( 'op', 'add_topic' ) );
 		} else {
 			$groups = explode ( " ", $this->getVar ( 'topic_groups', 'e' ) );
@@ -81,13 +81,13 @@ class news_topic extends XoopsObject {
 		
 		$form->addElement ( new XoopsFormHidden ( 'topic_id', $this->getVar ( 'topic_id', 'e' ) ) );
 		$form->addElement ( new XoopsFormHidden ( 'topic_submitter', $GLOBALS ['xoopsUser']->getVar ( 'uid' ) ) );
-		$form->addElement ( new XoopsFormHidden ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		$form->addElement ( new XoopsFormHidden ( 'topic_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$form->addElement ( new XoopsFormText ( _NEWS_AM_TOPIC_NAME, "topic_title", 50, 255, $this->getVar ( "topic_title" ) ), true );
 		$form->addElement ( new XoopsFormText ( _NEWS_AM_TOPIC_ALIAS, "topic_alias", 50, 255, $this->getVar ( "topic_alias" ) ), true );
 		
 		$topic_Handler = xoops_getModuleHandler ( "topic", "news" );
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'topic_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$topic = $topic_Handler->getObjects ( $criteria );
 		$tree = new XoopsObjectTree ( $topic, 'topic_id', 'topic_pid' );
 		ob_start ();
@@ -100,7 +100,7 @@ class news_topic extends XoopsObject {
 		
 		// Image
 		$topic_img = $this->getVar ( 'topic_img' ) ? $this->getVar ( 'topic_img' ) : 'blank.gif';
-		$uploadirectory_topic_img = xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) );
+		$uploadirectory_topic_img = xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) );
 		$fileseltray_topic_img = new XoopsFormElementTray ( _NEWS_AM_TOPIC_IMG, '<br />' );
 		$fileseltray_topic_img->addElement ( new XoopsFormLabel ( '', "<img class='fromimage' src='" . XOOPS_URL . $uploadirectory_topic_img . $topic_img . "' name='image_topic_img' id='image_topic_img' alt='' />" ) );
 		if ($this->getVar ( 'topic_img' )) {
@@ -108,7 +108,7 @@ class news_topic extends XoopsObject {
 			$delete_img->addOption ( 1, _DELETE );
 			$fileseltray_topic_img->addElement ( $delete_img );
 		}
-		$fileseltray_topic_img->addElement ( new XoopsFormFile ( _NEWS_AM_GLOBAL_FORMUPLOAD, 'topic_img', xoops_getModuleOption ( 'img_size', $forMods->getVar ( 'dirname' ) ) ), false );
+		$fileseltray_topic_img->addElement ( new XoopsFormFile ( _NEWS_AM_GLOBAL_FORMUPLOAD, 'topic_img', xoops_getModuleOption ( 'img_size', $NewsModule->getVar ( 'dirname' ) ) ), false );
 		$form->addElement ( $fileseltray_topic_img );
 		
 		$form->addElement ( new XoopsFormRadioYN ( _NEWS_AM_TOPIC_ONLINE, 'topic_online', $this->getVar ( 'topic_online', 'e' ) ) );
@@ -212,9 +212,9 @@ class NewsTopicHandler extends XoopsPersistableObjectHandler {
 	 * @param   String  $alias
 	 * @return  boolean
 	 **/
-	function existAlias($forMods , $infos) {
+	function News_ExistTopicAlias($NewsModule , $infos) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'topic_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'topic_alias', $infos['topic_alias'] ) );
 		if($infos['topic_id']) {
 			$criteria->add ( new Criteria ( 'topic_id', $infos['topic_id'] , '!=') );
@@ -229,7 +229,7 @@ class NewsTopicHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get id from alias
 	 */
-	function getId($alias) {
+	function News_GetTopicId($alias) {
 		$criteria = new CriteriaCompo ();
 		$criteria = new Criteria ( 'topic_alias', $alias );
 		$criteria->setLimit ( 1 );
@@ -243,10 +243,10 @@ class NewsTopicHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get topic information
 	 */
-	function getTopics($forMods, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu, $topic_online , $topic_parent) {
+	function News_GetTopics($NewsModule, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu, $topic_online , $topic_parent) {
 		$ret = array ();
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'topic_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'topic_asmenu', $topic_menu ) );
 		$criteria->add ( new Criteria ( 'topic_online', $topic_online ) );
 		if(isset($topic_parent)) {
@@ -262,9 +262,9 @@ class NewsTopicHandler extends XoopsPersistableObjectHandler {
 			foreach ( $topics as $root ) {
 				$tab = array ();
 				$tab = $root->toArray ();
-				$tab ['topicurl'] = News_TopicUrl ( $forMods->getVar ( 'dirname' ), $tab );
-				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/thumb/' .$root->getVar ( 'topic_img' );
-				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/medium/' .$root->getVar ( 'topic_img' );
+				$tab ['topicurl'] = NewsUtils::News_TopicUrl ( $NewsModule->getVar ( 'dirname' ), $tab );
+				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' .$root->getVar ( 'topic_img' );
+				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' .$root->getVar ( 'topic_img' );
 				$ret [] = $tab;
 			}
 		}
@@ -274,16 +274,16 @@ class NewsTopicHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get topic Count
 	 */
-	function getTopicCount($forMods) {
+	function News_GetTopicCount($NewsModule) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'topic_modid', $NewsModule->getVar ( 'mid' ) ) );
 		return $this->getCount ( $criteria );
 	}
 	
 	/**
 	 * Get topic from ID
 	 */
-	function getTopicFromId($topicid) {
+	function News_GetTopicFromId($topicid) {
 		$myts = & MyTextSanitizer::getInstance ();
 		$topicid = intval ( $topicid );
 		$topic_title = '';
@@ -307,7 +307,7 @@ class NewsTopicHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get All of sub topics
 	 */
-	function getSubTopics($forMods , $id ,$topics) {
+	function News_GetSubTopics($NewsModule , $id ,$topics) {
 		$ret = array();
 			foreach ( $topics as $root ) {
 				if($root->getVar ( 'topic_pid' ) == $id) {
@@ -320,9 +320,9 @@ class NewsTopicHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Set order
 	 */
-	function setorder($forMods) {
+	function setorder($NewsModule) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'topic_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->setSort ( 'topic_weight' );
 		$criteria->setOrder ( 'DESC' );
 		$criteria->setLimit ( 1 );
@@ -337,7 +337,7 @@ class NewsTopicHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get all visible topics
 	 */
-	function allVisible($forMods, $topics, $topic) {
+	function allVisible($NewsModule, $topics, $topic) {
 		$topic_show = array();
 		if($topic) {
 			$topic_show[] = $topic;

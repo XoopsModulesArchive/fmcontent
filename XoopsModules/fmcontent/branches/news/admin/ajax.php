@@ -20,27 +20,27 @@
  */
 
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 
 error_reporting(0);
 $GLOBALS['xoopsLogger']->activated = false;
 
-$ajax_type = news_CleanVars($_REQUEST, 'type', '', 'string');
+$ajax_type = NewsUtils::News_CleanVars($_REQUEST, 'type', '', 'string');
 
 switch ($ajax_type) {
     case 'filter':
-        $value = $func = news_CleanVars($_REQUEST, 'value', '', 'string');
-        echo News_Filter($value);
+        $value = $func = NewsUtils::News_CleanVars($_REQUEST, 'value', '', 'string');
+        echo NewsUtils::News_AliasFilter($value);
         break;
 
     case 'words':
-        $value = $func = news_CleanVars($_REQUEST, 'value', '', 'string');
-        echo News_MetaFilter($value);
+        $value = $func = NewsUtils::News_CleanVars($_REQUEST, 'value', '', 'string');
+        echo NewsUtils::News_MetaFilter($value);
         break;
 
     case 'desc':
-        $value = $func = news_CleanVars($_REQUEST, 'value', '', 'string');
-        echo News_AjaxFilter($value);
+        $value = $func = NewsUtils::News_CleanVars($_REQUEST, 'value', '', 'string');
+        echo NewsUtils::News_AjaxFilter($value);
         break;
 }
 

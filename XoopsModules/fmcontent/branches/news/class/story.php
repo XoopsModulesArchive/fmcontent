@@ -73,12 +73,12 @@ class news_story extends XoopsObject {
 	/**
 	 * Submit form in admin side
 	 */
-	function getContentForm($forMods, $story_type = 'news') {
+	function News_GetContentForm($NewsModule, $story_type = 'news') {
 		$form = new XoopsThemeForm ( _NEWS_AM_CONTENT_FORM, 'news', 'backend.php', 'post' );
 		$form->setExtra ( 'enctype="multipart/form-data"' );
 		
 		if ($this->isNew ()) {
-			$groups = xoops_getModuleOption ( 'groups', $forMods->getVar ( 'dirname', 'e' ) );
+			$groups = xoops_getModuleOption ( 'groups', $NewsModule->getVar ( 'dirname', 'e' ) );
 			$form->addElement ( new XoopsFormHidden ( 'op', 'add' ) );
 			$form->addElement ( new XoopsFormHidden ( 'story_uid', $GLOBALS ['xoopsUser']->getVar ( 'uid' ) ) );
 		} else {
@@ -89,7 +89,7 @@ class news_story extends XoopsObject {
 		// Content Id
 		$form->addElement ( new XoopsFormHidden ( 'story_id', $this->getVar ( 'story_id', 'e' ) ) );
 		// Module Id
-		$form->addElement ( new XoopsFormHidden ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$form->addElement ( new XoopsFormHidden ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		// Content type
 		$form->addElement ( new XoopsFormHidden ( 'story_type', $story_type ) );
 		// Content title
@@ -106,7 +106,7 @@ class news_story extends XoopsObject {
 		// Topic
 		$topic_Handler = xoops_getModuleHandler ( "topic", "news" );
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'topic_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$topic = $topic_Handler->getObjects ( $criteria );
 		if ($topic) {
 			$tree = new XoopsObjectTree ( $topic, 'topic_id', 'topic_pid' );
@@ -124,13 +124,13 @@ class news_story extends XoopsObject {
 		// Editor
 		$editor_tray = new XoopsFormElementTray ( _NEWS_AM_CONTENT_FORMTEXT, '<br />' );
 		if (class_exists ( 'XoopsFormEditor' )) {
-			$configs = array ('name' => 'story_desc', 'value' => $this->getVar ( 'story_text', 'e' ), 'rows' => 25, 'cols' => 90, 'width' => '100%', 'height' => '400px', 'editor' => xoops_getModuleOption ( 'form_editor', $forMods->getVar ( 'dirname', 'e' ) ) );
+			$configs = array ('name' => 'story_desc', 'value' => $this->getVar ( 'story_text', 'e' ), 'rows' => 25, 'cols' => 90, 'width' => '100%', 'height' => '400px', 'editor' => xoops_getModuleOption ( 'form_editor', $NewsModule->getVar ( 'dirname', 'e' ) ) );
 			$editor_tray->addElement ( new XoopsFormEditor ( '', 'story_text', $configs, false, $onfailure = 'textarea' ) );
 		} else {
 			$editor_tray->addElement ( new XoopsFormDhtmlTextArea ( '', 'story_text', $this->getVar ( 'story_text', 'e' ), '100%', '100%' ) );
 		}
 		$editor_tray->setDescription ( _NEWS_AM_CONTENT_FORMTEXT_DESC );
-		if (! News_isEditorHTML ( $forMods->getVar ( 'dirname', 'e' ) )) {
+		if (! NewsUtils::News_isEditorHTML ( $NewsModule->getVar ( 'dirname', 'e' ) )) {
 			if ($this->isNew ()) {
 				$this->setVar ( 'dohtml', 0 );
 				$this->setVar ( 'dobr', 1 );
@@ -162,15 +162,15 @@ class news_story extends XoopsObject {
 		// Editor and options
 		$form->addElement ( $editor_tray );
 		//tag
-		if ((xoops_getModuleOption ( 'usetag', $forMods->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
+		if ((xoops_getModuleOption ( 'usetag', $NewsModule->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
 			$items_id = $this->isNew () ? 0 : $this->getVar ( "story_id" );
 			include_once XOOPS_ROOT_PATH . "/modules/tag/include/formtag.php";
 			$form->addElement ( new XoopsFormTag ( "item_tag", 60, 255, $items_id, $catid = 0 ) );
 		}
 		// Image
 		$story_img = $this->getVar ( 'story_img' ) ? $this->getVar ( 'story_img' ) : 'blank.gif';
-		$uploadirectory_story_img = xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/original';
-		$uploadirectory_thumb_img = xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/thumb/';
+		$uploadirectory_story_img = xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/original';
+		$uploadirectory_thumb_img = xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/';
 		$fileseltray_story_img = new XoopsFormElementTray ( _NEWS_AM_GLOBAL_IMG, '<br />' );
 		$fileseltray_story_img->addElement ( new XoopsFormLabel ( '', "<img class='fromimage' src='" . XOOPS_URL . $uploadirectory_thumb_img . $story_img . "' name='image_story_img' id='image_story_img' alt='' />" ) );
 		if ($this->getVar ( 'story_img' )) {
@@ -178,11 +178,11 @@ class news_story extends XoopsObject {
 			$delete_img->addOption ( 1, _DELETE );
 			$fileseltray_story_img->addElement ( $delete_img );
 		}
-		$fileseltray_story_img->addElement ( new XoopsFormFile ( _NEWS_AM_GLOBAL_FORMUPLOAD, 'story_img', xoops_getModuleOption ( 'img_size', $forMods->getVar ( 'dirname' ) ) ), false );
+		$fileseltray_story_img->addElement ( new XoopsFormFile ( _NEWS_AM_GLOBAL_FORMUPLOAD, 'story_img', xoops_getModuleOption ( 'img_size', $NewsModule->getVar ( 'dirname' ) ) ), false );
 		$form->addElement ( $fileseltray_story_img );
 		// Files
-		$uploadirectory_file = xoops_getModuleOption ( 'file_dir', $forMods->getVar ( 'dirname' ) );
-		$fileseltray_file = new XoopsFormFile ( _NEWS_AM_FILE_SELECT, 'file_name', xoops_getModuleOption ( 'file_size', $forMods->getVar ( 'dirname' ) ) );
+		$uploadirectory_file = xoops_getModuleOption ( 'file_dir', $NewsModule->getVar ( 'dirname' ) );
+		$fileseltray_file = new XoopsFormFile ( _NEWS_AM_FILE_SELECT, 'file_name', xoops_getModuleOption ( 'file_size', $NewsModule->getVar ( 'dirname' ) ) );
 		$file = new XoopsFormElementTray ( _NEWS_AM_FILE );
 		$file->addElement ( $fileseltray_file );
 		$file->setDescription ( _NEWS_AM_CONTENT_FILE_DESC );
@@ -213,7 +213,7 @@ class news_story extends XoopsObject {
 		if (!$this->isNew ()) {
 			$story_handler = xoops_getmodulehandler ( 'story', 'news' );
 			$criteria = new CriteriaCompo ();
-			$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+			$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 			$criteria->add ( new Criteria ( 'story_status', '1' ) );
 			$criteria->add ( new Criteria ( 'story_topic', $this->getVar ( 'story_topic', 'e' ) ) );
 			$content = $story_handler->getObjects ( $criteria );
@@ -249,12 +249,12 @@ class news_story extends XoopsObject {
 	/**
 	 * Submit form in admin side
 	 */
-	function getContentSimpleForm($forMods, $story_type = 'news') {
+	function News_GetContentSimpleForm($NewsModule, $story_type = 'news') {
 		$form = new XoopsThemeForm ( _NEWS_AM_CONTENT_FORM, 'news', 'submit.php', 'post' );
 		$form->setExtra ( 'enctype="multipart/form-data"' );
 		
 		if ($this->isNew ()) {
-			$groups = xoops_getModuleOption ( 'groups', $forMods->getVar ( 'dirname', 'e' ) );
+			$groups = xoops_getModuleOption ( 'groups', $NewsModule->getVar ( 'dirname', 'e' ) );
 			$form->addElement ( new XoopsFormHidden ( 'op', 'add' ) );
 			$form->addElement ( new XoopsFormHidden ( 'story_uid', $GLOBALS ['xoopsUser']->getVar ( 'uid' ) ) );
 		} else {
@@ -265,7 +265,7 @@ class news_story extends XoopsObject {
 		// Content Id
 		$form->addElement ( new XoopsFormHidden ( 'story_id', $this->getVar ( 'story_id', 'e' ) ) );
 		// Module Id
-		$form->addElement ( new XoopsFormHidden ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$form->addElement ( new XoopsFormHidden ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		// Content type
 		$form->addElement ( new XoopsFormHidden ( 'story_type', $story_type ) );
 		// Content title
@@ -275,12 +275,12 @@ class news_story extends XoopsObject {
 		// Topic
 		$topic_Handler = xoops_getModuleHandler ( "topic", "news" );
 		$perm_handler = NewsPermission::getHandler ();
-		$topics = NewsPermission::getItemIds ( 'news_submit', $forMods );
+		$topics = NewsPermission::News_GetItemIds ( 'news_submit', $NewsModule );
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'topic_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'topic_modid', $NewsModule->getVar ( 'mid' ) ) );
 		global $xoopsUser;
 		if ($xoopsUser) {
-			if (! $xoopsUser->isAdmin ( $forMods->getVar ( 'mid' ) )) {
+			if (! $xoopsUser->isAdmin ( $NewsModule->getVar ( 'mid' ) )) {
 				$criteria->add ( new Criteria ( 'topic_id', '(' . implode ( ',', $topics ) . ')', 'IN' ) );
 			}
 		} else {
@@ -303,7 +303,7 @@ class news_story extends XoopsObject {
 		// Editor
 		$editor_tray = new XoopsFormElementTray ( _NEWS_AM_CONTENT_FORMTEXT, '<br />' );
 		if (class_exists ( 'XoopsFormEditor' )) {
-			$configs = array ('name' => 'story_desc', 'value' => $this->getVar ( 'story_text', 'e' ), 'rows' => 15, 'cols' => 80, 'width' => '95%', 'height' => '250px', 'editor' => xoops_getModuleOption ( 'form_editor', $forMods->getVar ( 'dirname', 'e' ) ) );
+			$configs = array ('name' => 'story_desc', 'value' => $this->getVar ( 'story_text', 'e' ), 'rows' => 15, 'cols' => 80, 'width' => '95%', 'height' => '250px', 'editor' => xoops_getModuleOption ( 'form_editor', $NewsModule->getVar ( 'dirname', 'e' ) ) );
 			$editor_tray->addElement ( new XoopsFormEditor ( '', 'story_text', $configs, false, $onfailure = 'textarea' ) );
 		} else {
 			$editor_tray->addElement ( new XoopsFormDhtmlTextArea ( '', 'story_text', $this->getVar ( 'story_text', 'e' ), '100%', '100%' ) );
@@ -311,7 +311,7 @@ class news_story extends XoopsObject {
 		$editor_tray->setDescription ( _NEWS_AM_CONTENT_FORMTEXT_DESC );
 		// Editor and options
 		$form->addElement ( $editor_tray );
-		if (! News_isEditorHTML ( $forMods->getVar ( 'dirname', 'e' ) )) {
+		if (! NewsUtils::News_isEditorHTML ( $NewsModule->getVar ( 'dirname', 'e' ) )) {
 			$form->addElement ( new xoopsFormHidden ( 'dohtml', 0 ) );
 			$form->addElement ( new xoopsFormHidden ( 'dobr', 1 ) );
 		} else {
@@ -322,21 +322,21 @@ class news_story extends XoopsObject {
 		$form->addElement ( new xoopsFormHidden ( 'doxcode', 1 ) );
 		$form->addElement ( new xoopsFormHidden ( 'dosmiley', 1 ) );
 		//tag
-		if ((xoops_getModuleOption ( 'usetag', $forMods->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
+		if ((xoops_getModuleOption ( 'usetag', $NewsModule->getVar ( 'dirname' ) )) and (is_dir ( XOOPS_ROOT_PATH . '/modules/tag' ))) {
 			$items_id = $this->isNew () ? 0 : $this->getVar ( "story_id" );
 			include_once XOOPS_ROOT_PATH . "/modules/tag/include/formtag.php";
 			$form->addElement ( new XoopsFormTag ( "item_tag", 60, 255, $items_id, $catid = 0 ) );
 		}
 		// Image
 		$story_img = $this->getVar ( 'story_img' ) ? $this->getVar ( 'story_img' ) : 'blank.gif';
-		$uploadirectory_story_img = xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/original';
+		$uploadirectory_story_img = xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/original';
 		$fileseltray_story_img = new XoopsFormElementTray ( _NEWS_AM_GLOBAL_IMG, '<br />' );
 		$fileseltray_story_img->addElement ( new XoopsFormLabel ( '', "<img class='fromimage' src='" . XOOPS_URL . $uploadirectory_story_img . $story_img . "' name='image_story_img' id='image_story_img' alt='' />" ) );
-		$fileseltray_story_img->addElement ( new XoopsFormFile ( _NEWS_AM_GLOBAL_FORMUPLOAD, 'story_img', xoops_getModuleOption ( 'img_size', $forMods->getVar ( 'dirname' ) ) ), false );
+		$fileseltray_story_img->addElement ( new XoopsFormFile ( _NEWS_AM_GLOBAL_FORMUPLOAD, 'story_img', xoops_getModuleOption ( 'img_size', $NewsModule->getVar ( 'dirname' ) ) ), false );
 		$form->addElement ( $fileseltray_story_img );
 		// Files
-		$uploadirectory_file = xoops_getModuleOption ( 'file_dir', $forMods->getVar ( 'dirname' ) );
-		$fileseltray_file = new XoopsFormFile ( _NEWS_AM_FILE_SELECT, 'file_name', xoops_getModuleOption ( 'file_size', $forMods->getVar ( 'dirname' ) ) );
+		$uploadirectory_file = xoops_getModuleOption ( 'file_dir', $NewsModule->getVar ( 'dirname' ) );
+		$fileseltray_file = new XoopsFormFile ( _NEWS_AM_FILE_SELECT, 'file_name', xoops_getModuleOption ( 'file_size', $NewsModule->getVar ( 'dirname' ) ) );
 		$file = new XoopsFormElementTray ( _NEWS_AM_FILE );
 		$file->addElement ( $fileseltray_file );
 		$file->setDescription ( _NEWS_AM_CONTENT_FILE_DESC );
@@ -386,9 +386,9 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	 * @param   String  $alias
 	 * @return  boolean
 	 **/
-	function existAlias($forMods , $infos) {
+	function News_ExistAlias($NewsModule , $infos) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_alias', $infos['story_alias'] ) );
 		if($infos['story_id']) {
 			$criteria->add ( new Criteria ( 'story_id', $infos['story_id'] , '!='));
@@ -403,7 +403,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get id from alias
 	 */
-	function getId($alias) {
+	function News_GetId($alias) {
 		$criteria = new CriteriaCompo ();
 		$criteria = new Criteria ( 'story_alias', $alias );
 		$criteria->setLimit ( 1 );
@@ -417,7 +417,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get Default content
 	 */
-	function getDefault($criteria = null) {
+	function News_GetDefault($criteria = null) {
 		$obj_array = $this->getObjects ( $criteria, false, false );
 		if (count ( $obj_array ) != 1) {
 			return 0;
@@ -428,37 +428,37 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get Default content
 	 */
-	function contentDefault($forMods, $default_info) {
-		$contentdefault = array ();
+	function News_ContentDefault($NewsModule, $default_info) {
+		$contentDefault = array ();
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_default', 1 ) );
 		$criteria->add ( new Criteria ( 'story_topic', $default_info ['id'] ) );
-		$default = self::getDefault ( $criteria );
+		$default = self::News_GetDefault ( $criteria );
 		$obj = self::get ( $default );
-		$contentdefault = $obj->toArray ();
-		$contentdefault ['story_create'] = formatTimestamp ( $contentdefault ['story_create'], _MEDIUMDATESTRING );
-		$contentdefault ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/medium/' . $contentdefault ['story_img'];
-		$contentdefault ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/thumb/' . $contentdefault ['story_img'];
-		$contentdefault ['topic'] = $default_info ['title'];
-		$contentdefault ['topic_alias'] = $default_info ['alias'];
-		$contentdefault ['url'] = News_Url ( $forMods->getVar ( 'dirname' ), $contentdefault );
-		if (isset ( $contentdefault ['story_id'] )) {
-			return $contentdefault;
+		$contentDefault = $obj->toArray ();
+		$contentDefault ['story_create'] = formatTimestamp ( $contentDefault ['story_create'], _MEDIUMDATESTRING );
+		$contentDefault ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $contentDefault ['story_img'];
+		$contentDefault ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $contentDefault ['story_img'];
+		$contentDefault ['topic'] = $default_info ['title'];
+		$contentDefault ['topic_alias'] = $default_info ['alias'];
+		$contentDefault ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $contentDefault );
+		if (isset ( $contentDefault ['story_id'] )) {
+			return $contentDefault;
 		}
 	}
 	
 	/**
 	 * Get content list for admin side
 	 */
-	function getAdminContentList($forMods, $story_infos) {
+	function News_GetAdminContentList($NewsModule, $story_infos) {
 		$ret = array ();
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'story_status', $story_infos ['story_status'] ) );
 		if ($story_infos ['story_static']) {
 			$criteria->add ( new Criteria ( 'story_topic', '0', '>' ) );
 		}
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_topic', $story_infos ['story_topic'] ) );
 		$criteria->add ( new Criteria ( 'story_uid', $story_infos ['story_user'] ) );
 		$criteria->setSort ( $story_infos ['story_sort'] );
@@ -483,14 +483,14 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 				if ($root->getVar ( 'story_topic' )) {
 					$tab ['topic'] = $list [$root->getVar ( 'story_topic' )] ['topic_title'];
 					$tab ['topic_alias'] = $list [$root->getVar ( 'story_topic' )] ['topic_alias'];
-					$tab ['topicurl'] = News_TopicUrl ( $forMods->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'story_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'story_topic' )] ['topic_alias'] ));
+					$tab ['topicurl'] = NewsUtils::News_TopicUrl ( $NewsModule->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'story_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'story_topic' )] ['topic_alias'] ));
 				}
 
-				$tab ['url'] = News_Url ( $forMods->getVar ( 'dirname' ), $tab );
+				$tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
 				$tab ['story_create'] = formatTimestamp ( $root->getVar ( 'story_create' ), _MEDIUMDATESTRING );
 				$tab ['story_update'] = formatTimestamp ( $root->getVar ( 'story_update' ), _MEDIUMDATESTRING );
-				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/medium/' . $root->getVar ( 'story_img' );
-				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/thumb/' . $root->getVar ( 'story_img' );
+				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $root->getVar ( 'story_img' );
+				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $root->getVar ( 'story_img' );
 				$ret [] = $tab;
 			}
 		}
@@ -500,16 +500,16 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get content list for user side
 	 */	
-	function getContentList($forMods, $story_infos) {
+	function News_GetContentList($NewsModule, $story_infos) {
 		$ret = array ();
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'story_status', $story_infos ['story_status'] ) );
-		$access_topic = NewsPermission::getItemIds ( 'news_access', $forMods);
+		$access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
 		$topic_handler = xoops_getmodulehandler ( 'topic', 'news' );
-		$topic_show = $topic_handler->allVisible($forMods,$story_infos ['topics'],$story_infos ['story_topic']);
+		$topic_show = $topic_handler->allVisible($NewsModule,$story_infos ['topics'],$story_infos ['story_topic']);
       $topiclist = array_intersect($access_topic , $topic_show);
 		$criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $topiclist ) . ')', 'IN' ) );
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_publish', time() , '<=' ));
 		$criteria->add ( new Criteria ( 'story_publish', 0 , '>' ));
 		$criteria->add ( new Criteria ( 'story_expire', time() , '>=' ));
@@ -543,14 +543,14 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 				if ($root->getVar ( 'story_topic' )) {
 					$tab ['topic'] = $list [$root->getVar ( 'story_topic' )] ['topic_title'];
 					$tab ['topic_alias'] = $list [$root->getVar ( 'story_topic' )] ['topic_alias'];
-					$tab ['topicurl'] = News_TopicUrl ( $forMods->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'story_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'story_topic' )] ['topic_alias'] ));
+					$tab ['topicurl'] = NewsUtils::News_TopicUrl ( $NewsModule->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'story_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'story_topic' )] ['topic_alias'] ));
 				}
 
-				$tab ['url'] = News_Url ( $forMods->getVar ( 'dirname' ), $tab );
+				$tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
 				$tab ['story_create'] = formatTimestamp ( $root->getVar ( 'story_create' ), _MEDIUMDATESTRING );
 				$tab ['story_update'] = formatTimestamp ( $root->getVar ( 'story_update' ), _MEDIUMDATESTRING );
-				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/medium/' . $root->getVar ( 'story_img' );
-				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/thumb/' . $root->getVar ( 'story_img' );
+				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $root->getVar ( 'story_img' );
+				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $root->getVar ( 'story_img' );
 				$ret [] = $tab;
 			}
 		}
@@ -560,7 +560,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get content list for list block
 	 */
-	function getContentBlockList($forMods, $story_infos ,$options) {
+	function News_GetContentBlockList($NewsModule, $story_infos ,$options) {
 		$ret = array ();
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'story_status', '1' ) );
@@ -568,8 +568,8 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		$criteria->add ( new Criteria ( 'story_publish', 0 , '>' ));
 		$criteria->add ( new Criteria ( 'story_expire', time() , '>=' ));
 		$criteria->add ( new Criteria ( 'story_expire', 0 ) ,'OR');
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
-		$access_topic = NewsPermission::getItemIds ( 'news_access', $forMods);
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
+		$access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
 		$criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
 		if (! (count ( $options ) == 1 && $options [0] == 0)) {
 			$criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $options ) . ')', 'IN' ) );
@@ -593,10 +593,10 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 				if ($root->getVar ( 'story_topic' )) {
 					$tab ['topic'] = $list [$root->getVar ( 'story_topic' )] ['topic_title'];
 					$tab ['topic_alias'] = $list [$root->getVar ( 'story_topic' )] ['topic_alias'];
-					$tab ['topicurl'] = News_TopicUrl ( $forMods->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'story_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'story_topic' )] ['topic_alias'] ));
+					$tab ['topicurl'] = NewsUtils::News_TopicUrl ( $NewsModule->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'story_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'story_topic' )] ['topic_alias'] ));
 				}
 				
-				$tab ['url'] = News_Url ( $forMods->getVar ( 'dirname' ), $tab );
+				$tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
 				$tab ['title'] = mb_strlen ( $root->getVar ( 'story_title' ), 'utf-8' ) > $story_infos ['lenght_title'] ? mb_substr ( $root->getVar ( 'story_title' ), 0, ($story_infos ['lenght_title']), 'utf-8' ) . "..." : $root->getVar ( 'story_title' );
 				$tab ['date'] = formatTimestamp ( $root->getVar ( 'story_create' ), _MEDIUMDATESTRING );
 				$ret [] = $tab;
@@ -608,12 +608,12 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get Expire list for admin side
 	 */
-	function getExpireContentList($forMods, $story_infos) {
+	function News_GetExpireContentList($NewsModule, $story_infos) {
 		$ret = array ();
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'story_expire', 0 , '!='));
       $criteria->add ( new Criteria ( 'story_expire', time() , '<=' ));
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->setSort ( $story_infos ['story_sort'] );
 		$criteria->setOrder ( $story_infos ['story_order'] );
 		$criteria->setLimit ( $story_infos ['story_limit'] );
@@ -636,14 +636,14 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 				if ($root->getVar ( 'story_topic' )) {
 					$tab ['topic'] = $list [$root->getVar ( 'story_topic' )] ['topic_title'];
 					$tab ['topic_alias'] = $list [$root->getVar ( 'story_topic' )] ['topic_alias'];
-					$tab ['topicurl'] = News_TopicUrl ( $forMods->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'story_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'story_topic' )] ['topic_alias'] ));
+					$tab ['topicurl'] = NewsUtils::News_TopicUrl ( $NewsModule->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'story_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'story_topic' )] ['topic_alias'] ));
 				}
 
-				$tab ['url'] = News_Url ( $forMods->getVar ( 'dirname' ), $tab );
+				$tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
 				$tab ['story_create'] = formatTimestamp ( $root->getVar ( 'story_create' ), _MEDIUMDATESTRING );
 				$tab ['story_update'] = formatTimestamp ( $root->getVar ( 'story_update' ), _MEDIUMDATESTRING );
-				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/medium/' . $root->getVar ( 'story_img' );
-				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $forMods->getVar ( 'dirname' ) ) . '/thumb/' . $root->getVar ( 'story_img' );
+				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $root->getVar ( 'story_img' );
+				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $root->getVar ( 'story_img' );
 				$ret [] = $tab;
 			}
 		}
@@ -653,13 +653,13 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	 * Get Content Count for user side
 	 * use in homepage function in NewsUtils class
 	 */
-	function getContentCount($forMods, $story_infos) {
+	function News_GetContentCount($NewsModule, $story_infos) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_topic', $story_infos ['story_topic'] ) );
-		$access_topic = NewsPermission::getItemIds ( 'news_access', $forMods);
+		$access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
 		$topic_handler = xoops_getmodulehandler ( 'topic', 'news' );
-		$topic_show = $topic_handler->allVisible($forMods,$story_infos ['topics'],$story_infos ['story_topic']);
+		$topic_show = $topic_handler->allVisible($NewsModule,$story_infos ['topics'],$story_infos ['story_topic']);
 		$topiclist = array_intersect($access_topic , $topic_show);
 		$criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $topiclist ) . ')', 'IN' ) );
 		if(isset($story_infos ['story_subtopic'])) {
@@ -676,9 +676,9 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get Content Count for admin side
 	 */
-	function getAdminContentCount($forMods, $story_infos) {
+	function News_GetAdminContentCount($NewsModule, $story_infos) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_topic', $story_infos ['story_topic'] ) );
 		if ($story_infos ['story_static']) {
 			$criteria->add ( new Criteria ( 'story_topic', '0', '>' ) );
@@ -689,9 +689,9 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get Offline Content Count for admin side
 	 */	
-	function getOfflineContentCount($forMods, $story_infos) {
+	function News_GetOfflineContentCount($NewsModule, $story_infos) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_topic', $story_infos ['story_topic'] ) );
 		$criteria->add ( new Criteria ( 'story_status', 0 ) );
 		return $this->getCount ( $criteria );
@@ -700,9 +700,9 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get Expire Content Count for admin side
 	 */
-	function getExpireContentCount ($forMods, $story_infos) {
+	function News_GetExpireContentCount ($NewsModule, $story_infos) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_topic', $story_infos ['story_topic'] ) );
       $criteria->add ( new Criteria ( 'story_expire', 0 , '!='));
       $criteria->add ( new Criteria ( 'story_expire', time() , '<=' ));
@@ -711,27 +711,27 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get All Content Count for admin side
 	 */
-	function getAllContentCount($forMods) {
+	function News_GetAllContentCount($NewsModule) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
       return $this->getCount ( $criteria );
 	}
 	
 	/**
 	 * Get Last Content
 	 */
-	function getLastContent($forMods, $story_infos) {
+	function News_GetLastContent($NewsModule, $story_infos) {
 		$ret = array ();
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$obj = $this->getObjects ( $criteria, false );
 		if ($obj) {
 			foreach ( $obj as $root ) {
 				$tab = array ();
 				$tab = $root->toArray ();
-				$tab ['topic'] = NewsTopicHandler::getTopicFromId ( $root->getVar ( 'story_topic' ) );
+				$tab ['topic'] = NewsTopicHandler::News_GetTopicFromId ( $root->getVar ( 'story_topic' ) );
             $tab ['topic_alias'] = $tab ['topic'];
-				$tab ['url'] = News_Url ( $forMods->getVar ( 'dirname' ), $tab );
+				$tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
 				$ret [] = $tab;
 			}
 		}
@@ -741,14 +741,14 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * some function for set Next and Previous content
 	 *
-	 * setNext function
-	 * setPrevious function
-	 * resetNext function
-	 * resetPrevious function
+	 * News_SetNext function
+	 * News_SetPrevious function
+	 * News_ResetNext function
+	 * News_ResetPrevious function
 	 */
-	function setNext($forMods, $topic_id) {
+	function News_SetNext($NewsModule, $topic_id) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_topic', $topic_id ) );
 		$criteria->setSort ( 'story_id' );
 		$criteria->setOrder ( 'ASC' );
@@ -759,9 +759,9 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		}
 	}
 	
-	function setPrevious($forMods, $topic_id) {
+	function News_SetPrevious($NewsModule, $topic_id) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_topic', $topic_id ) );
 		$criteria->setSort ( 'story_id' );
 		$criteria->setOrder ( 'DESC' );
@@ -772,9 +772,9 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		}
 	}
 	
-	function resetNext($forMods, $topic_id , $next_id) {
+	function News_ResetNext($NewsModule, $topic_id , $next_id) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_topic', $topic_id ) );
 		$criteria->setSort ( 'story_id' );
 		$criteria->setOrder ( 'DESC' );
@@ -787,9 +787,9 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		}
 	}
 	
-	function resetPrevious($forMods, $topic_id , $prev_id) {
+	function News_ResetPrevious($NewsModule, $topic_id , $prev_id) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_topic', $topic_id ) );
 		$criteria->setSort ( 'story_id' );
 		$criteria->setOrder ( 'ASC' );
@@ -805,9 +805,9 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Set order
 	 */
-	function setorder($forMods) {
+	function News_SetContentOrder($NewsModule) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->setSort ( 'story_order' );
 		$criteria->setOrder ( 'DESC' );
 		$criteria->setLimit ( 1 );
@@ -826,7 +826,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	 * @author      Hervé Thouzard (ttp://www.instant-zero.com)
 	 */
 	
-	function updateHits($story_id) {
+	function News_UpdateHits($story_id) {
 		$sql = 'UPDATE ' . $this->table . ' SET story_hits = story_hits + 1 WHERE story_id= ' . intval ( $story_id );
 		return $this->db->queryF ( $sql );
 	}
@@ -837,7 +837,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	 * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 	 * @author      Zoullou (http://www.zoullou.net)
 	 */
-	function getSearchedContent($queryArray, $condition, $limit, $start, $userId) {
+	function News_GetSearchedContent($queryArray, $condition, $limit, $start, $userId) {
 		$ret = array ();
 		include_once 'topic.php';
 		$criteria = new CriteriaCompo ();
@@ -870,9 +870,9 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 			$data = array ();
 			$data = $content->toArray ();
 			$data ['image'] = 'images/forum.gif';
-			$data ['topic'] = NewsTopicHandler::getTopicFromId ( $content->getVar ( 'story_topic' ) );
+			$data ['topic'] = NewsTopicHandler::News_GetTopicFromId ( $content->getVar ( 'story_topic' ) );
 			$data ['topic_alias'] = $data ['topic'];
-			$data ['link'] = News_Url ( 'news', $data );
+			$data ['link'] = NewsUtils::News_Url ( 'news', $data );
 			$data ['title'] = $content->getVar ( 'story_title' );
 			$data ['time'] = $content->getVar ( 'story_create' );
 			$data ['uid'] = $content->getVar ( 'story_uid' );
@@ -889,7 +889,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	 * @ Update user post count after change status content
 	 * @ Update user post count after delete content
 	 */
-	function updateposts($story_uid, $story_status, $story_action) {
+	function News_Updateposts($story_uid, $story_status, $story_action) {
 		switch ($story_action) {
 			case 'add' :
 				if ($story_uid && $story_status) {
@@ -924,7 +924,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Set number of files for each content
 	 */
-	function contentfile($action , $id , $previous = null) {
+	function News_Contentfile($action , $id , $previous = null) {
 		switch($action) {
 			case 'add':
 				$sql = 'UPDATE ' . $this->table . ' SET story_file = story_file + 1 WHERE story_id= ' . intval ( $id );
@@ -940,9 +940,9 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get all files fro each content
 	 */
-	function getfile($forMods) {
+	function getfile($NewsModule) {
 		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_file', '0', '>' ) );
 		return $this->getAll ( $criteria );
 	}	
@@ -950,10 +950,10 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get related contents
 	 */
-	 function relatedContent($forMods, $story_infos) {
+	 function News_RelatedContent($NewsModule, $story_infos) {
 	 	 $ret = array();
 		 $criteria = new CriteriaCompo ();
-		 $criteria->add ( new Criteria ( 'story_modid', $forMods->getVar ( 'mid' ) ) );	
+		 $criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );	
 		 $criteria->add ( new Criteria ( 'story_topic', $story_infos ['story_topic'] ) );
 		 $criteria->add ( new Criteria ( 'story_status', 1 ) );
 		 $criteria->add ( new Criteria ( 'story_publish', time() , '<=' ));
@@ -970,7 +970,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 				 $tab = array ();
 				 $tab = $root->toArray ();
 				 $tab ['topic_alias'] = $story_infos ['topic_alias'];
-				 $tab ['url'] = News_Url ( $forMods->getVar ( 'dirname' ), $tab );
+				 $tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
 				 $ret [] = $tab;
 			 }
 		 }

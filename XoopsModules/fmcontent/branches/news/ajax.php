@@ -19,19 +19,19 @@
  */
 
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 
 error_reporting(0);
 $GLOBALS['xoopsLogger']->activated = false;
 
-$story_id = news_CleanVars($_REQUEST, 'id', '', 'string');
-$story_text = news_CleanVars($_REQUEST, 'value', '', 'string');
+$story_id = NewsUtils::News_CleanVars($_REQUEST, 'id', '', 'string');
+$story_text = NewsUtils::News_CleanVars($_REQUEST, 'value', '', 'string');
 
 list($root, $id) = explode('_', $story_id);
 
 if (intval($id) > 0) {
     // Initialize content handler
-    $story_handler = xoops_getmodulehandler('story', $forMods->getVar('dirname'));
+    $story_handler = xoops_getmodulehandler('story', $NewsModule->getVar('dirname'));
     $content = $story_handler->get($id);
     $content->setVar('story_text', $story_text);
     if (!$story_handler->insert($content)) {

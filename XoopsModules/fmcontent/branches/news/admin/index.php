@@ -21,12 +21,12 @@
 
 require dirname(__FILE__) . '/header.php';
 
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 $index_admin = new ModuleAdmin();
 // Display Admin header
 xoops_cp_header();
 // Add module stylesheet
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $forMods->getVar('dirname') . '/css/admin.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $NewsModule->getVar('dirname') . '/css/admin.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
 
 $topic_handler = xoops_getmodulehandler('topic', 'news');
@@ -45,10 +45,10 @@ $story_infos = array(
 $index_admin = new ModuleAdmin();
 $index_admin->addInfoBox(_NEWS_AM_INDEX_ADMENU1);
 $index_admin->addInfoBox(_NEWS_AM_INDEX_ADMENU2);
-$index_admin->addInfoBoxLine(_NEWS_AM_INDEX_ADMENU1, _NEWS_AM_INDEX_TOPICS, $topic_handler->getTopicCount($forMods));
-$index_admin->addInfoBoxLine(_NEWS_AM_INDEX_ADMENU2, _NEWS_AM_INDEX_CONTENTS, $story_handler->getAllContentCount($forMods));
-$index_admin->addInfoBoxLine(_NEWS_AM_INDEX_ADMENU2, _NEWS_AM_INDEX_CONTENTS_OFFLINE, $story_handler->getOfflineContentCount($forMods , $story_infos));
-$index_admin->addInfoBoxLine(_NEWS_AM_INDEX_ADMENU2, _NEWS_AM_INDEX_CONTENTS_EXPIRE, $story_handler->getExpireContentCount($forMods , $story_infos));
+$index_admin->addInfoBoxLine(_NEWS_AM_INDEX_ADMENU1, _NEWS_AM_INDEX_TOPICS, $topic_handler->News_GetTopicCount($NewsModule));
+$index_admin->addInfoBoxLine(_NEWS_AM_INDEX_ADMENU2, _NEWS_AM_INDEX_CONTENTS, $story_handler->News_GetAllContentCount($NewsModule));
+$index_admin->addInfoBoxLine(_NEWS_AM_INDEX_ADMENU2, _NEWS_AM_INDEX_CONTENTS_OFFLINE, $story_handler->News_GetOfflineContentCount($NewsModule , $story_infos));
+$index_admin->addInfoBoxLine(_NEWS_AM_INDEX_ADMENU2, _NEWS_AM_INDEX_CONTENTS_EXPIRE, $story_handler->News_GetExpireContentCount($NewsModule , $story_infos));
 
 foreach (array_keys( $folder) as $i) {
     $index_admin->addConfigBoxLine($folder[$i], 'folder');
@@ -60,7 +60,7 @@ $xoopsTpl->assign('navtitle', _NEWS_MI_HOME);
 $xoopsTpl->assign('renderindex', $index_admin->renderIndex());
 
 // Call template file
-$xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/news_index.html');
+$xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $NewsModule->getVar('dirname') . '/templates/admin/news_index.html');
 
 // Display Xoops footer
 include "footer.php";

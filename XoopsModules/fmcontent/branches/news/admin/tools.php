@@ -20,14 +20,14 @@
  */
 
 require dirname(__FILE__) . '/header.php';
-if (!isset($forMods)) exit('Module not found');
+if (!isset($NewsModule)) exit('Module not found');
 
 // Display Admin header
 xoops_cp_header();
 // Define default value
-$op = news_CleanVars($_REQUEST, 'op', 'display', 'string');
+$op = NewsUtils::News_CleanVars($_REQUEST, 'op', 'display', 'string');
 // Add module stylesheet
-$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $forMods->getVar('dirname') . '/css/admin.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $NewsModule->getVar('dirname') . '/css/admin.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
 // Initialize content handler
 $topic_handler = xoops_getmodulehandler('topic', 'news');
@@ -55,7 +55,7 @@ switch ($op) {
         $form->addElement(new XoopsFormHidden('op', 'purge'));
         $clone = array();
         while ($myrow = $GLOBALS["xoopsDB"]->fetchArray($result)) {
-            if ($myrow['story_modid'] != $forMods->getVar('mid')) {
+            if ($myrow['story_modid'] != $NewsModule->getVar('mid')) {
                 if (!$module_handler->get($myrow['story_modid'])) {
                     $clone[] = $myrow['story_modid'];
                     $form->addElement(new XoopsFormHidden('modid[]', $myrow['story_modid']));
@@ -103,7 +103,7 @@ switch ($op) {
         break;
 
     case 'clone':
-        $folder = news_CleanVars($_REQUEST, 'folder_name', '', 'string');
+        $folder = NewsUtils::News_CleanVars($_REQUEST, 'folder_name', '', 'string');
         if (!is_dir(XOOPS_ROOT_PATH . '/modules/' . $folder)) {
             $folder_handler = new FolderHandler(XOOPS_ROOT_PATH . '/modules/' . $folder);
             $optn = array('to' => XOOPS_ROOT_PATH . '/modules/' . $folder, 'from' => XOOPS_ROOT_PATH . '/modules/news');
@@ -114,7 +114,7 @@ switch ($op) {
                 $xoopsTpl->assign('messages', $folder_handler->erros);
             }
         } else {
-            News_Redirect('tools.php', 1, _NEWS_AM_MSG_CLONE_ERROR);
+            NewsUtils::News_Redirect('tools.php', 1, _NEWS_AM_MSG_CLONE_ERROR);
         }
         break;
 
@@ -124,35 +124,35 @@ switch ($op) {
             $story_handler->deleteAll(new Criteria('story_modid', $id));
             $topic_handler->deleteAll(new Criteria('topic_modid', $id));
         }
-        News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+        NewsUtils::News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
         break;
       
     case 'alias':
-        $start_id = news_CleanVars($_REQUEST, 'start_id', '1', 'int');
-        $end_id = news_CleanVars($_REQUEST, 'end_id', '1', 'int');	
-        NewsUtils::news_rebuild ($story_handler , 'story_id' , 'alias' , 'story_alias' , 'story_title' , $start_id , $end_id);	   
-        News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+        $start_id = NewsUtils::News_CleanVars($_REQUEST, 'start_id', '1', 'int');
+        $end_id = NewsUtils::News_CleanVars($_REQUEST, 'end_id', '1', 'int');	
+        NewsUtils::News_Rebuild ($story_handler , 'story_id' , 'alias' , 'story_alias' , 'story_title' , $start_id , $end_id);	   
+        NewsUtils::News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
 	     break;
 	         
     case 'topicalias': 
-        $start_id = news_CleanVars($_REQUEST, 'start_id', '1', 'int');
-        $end_id = news_CleanVars($_REQUEST, 'end_id', '1', 'int');	
-        NewsUtils::news_rebuild ($topic_handler , 'topic_id' , 'topicalias' , 'topic_alias' , 'topic_title' , $start_id , $end_id);	   
-        News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+        $start_id = NewsUtils::News_CleanVars($_REQUEST, 'start_id', '1', 'int');
+        $end_id = NewsUtils::News_CleanVars($_REQUEST, 'end_id', '1', 'int');	
+        NewsUtils::News_Rebuild ($topic_handler , 'topic_id' , 'topicalias' , 'topic_alias' , 'topic_title' , $start_id , $end_id);	   
+        NewsUtils::News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
 	     break; 
     
     case 'keyword':
-        $start_id = news_CleanVars($_REQUEST, 'start_id', '1', 'int');
-        $end_id = news_CleanVars($_REQUEST, 'end_id', '1', 'int');	
-        NewsUtils::news_rebuild ($story_handler , 'story_id' , 'keyword' , 'story_words' , 'story_title' , $start_id , $end_id);  
-        News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+        $start_id = NewsUtils::News_CleanVars($_REQUEST, 'start_id', '1', 'int');
+        $end_id = NewsUtils::News_CleanVars($_REQUEST, 'end_id', '1', 'int');	
+        NewsUtils::News_Rebuild ($story_handler , 'story_id' , 'keyword' , 'story_words' , 'story_title' , $start_id , $end_id);  
+        NewsUtils::News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
 	     break; 
        
     case 'description':
-        $start_id = news_CleanVars($_REQUEST, 'start_id', '1', 'int');
-        $end_id = news_CleanVars($_REQUEST, 'end_id', '1', 'int');	
-        NewsUtils::news_rebuild ($story_handler , 'story_id' , 'description' , 'story_desc' , 'story_title' , $start_id , $end_id); 
-        News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+        $start_id = NewsUtils::News_CleanVars($_REQUEST, 'start_id', '1', 'int');
+        $end_id = NewsUtils::News_CleanVars($_REQUEST, 'end_id', '1', 'int');	
+        NewsUtils::News_Rebuild ($story_handler , 'story_id' , 'description' , 'story_desc' , 'story_title' , $start_id , $end_id); 
+        NewsUtils::News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
 	     break; 
 }
 
@@ -160,7 +160,7 @@ $xoopsTpl->assign('navigation', 'tools');
 $xoopsTpl->assign('navtitle', _NEWS_MI_TOOLS);
 
 // Call template file
-$xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $forMods->getVar('dirname') . '/templates/admin/news_tools.html');
+$xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $NewsModule->getVar('dirname') . '/templates/admin/news_tools.html');
 
 // Display Xoops footer
 include "footer.php";
