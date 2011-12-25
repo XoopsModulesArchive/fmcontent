@@ -559,7 +559,7 @@ class NewsUtils {
 	    $tpl->assign('message', $message);
 	    $tpl->assign('ifnotreload', sprintf(_IFNOTRELOAD, $url));
 	    // Call template file
-	    echo $tpl->fetch(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/templates/admin/self::News_Redirect.html');
+	    echo $tpl->fetch(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/templates/admin/news_redirect.html');
 	    // Force redirection
 	    header("refresh: " . $time . "; url=" . $url);
 	}
