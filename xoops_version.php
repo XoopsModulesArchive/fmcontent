@@ -63,6 +63,13 @@ $modversion = array(
      'min_admin' => '1.1'
 );
 
+//Sql file
+$modversion["sqlfile"]["mysql"] = "sql/mysql.sql";
+$modversion["tables"] = array(
+    "news_story",
+    "news_topic",
+    "news_file",
+);
 
 //Recherche
 $modversion["search"]["file"] = "include/search.inc.php";

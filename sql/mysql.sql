@@ -71,11 +71,8 @@ CREATE TABLE `news_topic` (
 `topic_alias` varchar(255) NOT NULL,
 `topic_homepage` tinyint (4)   NOT NULL ,
 `topic_show` tinyint (1)   NOT NULL default '1',
-  PRIMARY KEY (`story_id`),
-  KEY `idxstoriestopic` (`story_topic`),
-  KEY `story_title` (`story_title`),
-  KEY `story_create` (`story_create`),
-  FULLTEXT KEY `search` (`story_title`,`story_short`,`story_text`,`story_subtitle`)
+PRIMARY KEY (`topic_id`,`topic_modid`),
+UNIQUE KEY `file_id` (`topic_id`,`topic_modid`)
 ) ENGINE=MyISAM;
 
 CREATE TABLE `news_file` (
