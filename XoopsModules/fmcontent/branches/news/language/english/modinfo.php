@@ -21,11 +21,11 @@
 if (!defined('_MI_NEWS_NAME')) {
     // Module info
     define('_MI_NEWS_NAME', 'News');
-    define('_MI_NEWS_DESC', 'Manage page content');
+    define('_MI_NEWS_DESC', 'Manage articles');
 // Menu
     define('_NEWS_MI_HOME', 'Home');
-    define('_NEWS_MI_TOPIC', 'Topic');
-    define('_NEWS_MI_CONTENT', 'Content');
+    define('_NEWS_MI_TOPIC', 'Topics');
+    define('_NEWS_MI_ARTICLE', 'Articles');
     define('_NEWS_MI_PERM', 'Permissions');
     define('_NEWS_MI_TOOLS', 'Tools');
     define('_NEWS_MI_ABOUT', 'About');
@@ -33,11 +33,11 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_SUBMIT', 'Submit');
     define('_NEWS_MI_FILE', 'File');
 // Block
-    define('_NEWS_MI_BLOCK_PAGE', 'Content page');
-    define('_NEWS_MI_BLOCK_LIST', 'Content list');
+    define('_NEWS_MI_BLOCK_PAGE', 'Article page');
+    define('_NEWS_MI_BLOCK_LIST', 'Article list');
 // Editor
     define("_NEWS_MI_FORM_EDITOR", "Form Option");
-    define("_NEWS_MI_FORM_EDITOR_DESC", "Select the editor to use for editing your content.");
+    define("_NEWS_MI_FORM_EDITOR_DESC", "Select the editor to use for editing your article.");
 // Urls
     define('_NEWS_MI_FRIENDLYURL', 'URL rewrite method');
     define('_NEWS_MI_FRIENDLYURL_DESC', 'Select the URL rewrite mode you want to use.<ul>
@@ -50,7 +50,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_URL_ID', 'ID Mode');
 // Rewrite Mode
     define('_NEWS_MI_REWRITEBASE', 'Rewrite Mode: .htaccess file position');
-    define('_NEWS_MI_REWRITEBASE_DESC', '"Module": .htaccess file must be in the module directory.<br />"Root": .htaccess file must be in your XOOPS root directory.');
+    define('_NEWS_MI_REWRITEBASE_DESC', '"Module": .htaccess file must be in the module directory.<br />"Root": .htaccess file must be in your ROOT directory.');
     define('_NEWS_MI_REWRITEBASE_MODS', 'Module');
     define('_NEWS_MI_REWRITEBASE_ROOT', 'Root');
 // Rewrite Name
@@ -70,10 +70,10 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_GROUPS_DESC', 'Select general access permission for groups.');
 //Advertisement 
     define('_NEWS_MI_ADVERTISEMENT', 'Advertisement');
-    define('_NEWS_MI_ADVERTISEMENT_DESC', 'Enter text or html/Javascript code for your contents');
+    define('_NEWS_MI_ADVERTISEMENT_DESC', 'Enter text or html/Javascript code for your articles');
 // Edit in place
     define('_NEWS_MI_EDITINPLACE', 'Use edit in place?');
-    define('_NEWS_MI_EDITINPLACE_DESC', 'Allow inline edits of your contents');
+    define('_NEWS_MI_EDITINPLACE_DESC', 'Allow inline edits of your articles');
 // Tell a friend
     define('_NEWS_MI_TELLAFRIEND', 'Use module Tell a friend?');
     define('_NEWS_MI_TELLAFRIEND_DESC', '');
@@ -88,7 +88,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_MINWORDOCCUR_DESC', 'Choose the minimum occurrence of single words');
 // Show options
     define('_NEWS_MI_DISP_OPTION', 'General display method');
-    define('_NEWS_MI_DISP_OPTION_DESC', 'Select which display options will be used in contents<br />"Topic based" will use display options defined in topic preferences');
+    define('_NEWS_MI_DISP_OPTION_DESC', 'Select which display options will be used in articles<br />"Topic based" will use display options defined in topic preferences');
     define('_NEWS_MI_DISP_OPTION_MODULE', 'Module based');
     define('_NEWS_MI_DISP_OPTION_TOPIC', 'Topic based');
 // Title
@@ -122,14 +122,14 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_DISPCOMS', 'Display Comments count');
     define('_NEWS_MI_DISPCOMS_DESC', '');
 // Per page
-    define('_NEWS_MI_PERPAGE', 'Per page contents');
-    define('_NEWS_MI_PERPAGE_DESC', 'Number of contents listed in topic/index page');
+    define('_NEWS_MI_PERPAGE', 'Per page articles');
+    define('_NEWS_MI_PERPAGE_DESC', 'Number of articles listed in topic/index page');
 // Columns
     define('_NEWS_MI_COLUMNS', 'Columns');
     define('_NEWS_MI_COLUMNS_DESC', 'Number of Columns in each page');
 // Show type
     define('_NEWS_MI_SHOWTYPE', 'Display mode');
-    define('_NEWS_MI_SHOWTYPE_DESC', 'Display template for contents listed in topic/index page');
+    define('_NEWS_MI_SHOWTYPE_DESC', 'Display template for articles listed in topic/index page');
     define('_NEWS_MI_SHOWTYPE_0', 'Module based');
     define('_NEWS_MI_SHOWTYPE_1', 'News type');
     define('_NEWS_MI_SHOWTYPE_2', 'Table type');
@@ -149,23 +149,23 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_ASC', 'ASC');
 // Show sort
     define('_NEWS_MI_SHOWSORT', 'Sort by');
-    define('_NEWS_MI_SHOWSORT_DESC', 'Ordering method for contents displayed in the module');
-    define('_NEWS_MI_SHOWSORT_1', 'Content id');
-    define('_NEWS_MI_SHOWSORT_2', 'Content create');
-    define('_NEWS_MI_SHOWSORT_3', 'Content update');
-    define('_NEWS_MI_SHOWSORT_4', 'Content title');
-    define('_NEWS_MI_SHOWSORT_5', 'Admin Content page order');
+    define('_NEWS_MI_SHOWSORT_DESC', 'Ordering method for articles displayed in the module');
+    define('_NEWS_MI_SHOWSORT_1', 'article id');
+    define('_NEWS_MI_SHOWSORT_2', 'article create');
+    define('_NEWS_MI_SHOWSORT_3', 'article update');
+    define('_NEWS_MI_SHOWSORT_4', 'article title');
+    define('_NEWS_MI_SHOWSORT_5', 'Admin article page order');
     define('_NEWS_MI_SHOWSORT_6', 'Random order');
-    define('_NEWS_MI_SHOWSORT_7', 'content Hits');
+    define('_NEWS_MI_SHOWSORT_7', 'article Hits');
 // Admin page
-    define('_NEWS_MI_ADMIN_PERPAGE', 'Admin Content page items number');
-    define('_NEWS_MI_ADMIN_PERPAGE_DESC', 'Number of items listed in admin Content page');
+    define('_NEWS_MI_ADMIN_PERPAGE', 'Admin article page items number');
+    define('_NEWS_MI_ADMIN_PERPAGE_DESC', 'Number of items listed in admin article page');
 // Admin Show order
-    define('_NEWS_MI_ADMIN_SHOWORDER', 'Admin Content page display order');
-    define('_NEWS_MI_ADMIN_SHOWORDER_DESC', 'Select Descendant/Ascendant order for admin Content page');
+    define('_NEWS_MI_ADMIN_SHOWORDER', 'Admin article page display order');
+    define('_NEWS_MI_ADMIN_SHOWORDER_DESC', 'Select Descendant/Ascendant order for admin article page');
 // Admin sort
-    define('_NEWS_MI_ADMIN_SHOWSORT', 'Admin Content page sort');
-    define('_NEWS_MI_ADMIN_SHOWSORT_DESC', 'Ordering method for items listed in admin Content page<br />Any option except "Admin content order" will modify all manual sort of content page at each reload.');
+    define('_NEWS_MI_ADMIN_SHOWSORT', 'Admin article page sort');
+    define('_NEWS_MI_ADMIN_SHOWSORT_DESC', 'Ordering method for items listed in admin article page<br />Any option except "Admin article order" will modify all manual sort of article page at each reload.');
 // Admin topic page
     define('_NEWS_MI_ADMIN_PERPAGE_TOPIC', 'Admin Topic page items number');
     define('_NEWS_MI_ADMIN_PERPAGE_TOPIC_DESC', 'Number of items listed in admin Topic page');
@@ -189,7 +189,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_RSS_PERPAGE', 'RSS number');
     define('_NEWS_MI_RSS_PERPAGE_DESC', 'Select number of items in RSS page');
     define('_NEWS_MI_RSS_LOGO', 'RSS logo URL');
-    define('_NEWS_MI_RSS_LOGO_DESC', 'Path for site logo displayed in RSS pages (relative to Xoops root directory)');
+    define('_NEWS_MI_RSS_LOGO_DESC', 'Path for site logo displayed in RSS pages (relative to ROOT directory)');
 // Print    
     define('_NEWS_MI_PRINT_LOGO', 'Display site title');
     define('_NEWS_MI_PRINT_LOGO_DESC', 'Show/hide site title in print page');
@@ -199,7 +199,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_PRINT_RIGHT', 'Right');
     define('_NEWS_MI_PRINT_CENTER', 'Center');
     define('_NEWS_MI_PRINT_LOGOURL', 'Print logo URL');
-    define('_NEWS_MI_PRINT_LOGOURL_DESC', 'Path for site logo displayed in print page (relative to Xoops root directory)');
+    define('_NEWS_MI_PRINT_LOGOURL_DESC', 'Path for site logo displayed in print page (relative to ROOT directory)');
     define('_NEWS_MI_PRINT_TITLE', 'Display Title');
     define('_NEWS_MI_PRINT_TITLE_DESC', '');
     define('_NEWS_MI_PRINT_IMG', 'Display Image');
@@ -216,7 +216,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_PRINT_LINK_DESC', '');
 //img
     define('_NEWS_MI_IMAGE_DIR', 'Image upload path');
-    define('_NEWS_MI_IMAGE_DIR_DESC', 'Upload path for images attached to content');
+    define('_NEWS_MI_IMAGE_DIR_DESC', 'Upload path for images attached to article');
     define('_NEWS_MI_IMAGE_SIZE', 'Image file size (in bytes)');
     define('_NEWS_MI_IMAGE_SIZE_DESC', 'Max allowed size for image file (1048576 bytes = 1 MegaByte)');
     define('_NEWS_MI_IMAGE_MAXWIDTH', 'Image max width (pixel)');
@@ -233,31 +233,31 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_IMAGE_THUMBHEIGHT_DESC', 'Thumb allowed height for image resize');
     define('_NEWS_MI_IMAGE_MIME', 'Image mime types');
     define('_NEWS_MI_IMAGE_MIME_DESC', 'Allowed myme-types for image upload');
-    define('_NEWS_MI_IMAGE_WIDTH', 'Content list max image width (pixel)');
-    define('_NEWS_MI_IMAGE_WIDTH_DESC', 'Max allowed width for images in content listed in index/topic pages<br /> A max width/height for images in content pages is set in /css/style.css');
+    define('_NEWS_MI_IMAGE_WIDTH', 'article list max image width (pixel)');
+    define('_NEWS_MI_IMAGE_WIDTH_DESC', 'Max allowed width for images in article listed in index/topic pages<br /> A max width/height for images in article pages is set in /css/style.css');
     define('_NEWS_MI_IMAGE_FLOAT', 'Image align');
-    define('_NEWS_MI_IMAGE_FLOAT_DESC', 'Select left or right position for images attached to content');
+    define('_NEWS_MI_IMAGE_FLOAT_DESC', 'Select left or right position for images attached to article');
     define('_NEWS_MI_IMAGE_LEFT', 'Left');
     define('_NEWS_MI_IMAGE_RIGHT', 'Right');
     define('_NEWS_MI_IMAGE_LIGHTBOX', 'Use lightbox');
     define('_NEWS_MI_IMAGE_LIGHTBOX_DESC', 'Use lightbox effect to display images at original size');
 //social
     define('_NEWS_MI_SOCIAL', 'Display Bookmark/Social links');
-    define('_NEWS_MI_SOCIAL_DESC', 'You can display Social network and bookmark icons in each content');
+    define('_NEWS_MI_SOCIAL_DESC', 'You can display Social network and bookmark icons in each article');
     define('_NEWS_MI_BOOKMARK', 'Bookmark');
     define('_NEWS_MI_SOCIALNETWORM', 'Social Networks');
     define('_NEWS_MI_NONE', 'None');
     define('_NEWS_MI_BOTH', 'Both');
 //Multiple Columns 
     define('_NEWS_MI_MULTIPLE_COLUMNS', 'Multiple Columns');
-    define('_NEWS_MI_MULTIPLE_COLUMNS_DESC', 'Select number of columns used for displaying contents<br />This option works only in content page and for content in <b>Text</b> field');
+    define('_NEWS_MI_MULTIPLE_COLUMNS_DESC', 'Select number of columns used for displaying articles<br />This option works only in article page and for article in <b>Text</b> field');
     define('_NEWS_MI_MULTIPLE_COLUMNS_1', 'One Column');
     define('_NEWS_MI_MULTIPLE_COLUMNS_2', 'Two Columns');
     define('_NEWS_MI_MULTIPLE_COLUMNS_3', 'Three Columns');
     define('_NEWS_MI_MULTIPLE_COLUMNS_4', 'Four Columns');
 // All user posts
     define('_NEWS_MI_ALLUSERPOST', 'Display "All user posts" link');
-    define('_NEWS_MI_ALLUSERPOST_DESC', 'Show/Hide all user posts link in each content');
+    define('_NEWS_MI_ALLUSERPOST_DESC', 'Show/Hide all user posts link in each article');
 // regular expression
     define('_NEWS_MI_REGULAR_EXPRESSION', 'Auto Alias URL pattern');
     define('_NEWS_MI_REGULAR_EXPRESSION_DESC', 'Regular Expression for generating auto Alias URL pattern. <br />If you your language is not supported in Alias URL you can add appopriate regular expression here. Default setting is : <b>`[^a-z0-9]`i</b>');
@@ -268,7 +268,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_BREADCRUMB_TOHOME', 'Display Homepage link');
 // Files
     define('_NEWS_MI_FILE_DIR', 'File upload path');
-    define('_NEWS_MI_FILE_DIR_DESC', 'Upload path for files attached to content');
+    define('_NEWS_MI_FILE_DIR_DESC', 'Upload path for files attached to article');
     define('_NEWS_MI_FILE_SIZE', 'file size (in bytes)');
     define('_NEWS_MI_FILE_SIZE_DESC', 'Max allowed size for file (1048576 bytes = 1 MegaByte)');
     define('_NEWS_MI_FILE_MIME', 'File mime types');
@@ -294,11 +294,11 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_INSERT_DATA', 'Inserting data');
 // homepage   
     define('_NEWS_MI_HOMEPAGE', 'Homepage seting');
-    define('_NEWS_MI_HOMEPAGE_DESC', 'Seting content show type in module index page');
-    define('_NEWS_MI_HOMEPAGE_1', 'List all contents from all topics');
+    define('_NEWS_MI_HOMEPAGE_DESC', 'Seting article show type in module index page');
+    define('_NEWS_MI_HOMEPAGE_1', 'List all articles from all topics');
     define('_NEWS_MI_HOMEPAGE_2', 'List all topics');
     define('_NEWS_MI_HOMEPAGE_3', 'List all static pages');
-    define('_NEWS_MI_HOMEPAGE_4', 'Show selected static content');
+    define('_NEWS_MI_HOMEPAGE_4', 'Show selected static article');
 // topic name
 	 define('_NEWS_MI_TOPICNAME', 'Topic name');
 	 define('_NEWS_MI_TOPICNAME_DESC', 'Set topic name for URL');  
@@ -306,6 +306,6 @@ if (!defined('_MI_NEWS_NAME')) {
 	 define('_NEWS_MI_RELATED', 'Related table');
 	 define('_NEWS_MI_RELATED_DESC', 'When you use this option, a summary containing links to all the recent published articles is visible at the bottom of each article');  
 	 define('_NEWS_MI_RELATED_LIMIT', 'Related limit');
-	 define('_NEWS_MI_RELATED_LIMIT_DESC', 'Number of contents for show in Related table');  	 
+	 define('_NEWS_MI_RELATED_LIMIT_DESC', 'Number of articles for show in Related table');  	 
 }
 ?>

@@ -19,11 +19,11 @@ if (!defined('_NEWS_TYPE')) {
     define('_NEWS_MB_SELECTPAGE', 'Select the page to display: ');
     define('_NEWS_MB_ALLMENUS', 'All Topics');
     define('_NEWS_MB_TOPICDISPLAY', 'Select Topics to display');
-    define('_NEWS_MB_NUMBER', 'Number of listed contents');
+    define('_NEWS_MB_NUMBER', 'Number of listed articles');
     define('_NEWS_MB_CHARS', 'Title lenght (characters)');
     define('_NEWS_MB_IMG', 'Display image');
     define('_NEWS_MB_WIDTH', 'Max image width (pixel)');
-    define('_NEWS_MB_DESCRIPTION', 'Display content text');
+    define('_NEWS_MB_DESCRIPTION', 'Display article text');
     define('_NEWS_MB_DATE', 'Display publish date');
     define('_NEWS_MB_MORE', 'Read more');
     define('_NEWS_MB_SHOE_MORELINK', 'Show more link');

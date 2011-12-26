@@ -232,7 +232,7 @@ switch ($op)
         }
 
         $xoopsTpl->assign('navigation', 'content');
-        $xoopsTpl->assign('navtitle', _NEWS_MI_CONTENT);
+        $xoopsTpl->assign('navtitle', _NEWS_MI_ARTICLE);
         $xoopsTpl->assign('topic_title', $topic_title);
         $xoopsTpl->assign('contents', $contents);
         $xoopsTpl->assign('story_pagenav', $story_pagenav);

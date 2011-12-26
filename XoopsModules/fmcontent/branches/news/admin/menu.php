@@ -27,7 +27,7 @@ $adminmenu[$i] = array(
 	 'icon' => 'images/admin/category.png');
 $i++;
 $adminmenu[$i] = array(
-    'title' => _NEWS_MI_CONTENT,
+    'title' => _NEWS_MI_ARTICLE,
     'link' => 'admin/article.php',
 	 'icon' => 'images/admin/content.png');
 $i++;

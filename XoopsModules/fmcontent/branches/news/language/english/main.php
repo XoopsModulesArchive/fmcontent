@@ -30,7 +30,7 @@ if (!defined('_NEWS_MD_NEXT')) {
     define("_NEWS_MD_AUTHOR_ALL", "Read all");
     define("_NEWS_MD_AUTHOR_ALL_DESC", "View all contributions by ");
     define('_NEWS_MD_COM', 'Comment');
-    define('_NEWS_MD_RELATED', 'Related contents');
+    define('_NEWS_MD_RELATED', 'Related articles');
     define("_NEWS_MD_HOME", "Home");
 // Link
     define('_NEWS_MD_NEXT', 'Next page');
@@ -51,7 +51,7 @@ if (!defined('_NEWS_MD_NEXT')) {
     define('_NEWS_MD_ERROR_NOPAGE', 'You have not created any page yet');
     define('_NEWS_MD_ERROR_STATUS', 'This page is diactive');
     define('_NEWS_MD_ERROR_TOPIC', 'Selected topic does not exist');
-    define('_NEWS_MD_ERROR_EXIST', 'Selected content does not exist');
+    define('_NEWS_MD_ERROR_EXIST', 'Selected article does not exist');
 // Light box
     define('_NEWS_MD_LIGHTBOX_IMAGE', 'Image');
     define('_NEWS_MD_LIGHTBOX_OF', 'of');
