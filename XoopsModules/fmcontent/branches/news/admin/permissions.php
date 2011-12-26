@@ -22,7 +22,7 @@ require dirname(__FILE__) . '/header.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopstopic.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
-require_once XOOPS_ROOT_PATH . '/modules/news/class/topic.php';
+include_once XOOPS_ROOT_PATH . '/modules/news/class/topic.php';
 
 // Display Admin header
 xoops_cp_header();
@@ -30,7 +30,7 @@ xoops_cp_header();
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $NewsModule->getVar('dirname') . '/css/admin.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
 
-$topic_handler = xoops_getmodulehandler('topic', 'news'); //mb
+$topic_handler = xoops_getmodulehandler('topic', 'news');
 
 $permtoset = isset($_POST["permtoset"]) ? intval($_POST["permtoset"]) : 1;
 $selected = array("", "", "");
@@ -76,7 +76,7 @@ if ($permtoset == 1) {
     $xoopsTpl->assign('permform', $permform->render());
 } else {
     $xt = new XoopsTopic($xoopsDB -> prefix("news_topic"));
-    $alltopics =& $xt->News_GetTopicsList();
+    $alltopics =& $xt->getTopicsList();
 
     foreach ($alltopics as $topic_id => $topic) {
         $permform->addItem($topic_id, $topic["title"], $topic["pid"]);
