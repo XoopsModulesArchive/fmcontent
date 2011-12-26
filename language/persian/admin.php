@@ -77,7 +77,7 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_TOPIC_SHOWTYPE_4', 'List type');
     define('_NEWS_AM_TOPIC_SHOWTYPE_5', 'Spotlight');
 // Content page
-    define('_NEWS_AM_CONTENT_FORM', 'مدیریت محتوا');
+    define('_NEWS_AM_CONTENT_FORM', 'مدیریت اخبار');
     define('_NEWS_AM_CONTENT_FORMTITLE', 'عنوان');
     define('_NEWS_AM_CONTENT_FORMTITLE_DISP', 'نمایش عنوان صفحه؟');
     define('_NEWS_AM_CONTENT_FORMAUTHOR', 'سازنده ( نام)');
@@ -93,12 +93,12 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_CONTENT_FORMNEXT', 'صقحه بعدی');
     define('_NEWS_AM_CONTENT_DOHTML', 'نمایش به صورت Html');
     define('_NEWS_AM_CONTENT_BREAKS', 'تبدیل خط شکسته فعال');
-    define('_NEWS_AM_CONTENT_DOIMAGE', 'نمایش تصاویر محتوا');
-    define('_NEWS_AM_CONTENT_DOXCODE', 'نمایش کدهای محتوا');
-    define('_NEWS_AM_CONTENT_DOSMILEY', 'نمایش لبخند های محتوا');
+    define('_NEWS_AM_CONTENT_DOIMAGE', 'نمایش تصاویر');
+    define('_NEWS_AM_CONTENT_DOXCODE', 'نمایش کدها');
+    define('_NEWS_AM_CONTENT_DOSMILEY', 'نمایش لبخند ها');
     define('_NEWS_AM_CONTENT_SHORT', 'متن خلاصه');
     define('_NEWS_AM_CONTENT_TITLE', 'عنوان');
-    define('_NEWS_AM_CONTENT_MANAGER', 'مدیریت محتوا');
+    define('_NEWS_AM_CONTENT_MANAGER', 'مدیریت اخبار');
     define('_NEWS_AM_CONTENT_FILE', 'File');
     define('_NEWS_AM_CONTENT_ID', 'ID');
     define('_NEWS_AM_CONTENT_NUM', 'وزن');
@@ -164,7 +164,7 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_MSG_DELETE', 'آیا اطمینان دارید که میخواهید %s را حذف کنید؟');
     define('_NEWS_AM_MSG_EDIT_ERROR', 'این صفحه پیدا نشد یا آی دی صفحه اشتباه است!');
     define('_NEWS_AM_MSG_UPDATE_ERROR', 'ناتوان در به روز رسانی پایگاه داده ها! خطا در به روز رسانی صفحه');
-    define('_NEWS_AM_MSG_INSERT_ERROR', 'ناتوان در به روز رسانی پایگاه داده ها! خطا در مورد محتوا');
+    define('_NEWS_AM_MSG_INSERT_ERROR', 'ناتوان در به روز رسانی پایگاه داده ها! خطا در مورد اخبار');
     define('_NEWS_AM_MSG_CLONE_ERROR', 'این شاخه هماکنون موجود است!');
     define("_NEWS_AM_MSG_NOPERMSSET", "هیچ دسترسی قابل تنظیم نیست : هنوز هیچ شاخه ای ساخته نشده است! لطفا ابتدا یک شاخه بسازید.");
     define('_NEWS_AM_MSG_ALIASERROR', 'نام مستعار مورد انتخاب شما گرفته شده است. لطفا یک نام دیگر انتخاب کنید.');

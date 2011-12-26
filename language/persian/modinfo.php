@@ -20,12 +20,12 @@
 
 if (!defined('_MI_NEWS_NAME')) {
     // Module info
-    define('_MI_NEWS_NAME', 'محتوا');
+    define('_MI_NEWS_NAME', 'اخبار');
     define('_MI_NEWS_DESC', 'برای مدییت صفحات ایستا و پویا');
 // Menu
     define("_NEWS_MI_HOME", "صفحه اصلی");
     define("_NEWS_MI_TOPIC", "شاخه");
-    define("_NEWS_MI_CONTENT", "محتوا");
+    define("_NEWS_MI_CONTENT", "اخبار");
     define("_NEWS_MI_PERM", "دسترسی ها");
     define("_NEWS_MI_TOOLS", "ابزار");
     define("_NEWS_MI_ABOUT", "درباره");

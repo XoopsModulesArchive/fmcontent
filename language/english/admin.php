@@ -20,16 +20,16 @@
 
 if (!defined('_NEWS_AM_PREFERENCES')) {
 // Global page
-    define('_NEWS_AM_GLOBAL_ADD_CONTENT', 'Add Content');
+    define('_NEWS_AM_GLOBAL_ADD_CONTENT', 'Add Article');
     define('_NEWS_AM_GLOBAL_ADD_TOPIC', 'Add Topic');
     define('_NEWS_AM_GLOBAL_ADD_FILE', 'Add File');
     define('_NEWS_AM_GLOBAL_IMG', 'Image');
     define('_NEWS_AM_GLOBAL_FORMUPLOAD', 'Select Image');
 // Index page
     define("_NEWS_AM_INDEX_ADMENU1", "Topics");
-    define("_NEWS_AM_INDEX_ADMENU2", "Contents");
+    define("_NEWS_AM_INDEX_ADMENU2", "Articles");
     define("_NEWS_AM_INDEX_TOPICS", "There are <span class='green'>%s</span> Topics in our database");
-	 define("_NEWS_AM_INDEX_CONTENTS", "There are <span class='green'>%s</span> Contents in our database");
+	 define("_NEWS_AM_INDEX_CONTENTS", "There are <span class='green'>%s</span> Articles in our database");
 	 define("_NEWS_AM_INDEX_CONTENTS_OFFLINE", "There are <span class='red'>%s</span> Offline news in our database");
 	 define("_NEWS_AM_INDEX_CONTENTS_EXPIRE", "There are <span class='red'>%s</span> Expire news in our database");
 // Topic page
@@ -42,7 +42,7 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_TOPIC_IMG', 'Image');
     define('_NEWS_AM_TOPIC_WEIGHT', 'Weight');
     define('_NEWS_AM_TOPIC_SHOWTYPE', 'Display mode');
-    define('_NEWS_AM_TOPIC_SHOWTYPE_DESC', 'Contents display template for this topic<br />"Module based" will use display options defined in module preferences.');
+    define('_NEWS_AM_TOPIC_SHOWTYPE_DESC', 'Articles display template for this topic<br />"Module based" will use display options defined in module preferences.');
     define('_NEWS_AM_TOPIC_PERPAGE', 'Per page');
     define('_NEWS_AM_TOPIC_COLUMNS', 'Columns');
     define('_NEWS_AM_TOPIC_ONLINE', 'Active');
@@ -62,11 +62,11 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_TOPIC_SHOWHITS', 'Display Hits');
     define('_NEWS_AM_TOPIC_SHOWCOMS', 'Display Comments count');
     define('_NEWS_AM_TOPIC_HOMEPAGE', 'Topic homepage seting');
-    define('_NEWS_AM_TOPIC_HOMEPAGE_DESC', 'Seting content show type in topic pages');
-    define('_NEWS_AM_TOPIC_HOMEPAGE_1', 'List all contents from this topic and subtopics');
+    define('_NEWS_AM_TOPIC_HOMEPAGE_DESC', 'Seting article show type in topic pages');
+    define('_NEWS_AM_TOPIC_HOMEPAGE_1', 'List all articles from this topic and subtopics');
     define('_NEWS_AM_TOPIC_HOMEPAGE_2', 'List all subtopics');
-    define('_NEWS_AM_TOPIC_HOMEPAGE_3', 'List all contents from just this topic');
-    define('_NEWS_AM_TOPIC_HOMEPAGE_4', 'Show selected content from this topic');
+    define('_NEWS_AM_TOPIC_HOMEPAGE_3', 'List all articles from just this topic');
+    define('_NEWS_AM_TOPIC_HOMEPAGE_4', 'Show selected article from this topic');
     define('_NEWS_AM_TOPIC_OPTIONS', 'Sellect topic show options');
     define('_NEWS_AM_TOPIC_OPTIONS_DESC', 'Sellect topic show options');
     define('_NEWS_AM_TOPIC_ALIAS', 'Alias (for url)');
@@ -77,7 +77,7 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_TOPIC_SHOWTYPE_4', 'List type');
     define('_NEWS_AM_TOPIC_SHOWTYPE_5', 'Spotlight');
 // Content page
-    define('_NEWS_AM_CONTENT_FORM', 'Manage Content');
+    define('_NEWS_AM_CONTENT_FORM', 'Manage Article');
     define('_NEWS_AM_CONTENT_FORMTITLE', 'Title');
     define('_NEWS_AM_CONTENT_FORMTITLE_DISP', 'Display page title?');
     define('_NEWS_AM_CONTENT_FORMAUTHOR', 'Source (Name)');
@@ -93,12 +93,12 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_CONTENT_FORMNEXT', 'Next link');
     define('_NEWS_AM_CONTENT_DOHTML', 'Allow HTML code');
     define('_NEWS_AM_CONTENT_BREAKS', 'Convert line breaks');
-    define('_NEWS_AM_CONTENT_DOIMAGE', 'Allow XOOPS Images');
-    define('_NEWS_AM_CONTENT_DOXCODE', 'Allow XOOPS BBcode');
-    define('_NEWS_AM_CONTENT_DOSMILEY', 'Allow XOOPS Smilies');
+    define('_NEWS_AM_CONTENT_DOIMAGE', 'Allow Images');
+    define('_NEWS_AM_CONTENT_DOXCODE', 'Allow BBcode');
+    define('_NEWS_AM_CONTENT_DOSMILEY', 'Allow Smilies');
     define('_NEWS_AM_CONTENT_SHORT', 'Short text');
     define('_NEWS_AM_CONTENT_TITLE', 'Title');
-    define('_NEWS_AM_CONTENT_MANAGER', 'Content manager');
+    define('_NEWS_AM_CONTENT_MANAGER', 'Article manager');
     define('_NEWS_AM_CONTENT_FILE', 'File');
     define('_NEWS_AM_CONTENT_ID', 'ID');
     define('_NEWS_AM_CONTENT_NUM', 'Weight');
@@ -114,10 +114,10 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_CONTENT_DELETE', 'Delete');
     define('_NEWS_AM_CONTENT_SHORTDESC', 'Short Desc');
     define('_NEWS_AM_CONTENT_TOPIC', 'Topic');
-    define('_NEWS_AM_CONTENT_TOPIC_DESC', 'Empty selection will set the content as a Static Page');
+    define('_NEWS_AM_CONTENT_TOPIC_DESC', 'Empty selection will set the article as a Static Page');
     define('_NEWS_AM_CONTENT_STATIC', 'Static page');
     define('_NEWS_AM_CONTENT_STATICS', 'Static pages');
-    define('_NEWS_AM_CONTENT_ALL_ITEMS', 'All content/item list');
+    define('_NEWS_AM_CONTENT_ALL_ITEMS', 'All article/item list');
     define('_NEWS_AM_CONTENT_ALL_ITEMS_FROM', 'Item list filtered by: ');
     define('_NEWS_AM_CONTENT_FILE_DESC', 'For add more files you must use admin file system in admin side');
     define('_NEWS_AM_CONTENT_SUBTITLE', 'Subtitle');
@@ -133,7 +133,7 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_TOOLS_LOG_TITLE', 'Clone module log');
     define('_NEWS_AM_TOOLS_FORMPURGE_TITLE', 'Purge page of deleted clone');
     define('_NEWS_AM_TOOLS_ALIAS_TITLE', 'Rebuild Alias');
-    define('_NEWS_AM_TOOLS_ALIAS_CONTENT', 'Rebuild content alias');
+    define('_NEWS_AM_TOOLS_ALIAS_CONTENT', 'Rebuild article alias');
     define('_NEWS_AM_TOOLS_ALIAS_TOPIC', 'Rebuild topic alias');
     define('_NEWS_AM_TOOLS_META_TITLE', 'Rebuild Metas');
     define('_NEWS_AM_TOOLS_META_KEYWORD', 'Rebuild Meta keywords');
@@ -152,18 +152,18 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
 	 define('_NEWS_AM_FILE_ACTION', 'Action');
     define('_NEWS_AM_FILE_FORM', 'Attach file');
 	 define('_NEWS_AM_FILE_TITLE', 'Title');
-	 define('_NEWS_AM_FILE_CONTENT', 'File Content');
+	 define('_NEWS_AM_FILE_CONTENT', 'File Article');
 	 define('_NEWS_AM_FILE_STATUS', 'Active');
 	 define('_NEWS_AM_FILE_SELECT', 'Select your file');
 	 define('_NEWS_AM_FILE_TYPE', 'Type');
 // Admin message
     define('_NEWS_AM_MSG_DBUPDATE', 'Database updated successfully!');
-    define('_NEWS_AM_MSG_ERRORDELETE', 'You cannot delete this content! <br />Please move or delete all child of this content');
+    define('_NEWS_AM_MSG_ERRORDELETE', 'You cannot delete this article! <br />Please move or delete all child of this article');
     define('_NEWS_AM_MSG_WAIT', 'Please wait...');
     define('_NEWS_AM_MSG_DELETE', 'Are you sure you would like to delete: %s ?');
     define('_NEWS_AM_MSG_EDIT_ERROR', 'Could not find page or invalid page id!');
-    define('_NEWS_AM_MSG_UPDATE_ERROR', 'Could not update database! Update content error');
-    define('_NEWS_AM_MSG_INSERT_ERROR', 'Could not update database! Insert content error ');
+    define('_NEWS_AM_MSG_UPDATE_ERROR', 'Could not update database! Update article error');
+    define('_NEWS_AM_MSG_INSERT_ERROR', 'Could not update database! Insert article error ');
     define('_NEWS_AM_MSG_CLONE_ERROR', 'This folder already exists !');
     define('_NEWS_AM_MSG_NOPERMSSET', 'Permission cannot be set: No Topics created yet! Please create a Topic first.');
 	 define('_NEWS_AM_MSG_ALIASERROR', 'Your selected Alias is already taken. Please change it and try again');
@@ -190,15 +190,15 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_TOPIC_TIPS',
     '<ul>
 	<li>Reorder, view, edit or delete any topic</li>
-	<li>Display topic contents as a menu in block</li>
+	<li>Display topic articles as a menu in block</li>
 	<li>Show/hide topics in index and parent pages</li>
-	<li>Click on a topic title to see all contents for that topic</li>
+	<li>Click on a topic title to see all articles for that topic</li>
 	</ul>');
     define('_NEWS_AM_CONTENT_TIPS',
     '<ul>
-	<li>Reorder, view, edit or delete any content page</li>
-	<li>Create content, link, section header or separator</li>
-	<li>To change order of contents (which will be reflected in the Menu), simply drag and drop the contents into the desired position.</li>
+	<li>Reorder, view, edit or delete any article page</li>
+	<li>Create article, link, section header or separator</li>
+	<li>To change order of articles (which will be reflected in the Menu), simply drag and drop the articles into the desired position.</li>
 	</ul>');
     define('_NEWS_AM_TOOLS_TIPS',
     '<ul>
