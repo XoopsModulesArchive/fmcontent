@@ -124,35 +124,35 @@ switch ($op) {
             $story_handler->deleteAll(new Criteria('story_modid', $id));
             $topic_handler->deleteAll(new Criteria('topic_modid', $id));
         }
-        NewsUtils::News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+        NewsUtils::News_Redirect('tools.php', 1, _NEWS_AM_MSG_WAIT);
         break;
       
     case 'alias':
         $start_id = NewsUtils::News_CleanVars($_REQUEST, 'start_id', '1', 'int');
         $end_id = NewsUtils::News_CleanVars($_REQUEST, 'end_id', '1', 'int');	
         NewsUtils::News_Rebuild ($story_handler , 'story_id' , 'alias' , 'story_alias' , 'story_title' , $start_id , $end_id);	   
-        NewsUtils::News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+        NewsUtils::News_Redirect('tools.php', 1, _NEWS_AM_MSG_WAIT);
 	     break;
 	         
     case 'topicalias': 
         $start_id = NewsUtils::News_CleanVars($_REQUEST, 'start_id', '1', 'int');
         $end_id = NewsUtils::News_CleanVars($_REQUEST, 'end_id', '1', 'int');	
         NewsUtils::News_Rebuild ($topic_handler , 'topic_id' , 'topicalias' , 'topic_alias' , 'topic_title' , $start_id , $end_id);	   
-        NewsUtils::News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+        NewsUtils::News_Redirect('tools.php', 1, _NEWS_AM_MSG_WAIT);
 	     break; 
     
     case 'keyword':
         $start_id = NewsUtils::News_CleanVars($_REQUEST, 'start_id', '1', 'int');
         $end_id = NewsUtils::News_CleanVars($_REQUEST, 'end_id', '1', 'int');	
         NewsUtils::News_Rebuild ($story_handler , 'story_id' , 'keyword' , 'story_words' , 'story_title' , $start_id , $end_id);  
-        NewsUtils::News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+        NewsUtils::News_Redirect('tools.php', 1, _NEWS_AM_MSG_WAIT);
 	     break; 
        
     case 'description':
         $start_id = NewsUtils::News_CleanVars($_REQUEST, 'start_id', '1', 'int');
         $end_id = NewsUtils::News_CleanVars($_REQUEST, 'end_id', '1', 'int');	
         NewsUtils::News_Rebuild ($story_handler , 'story_id' , 'description' , 'story_desc' , 'story_title' , $start_id , $end_id); 
-        NewsUtils::News_Redirect('tools.php', 20, _NEWS_AM_MSG_WAIT);
+        NewsUtils::News_Redirect('tools.php', 1, _NEWS_AM_MSG_WAIT);
 	     break; 
 }
 
