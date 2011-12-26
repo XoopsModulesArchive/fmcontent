@@ -511,12 +511,11 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		} else {
 			$topiclist = array_intersect($access_topic , $topic_show);
 		}		
-      
-      
+
       $criteria = new CriteriaCompo ();
       $criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $topiclist ) . ')', 'IN' ) );
 		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
-		$criteria->add ( new Criteria ( 'story_status', $story_infos ['story_status'] ) );
+		$criteria->add ( new Criteria ( 'story_status', '1' ) );
       $criteria->add ( new Criteria ( 'story_uid', $story_infos ['story_user'] ) );
       $criteria->add ( new Criteria ( 'story_publish', 0 , '>' ));
 		$criteria->add ( new Criteria ( 'story_publish', time() , '<=' ));
@@ -563,21 +562,27 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	 */
 	function News_GetContentBlockList($NewsModule, $story_infos ,$options) {
 		$ret = array ();
-		$criteria = new CriteriaCompo ();
-		$criteria->add ( new Criteria ( 'story_status', '1' ) );
-		$criteria->add ( new Criteria ( 'story_publish', time() , '<=' ));
-		$criteria->add ( new Criteria ( 'story_publish', 0 , '>' ));
-		$criteria->add ( new Criteria ( 'story_expire', time() , '>=' ));
-		$criteria->add ( new Criteria ( 'story_expire', 0 ) ,'OR');
-		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
-		$access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
-		$criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $access_topic ) . ')', 'IN' ) );
+
+      $access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
+		
 		if (! (count ( $options ) == 1 && $options [0] == 0)) {
-			$criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $options ) . ')', 'IN' ) );
-		}
-		$criteria->setSort ( $story_infos ['story_sort'] );
+			$topiclist = array_intersect($access_topic , $options);
+		} else {
+		   $topiclist = $access_topic;
+		}	
+
+      $criteria = new CriteriaCompo ();
+      $criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $topiclist ) . ')', 'IN' ) );
+		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
+		$criteria->add ( new Criteria ( 'story_status', '1' ) );
+      $criteria->add ( new Criteria ( 'story_publish', 0 , '>' ));
+		$criteria->add ( new Criteria ( 'story_publish', time() , '<=' ));
+		$criteria->add ( new Criteria ( 'story_expire', 0 ));
+		$criteria->add ( new Criteria ( 'story_expire', time() , '>' ) ,'OR');
+   	$criteria->setSort ( $story_infos ['story_sort'] );
 		$criteria->setOrder ( $story_infos ['story_order'] );
 		$criteria->setLimit ( $story_infos ['story_limit'] );
+		$criteria->setStart ( $story_infos ['story_start'] );
 		
 		$obj = $this->getObjects ( $criteria, false );
 		if ($obj) {
