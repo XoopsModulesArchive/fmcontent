@@ -148,7 +148,7 @@ if (isset ( $_REQUEST ['start'] )) {
 	$story_start = 0;
 }
 
-$story_infos = array ('topics' => $topics, 'story_limit' => $story_limit, 'story_topic' => $story_topic, 'story_user' => $story_user, 'story_start' => $story_start, 'story_order' => $story_order, 'story_sort' => $story_sort, 'story_status' => '1', 'story_static' => true, 'admin_side' => false , 'story_subtopic' => $story_subtopic , 'id' => $default_id, 'title' => $default_title , 'alias' => $default_alias);
+$story_infos = array ('topics' => $topics, 'story_limit' => $story_limit, 'story_topic' => $story_topic, 'story_user' => $story_user, 'story_start' => $story_start, 'story_order' => $story_order, 'story_sort' => $story_sort, 'story_status' => '1', 'story_subtopic' => $story_subtopic , 'id' => $default_id, 'title' => $default_title , 'alias' => $default_alias);
 
 // Get Information for Show in indexpage or topic pages
 $contents = NewsUtils::News_Homepage ( $NewsModule, $story_infos, $type );

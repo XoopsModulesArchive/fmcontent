@@ -309,6 +309,7 @@ class NewsTopicHandler extends XoopsPersistableObjectHandler {
 	 */
 	function News_GetSubTopics($NewsModule , $id ,$topics) {
 		$ret = array();
+		   $ret [] = $id;
 			foreach ( $topics as $root ) {
 				if($root->getVar ( 'topic_pid' ) == $id) {
             $ret [] =   $root->getVar ( 'topic_id' );
