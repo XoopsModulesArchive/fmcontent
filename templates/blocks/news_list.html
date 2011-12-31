@@ -3,7 +3,7 @@
 	<{foreach item=content from=$block.contents}>
 		<div class="item">
 			<div class="itemHead">
-				<div class="itemTitle"><h3><a title="<{$content.title}>" href="<{$content.url}>"><{$content.title}></a></h3></div>
+				<div class="itemTitle"><h3><{if $content.story_important}><span class="red bold"><{$smarty.const._NEWS_MB_IMPORTANT}></span><{/if}><a title="<{$content.title}>" href="<{$content.url}>"><{$content.title}></a></h3></div>
 			</div>
 			<{if $block.date}>
 			<div class="itemInfo"><{$smarty.const._NEWS_MB_DATE}> :<{$content.date}></div>
@@ -39,7 +39,7 @@
 			</div>
 			<{/if}>
 			<li>
-				<h3><a href="<{$content.url}>" title="<{$content.story_title}>"><{$content.story_title}></a></h3>
+				<h3><{if $content.story_important}><span class="red bold"><{$smarty.const._NEWS_MB_IMPORTANT}></span><{/if}><a href="<{$content.url}>" title="<{$content.story_title}>"><{$content.story_title}></a></h3>
 				<{if $block.date}>
 				<div class="itemPostDate"><{$content.date}></div>
 				<{/if}>
@@ -47,7 +47,7 @@
 				<{if $content.story_short}>
 					<div class="itemText"><{$content.story_short}></div>
 				<{else}>
-					<div class="itemText"><{$content.story_text|truncate:130:""}></div>
+					<div class="itemText"><{$content.story_text|truncate:130}></div>
 				<{/if}>
 				<{/if}>
 				<div class="clear"></div>
@@ -58,7 +58,7 @@
 		<ul>
 		<{foreach item=content from=$block.contents}>
 			<li>
-				<h3><a href="<{$content.url}>" title="<{$content.story_title}>"><{$content.story_title}></a></h3>
+				<h3><{if $content.story_important}><span class="red bold"><{$smarty.const._NEWS_MB_IMPORTANT}></span><{/if}><a href="<{$content.url}>" title="<{$content.story_title}>"><{$content.story_title}></a></h3>
 				<{if $block.date}>
 				<div class="itemPostDate"><{$content.date}></div>
 				<{/if}>
@@ -74,7 +74,7 @@
 		<div class="itemBlockLeft">
 			<div class="item">
 				<div class="itemHead">
-					<div class="itemTitle"><h2><a title="<{$content.title}>" href="<{$content.url}>"><{$content.title}></a></h2></div>
+					<div class="itemTitle"><h2><{if $content.story_important}><span class="red bold"><{$smarty.const._NEWS_MB_IMPORTANT}></span><{/if}><a title="<{$content.title}>" href="<{$content.url}>"><{$content.title}></a></h2></div>
 				</div>
 				<{if $block.date}>
 				<div class="itemInfo"><{$smarty.const._NEWS_MB_DATE}> :<{$content.date}></div>
@@ -104,7 +104,7 @@
 	<{foreach item=content from=$block.contents}>
 		<{if $content.story_default == 0}>
 		<div class="itemBlockRight">
-			<h3><a href="<{$content.url}>" title="<{$content.story_title}>"><{$content.story_title|truncate:80}></a></h3>
+			<h3><{if $content.story_important}><span class="red bold"><{$smarty.const._NEWS_MB_IMPORTANT}></span><{/if}><a href="<{$content.url}>" title="<{$content.story_title}>"><{$content.story_title|truncate:80}></a></h3>
 		</div>
 		<{/if}>
 		<{/foreach}>

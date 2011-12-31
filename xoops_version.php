@@ -119,7 +119,7 @@ $modversion['blocks'][] = array(
     'description' => '',
     'show_func' => 'news_list_show',
     'edit_func' => 'news_list_edit',
-    'options' => $modversion['dirname'] . '|news|10|100|1|1|1|story_create|180|left|DESC|0|'. XOOPS_URL.'|0',
+    'options' => $modversion['dirname'] . '|news|10|100|1|1|1|story_publish|180|left|DESC|0|'. XOOPS_URL.'|0',
     'template' => 'news_list.html');
 
 // Settings
@@ -394,7 +394,7 @@ $modversion['config'][] = array(
     'description' => '_NEWS_MI_SHOWSORT_DESC',
     'formtype' => 'select',
     'valuetype' => 'text',
-    'options' => array(_NEWS_MI_SHOWSORT_1 => 'story_id', _NEWS_MI_SHOWSORT_2 => 'story_create', _NEWS_MI_SHOWSORT_3 => 'story_update', _NEWS_MI_SHOWSORT_4 => 'story_title', _NEWS_MI_SHOWSORT_5 => 'story_order', _NEWS_MI_SHOWSORT_6 => 'RAND()' , _NEWS_MI_SHOWSORT_7 => 'story_hits'),
+    'options' => array(_NEWS_MI_SHOWSORT_1 => 'story_id', _NEWS_MI_SHOWSORT_2 => 'story_publish', _NEWS_MI_SHOWSORT_3 => 'story_update', _NEWS_MI_SHOWSORT_4 => 'story_title', _NEWS_MI_SHOWSORT_5 => 'story_order', _NEWS_MI_SHOWSORT_6 => 'RAND()' , _NEWS_MI_SHOWSORT_7 => 'story_hits'),
     'default' => 'story_id');
 
 $modversion['config'][] = array(
@@ -792,7 +792,7 @@ $modversion['config'][] = array(
     'description' => '_NEWS_MI_ADMIN_SHOWSORT_DESC',
     'formtype' => 'select',
     'valuetype' => 'text',
-    'options' => array(_NEWS_MI_SHOWSORT_1 => 'story_id', _NEWS_MI_SHOWSORT_2 => 'story_create', _NEWS_MI_SHOWSORT_3 => 'story_update', _NEWS_MI_SHOWSORT_4 => 'story_title', _NEWS_MI_SHOWSORT_5 => 'story_order', _NEWS_MI_SHOWSORT_6 => 'RAND()'),
+    'options' => array(_NEWS_MI_SHOWSORT_1 => 'story_id', _NEWS_MI_SHOWSORT_2 => 'story_publish', _NEWS_MI_SHOWSORT_3 => 'story_update', _NEWS_MI_SHOWSORT_4 => 'story_title', _NEWS_MI_SHOWSORT_5 => 'story_order', _NEWS_MI_SHOWSORT_6 => 'RAND()'),
     'default' => 1);
 
 $modversion['config'][] = array(

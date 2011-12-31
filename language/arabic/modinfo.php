@@ -155,7 +155,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_SHOWSORT_3', 'content update');
     define('_NEWS_MI_SHOWSORT_4', 'content title');
     define('_NEWS_MI_SHOWSORT_5', 'content order');
-    define('_NEWS_MI_SHOWSORT_6', 'Random content');
+    define('_NEWS_MI_SHOWSORT_6', 'Random');
     define('_NEWS_MI_SHOWSORT_7', 'content Hits');
 // Admin page
     define('_NEWS_MI_ADMIN_PERPAGE', 'الوثیقة في کل صفحة');

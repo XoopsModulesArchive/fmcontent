@@ -437,7 +437,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		$default = self::News_GetDefault ( $criteria );
 		$obj = self::get ( $default );
 		$contentDefault = $obj->toArray ();
-		$contentDefault ['story_create'] = formatTimestamp ( $contentDefault ['story_create'], _MEDIUMDATESTRING );
+		$contentDefault ['story_publish'] = formatTimestamp ( $contentDefault ['story_publish'], _MEDIUMDATESTRING );
 		$contentDefault ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $contentDefault ['story_img'];
 		$contentDefault ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $contentDefault ['story_img'];
 		$contentDefault ['topic'] = $default_info ['title'];
@@ -487,7 +487,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 				}
 
 				$tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
-				$tab ['story_create'] = formatTimestamp ( $root->getVar ( 'story_create' ), _MEDIUMDATESTRING );
+				$tab ['story_publish'] = formatTimestamp ( $root->getVar ( 'story_publish' ), _MEDIUMDATESTRING );
 				$tab ['story_update'] = formatTimestamp ( $root->getVar ( 'story_update' ), _MEDIUMDATESTRING );
 				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $root->getVar ( 'story_img' );
 				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $root->getVar ( 'story_img' );
@@ -547,7 +547,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 				}
 
 				$tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
-				$tab ['story_create'] = formatTimestamp ( $root->getVar ( 'story_create' ), _MEDIUMDATESTRING );
+				$tab ['story_publish'] = formatTimestamp ( $root->getVar ( 'story_publish' ), _MEDIUMDATESTRING );
 				$tab ['story_update'] = formatTimestamp ( $root->getVar ( 'story_update' ), _MEDIUMDATESTRING );
 				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $root->getVar ( 'story_img' );
 				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $root->getVar ( 'story_img' );
@@ -604,7 +604,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 				
 				$tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
 				$tab ['title'] = mb_strlen ( $root->getVar ( 'story_title' ), 'utf-8' ) > $story_infos ['lenght_title'] ? mb_substr ( $root->getVar ( 'story_title' ), 0, ($story_infos ['lenght_title']), 'utf-8' ) . "..." : $root->getVar ( 'story_title' );
-				$tab ['date'] = formatTimestamp ( $root->getVar ( 'story_create' ), _MEDIUMDATESTRING );
+				$tab ['date'] = formatTimestamp ( $root->getVar ( 'story_publish' ), _MEDIUMDATESTRING );
 				$ret [] = $tab;
 			}
 		}
@@ -646,7 +646,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 				}
 
 				$tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
-				$tab ['story_create'] = formatTimestamp ( $root->getVar ( 'story_create' ), _MEDIUMDATESTRING );
+				$tab ['story_publish'] = formatTimestamp ( $root->getVar ( 'story_publish' ), _MEDIUMDATESTRING );
 				$tab ['story_update'] = formatTimestamp ( $root->getVar ( 'story_update' ), _MEDIUMDATESTRING );
 				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $root->getVar ( 'story_img' );
 				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $root->getVar ( 'story_img' );
@@ -873,7 +873,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		}
 		$criteria->setStart ( $start );
 		$criteria->setLimit ( $limit );
-		$criteria->setSort ( 'story_create' );
+		$criteria->setSort ( 'story_publish' );
 		
 		$contents = $this->getObjects ( $criteria );
 		
@@ -886,7 +886,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 			$data ['topic_alias'] = $data ['topic'];
 			$data ['link'] = NewsUtils::News_Url ( 'news', $data );
 			$data ['title'] = $content->getVar ( 'story_title' );
-			$data ['time'] = $content->getVar ( 'story_create' );
+			$data ['time'] = $content->getVar ( 'story_publish' );
 			$data ['uid'] = $content->getVar ( 'story_uid' );
 			$ret [] = $data;
 		}

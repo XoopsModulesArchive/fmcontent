@@ -89,7 +89,7 @@ $view_topic = $topic_handler->get ( $story_topic );
 $content ['topic'] = $view_topic->getVar ( 'topic_title' );
 $content ['topic_alias'] = $view_topic->getVar ( 'topic_alias' );
 $content ['topic_id'] = $view_topic->getVar ( 'topic_id' );
-$content ['story_create'] = formatTimestamp ( $content ['story_create'], _MEDIUMDATESTRING );
+$content ['story_publish'] = formatTimestamp ( $content ['story_publish'], _MEDIUMDATESTRING );
 $content ['story_update'] = formatTimestamp ( $content ['story_update'], _MEDIUMDATESTRING );
 $content ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $content ['story_img'];
 $content ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $content ['story_img'];
@@ -188,7 +188,7 @@ if (isset ( $story_topic ) && $story_topic > 0 && $view_topic->getVar ( 'topic_s
 		}
 	}
 	if (xoops_getModuleOption ( 'disp_date', $NewsModule->getVar ( 'dirname' ) )) {
-		$link ['date'] = XoopsUser::getUnameFromId ( $obj->getVar ( 'story_create' ) );
+		$link ['date'] = XoopsUser::getUnameFromId ( $obj->getVar ( 'story_publish' ) );
 	}
 	if (xoops_getModuleOption ( 'disp_author', $NewsModule->getVar ( 'dirname' ) )) {
 		$content ['author'] = XoopsUser::getUnameFromId ( $obj->getVar ( 'story_uid' ) );
@@ -236,9 +236,9 @@ if (isset ( $story_topic ) && $story_topic > 0 && $view_topic->getVar ( 'topic_s
 if (xoops_getModuleOption ( 'editinplace', $NewsModule->getVar ( 'dirname' ) ) && is_object ( $xoopsUser ) && ($xoopsUser->id () == $obj->getVar ( 'story_uid' ) || $xoopsUser->isAdmin ()) && $content ['dohtml']) {
 	// Add scripts
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/jquery.js' );
-	$xoTheme->addScript ( 'browse.php?modules/' . $NewsModule->getVar ( 'dirname' ) . '/js/jeditable/jquery.wysiwyg.js' );
-	$xoTheme->addScript ( 'browse.php?modules/' . $NewsModule->getVar ( 'dirname' ) . '/js/jeditable/jquery.jeditable.mini.js' );
-	$xoTheme->addScript ( 'browse.php?modules/' . $NewsModule->getVar ( 'dirname' ) . '/js/jeditable/jquery.jeditable.wysiwyg.js' );
+	$xoTheme->addScript ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/js/jeditable/jquery.wysiwyg.js' );
+	$xoTheme->addScript ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/js/jeditable/jquery.jeditable.mini.js' );
+	$xoTheme->addScript ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/js/jeditable/jquery.jeditable.wysiwyg.js' );
 	// Add Stylesheet
 	$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/jquery.wysiwyg.css' );
 	$xoopsTpl->assign ( 'editinplace', true );
@@ -249,7 +249,7 @@ if (xoops_getModuleOption ( 'img_lightbox', $NewsModule->getVar ( 'dirname' ) ))
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/jquery.js' );
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/plugins/jquery.lightbox.js' );
 	// Add Stylesheet
-	$xoTheme->addStylesheet ( 'browse.php?modules/system/css/lightbox.css' );
+	$xoTheme->addStylesheet ( XOOPS_URL . '/modules/system/css/lightbox.css' );
 	$xoopsTpl->assign ( 'img_lightbox', true );
 }
 
