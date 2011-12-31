@@ -59,17 +59,17 @@ if (isset ( $story_topic )) {
 	$topics = $topic_handler->getall ( $story_topic );
 	$view_topic = $topics[$story_topic];
 	if (! isset ( $view_topic )) {
-		redirect_header ( 'index.php', 3, _NEWS_MD_TOPIC_ERROR );
+		redirect_header ( 'index.php', 3, _NEWS_MD_ERROR_TOPIC );
 		exit ();
 	}
 	
 	if ($view_topic->getVar ( 'topic_modid' ) != $NewsModule->getVar ( 'mid' )) {
-		redirect_header ( 'index.php', 3, _NEWS_MD_TOPIC_ERROR );
+		redirect_header ( 'index.php', 3, _NEWS_MD_ERROR_TOPIC );
 		exit ();
 	}
 	
 	if ($view_topic->getVar ( 'topic_online' ) == '0') {
-		redirect_header ( 'index.php', 3, _NEWS_MD_TOPIC_ERROR );
+		redirect_header ( 'index.php', 3, _NEWS_MD_ERROR_TOPIC );
 		exit ();
 	}
 	
@@ -199,7 +199,7 @@ if (xoops_getModuleOption ( 'img_lightbox', $NewsModule->getVar ( 'dirname' ) ))
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/jquery.js' );
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/plugins/jquery.lightbox.js' );
 	// Add Stylesheet
-	$xoTheme->addStylesheet ( 'browse.php?modules/system/css/lightbox.css' );
+	$xoTheme->addStylesheet ( XOOPS_URL . '/modules/system/css/lightbox.css' );
 	$xoopsTpl->assign ( 'img_lightbox', true );
 }
 

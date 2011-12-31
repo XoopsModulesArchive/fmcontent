@@ -145,7 +145,7 @@ function news_list_edit($options) {
 
     $story_sort = new XoopsFormSelect(_NEWS_MI_SHOWSORT, 'options[]', $options[7]);
     $story_sort->addOption("story_id", _NEWS_MI_SHOWSORT_1);
-    $story_sort->addOption("story_create", _NEWS_MI_SHOWSORT_2);
+    $story_sort->addOption("story_publish", _NEWS_MI_SHOWSORT_2);
     $story_sort->addOption("story_update", _NEWS_MI_SHOWSORT_3);
     $story_sort->addOption("story_title", _NEWS_MI_SHOWSORT_4);
     $story_sort->addOption("story_order", _NEWS_MI_SHOWSORT_5);

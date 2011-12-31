@@ -28,5 +28,6 @@ if (!defined('_NEWS_TYPE')) {
     define('_NEWS_MB_MORE', ' اقرأ المزيد ');
     define('_NEWS_MB_SHOE_MORELINK', 'Show more link');
     define('_NEWS_MB_MORELINK', 'More link');
+    define("_NEWS_MB_IMPORTANT", "Immediate ");
 }
 ?>

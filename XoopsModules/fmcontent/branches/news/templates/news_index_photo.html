@@ -19,6 +19,7 @@
 	<div class="itemHead">
 		<div class="itemTitle">
 			<h2>
+			   <{if $content.story_important}><span class="red bold"><{$smarty.const._NEWS_MD_IMPORTANT}></span><{/if}>
 				<a href="<{$content.url}>" title="<{$content.story_title}>"><{$content.story_title}></a>
 			</h2>
 		</div>
@@ -32,7 +33,7 @@
 		<{/if}>
 		<{if $info.date}>
 		<span class="itemPostDate">
-		<{$smarty.const._NEWS_MD_DATE}>: <{$content.story_create}><{if $content.story_update != $content.story_create}> &bull; <{$smarty.const._NEWS_MD_UPDATE}>: <{$content.story_update}><{/if}>
+		<{$smarty.const._NEWS_MD_DATE}>: <{$content.story_publish}><{if $content.story_update != $content.story_publish}> &bull; <{$smarty.const._NEWS_MD_UPDATE}>: <{$content.story_update}><{/if}>
 		</span>
 		<{if $info.hits}> &bull;<{/if}>
 		<{/if}>

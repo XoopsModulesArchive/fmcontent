@@ -2,7 +2,7 @@
 	<ul>
 		<{foreach item=content from=$contents}>
 		<li>
-			<h3><a href="<{$content.url}>" title="<{$content.story_title}>"><{$content.story_title}></a></h3>
+			<h3><{if $content.story_important}><span class="red bold"><{$smarty.const._NEWS_MD_IMPORTANT}></span><{/if}><a href="<{$content.url}>" title="<{$content.story_title}>"><{$content.story_title}></a></h3>
 			<{if $info.author || $info.date || $info.hits}>
 			<div class="pad2">
 				<{if $info.author}>
@@ -12,7 +12,7 @@
 				<{if $info.date || $info.hits}> &bull;<{/if}>
 				<{/if}>
 				<{if $info.date}>
-				<span class="itemPostDate"><{$content.story_create}></span>
+				<span class="itemPostDate"><{$content.story_publish}></span>
 				<{if $info.hits}> &bull;<{/if}>
 				<{/if}>
 				<{if $info.hits}>

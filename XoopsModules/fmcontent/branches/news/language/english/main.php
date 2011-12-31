@@ -32,6 +32,7 @@ if (!defined('_NEWS_MD_NEXT')) {
     define('_NEWS_MD_COM', 'Comment');
     define('_NEWS_MD_RELATED', 'Related articles');
     define("_NEWS_MD_HOME", "Home");
+    define("_NEWS_MD_IMPORTANT", "Immediate ");
 // Link
     define('_NEWS_MD_NEXT', 'Next page');
     define('_NEWS_MD_PREV', 'Previous page');

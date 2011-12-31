@@ -25,7 +25,7 @@
         <title><{$content.story_title}></title>
         <link><{$content.url}></link>
         <description><{if $content.story_short}><{$content.story_short}><{else}><{$content.story_text|strip_tags|truncate:300}><{/if}></description>
-        <pubDate><{$content.story_create}></pubDate>
+        <pubDate><{$content.story_publish}></pubDate>
         <guid><{$content.url}></guid>
     </item>
     <{/foreach}>

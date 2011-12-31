@@ -1,5 +1,5 @@
 <div id="default" class="item">
-	<div class="itemTitle "><h2><{$default.story_title}></h2></div>
+	<div class="itemTitle "><h2><{if $content.story_important}><span class="red bold"><{$smarty.const._NEWS_MD_IMPORTANT}></span><{/if}><{$default.story_title}></h2></div>
 	<{if $default.story_short}>
 	<div class="itemShort">        	
 		<{if $default.story_img}>						
@@ -34,7 +34,7 @@
 		<div class="clear"></div>								
 	</div>
 	<{/if}>
-	<div class="itemPostDate"><{$smarty.const._NEWS_MD_DATE}>: <{$default.story_create}>
+	<div class="itemPostDate"><{$smarty.const._NEWS_MD_DATE}>: <{$default.story_publish}>
 	<{if $xoops_isadmin}>
 	<span class="itemAdminLink">
 		<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/admin/article.php?op=edit_content&amp;story_id=<{$default.story_id}>" title="<{$smarty.const._NEWS_MD_EDIT}>"><img src="<{$xoops_url}>/modules/<{$xoops_dirname}>/images/icons/edit.png" alt="<{$smarty.const._story_EDIT}>"/></a>

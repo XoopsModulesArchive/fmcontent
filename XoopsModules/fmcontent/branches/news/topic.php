@@ -69,7 +69,7 @@ if (xoops_getModuleOption ( 'img_lightbox', $NewsModule->getVar ( 'dirname' ) ))
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/jquery.js' );
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/plugins/jquery.lightbox.js' );
 	// Add Stylesheet
-	$xoTheme->addStylesheet ( 'browse.php?modules/system/css/lightbox.css' );
+	$xoTheme->addStylesheet ( XOOPS_URL . '/modules/system/css/lightbox.css' );
 	$xoopsTpl->assign ( 'img_lightbox', true );
 }
         

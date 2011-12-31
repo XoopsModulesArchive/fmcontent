@@ -32,6 +32,7 @@ if (!defined('_NEWS_MD_NEXT')) {
     define('_NEWS_MD_COM', 'نظر');
     define('_NEWS_MD_RELATED', 'مطالب مرتبط');
     define("_NEWS_MD_HOME", "Home");
+    define("_NEWS_MD_IMPORTANT", "Immediate ");
 // Link
     define('_NEWS_MD_NEXT', 'صفحه بعدی');
     define('_NEWS_MD_PREV', 'صفحه قبلی');

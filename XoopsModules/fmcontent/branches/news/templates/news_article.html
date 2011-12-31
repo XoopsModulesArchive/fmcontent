@@ -11,7 +11,7 @@
 		<!-- Display content header -->
 		<div class="itemHead">
 			<div class="itemTitle">
-				<h2><{$content.story_title}></h2>
+				<h2><{if $content.story_important}><span class="red bold"><{$smarty.const._NEWS_MD_IMPORTANT}></span><{/if}><{$content.story_title}></h2>
 			</div>
 		</div>
 		<{/if}>
@@ -21,7 +21,7 @@
 			<{if $link.date || $link.hits || $content.story_comments || $link.topicshow}> &bull;<{/if}>
 			<{/if}>          
 			<{if $link.date}>
-			<span class="itemPostDate"><{$smarty.const._NEWS_MD_DATE}>: <{$content.story_create}></span>
+			<span class="itemPostDate"><{$smarty.const._NEWS_MD_DATE}>: <{$content.story_publish}></span>
 			<{if $link.hits || $content.story_comments || $link.topicshow}> &bull;<{/if}>
 			<{/if}>
 			<{if $link.hits}>
@@ -64,7 +64,7 @@
 					</div>
 					<{/if}> 
 					<{if $link.date}>
-					<{if $content.story_update != $content.story_create}>
+					<{if $content.story_update != $content.story_publish}>
 					<div class="itemPostDate"><{$smarty.const._NEWS_MD_UPDATE}>: <{$content.story_update}></div>
 					<{/if}> 
 					<{/if}>

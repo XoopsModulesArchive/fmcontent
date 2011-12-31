@@ -33,8 +33,8 @@ $story_handler = xoops_getmodulehandler('story', 'news');
 // Define scripts
 $xoTheme->addScript('browse.php?Frameworks/jquery/jquery.js');
 $xoTheme->addScript('browse.php?Frameworks/jquery/plugins/jquery.ui.js');
-$xoTheme->addScript('browse.php?modules/' . $NewsModule->getVar('dirname') . '/js/order.js');
-$xoTheme->addScript('browse.php?modules/' . $NewsModule->getVar('dirname') . '/js/admin.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $NewsModule->getVar('dirname') . '/js/order.js');
+$xoTheme->addScript(XOOPS_URL . '/modules/' . $NewsModule->getVar('dirname') . '/js/admin.js');
 // Add module stylesheet
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $NewsModule->getVar('dirname') . '/css/admin.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/ui/' . xoops_getModuleOption('jquery_theme', 'system') . '/ui.all.css');

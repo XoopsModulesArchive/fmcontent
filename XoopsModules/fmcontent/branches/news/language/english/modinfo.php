@@ -154,8 +154,8 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_SHOWSORT_2', 'article create');
     define('_NEWS_MI_SHOWSORT_3', 'article update');
     define('_NEWS_MI_SHOWSORT_4', 'article title');
-    define('_NEWS_MI_SHOWSORT_5', 'Admin article page order');
-    define('_NEWS_MI_SHOWSORT_6', 'Random order');
+    define('_NEWS_MI_SHOWSORT_5', 'article order');
+    define('_NEWS_MI_SHOWSORT_6', 'Random');
     define('_NEWS_MI_SHOWSORT_7', 'article Hits');
 // Admin page
     define('_NEWS_MI_ADMIN_PERPAGE', 'Admin article page items number');
