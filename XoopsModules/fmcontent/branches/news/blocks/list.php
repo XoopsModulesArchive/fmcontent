@@ -67,7 +67,12 @@ function news_list_show($options) {
     $options0 = $options[0];
     $story_infos ['topics'] = $topic_handler->getall ();
     $contents = $story_handler->News_GetContentBlockList($NewsModule, $story_infos ,$options);
-
+    
+    if($show == 'spotlight') {
+	    $spotlightid = $story_handler->News_SpotlightId($contents);
+	    $block['spotlightid'] = $spotlightid;
+    }
+    
     // Add block data
 	 $block['show'] = $show;
     $block['img'] = $showimg;

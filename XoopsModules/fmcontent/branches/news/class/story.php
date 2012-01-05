@@ -988,6 +988,29 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		 }
 		 return $ret;
 	 }	
+
+	/**
+	 * Get Spotlight Id
+	 */
+	 function News_SpotlightId($list) {
+	 	 $defaultid = array();
+	 	 $storyid = array();
+	 	 
+		 foreach ( $list as $item ) {
+		 	 $storyid [] = $item['story_id'];
+	       if($item['story_default'] === '1') {
+	       	 $defaultid [] = $item['story_id'];	
+	       }	
+		 }	
+       
+       if($defaultid) {
+       	$spotlightid = max($defaultid);
+       }	else {
+       	$spotlightid = max($storyid);
+       }	
+       
+		 return $spotlightid;
+	 }	
 }
 
 ?> 

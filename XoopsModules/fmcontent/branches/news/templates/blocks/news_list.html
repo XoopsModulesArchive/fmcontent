@@ -70,7 +70,7 @@
 <{elseif $block.show == 'spotlight'}>
 	<div class="itemBlock">
 	<{foreach item=content from=$block.contents}>
-		<{if $content.story_default == 1}>
+		<{if $content.story_id == $block.spotlightid}>
 		<div class="itemBlockLeft">
 			<div class="item">
 				<div class="itemHead">
@@ -102,7 +102,7 @@
 		<{/if}>
 	<{/foreach}>
 	<{foreach item=content from=$block.contents}>
-		<{if $content.story_default == 0}>
+		<{if $content.story_id != $block.spotlightid}>
 		<div class="itemBlockRight">
 			<h3><{if $content.story_important}><span class="red bold"><{$smarty.const._NEWS_MB_IMPORTANT}></span><{/if}><a href="<{$content.url}>" title="<{$content.story_title}>"><{$content.story_title|truncate:80}></a></h3>
 		</div>
