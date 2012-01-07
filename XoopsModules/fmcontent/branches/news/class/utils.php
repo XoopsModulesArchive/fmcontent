@@ -230,7 +230,7 @@ class NewsUtils {
 				$contents ['numrows'] = $story_handler->News_GetContentCount ( $NewsModule, $story_infos );
 				if ($contents ['numrows'] > $story_infos ['story_limit']) {
 					if ($story_infos ['story_topic']) {
-						$story_pagenav = new XoopsPageNav ( $contents ['numrows'], $story_infos ['story_limit'], $story_infos ['story_start'], 'start', 'limit=' . $story_infos ['story_limit'] . '&topic=' . $story_infos ['story_topic'] );
+						$story_pagenav = new XoopsPageNav ( $contents ['numrows'], $story_infos ['story_limit'], $story_infos ['story_start'], 'start', 'limit=' . $story_infos ['story_limit'] . '&storytopic=' . $story_infos ['story_topic'] );
 					} else {
 						$story_pagenav = new XoopsPageNav ( $contents ['numrows'], $story_infos ['story_limit'], $story_infos ['story_start'], 'start', 'limit=' . $story_infos ['story_limit'] );
 					}
@@ -262,7 +262,7 @@ class NewsUtils {
 				$contents ['numrows'] = $story_handler->News_GetContentCount ( $NewsModule, $story_infos );
 				if ($contents ['numrows'] > $story_infos ['story_limit']) {
 					if ($story_topic) {
-						$story_pagenav = new XoopsPageNav ( $contents ['numrows'], $story_infos ['story_limit'], $story_infos ['story_start'], 'start', 'limit=' . $story_infos ['story_limit'] . '&topic=' . $story_infos ['story_topic'] );
+						$story_pagenav = new XoopsPageNav ( $contents ['numrows'], $story_infos ['story_limit'], $story_infos ['story_start'], 'start', 'limit=' . $story_infos ['story_limit'] . '&storytopic=' . $story_infos ['story_topic'] );
 					} else {
 						$story_pagenav = new XoopsPageNav ( $contents ['numrows'], $story_infos ['story_limit'], $story_infos ['story_start'], 'start', 'limit=' . $story_infos ['story_limit'] );
 					}
