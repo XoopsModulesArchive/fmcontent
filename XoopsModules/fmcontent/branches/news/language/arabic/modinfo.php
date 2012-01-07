@@ -25,7 +25,7 @@ if (!defined('_MI_NEWS_NAME')) {
 // Menu
     define("_NEWS_MI_HOME", "الرئیسیة");
     define("_NEWS_MI_TOPIC", "فئة");
-    define("_NEWS_MI_CONTENT", "محتوی");
+    define("_NEWS_MI_ARTICLE", "محتوی");
     define("_NEWS_MI_PERM", "الإتاحات");
     define("_NEWS_MI_TOOLS", "أداة");
     define("_NEWS_MI_ABOUT", "درباره");

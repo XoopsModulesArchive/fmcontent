@@ -25,7 +25,7 @@ if (!defined('_MI_NEWS_NAME')) {
 // Menu
     define("_NEWS_MI_HOME", "صفحه اصلی");
     define("_NEWS_MI_TOPIC", "شاخه");
-    define("_NEWS_MI_CONTENT", "اخبار");
+    define("_NEWS_MI_ARTICLE", "اخبار");
     define("_NEWS_MI_PERM", "دسترسی ها");
     define("_NEWS_MI_TOOLS", "ابزار");
     define("_NEWS_MI_ABOUT", "درباره");
