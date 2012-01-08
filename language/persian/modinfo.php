@@ -35,6 +35,7 @@ if (!defined('_MI_NEWS_NAME')) {
 // Block
     define("_NEWS_MI_BLOCK_PAGE", "صفحه");
     define("_NEWS_MI_BLOCK_LIST", "فهرست");
+    define('_NEWS_MI_BLOCK_TOPIC', 'Topic list');
 // Editor
     define("_NEWS_MI_FORM_EDITOR", "انتخاب فرم");
     define("_NEWS_MI_FORM_EDITOR_DESC", "انتخاب ویرایشگر برای استفاده در صفحه ارسال مطلب.");

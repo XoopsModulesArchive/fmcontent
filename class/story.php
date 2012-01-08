@@ -1011,6 +1011,23 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
        
 		 return $spotlightid;
 	 }	
+	 
+  /**
+	* Returns the number of published news per topic
+	* @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+	* @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+	* @author      Hervé Thouzard (ttp://www.instant-zero.com)
+	*/
+	 function News_GetNewsCountByTopic()
+	 {
+		 $ret = array();
+		 $sql = "SELECT count( story_id ) AS cpt, story_topic FROM ".$this->db->prefix('news_story')." WHERE ( story_publish > 0 AND story_publish <= " . time() . " ) AND ( story_expire = 0 OR story_expire > " . time() . " ) GROUP BY story_topic";
+		 $result = $this->db->query($sql);
+		 while ($row = $this->db->fetchArray($result)) {
+			 $ret [ $row["story_topic"] ] = $row["cpt"];
+		 }
+		 return $ret;
+	 }
 }
 
 ?> 
