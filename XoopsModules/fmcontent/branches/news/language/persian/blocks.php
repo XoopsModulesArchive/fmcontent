@@ -29,5 +29,8 @@ if (!defined('_NEWS_TYPE')) {
     define('_NEWS_MB_SHOE_MORELINK', 'Show more link');
     define('_NEWS_MB_MORELINK', 'More link');
     define("_NEWS_MB_IMPORTANT", "Immediate ");
+    define("_NEWS_MB_COUNT", "Show news count");
+    define("_NEWS_MB_TOPIC_NAME", "Title");
+    define("_NEWS_MB_TOPIC_IMG", "image");
 }
 ?>

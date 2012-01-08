@@ -111,7 +111,7 @@ $modversion['blocks'][] = array(
     'show_func' => 'news_page_show',
     'edit_func' => 'news_page_edit',
     'options' => '0|' . $modversion['dirname'],
-    'template' => 'news_page.html');
+    'template' => 'news_block_page.html');
 
 $modversion['blocks'][] = array(
     'file' => 'list.php',
@@ -120,8 +120,17 @@ $modversion['blocks'][] = array(
     'show_func' => 'news_list_show',
     'edit_func' => 'news_list_edit',
     'options' => $modversion['dirname'] . '|news|10|100|1|1|1|story_publish|180|left|DESC|0|'. XOOPS_URL.'|0',
-    'template' => 'news_list.html');
+    'template' => 'news_block_list.html');
 
+$modversion['blocks'][] = array(
+    'file' => 'topic.php',
+    'name' => _NEWS_MI_BLOCK_TOPIC,
+    'description' => '',
+    'show_func' => 'news_topic_show',
+    'edit_func' => 'news_topic_edit',
+    'options' => $modversion['dirname'] . '|list|0|0|0|left|DESC|topic_id',
+    'template' => 'news_block_topic.html');
+    
 // Settings
 // Load class
 xoops_load('xoopslists');
