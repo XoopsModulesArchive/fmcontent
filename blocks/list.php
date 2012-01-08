@@ -46,6 +46,7 @@ function news_list_show($options) {
     $story_infos['story_order'] = $options[10];
     $block['showmore'] = $options[11];
     $block['morelink'] = $options[12];
+    $day = $options[13];
     
     array_shift($options);
 	 array_shift($options);
@@ -60,10 +61,23 @@ function news_list_show($options) {
     array_shift($options);
     array_shift($options);
     array_shift($options);
+    array_shift($options);
 
     $NewsModule = $module_handler->getByDirname($NewsModule);
     
-
+    if($story_infos['story_sort'] == 'story_hits') {
+    	 if($day) {
+    	 	$day = 86400 * $day;
+    	   $publish = time() - $day;
+    	 } else {
+    	 	$publish = 0;
+    	 }		
+    } else {
+    	 $publish = 0;
+    }		
+    
+    $story_infos['story_publish'] = $publish;
+    
     $options0 = $options[0];
     $story_infos ['topics'] = $topic_handler->getall ();
     $contents = $story_handler->News_GetContentBlockList($NewsModule, $story_infos ,$options);
@@ -154,8 +168,8 @@ function news_list_edit($options) {
     $story_sort->addOption("story_update", _NEWS_MI_SHOWSORT_3);
     $story_sort->addOption("story_title", _NEWS_MI_SHOWSORT_4);
     $story_sort->addOption("story_order", _NEWS_MI_SHOWSORT_5);
-    $story_sort->addOption("RAND()", _NEWS_MI_SHOWSORT_6);
     $story_sort->addOption("story_hits", _NEWS_MI_SHOWSORT_7);
+    $story_sort->addOption("RAND()", _NEWS_MI_SHOWSORT_6);
     $form .= _NEWS_MI_SHOWSORT . " : " . $story_sort->render() . '<br />';
 
     $form .= _NEWS_MB_WIDTH . " : <input name=\"options[8]\" size=\"5\" maxlength=\"255\" value=\"" . $options[8] . "\" type=\"text\" /><br />\n";
@@ -181,9 +195,11 @@ function news_list_edit($options) {
     $form .= "<input name=\"options[11]\" value=\"0\" type=\"radio\" " . $checked_no . "/>" . _NO . "<br />\n";
     	
     $form .= _NEWS_MB_MORELINK . " : <input name=\"options[12]\" size=\"50\" maxlength=\"255\" value=\"" . $options[12] . "\" type=\"text\" /><br />\n";
+    $form .= _NEWS_MB_HITINDAY1 . " <input name=\"options[13]\" size=\"5\" maxlength=\"255\" value=\"" . $options[13] . "\" type=\"text\" />" . _NEWS_MB_HITINDAY2 . "<br />\n";
     	
 	 array_shift($options);
 	 array_shift($options);
+    array_shift($options);
     array_shift($options);
     array_shift($options);
     array_shift($options);

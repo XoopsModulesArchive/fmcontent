@@ -32,5 +32,7 @@ if (!defined('_NEWS_TYPE')) {
     define("_NEWS_MB_COUNT", "Show news count");
     define("_NEWS_MB_TOPIC_NAME", "Title");
     define("_NEWS_MB_TOPIC_IMG", "image");
+    define("_NEWS_MB_HITINDAY1", "Show news since");
+    define("_NEWS_MB_HITINDAY2", "Day's ago. This option work when you sort news by hit");
 }
 ?>
