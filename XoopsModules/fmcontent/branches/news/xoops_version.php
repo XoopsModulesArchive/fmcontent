@@ -75,9 +75,10 @@ $modversion["tables"] = array(
 $modversion["search"]["file"] = "include/search.inc.php";
 $modversion["search"]["func"] = "news_search";
 
-// Commentaires
-$modversion['comments']['itemName'] = 'storyid';
+// Comments
 $modversion['comments']['pageName'] = 'article.php';
+$modversion['comments']['itemName'] = 'storyid';
+// Comment callback functions
 $modversion['comments']['callbackFile'] = 'include/comment_functions.php';
 $modversion['comments']['callback']['approve'] = 'news_com_approve';
 $modversion['comments']['callback']['update'] = 'news_com_update';
@@ -119,7 +120,7 @@ $modversion['blocks'][] = array(
     'description' => '',
     'show_func' => 'news_list_show',
     'edit_func' => 'news_list_edit',
-    'options' => $modversion['dirname'] . '|news|10|100|1|1|1|story_publish|180|left|DESC|0|'. XOOPS_URL.'|0',
+    'options' => $modversion['dirname'] . '|news|10|100|1|1|1|story_publish|180|left|DESC|0|'. XOOPS_URL.'|0|0',
     'template' => 'news_block_list.html');
 
 $modversion['blocks'][] = array(

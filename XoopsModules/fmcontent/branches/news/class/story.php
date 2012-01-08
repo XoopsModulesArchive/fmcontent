@@ -580,7 +580,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
       $criteria->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $topiclist ) . ')', 'IN' ) );
 		$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$criteria->add ( new Criteria ( 'story_status', '1' ) );
-      $criteria->add ( new Criteria ( 'story_publish', 0 , '>' ));
+      $criteria->add ( new Criteria ( 'story_publish', $story_infos['story_publish'] , '>' ));
 		$criteria->add ( new Criteria ( 'story_publish', time() , '<=' ));
 		$criteria->add ( new Criteria ( 'story_expire', 0 ));
 		$criteria->add ( new Criteria ( 'story_expire', time() , '>' ) ,'OR');
