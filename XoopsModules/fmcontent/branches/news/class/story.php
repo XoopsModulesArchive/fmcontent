@@ -551,6 +551,8 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 				$tab ['story_update'] = formatTimestamp ( $root->getVar ( 'story_update' ), _MEDIUMDATESTRING );
 				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $root->getVar ( 'story_img' );
 				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $root->getVar ( 'story_img' );
+				$tab ['story_short'] = strip_tags($root->getVar ( 'story_short' ));
+				$tab ['story_text'] = strip_tags($root->getVar ( 'story_text' ));
 				$ret [] = $tab;
 			}
 		}
@@ -604,6 +606,8 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 				$tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
 				$tab ['title'] = mb_strlen ( $root->getVar ( 'story_title' ), 'utf-8' ) > $story_infos ['lenght_title'] ? mb_substr ( $root->getVar ( 'story_title' ), 0, ($story_infos ['lenght_title']), 'utf-8' ) . "..." : $root->getVar ( 'story_title' );
 				$tab ['date'] = formatTimestamp ( $root->getVar ( 'story_publish' ), _MEDIUMDATESTRING );
+				$tab ['story_short'] = strip_tags($root->getVar ( 'story_short' ));
+				$tab ['story_text'] = strip_tags($root->getVar ( 'story_text' ));
 				$ret [] = $tab;
 			}
 		}
