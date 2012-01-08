@@ -582,7 +582,6 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
    	$criteria->setSort ( $story_infos ['story_sort'] );
 		$criteria->setOrder ( $story_infos ['story_order'] );
 		$criteria->setLimit ( $story_infos ['story_limit'] );
-		$criteria->setStart ( $story_infos ['story_start'] );
 		
 		$obj = $this->getObjects ( $criteria, false );
 		if ($obj) {
