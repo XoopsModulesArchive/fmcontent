@@ -16,6 +16,92 @@
  * @version    $Id $
  **/
 
+.item {
+	margin-bottom: 12px;
+}
+
+#default.item {
+	border-width: 0;
+}
+
+#default .itemTitle {
+	padding-bottom: 2px;
+}
+
+#default .itemShort,#default .itemText {
+	text-align: justify;
+}
+
+.itemHead {
+	padding: 5px 3px 6px 7px;
+}
+
+.itemInfo {
+	padding: 4px 5px;
+}
+
+.itemBody {
+	padding: 3px 4px;
+}
+
+.itemFoot {
+	padding: 4px 5px;
+}
+
+.itemFoot img {
+	vertical-align: -3px;
+}
+
+.itemTitle h1 {
+	padding: 0;
+	margin: 0;
+}
+
+.itemTitle h2 {
+	padding: 0;
+	margin: 0;
+}
+
+.itemTitle a {
+	font-size: inherit;
+}
+
+.itemShort {
+	line-height: 1.5em;
+	margin: 0 2px;
+	padding: 0 2px;
+}
+
+.itemSource {
+	font-style: italic;
+	font-size: 0.9em;;
+	margin-bottom: 2px;
+}
+
+.itemAdminLink img {
+	vertical-align: bottom;
+}
+
+.itemAde {
+	text-align: center;
+	margin: 4px 0 1px 0;
+	auto;
+}
+
+.itemMore {
+	margin-top: 4px;
+}
+
+.related h2 {
+	padding: 7px 0 6px 0;
+	margin: 0;
+}
+
+#xo-canvas-content ul li,.news ul li {
+	list-style-position: outside;
+	margin: 0 0 5px 15px;
+}
+
 .itemImg img {
 	max-width: 200px;
 	max-height: 200px;
@@ -30,6 +116,11 @@
 .itemVideo .itemPlayer {
 	padding: 5px;
 	margin: 5px;
+}
+
+.itemSubTitle {
+	padding: 0px;
+	margin: 0px;
 }
 
 .content_img {
