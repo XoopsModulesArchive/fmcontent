@@ -846,7 +846,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	 *
 	 * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
 	 * @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-	 * @author      Hervé Thouzard (ttp://www.instant-zero.com)
+	 * @author      Hervé Thouzard (http://www.instant-zero.com)
 	 */
 	
 	function News_UpdateHits($story_id) {
@@ -1027,7 +1027,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	* Returns the number of published news per topic
 	* @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
 	* @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-	* @author      Hervé Thouzard (ttp://www.instant-zero.com)
+	* @author      Hervé Thouzard (http://www.instant-zero.com)
 	*/
 	 function News_GetNewsCountByTopic()
 	 {
@@ -1039,6 +1039,55 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		 }
 		 return $ret;
 	 }
+	 
+  /**
+	* Get archive month
+	* @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+	* @license     GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+	* @author      Hervé Thouzard (http://www.instant-zero.com)
+	*/
+	 function News_GetArchiveMonth($NewsModule) {
+		 $sql = "SELECT `story_publish` FROM ".$this->db->prefix('news_story')." WHERE ( story_status = 1 ) AND ( story_topic != 0  ) AND ( story_modid = " . $NewsModule->getVar ( 'mid' ) . " ) AND ( story_publish > 0 AND story_publish <= " . time() . " ) AND ( story_expire = 0 OR story_expire <= " . time() . " ) ORDER BY story_publish DESC";
+	    $result = $this->db->query($sql);
+	    return $result;
+	 }	
+	 
+	 /**
+	* Get archive
+	*/
+	 function News_GetArchive($NewsModule, $publish_start, $publish_end ,$topics) {
+		 $ret = array();
+		 $criteria = new CriteriaCompo ();
+		 $criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
+		 $criteria->add ( new Criteria ( 'story_status', '1' ) );
+       $criteria->add ( new Criteria ( 'story_publish', $publish_start , '>' ));
+		 $criteria->add ( new Criteria ( 'story_publish', $publish_end , '<=' ));
+		 $criteria->add ( new Criteria ( 'story_expire', 0 ));
+		 $criteria->add ( new Criteria ( 'story_expire', time() , '>' ) ,'OR');
+		 $criteria->setSort ( 'story_publish' );
+		 $criteria->setOrder ( 'DESC' );
+		 $obj = $this->getObjects ( $criteria, false );
+		 if ($obj) {
+			 foreach ( $obj as $root ) {
+				 $tab = array ();
+				 $tab = $root->toArray ();
+				 foreach ( array_keys ( $topics ) as $i ) {
+					 $list [$i] ['topic_title'] = $topics [$i]->getVar ( "topic_title" );
+					 $list [$i] ['topic_id'] = $topics [$i]->getVar ( "topic_id" );
+					 $list [$i] ['topic_alias'] =$topics [$i]->getVar ( "topic_alias" );
+				 }
+				 $tab ['topic'] = $list [$root->getVar ( 'story_topic' )] ['topic_title'];
+				 $tab ['topic_alias'] = $list [$root->getVar ( 'story_topic' )] ['topic_alias'];
+				 $tab ['topicurl'] = NewsUtils::News_TopicUrl ( $NewsModule->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'story_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'story_topic' )] ['topic_alias'] ));
+				 $tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
+				 $tab ['story_publish'] = formatTimestamp ( $root->getVar ( 'story_publish' ), _MEDIUMDATESTRING );
+				 $tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $root->getVar ( 'story_img' );
+				 $tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $root->getVar ( 'story_img' );
+				 $ret [] = $tab;
+			 }
+		 }
+		 return $ret;
+	 }	
 }
 
 ?> 

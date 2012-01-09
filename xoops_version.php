@@ -95,6 +95,7 @@ $modversion['templates'][] = array('file' => 'news_rss.html', 'description' => '
 $modversion['templates'][] = array('file' => 'news_bookmarkme.html', 'description' => '');
 $modversion['templates'][] = array('file' => 'news_header.html', 'description' => '');
 $modversion['templates'][] = array('file' => 'news_topic.html', 'description' => '');
+$modversion['templates'][] = array('file' => 'news_archive.html', 'description' => '');
 
 // Menu
 $modversion['sub'][] = array(
@@ -103,6 +104,9 @@ $modversion['sub'][] = array(
 $modversion['sub'][] = array(
     'name' => _NEWS_MI_TOPIC,
     'url' => 'topic.php');
+$modversion['sub'][] = array(
+    'name' => _NEWS_MI_ARCHIVE,
+    'url' => 'archive.php');    
 
 // Blocks
 $modversion['blocks'][] = array(
