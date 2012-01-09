@@ -243,7 +243,7 @@ class NewsTopicHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get topic information
 	 */
-	function News_GetTopics($NewsModule, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu, $topic_online , $topic_parent) {
+	function News_GetTopics($NewsModule, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu, $topic_online , $topic_parent , $newscountbytopic) {
 		$ret = array ();
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'topic_modid', $NewsModule->getVar ( 'mid' ) ) );
@@ -265,6 +265,7 @@ class NewsTopicHandler extends XoopsPersistableObjectHandler {
 				$tab ['topicurl'] = NewsUtils::News_TopicUrl ( $NewsModule->getVar ( 'dirname' ), $tab );
 				$tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' .$root->getVar ( 'topic_img' );
 				$tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' .$root->getVar ( 'topic_img' );
+				$tab ['count'] = $newscountbytopic[$root->getVar ( 'topic_id' )];
 				$ret [] = $tab;
 			}
 		}

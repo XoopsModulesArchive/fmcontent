@@ -54,7 +54,8 @@ if (isset($_REQUEST['start'])) {
    $topic_start = 0;
 }
 
-$topics = $topic_handler->News_GetTopics($NewsModule, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu = null, $topic_online = null , $topic_parent = null);
+$newscountbytopic = $story_handler->News_GetNewsCountByTopic();
+$topics = $topic_handler->News_GetTopics($NewsModule, $topic_limit, $topic_start, $topic_order, $topic_sort, $topic_menu = null, $topic_online = null , $topic_parent = null , $newscountbytopic);
 $topic_numrows = $topic_handler->News_GetTopicCount($NewsModule);
 
 if ($topic_numrows > $topic_limit) {

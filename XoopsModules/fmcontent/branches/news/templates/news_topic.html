@@ -11,7 +11,7 @@
 			<{foreach item=topic from=$topics}>
 			<tr class="odd">
 				<td<{if !$topic.topic_img}> colspan="2"<{/if}> class="top">
-					<div class=""><a title="<{$topic.topic_title}>" href="<{$topic.topicurl}>"><{$topic.topic_title}></a></div>
+					<div class=""><a title="<{$topic.topic_title}>" href="<{$topic.topicurl}>"><{$topic.topic_title}></a> ( <{$topic.count}> ) </div>
 					<div class=""><{$topic.topic_desc}></div>
 				</td>
 				<{if $topic.topic_img}>
