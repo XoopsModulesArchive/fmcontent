@@ -97,7 +97,32 @@ switch ($op) {
         $form->addElement(new XoopsFormHidden('op', 'keyword'));
         $form->addElement(new XoopsFormButton('', 'post', _SUBMIT, 'submit'));
         $xoopsTpl->assign('keyword', $form->render());
-
+        
+        // prune manager
+        $form = new XoopsThemeForm(_NEWS_AM_TOOLS_PRUNE, 'tools', 'tools.php', 'post'); 
+        $form->addElement(new XoopsFormTextDateSelect(_NEWS_AM_TOOLS_PRUNE_BEFORE, 'prune_date', 15,  time()));
+	     $onlyexpired=new xoopsFormCheckBox('', 'onlyexpired');
+	     $onlyexpired->addOption(1, _NEWS_AM_TOOLS_PRUNE_EXPIREDONLY);
+	     $form->addElement($onlyexpired, false);
+	     $form->addElement(new XoopsFormHidden('op', 'confirmbeforetoprune'), false);
+	     $form->addElement(new XoopsFormHidden('op', 'confirmbeforetoprune'), false);
+        $topiclist = new XoopsFormSelect(_NEWS_AM_TOOLS_PRUNE_TOPICS, 'pruned_topics','',5,true);
+	     $criteria = new CriteriaCompo ();
+	     $criteria->add ( new Criteria ( 'topic_modid', $NewsModule->getVar ( 'mid' ) ) );
+	     $criteria->setSort ( 'topic_id' );
+		  $criteria->setOrder ( 'DESC' );
+	     $allTopics = $topic_handler->getObjects ( $criteria );
+	     $topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+	     $topics_arr = $topic_tree->getAllChild(0);
+	     foreach ($topics_arr as $onetopic) {
+			  $topiclist->addOption($onetopic->getVar ( 'topic_id' ),$onetopic->getVar ( 'topic_title', 'e' ));
+	     }
+	     $topiclist->setDescription(_NEWS_AM_TOOLS_EXPORT_PRUNE_DSC);
+	     $form->addElement($topiclist,false);
+		  $form->addElement(new XoopsFormHidden('op', 'prune'));
+        $form->addElement(new XoopsFormButton('', 'post', _SUBMIT, 'submit'));	
+        $xoopsTpl->assign('prune', $form->render());
+        
         // other options  
         $xoopsTpl->assign('header', true );
         break;
@@ -154,6 +179,19 @@ switch ($op) {
         NewsUtils::News_Rebuild ($story_handler , 'story_id' , 'description' , 'story_desc' , 'story_title' , $start_id , $end_id); 
         NewsUtils::News_Redirect('tools.php', 1, _NEWS_AM_MSG_WAIT);
 	     break; 
+	     
+	 case 'prune':
+	     $timestamp = NewsUtils::News_CleanVars ( $_REQUEST, 'prune_date', '', 'int' );
+	     $expired = NewsUtils::News_CleanVars ( $_REQUEST, 'onlyexpired', 0, 'int' );
+		  $timestamp = strtotime($_REQUEST ['prune_date']);
+		  $topiclist = '';
+		  if(isset($_REQUEST['pruned_topics'])) {
+			  $topiclist = implode ( ',', $_REQUEST['pruned_topics'] );
+		  }
+		  $count = $story_handler->News_PruneCount($NewsModule,$timestamp,$expired,$topiclist);
+        $story_handler->News_DeleteBeforeDate($NewsModule,$timestamp,$expired,$topiclist);
+	     NewsUtils::News_Redirect('tools.php', 100, sprintf(_NEWS_AM_MSG_PRUNE_DELETED,$count));
+		  break;    
 }
 
 $xoopsTpl->assign('navigation', 'tools');

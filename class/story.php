@@ -1052,7 +1052,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	    return $result;
 	 }	
 	 
-	 /**
+  /**
 	* Get archive
 	*/
 	 function News_GetArchive($NewsModule, $publish_start, $publish_end ,$topics) {
@@ -1088,6 +1088,50 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		 }
 		 return $ret;
 	 }	
+	 
+  /**
+	* News Prune Count
+	*/
+	function News_PruneCount($NewsModule,$timestamp,$expired,$topiclist) {
+		 $criteria = new CriteriaCompo ();
+		 $criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
+		 $criteria->add ( new Criteria ( 'story_publish', $timestamp , '<=' ));
+		 if($expired) {
+			 $criteria->add ( new Criteria ( 'story_expire', 0 ));
+		    $criteria->add ( new Criteria ( 'story_expire', time() , '>' ) ,'OR');
+		 }
+		 if($topiclist) {
+			 $criteria->add ( new Criteria ( 'story_topic', '(' . $topiclist . ')', 'IN' ) );	
+		 }	
+		 return $this->getCount ( $criteria );
+	}	
+	
+	/**
+	* News Delete Before Date
+	*/
+	function News_DeleteBeforeDate($NewsModule,$timestamp,$expired,$topiclist) {
+		 $criteria = new CriteriaCompo ();
+		 $criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
+		 $criteria->add ( new Criteria ( 'story_publish', $timestamp , '<=' ));
+		 if($expired) {
+			 $criteria->add ( new Criteria ( 'story_expire', 0 ));
+		    $criteria->add ( new Criteria ( 'story_expire', time() , '>' ) ,'OR');
+		 }
+		 if($topiclist) {
+			 $criteria->add ( new Criteria ( 'story_topic', '(' . $topiclist . ')', 'IN' ) );	
+		 }	
+		 /*
+		 $obj = $this->getObjects ( $criteria, false );
+		 if ($obj) {
+			 foreach ( $obj as $root ) {
+             xoops_comment_delete( $NewsModule->getVar ( 'mid' ) , $root->getVar ( 'story_id' ));
+			    //xoops_notification_deletebyitem( $NewsModule->getVar ( 'mid' ) , 'story', $root->getVar ( 'story_id' ));
+			 }
+		 }
+		 */
+		 $this->deleteAll($criteria);
+		 return true;
+	}	
 }
 
 ?> 
