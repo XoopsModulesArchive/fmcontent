@@ -32,6 +32,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define("_NEWS_MI_HELP", "دلیل");
     define("_NEWS_MI_SUBMIT", "ارسال");
     define('_NEWS_MI_FILE', 'ملف');
+    define('_NEWS_MI_ARCHIVE', 'Archive');
 // Block
     define("_NEWS_MI_BLOCK_PAGE", "الصفحة");
     define("_NEWS_MI_BLOCK_LIST", "الفهرسة");

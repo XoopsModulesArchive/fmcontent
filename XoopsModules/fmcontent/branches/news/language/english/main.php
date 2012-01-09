@@ -80,10 +80,17 @@ if (!defined('_NEWS_MD_NEXT')) {
     define("_NEWS_MD_BOOKMARK_TO_GOOLGEBUZZ", "Bookmark to Google Buzz");
     define("_NEWS_MD_BOOKMARK_TO_GOOLGEREADER", "Bookmark to Google Reader");
     define("_NEWS_MD_BOOKMARK_TO_GOOLGEBOOKMARKS", "Bookmark to Google Bookmarks");
-// topic 
+// Topic 
     define("_NEWS_MD_TOPIC_ID", "ID");
     define("_NEWS_MD_TOPIC_NAME", "Title");
     define("_NEWS_MD_TOPIC_DESC", "Description");
     define("_NEWS_MD_TOPIC_IMG", "image");  
+// Archive    
+    define("_NEWS_MD_ARCHIVE", "News Archive");
+    define("_NEWS_MD_ARCHIVE_ARTICLES", "Articles");
+    define("_NEWS_MD_ARCHIVE_VIEW", "Hits");
+    define("_NEWS_MD_ARCHIVE_DATE", "Date");
+    define("_NEWS_MD_ARCHIVE_TOPIC", "Topic");
+    define("_NEWS_MD_ARCHIVE_TOTAL", "Total Stores");
 }
 ?>

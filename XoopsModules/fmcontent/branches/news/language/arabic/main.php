@@ -85,5 +85,12 @@ if (!defined('_NEWS_MD_NEXT')) {
     define("_NEWS_MD_TOPIC_NAME", "العنوان");
     define("_NEWS_MD_TOPIC_DESC", "شرح");
     define("_NEWS_MD_TOPIC_IMG", "صورة");  
+// Archive    
+    define("_NEWS_MD_ARCHIVE", "News Archive");
+    define("_NEWS_MD_ARCHIVE_ARTICLES", "Articles");
+    define("_NEWS_MD_ARCHIVE_VIEW", "Hits");
+    define("_NEWS_MD_ARCHIVE_DATE", "Date");
+    define("_NEWS_MD_ARCHIVE_TOPIC", "Topic");
+    define("_NEWS_MD_ARCHIVE_TOTAL", "Total Stores");
 }
 ?>

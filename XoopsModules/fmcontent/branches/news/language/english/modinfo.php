@@ -32,6 +32,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_HELP', 'Help');
     define('_NEWS_MI_SUBMIT', 'Submit');
     define('_NEWS_MI_FILE', 'File');
+    define('_NEWS_MI_ARCHIVE', 'Archive');
 // Block
     define('_NEWS_MI_BLOCK_PAGE', 'Article page');
     define('_NEWS_MI_BLOCK_LIST', 'Article list');
