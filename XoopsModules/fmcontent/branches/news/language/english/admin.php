@@ -168,6 +168,7 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_MSG_NOPERMSSET', 'Permission cannot be set: No Topics created yet! Please create a Topic first.');
 	 define('_NEWS_AM_MSG_ALIASERROR', 'Your selected Alias is already taken. Please change it and try again');
 	 define('_NEWS_AM_MSG_INPROC', 'Rebuilding ... ');
+	 define('_NEWS_AM_MSG_PRUNE_DELETED', '%s Articles deleted');
 // about	
     define('_NEWS_AM_ABOUT_ADMIN', 'About');
     define('_NEWS_AM_ABOUT_DESCRIPTION', 'Description:');

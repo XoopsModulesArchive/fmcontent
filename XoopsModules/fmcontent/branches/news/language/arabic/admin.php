@@ -168,6 +168,7 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_MSG_CLONE_ERROR', 'هذا الدليل هو متاح الآن !');
     define("_NEWS_AM_MSG_NOPERMSSET", "لایمکن تعدیل الإتاحات: لم یتم تحدیث أي فئة ! الرجاء تحدیث فئة أولا.");
     define('_NEWS_AM_MSG_ALIASERROR', 'لقد تم اختیار هذا الإسم. الرجاء اختیار اسم آخر.');
+    define('_NEWS_AM_MSG_PRUNE_DELETED', '%s Articles deleted');
 // about	
     define('_NEWS_AM_ABOUT_ADMIN', 'درباره');
     define('_NEWS_AM_ABOUT_DESCRIPTION', 'وصف:');

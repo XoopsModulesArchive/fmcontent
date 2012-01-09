@@ -168,6 +168,7 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_MSG_CLONE_ERROR', 'این شاخه هماکنون موجود است!');
     define("_NEWS_AM_MSG_NOPERMSSET", "هیچ دسترسی قابل تنظیم نیست : هنوز هیچ شاخه ای ساخته نشده است! لطفا ابتدا یک شاخه بسازید.");
     define('_NEWS_AM_MSG_ALIASERROR', 'نام مستعار مورد انتخاب شما گرفته شده است. لطفا یک نام دیگر انتخاب کنید.');
+    define('_NEWS_AM_MSG_PRUNE_DELETED', '%s Articles deleted');
 // about	
     define('_NEWS_AM_ABOUT_ADMIN', 'درباره');
     define('_NEWS_AM_ABOUT_DESCRIPTION', 'توضیحات:');
