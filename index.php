@@ -53,7 +53,6 @@ include XOOPS_ROOT_PATH . '/header.php';
 
 // Add Stylesheet
 $xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/style.css' );
-$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/legacy.css' );
 
 if (isset ( $story_topic )) {
 	$topics = $topic_handler->getall ( $story_topic );
