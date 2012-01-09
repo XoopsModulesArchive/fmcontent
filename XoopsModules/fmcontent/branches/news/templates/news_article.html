@@ -38,6 +38,9 @@
 		</div>
 		<div class="itemBody">
 			<!-- Display content body -->
+			<{if $content.story_subtitle}>
+         <div class="itemSubTitle"><h3><{$content.story_subtitle}></h3></div>
+         <{/if}>
 			<{if $content.story_short}>
 			<div class="itemShort"><{$content.story_short}></div>
 			<{/if}>
@@ -55,7 +58,7 @@
 						<img class="<{$imgfloat}> story_img" src="<{$content.thumburl}>" alt="<{$content.story_title}>"/>
 						<{/if}>
 					</div>
-					<{/if}>                                      
+					<{/if}>                    
 					<{$content.story_text}>
 					<div class="clear spacer"></div>
 					<{if $content.story_author}>
