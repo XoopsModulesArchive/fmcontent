@@ -117,7 +117,7 @@ switch ($op) {
 	     foreach ($topics_arr as $onetopic) {
 			  $topiclist->addOption($onetopic->getVar ( 'topic_id' ),$onetopic->getVar ( 'topic_title', 'e' ));
 	     }
-	     $topiclist->setDescription(_NEWS_AM_TOOLS_EXPORT_PRUNE_DSC);
+	     $topiclist->setDescription(_NEWS_AM_TOOLS_PRUNE_EXPORT_DSC);
 	     $form->addElement($topiclist,false);
 		  $form->addElement(new XoopsFormHidden('op', 'prune'));
         $form->addElement(new XoopsFormButton('', 'post', _SUBMIT, 'submit'));	
