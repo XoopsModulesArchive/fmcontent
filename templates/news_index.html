@@ -20,15 +20,16 @@
 					<{if $topic_img}>
 						<div class="itemImg gallery">
 						<{if $img_lightbox}>
-							<a href="<{$topic_imgurl}>" title="<{$topic_title}>" >
-								<img width="<{$imgwidth}>" class="<{$imgfloat}> story_img" src="<{$topic_imgurl}>" alt="<{$topic_title}>"/>
+							<a href="<{$topic_medium}>" title="<{$topic_title}>" >
+								<img width="<{$imgwidth}>" class="<{$imgfloat}> story_img" src="<{$topic_thumb}>" alt="<{$topic_title}>"/>
 							</a>
 						<{else}>
-						 	<img width="<{$imgwidth}>" class="<{$imgfloat}> story_img" src="<{$topic_imgurl}>" alt="<{$topic_title}>"/>
+						 	<img width="<{$imgwidth}>" class="<{$imgfloat}> story_img" src="<{$topic_thumb}>" alt="<{$topic_title}>"/>
 						<{/if}>
 						</div>
 					<{/if}>
 					<{$topic_desc}>
+					<div class="clear"></div>
 				</div>	
 			<{/if}>
 		<{/if}>

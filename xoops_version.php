@@ -63,14 +63,6 @@ $modversion = array(
      'min_admin' => '1.1'
 );
 
-//Sql file
-$modversion["sqlfile"]["mysql"] = "sql/mysql.sql";
-$modversion["tables"] = array(
-    "news_story",
-    "news_topic",
-    "news_file",
-);
-
 //Recherche
 $modversion["search"]["file"] = "include/search.inc.php";
 $modversion["search"]["func"] = "news_search";
@@ -516,7 +508,7 @@ $modversion['config'][] = array(
     'description' => '_NEWS_MI_FILE_DIR_DESC',
     'formtype' => 'textbox',
     'valuetype' => 'text',
-    'default' => "/uploads/news/file/");
+    'default' => "/uploads/news/file");
  
 $modversion['config'][] = array(
     'name' => 'file_size',
@@ -548,7 +540,7 @@ $modversion['config'][] = array(
     'description' => '_NEWS_MI_IMAGE_DIR_DESC',
     'formtype' => 'textbox',
     'valuetype' => 'text',
-    'default' => "/uploads/news/img/");
+    'default' => "/uploads/news/image");
 
 $modversion['config'][] = array(
     'name' => 'img_size',

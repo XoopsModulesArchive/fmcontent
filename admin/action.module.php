@@ -21,16 +21,18 @@
 
 function xoops_module_pre_install_news($module) {
 	
-	 /*
-    $db =& $GLOBALS["xoopsDB"];
+
+    $db = $GLOBALS["xoopsDB"];
     $error = false;
+    
+    /*
     if (substr(XOOPS_VERSION, 0, 9) < "XOOPS 2.5") {
         $module->setErrors("The module only works for XOOPS 2.5+");
         return false;
     }
-
-    $sqlfile = array('mysql' => 'sql/mysql.sql');
     */
+    $sqlfile = array('mysql' => 'sql/mysql.sql');
+
     $modsDirname = 'news';
     $indexFile = XOOPS_ROOT_PATH . "/uploads/index.html";
     $blankFile = XOOPS_ROOT_PATH . "/uploads/blank.gif";
@@ -44,39 +46,39 @@ function xoops_module_pre_install_news($module) {
     }
 
     //Creation du fichier price dans uploads
-    $module_uploads = XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/img";
+    $module_uploads = XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/image";
     if (!is_dir($module_uploads)) {
 	    mkdir($module_uploads, 0777);
 	    chmod($module_uploads, 0777);
-	    copy($indexFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/img/index.html");
-	    copy($blankFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/img/blank.gif");
+	    copy($indexFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/image/index.html");
+	    copy($blankFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/image/blank.gif");
     }
     
     //Creation du fichier price dans uploads
-    $module_uploads = XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/img/original";
+    $module_uploads = XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/image/original";
     if (!is_dir($module_uploads)) {
 	    mkdir($module_uploads, 0777);
 	    chmod($module_uploads, 0777);
-	    copy($indexFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/img/original/index.html");
-	    copy($blankFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/img/original/blank.gif");
+	    copy($indexFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/image/original/index.html");
+	    copy($blankFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/image/original/blank.gif");
     }
     
     //Creation du fichier price dans uploads
-    $module_uploads = XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/img/medium";
+    $module_uploads = XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/image/medium";
     if (!is_dir($module_uploads)) {
 	    mkdir($module_uploads, 0777);
 	    chmod($module_uploads, 0777);
-	    copy($indexFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/img/medium/index.html");
-	    copy($blankFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/img/medium/blank.gif");
+	    copy($indexFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/image/medium/index.html");
+	    copy($blankFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/image/medium/blank.gif");
     }
     
     //Creation du fichier price dans uploads
-    $module_uploads = XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/img/thumb";
+    $module_uploads = XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/image/thumb";
     if (!is_dir($module_uploads)) {
 	    mkdir($module_uploads, 0777);
 	    chmod($module_uploads, 0777);
-	    copy($indexFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/img/thumb/index.html");
-	    copy($blankFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/img/thumb/blank.gif");
+	    copy($indexFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/image/thumb/index.html");
+	    copy($blankFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/image/thumb/blank.gif");
     }
     
     //Creation du fichier price dans uploads
@@ -88,9 +90,9 @@ function xoops_module_pre_install_news($module) {
 	    copy($blankFile, XOOPS_ROOT_PATH . "/uploads/" . $modsDirname . "/file/blank.gif");
     }
     
-    /*
     if (is_array($sqlfile) && !empty($sqlfile[XOOPS_DB_TYPE])) {
         $sql_file_path = XOOPS_ROOT_PATH . "/modules/" . $modsDirname . "/" . $sqlfile[XOOPS_DB_TYPE];
+        
         if (!file_exists($sql_file_path)) {
             $module->setErrors("<p>" . sprintf(_NEWS_MI_SQL_NOT_FOUND, "<strong>{$sql_file_path}</strong>"));
             $error = true;
@@ -148,8 +150,6 @@ function xoops_module_pre_install_news($module) {
         return true;
     }
     return false;
-    */
-    return true;
 }
 
 function xoops_module_update_news($module, $version) {
@@ -159,7 +159,6 @@ function xoops_module_update_news($module, $version) {
 function xoops_module_uninstall_news($module) {
     $db =& $GLOBALS["xoopsDB"];
 
-    //$created_tables = array(0 => 'news');
     $created_tables = array(0 => 'news_story', 1 => 'news_topic' , 2 => 'news_file');
 
     foreach ($created_tables as $ct) {

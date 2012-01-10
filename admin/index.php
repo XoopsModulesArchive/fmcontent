@@ -34,8 +34,11 @@ $story_handler = xoops_getmodulehandler('story', 'news');
 
 $folder = array(
 	XOOPS_ROOT_PATH . '/uploads/news/', 
-	XOOPS_ROOT_PATH . '/uploads/news/img',
-	XOOPS_ROOT_PATH . '/uploads/news/file'
+	XOOPS_ROOT_PATH . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ),
+	XOOPS_ROOT_PATH . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/',
+	XOOPS_ROOT_PATH . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/',
+	XOOPS_ROOT_PATH . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/original/',
+	XOOPS_ROOT_PATH . xoops_getModuleOption ( 'file_dir', $NewsModule->getVar ( 'dirname' ) )
 );
 
 $story_infos = array(
