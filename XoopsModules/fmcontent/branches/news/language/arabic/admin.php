@@ -138,7 +138,11 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_TOOLS_META_TITLE', 'Rebuild Metas');
     define('_NEWS_AM_TOOLS_META_KEYWORD', 'Rebuild Meta keywords');
     define('_NEWS_AM_TOOLS_META_DESCRIPTION', 'Rebuild Meta Description');
-    define('_NEWS_AM_MSG_INPROC', 'Rebuilding ... ');
+    define('_NEWS_AM_TOOLS_PRUNE', 'Prune news');
+    define('_NEWS_AM_TOOLS_PRUNE_BEFORE', 'Prune stories that were published before');
+    define('_NEWS_AM_TOOLS_PRUNE_EXPIREDONLY', 'Only remove stories who have expired');
+    define('_NEWS_AM_TOOLS_PRUNE_TOPICS', 'Limit to the following topics');
+    define('_NEWS_AM_TOOLS_PRUNE_EXPORT_DSC', 'If you dont check anything then all the topics will be used else only the selected topics will be used');
 // Permissions
     define('_NEWS_AM_PERMISSIONS_ACCESS', 'إتاحة العرض');
     define('_NEWS_AM_PERMISSIONS_SUBMIT', 'إتاحة الإرسال');
@@ -168,6 +172,7 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_MSG_CLONE_ERROR', 'هذا الدليل هو متاح الآن !');
     define("_NEWS_AM_MSG_NOPERMSSET", "لایمکن تعدیل الإتاحات: لم یتم تحدیث أي فئة ! الرجاء تحدیث فئة أولا.");
     define('_NEWS_AM_MSG_ALIASERROR', 'لقد تم اختیار هذا الإسم. الرجاء اختیار اسم آخر.');
+    define('_NEWS_AM_MSG_INPROC', 'Rebuilding ... ');
     define('_NEWS_AM_MSG_PRUNE_DELETED', '%s Articles deleted');
 // about	
     define('_NEWS_AM_ABOUT_ADMIN', 'درباره');

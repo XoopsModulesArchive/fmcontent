@@ -138,7 +138,11 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_TOOLS_META_TITLE', 'Rebuild Metas');
     define('_NEWS_AM_TOOLS_META_KEYWORD', 'Rebuild Meta keywords');
     define('_NEWS_AM_TOOLS_META_DESCRIPTION', 'Rebuild Meta Description');
-    define('_NEWS_AM_MSG_INPROC', 'Rebuilding ... ');
+    define('_NEWS_AM_TOOLS_PRUNE', 'Prune news');
+    define('_NEWS_AM_TOOLS_PRUNE_BEFORE', 'Prune stories that were published before');
+    define('_NEWS_AM_TOOLS_PRUNE_EXPIREDONLY', 'Only remove stories who have expired');
+    define('_NEWS_AM_TOOLS_PRUNE_TOPICS', 'Limit to the following topics');
+    define('_NEWS_AM_TOOLS_PRUNE_EXPORT_DSC', 'If you dont check anything then all the topics will be used else only the selected topics will be used');
 // Permissions
     define('_NEWS_AM_PERMISSIONS_ACCESS', 'دسترسی نمایش');
     define('_NEWS_AM_PERMISSIONS_SUBMIT', 'دسترسی ارسال');
@@ -168,6 +172,7 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_MSG_CLONE_ERROR', 'این شاخه هماکنون موجود است!');
     define("_NEWS_AM_MSG_NOPERMSSET", "هیچ دسترسی قابل تنظیم نیست : هنوز هیچ شاخه ای ساخته نشده است! لطفا ابتدا یک شاخه بسازید.");
     define('_NEWS_AM_MSG_ALIASERROR', 'نام مستعار مورد انتخاب شما گرفته شده است. لطفا یک نام دیگر انتخاب کنید.');
+    define('_NEWS_AM_MSG_INPROC', 'Rebuilding ... ');
     define('_NEWS_AM_MSG_PRUNE_DELETED', '%s Articles deleted');
 // about	
     define('_NEWS_AM_ABOUT_ADMIN', 'درباره');
