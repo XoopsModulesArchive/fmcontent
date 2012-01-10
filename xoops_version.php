@@ -44,9 +44,9 @@ $modversion = array(
     'adminindex' => 'admin/index.php',
     'adminmenu' => 'admin/menu.php',
     // Modules scripts
-    'onInstall' => 'admin/action.module.php',
-    'onUpdate' => 'admin/action.module.php',
-    'onUninstall' => 'admin/action.module.php',
+    'onInstall' => 'include/functions_install.php',
+    'onUpdate' => 'include/functions_update.php',
+    'onUninstall' => 'include/functions_uninstall.php',
     // Main menu
     'hasMain' => 1,
     // Recherche
