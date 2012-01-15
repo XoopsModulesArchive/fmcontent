@@ -45,7 +45,7 @@ include XOOPS_ROOT_PATH . '/header.php';
 // Add Stylesheet
 $xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/style.css' );
 
-if (! $story_id) {
+if (empty($story_id)) {
 	$criteria = new CriteriaCompo ();
 	$criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
 	$criteria->add ( new Criteria ( 'story_default', 1 ) );

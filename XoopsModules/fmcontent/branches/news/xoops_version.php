@@ -150,15 +150,18 @@ $modversion['config'][] = array(
     'default' => 'dhtmltextarea');
 
 // Get groups
+
+$criteria = new CriteriaCompo ();
+$criteria->add ( new Criteria ( 'group_type', 'Admin' ) );
 $member_handler =& xoops_gethandler('member');
-$xoopsgroups = $member_handler->getGroupList();
+$xoopsgroups = $member_handler->getGroupList($criteria);
 foreach ($xoopsgroups as $key => $group) {
     $groups[$group] = $key;
 }
 $modversion['config'][] = array(
-    'name' => 'groups',
-    'title' => '_NEWS_MI_GROUPS',
-    'description' => '_NEWS_MI_GROUPS_DESC',
+    'name' => 'admin_groups',
+    'title' => '_NEWS_MI_ADMINGROUPS',
+    'description' => '_NEWS_MI_ADMINGROUPS_DESC',
     'formtype' => 'select_multi',
     'valuetype' => 'array',
     'options' => $groups,

@@ -40,6 +40,9 @@ if (!defined('_MI_NEWS_NAME')) {
 // Editor
     define("_NEWS_MI_FORM_EDITOR", "اختیار شکل");
     define("_NEWS_MI_FORM_EDITOR_DESC", "تحدید محرر للاستخدام في صفحة إرسال المواضیع.");
+// Admin groups
+	 define("_NEWS_MI_ADMINGROUPS", "Admin Group Permissions");
+	 define("_NEWS_MI_ADMINGROUPS_DESC", "Which groups have access to tools and permissions page");  
 // Urls
     define('_NEWS_MI_FRIENDLYURL','تحدید عنوان مفضل للمستخدمین');
     define('_NEWS_MI_FRIENDLYURL_DESC', 'Select the URL rewrite mode you want to use.<ul>
@@ -67,9 +70,6 @@ if (!defined('_MI_NEWS_NAME')) {
 // Lenght Id
     define('_NEWS_MI_LENGHTID', 'طول رقم الصفحة');
     define('_NEWS_MI_LENGHTID_DESC', 'عدد ارقام المنتجة للصفحة');
-// Group Access
-    define('_NEWS_MI_GROUPS','اتاحة المجموعات');
-    define('_NEWS_MI_GROUPS_DESC', 'عین الإتاحة الکلیة للمجموعات.');
 //Advertisement 
     define('_NEWS_MI_ADVERTISEMENT', 'الإعلانات');
     define('_NEWS_MI_ADVERTISEMENT_DESC', 'اجعل نصا أو کود جاوا للعرض في جمیع الصفحات');

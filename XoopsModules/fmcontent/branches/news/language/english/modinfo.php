@@ -40,6 +40,9 @@ if (!defined('_MI_NEWS_NAME')) {
 // Editor
     define("_NEWS_MI_FORM_EDITOR", "Form Option");
     define("_NEWS_MI_FORM_EDITOR_DESC", "Select the editor to use for editing your article.");
+// Admin groups
+	 define("_NEWS_MI_ADMINGROUPS", "Admin Group Permissions");
+	 define("_NEWS_MI_ADMINGROUPS_DESC", "Which groups have access to tools and permissions page");  
 // Urls
     define('_NEWS_MI_FRIENDLYURL', 'URL rewrite method');
     define('_NEWS_MI_FRIENDLYURL_DESC', 'Select the URL rewrite mode you want to use.<ul>
@@ -67,9 +70,6 @@ if (!defined('_MI_NEWS_NAME')) {
 // Lenght Id
     define('_NEWS_MI_LENGHTID', 'Rewrite mode:: length for page ID');
     define('_NEWS_MI_LENGHTID_DESC', 'Number of digit used in url for page ID');
-// Group Access
-    define('_NEWS_MI_GROUPS', 'Groups access');
-    define('_NEWS_MI_GROUPS_DESC', 'Select general access permission for groups.');
 //Advertisement 
     define('_NEWS_MI_ADVERTISEMENT', 'Advertisement');
     define('_NEWS_MI_ADVERTISEMENT_DESC', 'Enter text or html/Javascript code for your articles');
