@@ -43,6 +43,9 @@ if (!defined('_MI_NEWS_NAME')) {
 // Admin groups
 	 define("_NEWS_MI_ADMINGROUPS", "Admin Group Permissions");
 	 define("_NEWS_MI_ADMINGROUPS_DESC", "Which groups have access to tools and permissions page");  
+// Group Access
+    define('_NEWS_MI_GROUPS', 'دسترسی گروه ها');
+    define('_NEWS_MI_GROUPS_DESC', 'دسترسی سراسری گروه ها را مشخص کنید.');	 
 // Urls
     define('_NEWS_MI_FRIENDLYURL', 'انتخاب آدرس کاربر پسند');
     define('_NEWS_MI_FRIENDLYURL_DESC', 'Select the URL rewrite mode you want to use.<ul>

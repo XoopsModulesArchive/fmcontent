@@ -43,6 +43,9 @@ if (!defined('_MI_NEWS_NAME')) {
 // Admin groups
 	 define("_NEWS_MI_ADMINGROUPS", "Admin Group Permissions");
 	 define("_NEWS_MI_ADMINGROUPS_DESC", "Which groups have access to tools and permissions page");  
+// Group Access
+    define('_NEWS_MI_GROUPS','اتاحة المجموعات');
+    define('_NEWS_MI_GROUPS_DESC', 'عین الإتاحة الکلیة للمجموعات.');	 
 // Urls
     define('_NEWS_MI_FRIENDLYURL','تحدید عنوان مفضل للمستخدمین');
     define('_NEWS_MI_FRIENDLYURL_DESC', 'Select the URL rewrite mode you want to use.<ul>
