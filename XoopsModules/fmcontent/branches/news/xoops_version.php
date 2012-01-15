@@ -150,13 +150,27 @@ $modversion['config'][] = array(
     'default' => 'dhtmltextarea');
 
 // Get groups
-
+$member_handler =& xoops_gethandler('member');
+$xoopsgroups = $member_handler->getGroupList();
+foreach ($xoopsgroups as $key => $group) {
+    $groups[$group] = $key;
+}
+$modversion['config'][] = array(
+    'name' => 'groups',
+    'title' => '_NEWS_MI_GROUPS',
+    'description' => '_NEWS_MI_GROUPS_DESC',
+    'formtype' => 'select_multi',
+    'valuetype' => 'array',
+    'options' => $groups,
+    'default' => $groups);
+    
+// Get Admin groups
 $criteria = new CriteriaCompo ();
 $criteria->add ( new Criteria ( 'group_type', 'Admin' ) );
 $member_handler =& xoops_gethandler('member');
-$xoopsgroups = $member_handler->getGroupList($criteria);
-foreach ($xoopsgroups as $key => $group) {
-    $groups[$group] = $key;
+$admin_xoopsgroups = $member_handler->getGroupList($criteria);
+foreach ($admin_xoopsgroups as $key => $admin_group) {
+    $admin_groups[$admin_group] = $key;
 }
 $modversion['config'][] = array(
     'name' => 'admin_groups',
@@ -164,8 +178,8 @@ $modversion['config'][] = array(
     'description' => '_NEWS_MI_ADMINGROUPS_DESC',
     'formtype' => 'select_multi',
     'valuetype' => 'array',
-    'options' => $groups,
-    'default' => $groups);
+    'options' => $admin_groups,
+    'default' => $admin_groups);
 
 $modversion['config'][] = array(
     'name' => 'editinplace',

@@ -119,7 +119,7 @@ if (isset ( $story_topic )) {
 } else {
 	
 	// get all topic informations
-	$topics = $topic_handler->getall ( $story_topic );
+	$topics = $topic_handler->getall ();
 	$default_title = xoops_getModuleOption ( 'static_name', $NewsModule->getVar ( 'dirname' ) );
 	$default_alias = NewsUtils::News_AliasFilter($default_title);
 	$topic_id = $default_id = '0';
