@@ -104,7 +104,7 @@ if (!$xoopsTpl->is_cached('db:news_rss.html')) {
         'story_user' => $story_user,
         'story_start' => 0,
         'story_order' => 'DESC',
-        'story_sort' => 'story_create',
+        'story_sort' => 'story_publish',
         'story_status' => '1',
         'story_static' => true,
         'admin_side' => false

@@ -26,6 +26,14 @@ include_once XOOPS_ROOT_PATH . '/modules/news/class/topic.php';
 
 // Display Admin header
 xoops_cp_header();
+
+// Check admin have access to this page
+$group = $xoopsUser->getGroups ();
+$groups = xoops_getModuleOption ( 'admin_groups', $NewsModule->getVar ( 'dirname' ) );
+if (count ( array_intersect ( $group, $groups ) ) <= 0) {
+	redirect_header ( 'index.php', 3, _NOPERM );
+}
+
 // Add module stylesheet
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $NewsModule->getVar('dirname') . '/css/admin.css');
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/system/css/admin.css');
