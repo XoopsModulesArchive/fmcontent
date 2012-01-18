@@ -169,7 +169,7 @@ class NewsFileHandler extends XoopsPersistableObjectHandler {
 			foreach ( $files as $root ) {
 				$tab = array ();
 				$tab = $root->toArray ();
-				$tab ['fileurl'] = XOOPS_URL . xoops_getModuleOption ( 'file_dir', $NewsModule->getVar ( 'dirname' ) ) . $root->getVar ( 'file_name' );
+				$tab ['fileurl'] = XOOPS_URL . xoops_getModuleOption ( 'file_dir', $NewsModule->getVar ( 'dirname' ) ) . '/' . $root->getVar ( 'file_name' );
 				$ret [] = $tab;
 			}
 		}
