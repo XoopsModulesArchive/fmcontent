@@ -120,7 +120,7 @@ class news_story extends XoopsObject {
 			$form->addElement ( new XoopsFormHidden ( 'story_topic', 0 ) );
 		}	
 		// Short
-		$form->addElement ( new XoopsFormTextArea ( _NEWS_AM_CONTENT_SHORT, 'story_short', $this->getVar ( 'story_short', 'e' ), 5, 90 ) );
+		$form->addElement ( new XoopsFormTextArea ( _NEWS_AM_CONTENT_SHORT, 'story_short', $this->getVar ( 'story_short', 'e' ), 10, 90 ) );
 		// Editor
 		$editor_tray = new XoopsFormElementTray ( _NEWS_AM_CONTENT_FORMTEXT, '<br />' );
 		if (class_exists ( 'XoopsFormEditor' )) {
@@ -188,8 +188,8 @@ class news_story extends XoopsObject {
 		$file->setDescription ( _NEWS_AM_CONTENT_FILE_DESC );
 		$form->addElement ($file);
 		// Metas
-		$form->addElement ( new XoopsFormTextArea ( 'Metas Keyword', 'story_words', $this->getVar ( 'story_words', 'e' ), 5, 90 ) );
-		$form->addElement ( new XoopsFormTextArea ( 'Metas Description', 'story_desc', $this->getVar ( 'story_desc', 'e' ), 5, 90 ) );
+		$form->addElement ( new XoopsFormTextArea ( 'Metas Keyword', 'story_words', $this->getVar ( 'story_words', 'e' ), 3, 50 ) );
+		$form->addElement ( new XoopsFormTextArea ( 'Metas Description', 'story_desc', $this->getVar ( 'story_desc', 'e' ), 3, 50 ) );
 		// Content author
 		$form->addElement ( new XoopsFormText ( _NEWS_AM_CONTENT_FORMAUTHOR, 'story_author', 50, 255, $this->getVar ( 'story_author', 'e' ) ), false );
 		// Content Source
@@ -299,7 +299,7 @@ class news_story extends XoopsObject {
 			$form->addElement ( new XoopsFormHidden ( 'story_topic', 0 ) );
 		}	
 		// Short
-		$form->addElement ( new XoopsFormTextArea ( _NEWS_AM_CONTENT_SHORT, 'story_short', $this->getVar ( 'story_short', 'e' ), 5, 80 ) );
+		$form->addElement ( new XoopsFormTextArea ( _NEWS_AM_CONTENT_SHORT, 'story_short', $this->getVar ( 'story_short', 'e' ), 10, 80 ) );
 		// Editor
 		$editor_tray = new XoopsFormElementTray ( _NEWS_AM_CONTENT_FORMTEXT, '<br />' );
 		if (class_exists ( 'XoopsFormEditor' )) {
