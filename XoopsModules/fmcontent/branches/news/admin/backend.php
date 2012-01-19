@@ -178,7 +178,7 @@ switch ($op) {
 		}
 				
 		// file
-		if(isset($_REQUEST['file_name'])) {
+		if(isset($_FILES['file_name']['name']) && !empty($_FILES['file_name']['name'])) {
 			$fileobj = $file_handler->create ();
 		   $fileobj->setVar ( 'file_date', time () );
 		   $fileobj->setVar ( 'file_modid', $NewsModule->getVar ( 'mid' ) );
@@ -274,7 +274,7 @@ switch ($op) {
 			}
 			
 			// file
-			if(isset($_REQUEST['xoops_upload_file'])) {
+			if(isset($_FILES['file_name']['name']) && !empty($_FILES['file_name']['name'])) {
 				$fileobj = $file_handler->create ();
 			   $fileobj->setVar ( 'file_date', time () );
 			   $fileobj->setVar ( 'file_modid', $NewsModule->getVar ( 'mid' ) );

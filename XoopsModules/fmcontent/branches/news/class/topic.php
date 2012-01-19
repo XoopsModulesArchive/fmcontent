@@ -89,15 +89,14 @@ class news_topic extends XoopsObject {
 		$criteria = new CriteriaCompo ();
 		$criteria->add ( new Criteria ( 'topic_modid', $NewsModule->getVar ( 'mid' ) ) );
 		$topic = $topic_Handler->getObjects ( $criteria );
-		$tree = new XoopsObjectTree ( $topic, 'topic_id', 'topic_pid' );
-		ob_start ();
-		echo $tree->makeSelBox ( 'topic_pid', 'topic_title', '--', $this->getVar ( 'topic_pid', 'e' ), true );
-		$form->addElement ( new XoopsFormLabel ( _NEWS_AM_TOPIC_PARENT, ob_get_contents () ) );
-		ob_end_clean ();
-		
-		$form->addElement ( new XoopsFormTextArea ( _NEWS_AM_TOPIC_DESC, "topic_desc", $this->getVar ( "topic_desc" ), 5, 47 ), false );
-		//$form->addElement ( new XoopsFormText ( _NEWS_AM_TOPIC_WEIGHT, "topic_weight", 5, 11, $this->getVar ( "topic_weight" ) ), false );
-		
+		if($topic) {
+			$tree = new XoopsObjectTree ( $topic, 'topic_id', 'topic_pid' );
+			ob_start ();
+			echo $tree->makeSelBox ( 'topic_pid', 'topic_title', '--', $this->getVar ( 'topic_pid', 'e' ), true );
+			$form->addElement ( new XoopsFormLabel ( _NEWS_AM_TOPIC_PARENT, ob_get_contents () ) );
+			ob_end_clean ();
+		}
+		$form->addElement ( new XoopsFormTextArea ( _NEWS_AM_TOPIC_DESC, "topic_desc", $this->getVar ( "topic_desc" ), 8, 47 ), false );
 		// Image
 		$topic_img = $this->getVar ( 'topic_img' ) ? $this->getVar ( 'topic_img' ) : 'blank.gif';
 		$uploadirectory_topic_img = xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) );
