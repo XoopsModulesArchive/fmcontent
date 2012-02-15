@@ -159,7 +159,6 @@ switch ($op)
         $xoopsTpl->assign('contents', $contents);
         $xoopsTpl->assign('story_pagenav', $story_pagenav);
         $xoopsTpl->assign('xoops_dirname', $NewsModule->getVar('dirname'));
-        $xoopsTpl->assign('news_tips', _NEWS_AM_CONTENT_TIPS);
 
         // Call template file
         $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $NewsModule->getVar('dirname') . '/templates/admin/news_article.html');
@@ -196,7 +195,6 @@ switch ($op)
         $xoopsTpl->assign('contents', $contents);
         $xoopsTpl->assign('story_pagenav', $story_pagenav);
         $xoopsTpl->assign('xoops_dirname', $NewsModule->getVar('dirname'));
-        $xoopsTpl->assign('news_tips', _NEWS_AM_CONTENT_TIPS);
 
         // Call template file
         $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $NewsModule->getVar('dirname') . '/templates/admin/news_article.html');
@@ -237,7 +235,6 @@ switch ($op)
         $xoopsTpl->assign('contents', $contents);
         $xoopsTpl->assign('story_pagenav', $story_pagenav);
         $xoopsTpl->assign('xoops_dirname', $NewsModule->getVar('dirname'));
-        $xoopsTpl->assign('news_tips', _NEWS_AM_CONTENT_TIPS);
 
         // Call template file
         $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $NewsModule->getVar('dirname') . '/templates/admin/news_article.html');

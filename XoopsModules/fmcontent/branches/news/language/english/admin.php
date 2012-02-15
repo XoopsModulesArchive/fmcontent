@@ -188,36 +188,5 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_ABOUT_AUTHOR_INFO', 'Author Info');
     define('_NEWS_AM_ABOUT_AUTHOR_NAME', 'Name:');
     define('_NEWS_AM_ABOUT_CHANGELOG', 'Changelog');
-// Tips
-    define('_NEWS_AM_HOME_TIPS',
-    '<ul>
-	<li>Not yet</li>
-	</ul>');
-    define('_NEWS_AM_TOPIC_TIPS',
-    '<ul>
-	<li>Reorder, view, edit or delete any topic</li>
-	<li>Display topic articles as a menu in block</li>
-	<li>Show/hide topics in index and parent pages</li>
-	<li>Click on a topic title to see all articles for that topic</li>
-	</ul>');
-    define('_NEWS_AM_CONTENT_TIPS',
-    '<ul>
-	<li>Reorder, view, edit or delete any article page</li>
-	<li>Create article, link, section header or separator</li>
-	<li>To change order of articles (which will be reflected in the Menu), simply drag and drop the articles into the desired position.</li>
-	</ul>');
-    define('_NEWS_AM_TOOLS_TIPS',
-    '<ul>
-	<li>Not yet</li>
-	</ul>');
-    define('_NEWS_AM_PERMISSIONS_TIPS',
-    '<ul>
-	<li>Access, submit and global permissions for the module</li>
-	</ul>');
-	define('_NEWS_AM_FILE_TIPS',
-    '<ul>
-	<li>Not yet</li>
-	</ul>');
-
 }
 ?>

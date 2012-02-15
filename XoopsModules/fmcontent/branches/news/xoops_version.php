@@ -304,15 +304,6 @@ $modversion['config'][] = array(
     'valuetype' => 'text',
     'options' => array(_NEWS_MI_HOMEPAGE_1 => 'type1', _NEWS_MI_HOMEPAGE_2 => 'type2', _NEWS_MI_HOMEPAGE_3 => 'type3', _NEWS_MI_HOMEPAGE_4 => 'type4'),
     'default' => 'type1');
-    
-$modversion['config'][] = array(
-    'name' => 'template',
-    'title' => '_NEWS_MI_TEMPLATE',
-    'description' => '_NEWS_MI_TEMPLATE_DESC',
-    'formtype' => 'select',
-    'valuetype' => 'text',
-    'options' => array(_NEWS_MI_TEMPLATE_1 => 'legacy', _NEWS_MI_TEMPLATE_2 => 'ui', _NEWS_MI_TEMPLATE_3 => 'html5'),
-    'default' => 'legacy');    
 
 $modversion['config'][] = array(
     'name' => 'showtype',

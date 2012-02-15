@@ -103,7 +103,6 @@ if ($permtoset == 1) {
 
 $xoopsTpl->assign('navigation', 'permission');
 $xoopsTpl->assign('navtitle', _NEWS_MI_PERM);
-$xoopsTpl->assign('news_tips', _NEWS_AM_PERMISSIONS_TIPS);
 
 // Call template file
 $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $NewsModule->getVar('dirname') . '/templates/admin/news_permissions.html');

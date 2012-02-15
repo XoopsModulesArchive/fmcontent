@@ -26,13 +26,13 @@ if (!defined('_NEWS_TYPE')) {
     define('_NEWS_MB_DESCRIPTION', 'توضیحات');
     define('_NEWS_MB_DATE', 'تاریخ انتشار');
     define('_NEWS_MB_MORE', 'ادامه مطلب');
-    define('_NEWS_MB_SHOE_MORELINK', 'Show more link');
-    define('_NEWS_MB_MORELINK', 'More link');
-    define("_NEWS_MB_IMPORTANT", "Immediate ");
-    define("_NEWS_MB_COUNT", "Show news count");
-    define("_NEWS_MB_TOPIC_NAME", "Title");
-    define("_NEWS_MB_TOPIC_IMG", "image");
-    define("_NEWS_MB_HITINDAY1", "Show news since");
-    define("_NEWS_MB_HITINDAY2", "Day's ago. This option work when you sort news by hit");
+    define('_NEWS_MB_SHOE_MORELINK', 'نمایش لینک بیشتر');
+    define('_NEWS_MB_MORELINK', 'لینک بیشتر');
+    define("_NEWS_MB_IMPORTANT", "مهم ");
+    define("_NEWS_MB_COUNT", "نمایش تعداد اخبار");
+    define("_NEWS_MB_TOPIC_NAME", "عنوان");
+    define("_NEWS_MB_TOPIC_IMG", "تصویر");
+    define("_NEWS_MB_HITINDAY1", "نمایش اخبار از");
+    define("_NEWS_MB_HITINDAY2", "روز قبل. این گزینه وقتی کار میکند که شما نمایش اخبار را بر اساس بازدید مرتب کرده باشید.");
 }
 ?>
