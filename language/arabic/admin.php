@@ -188,36 +188,5 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_ABOUT_AUTHOR_INFO', 'معلومات المنتج');
     define('_NEWS_AM_ABOUT_AUTHOR_NAME', 'الإسم:');
     define('_NEWS_AM_ABOUT_CHANGELOG', 'قائمة التعدیلات');
-// Tips
-    define('_NEWS_AM_HOME_TIPS',
-    '<ul>
-	<li>لم یتم کتابة موضوع بعد</li>
-	</ul>');
-    define('_NEWS_AM_TOPIC_TIPS',
-    '<ul>
-	<li>حفظ التعدیل أم حذف الفئات کلها</li>
-	<li> استخدام قائمة الفئات في الموقع</li>
-	<li>تفعیل و استخدام القائمة علی شکل آي جکس</li>
-	<li> اختیار الفئة لمشاهدة جمیع الصفحات الداخلیة للفئة المختارة</li>
-	</ul>');
-    define('_NEWS_AM_CONTENT_TIPS',
-    '<ul>
-	<li>حفظ عرض التعدیل ام حذف جمیع الصفحات</li>
-	<li>إنشاء فئة أو رابط</li>
-	<li لفرز الصفحات (لتحدید موقعها في القائمة أو وضع العرض) اسحب الصفحة إلی المکان الصحیح (drag and drop).</li>
-	</ul>');
-    define('_NEWS_AM_TOOLS_TIPS',
-    '<ul>
-	<li>لم یتم کتابة أي شيء بعد</li>
-	</ul>');
-    define('_NEWS_AM_PERMISSIONS_TIPS',
-    '<ul>
-	<li>إتاحة العرض و الإرسال و الموافقة التلقائیة للوحدة</li>
-	</ul>');
-	define('_NEWS_AM_FILE_TIPS',
-    '<ul>
-	<li>Not yet</li>
-	</ul>');
-
 }
 ?>

@@ -32,35 +32,32 @@ if (!defined('_MI_NEWS_NAME')) {
     define("_NEWS_MI_HELP", "راهنما");
     define("_NEWS_MI_SUBMIT", "ارسال");
     define('_NEWS_MI_FILE', 'فایل');
-    define('_NEWS_MI_ARCHIVE', 'Archive');
+    define('_NEWS_MI_ARCHIVE', 'آرشیو');
 // Block
     define("_NEWS_MI_BLOCK_PAGE", "صفحه");
     define("_NEWS_MI_BLOCK_LIST", "فهرست");
-    define('_NEWS_MI_BLOCK_TOPIC', 'Topic list');
+    define('_NEWS_MI_BLOCK_TOPIC', 'فهرست شاخه ها');
 // Editor
     define("_NEWS_MI_FORM_EDITOR", "انتخاب فرم");
     define("_NEWS_MI_FORM_EDITOR_DESC", "انتخاب ویرایشگر برای استفاده در صفحه ارسال مطلب.");
 // Admin groups
-	 define("_NEWS_MI_ADMINGROUPS", "Admin Group Permissions");
-	 define("_NEWS_MI_ADMINGROUPS_DESC", "Which groups have access to tools and permissions page");  
+	 define("_NEWS_MI_ADMINGROUPS", "دسترسی گروه های مدیریت");
+	 define("_NEWS_MI_ADMINGROUPS_DESC", "چه گروه هایی به صفحه دسترسی ها و ابزار ها دسترسی داشته باشند");  
 // Group Access
     define('_NEWS_MI_GROUPS', 'دسترسی گروه ها');
     define('_NEWS_MI_GROUPS_DESC', 'دسترسی سراسری گروه ها را مشخص کنید.');	 
 // Urls
     define('_NEWS_MI_FRIENDLYURL', 'انتخاب آدرس کاربر پسند');
-    define('_NEWS_MI_FRIENDLYURL_DESC', 'Select the URL rewrite mode you want to use.<ul>
-    <li>"Standard Mode": Module standard URL</li>
-    <li>"Rewrite Mode": you must use .htaccess file and edit .htaccess sample code if you change SEO / URL Rewrite options</li>
-    <li>"Short Rewrite": you can make URL whit out page id and module use alias for get page info. you must edit .htaccess, you can remove module name and Url extension and use Root base for have short URL</li></ul>');
+    define('_NEWS_MI_FRIENDLYURL_DESC', 'انتخاب حالت نمایش لینک برای استفاده');
     define('_NEWS_MI_URL_STANDARD', 'Standard Mode');
     define('_NEWS_MI_URL_REWRITE', 'Rewrite Mode');
     define('_NEWS_MI_URL_SHORT', 'Short Rewrite');
     define('_NEWS_MI_URL_ID', 'ID Mode');
 // Rewrite Mode
     define('_NEWS_MI_REWRITEBASE', 'آدرسی که به طور پایه قابل نوشتن است انتخاب کنید');
-    define('_NEWS_MI_REWRITEBASE_DESC', '"Module base": شما باید یک .htacces در شاخه ماژول قرار دهید.<br />"Root base": شما باید یک .htacces در شاخه ROOT_PATH قرار دهید.');
-    define('_NEWS_MI_REWRITEBASE_MODS', 'Module base');
-    define('_NEWS_MI_REWRITEBASE_ROOT', 'Root base');
+    define('_NEWS_MI_REWRITEBASE_DESC', '"برپایه ماژول": شما باید یک .htacces در شاخه ماژول قرار دهید.<br />"برپایه هسته": شما باید یک .htacces در شاخه ROOT_PATH قرار دهید.');
+    define('_NEWS_MI_REWRITEBASE_MODS', 'برپایه ماژول');
+    define('_NEWS_MI_REWRITEBASE_ROOT', 'برپایه هسته');
 // Rewrite Name
     define('_NEWS_MI_REWRITENAME', 'نام ماژول در حالت دوباره نویسی شده');
     define('_NEWS_MI_REWRITENAME_DESC', 'نام ماژول را در آدرس تولیدی انتخاب کنید (rewrite mode). اگر این نام را تغییر دهید باید فایل .htaccess را هم ویرایش کنید');
@@ -85,12 +82,6 @@ if (!defined('_MI_NEWS_NAME')) {
 // Tell a friend
     define('_NEWS_MI_USETAG', 'استفاده از ماژول TAG برای تولید تگ ها');
     define('_NEWS_MI_USETAG_DESC', 'برای استفاده از این گزینه باید ماژول TAG را نصب کرده باشید');
-// minimum length of single words
-    define('_NEWS_MI_MINWORDLENGHT', 'کلمات کلیدی');
-    define('_NEWS_MI_MINWORDLENGHT_DESC', 'Choose the minimum length of single words');
-// minimum length of single words
-    define('_NEWS_MI_MINWORDOCCUR', 'توضیح متا');
-    define('_NEWS_MI_MINWORDOCCUR_DESC', 'Choose the minimum occur of single words');
 // Show options
     define('_NEWS_MI_DISP_OPTION', 'حالت نمایش');
     define('_NEWS_MI_DISP_OPTION_DESC', 'حالت نمایش تنضیمات را انتخاب کنید. این حالت میتواند بر اساس تنظیمات در ویژگی های ماژول باشد یا تنظیمات برای هر شاخه');
@@ -140,13 +131,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_SHOWTYPE_2', 'حالت جدولی');
     define('_NEWS_MI_SHOWTYPE_3', 'حالت تصویر');
     define('_NEWS_MI_SHOWTYPE_4', 'حالت لیست');
-    define('_NEWS_MI_SHOWTYPE_5', 'Spotlight');
-//Template
-    define('_NEWS_MI_TEMPLATE', 'الگو');
-    define('_NEWS_MI_TEMPLATE_DESC', 'نوع الگو مورد استفاده را انتخاب کنید');
-    define('_NEWS_MI_TEMPLATE_1', 'Legacy');
-    define('_NEWS_MI_TEMPLATE_2', 'jQuery UI');
-    define('_NEWS_MI_TEMPLATE_3', 'Html 5');
+    define('_NEWS_MI_SHOWTYPE_5', 'اسپایت لایت');
 // Show order
     define('_NEWS_MI_SHOWORDER', 'اولویت نمایشی');
     define('_NEWS_MI_SHOWORDER_DESC', 'اولیت نمایش را در حالت صعودی یا نزولی انتخاب کنید');
@@ -155,13 +140,13 @@ if (!defined('_MI_NEWS_NAME')) {
 // Show sort
     define('_NEWS_MI_SHOWSORT', 'مرتب کردن بر اساس نمایش');
     define('_NEWS_MI_SHOWSORT_DESC', 'مرتب کردن بر اساس انتخاب نمایش');
-    define('_NEWS_MI_SHOWSORT_1', 'content id');
-    define('_NEWS_MI_SHOWSORT_2', 'content create');
-    define('_NEWS_MI_SHOWSORT_3', 'content update');
-    define('_NEWS_MI_SHOWSORT_4', 'content title');
-    define('_NEWS_MI_SHOWSORT_5', 'content order');
+    define('_NEWS_MI_SHOWSORT_1', 'Id');
+    define('_NEWS_MI_SHOWSORT_2', 'Create');
+    define('_NEWS_MI_SHOWSORT_3', 'Update');
+    define('_NEWS_MI_SHOWSORT_4', 'Title');
+    define('_NEWS_MI_SHOWSORT_5', 'Order');
     define('_NEWS_MI_SHOWSORT_6', 'Random');
-    define('_NEWS_MI_SHOWSORT_7', 'content Hits');
+    define('_NEWS_MI_SHOWSORT_7', 'Hits');
 // Admin page
     define('_NEWS_MI_ADMIN_PERPAGE', 'سند در هر صفحه');
     define('_NEWS_MI_ADMIN_PERPAGE_DESC', 'تعداد اسناد در هر صفحه بخش مدیریت');
@@ -177,9 +162,9 @@ if (!defined('_MI_NEWS_NAME')) {
 // Admin topic Show order
     define('_NEWS_MI_ADMIN_SHOWORDER_TOPIC', 'مرتب کردن بر اساس نمایش شاخه ها');
     define('_NEWS_MI_ADMIN_SHOWORDER_TOPIC_DESC', 'اولیت نمایش را در حالت صعودی یا نزولی انتخاب کنید');
-    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_1', 'topic id');
-    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_2', 'topic weight');
-    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_3', 'topic created');
+    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_1', 'Id');
+    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_2', 'Order');
+    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_3', 'Created');
 // Admin topic sort
     define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC', 'اولویت نمایشی شاخه ها');
     define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_DESC', 'مرتب کردن بر اساس انتخاب نمایش');
@@ -228,14 +213,14 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_IMAGE_MAXWIDTH_DESC', 'بیشترین عرض در هنگام بارگذاری تصویر');
     define('_NEWS_MI_IMAGE_MAXHEIGHT', 'بیشترین ارتفاع تصویر');
     define('_NEWS_MI_IMAGE_MAXHEIGHT_DESC', 'بیشترین ارتفاع در هنگام بارگذاری تصویر');
-    define('_NEWS_MI_IMAGE_MEDIUMWIDTH', 'Image medium width (pixel)');
-    define('_NEWS_MI_IMAGE_MEDIUMWIDTH_DESC', 'Medium allowed width for image resize');
-    define('_NEWS_MI_IMAGE_MEDIUMHEIGHT', 'Image medium height (pixel)');
-    define('_NEWS_MI_IMAGE_MEDIUMHEIGHT_DESC', 'Medium allowed height for image resize');
-    define('_NEWS_MI_IMAGE_THUMBWIDTH', 'Image thumb width (pixel)');
-    define('_NEWS_MI_IMAGE_THUMBWIDTH_DESC', 'Thumb allowed width for image resize');
-    define('_NEWS_MI_IMAGE_THUMBHEIGHT', 'Image thumb height (pixel)');
-    define('_NEWS_MI_IMAGE_THUMBHEIGHT_DESC', 'Thumb allowed height for image resize');
+    define('_NEWS_MI_IMAGE_MEDIUMWIDTH', 'عرض تصویر متوسط (پیکسل)');
+    define('_NEWS_MI_IMAGE_MEDIUMWIDTH_DESC', 'حداکثر عرض مجاز تصویر متوسط بعد از تغییر اندازه');
+    define('_NEWS_MI_IMAGE_MEDIUMHEIGHT', 'ارتفاع تصویر متوسط (پیکسل)');
+    define('_NEWS_MI_IMAGE_MEDIUMHEIGHT_DESC', 'حداکثر ارتفاع مجاز تصویر متوسط بعد از تغییر اندازه');
+    define('_NEWS_MI_IMAGE_THUMBWIDTH', 'عرض تصویر بند انگشتی (پیکسل)');
+    define('_NEWS_MI_IMAGE_THUMBWIDTH_DESC', 'حداکثر عرض مجاز تصویر بند انگشتی بعد از تغییر اندازه');
+    define('_NEWS_MI_IMAGE_THUMBHEIGHT', 'ارتفاع تصویر بند انگشتی (پیکسل)');
+    define('_NEWS_MI_IMAGE_THUMBHEIGHT_DESC', 'حداکثر ارتفاع مجاز تصویر بند انگشتی بعد از تغییر اندازه');
     define('_NEWS_MI_IMAGE_MIME', 'پسوند های مجاز برای بارگذاری');
     define('_NEWS_MI_IMAGE_MIME_DESC', 'پسوند های مورد تایید را انتخاب کنید');
     define('_NEWS_MI_IMAGE_WIDTH', 'عرض تصویر');
@@ -298,19 +283,19 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_SQL_NOT_VALID', 'پایگاه داده های SQL صحیح نیست');
     define('_NEWS_MI_INSERT_DATA', ',وارد کردن اطلاعات');
 // homepage   
-    define('_NEWS_MI_HOMEPAGE', 'Homepage seting');
-    define('_NEWS_MI_HOMEPAGE_DESC', 'Seting content show type in module index page');
-    define('_NEWS_MI_HOMEPAGE_1', 'List all contents from all topics');
-    define('_NEWS_MI_HOMEPAGE_2', 'List all topics');
-    define('_NEWS_MI_HOMEPAGE_3', 'List all static pages');
-    define('_NEWS_MI_HOMEPAGE_4', 'Show selected static content');
+    define('_NEWS_MI_HOMEPAGE', 'تنظیمات صفحه اول');
+    define('_NEWS_MI_HOMEPAGE_DESC', 'تنظیم نوع نمایش مطالب در صفحه اول');
+    define('_NEWS_MI_HOMEPAGE_1', 'فهرست تمام اخبار از تمام شاخه ها');
+    define('_NEWS_MI_HOMEPAGE_2', 'فهرست تمام شاخه ها');
+    define('_NEWS_MI_HOMEPAGE_3', 'فهرست صفحات استاتیک');
+    define('_NEWS_MI_HOMEPAGE_4', 'نمایش صفحه انتخاب شده');
 // topic name
 	 define('_NEWS_MI_TOPICNAME', 'نام شاخه');
 	 define('_NEWS_MI_TOPICNAME_DESC', 'انتخاب نام شاخه برای آدرس');  
 // related news
-	 define('_NEWS_MI_RELATED', 'Related table');
-	 define('_NEWS_MI_RELATED_DESC', 'When you use this option, a summary containing links to all the recent published articles is visible at the bottom of each article');  
-	 define('_NEWS_MI_RELATED_LIMIT', 'Related limit');
-	 define('_NEWS_MI_RELATED_LIMIT_DESC', 'Number of contents for show in Related table');  	 
+	 define('_NEWS_MI_RELATED', 'اخبارمرتبط');
+	 define('_NEWS_MI_RELATED_DESC', 'وقتی شما این خبر را انتخاب کنید خلاصه ای از آخرین اخبار مشابه زیر هر خبر نمایش داده میشود.');  
+	 define('_NEWS_MI_RELATED_LIMIT', 'تعداد اخبار مرتبط');
+	 define('_NEWS_MI_RELATED_LIMIT_DESC', 'تعداد مطلبی که در فهرست اخبار مرتبط نمایش داده میشود');  	 
 }
 ?>

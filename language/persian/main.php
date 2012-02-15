@@ -20,7 +20,7 @@
 
 if (!defined('_NEWS_MD_NEXT')) {
     // All
-    define('_NEWS_MD_ID', 'ID');
+    define('_NEWS_MD_ID', 'شماره');
     define('_NEWS_MD_TITLE', 'عنوان');
     define('_NEWS_MD_PUBLICDATE', 'تاریخ');
     define('_NEWS_MD_MORE', 'ادامه');
@@ -31,15 +31,15 @@ if (!defined('_NEWS_MD_NEXT')) {
     define("_NEWS_MD_AUTHOR_ALL_DESC", "مشاهده تمام مطالب ارسال شده توسط ");
     define('_NEWS_MD_COM', 'نظر');
     define('_NEWS_MD_RELATED', 'مطالب مرتبط');
-    define("_NEWS_MD_HOME", "Home");
-    define("_NEWS_MD_IMPORTANT", "Immediate ");
+    define("_NEWS_MD_HOME", "خانه");
+    define("_NEWS_MD_IMPORTANT", "مهم ");
 // Link
     define('_NEWS_MD_NEXT', 'صفحه بعدی');
     define('_NEWS_MD_PREV', 'صفحه قبلی');
     define('_NEWS_MD_EDIT', 'ویرایش صفحه');
     define('_NEWS_MD_DELETE', 'حذف صغحه');
     define('_NEWS_MD_PRINT', 'چاپ صفحه');
-    define('_NEWS_MD_PDF', 'PDF');
+    define('_NEWS_MD_PDF', 'پی دی اف');
     define('_NEWS_MD_MAIL', 'ارسال به دوستان');
     define('_NEWS_MD_COMS', 'نظر');
     define('_NEWS_MD_NOCOMS', 'بدون نظر');
@@ -50,9 +50,9 @@ if (!defined('_NEWS_MD_NEXT')) {
 // Error message
     define('_NEWS_MD_ERROR_DEFAULT', 'خطا در ماژول: هیچ صفحه پیشفرضی انتخاب نشده است!');
     define('_NEWS_MD_ERROR_NOPAGE', 'هیچ صفحه ای ساخته نشده است');
-    define('_NEWS_MD_ERROR_STATUS', 'This page is diactive');
+    define('_NEWS_MD_ERROR_STATUS', 'این صفحه غیر فعال است');
     define('_NEWS_MD_ERROR_TOPIC', 'خطا در هنگام انتخاب شاخه');
-    define('_NEWS_MD_ERROR_EXIST', 'Selected content does not exist');
+    define('_NEWS_MD_ERROR_EXIST', 'صفحه انتخاب شده موجود نیست');
 // Light box
     define('_NEWS_MD_LIGHTBOX_IMAGE', 'تصویر');
     define('_NEWS_MD_LIGHTBOX_OF', 'از');
@@ -81,16 +81,16 @@ if (!defined('_NEWS_MD_NEXT')) {
     define("_NEWS_MD_BOOKMARK_TO_GOOLGEREADER", "بوکمارک در Google Reader");
     define("_NEWS_MD_BOOKMARK_TO_GOOLGEBOOKMARKS", "بوکمارک در Google Bookmarks");
 // topic 
-    define("_NEWS_MD_TOPIC_ID", "ID");
+    define("_NEWS_MD_TOPIC_ID", "شماره");
     define("_NEWS_MD_TOPIC_NAME", "عنوان");
     define("_NEWS_MD_TOPIC_DESC", "توضیحات");
     define("_NEWS_MD_TOPIC_IMG", "تصویر");  
 // Archive    
-    define("_NEWS_MD_ARCHIVE", "News Archive");
-    define("_NEWS_MD_ARCHIVE_ARTICLES", "Articles");
-    define("_NEWS_MD_ARCHIVE_VIEW", "Hits");
-    define("_NEWS_MD_ARCHIVE_DATE", "Date");
-    define("_NEWS_MD_ARCHIVE_TOPIC", "Topic");
-    define("_NEWS_MD_ARCHIVE_TOTAL", "Total Stores");
+    define("_NEWS_MD_ARCHIVE", "آرشیو اخبار");
+    define("_NEWS_MD_ARCHIVE_ARTICLES", "مطالب");
+    define("_NEWS_MD_ARCHIVE_VIEW", "بازدید");
+    define("_NEWS_MD_ARCHIVE_DATE", "تاریخ");
+    define("_NEWS_MD_ARCHIVE_TOPIC", "شاخه");
+    define("_NEWS_MD_ARCHIVE_TOTAL", "مجموع اخبار");
 }
 ?>

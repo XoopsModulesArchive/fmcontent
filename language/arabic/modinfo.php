@@ -48,10 +48,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_GROUPS_DESC', 'عین الإتاحة الکلیة للمجموعات.');	 
 // Urls
     define('_NEWS_MI_FRIENDLYURL','تحدید عنوان مفضل للمستخدمین');
-    define('_NEWS_MI_FRIENDLYURL_DESC', 'Select the URL rewrite mode you want to use.<ul>
-    <li>"Standard Mode": Module standard URL</li>
-    <li>"Rewrite Mode": you must use .htaccess file and edit .htaccess sample code if you change SEO / URL Rewrite options</li>
-    <li>"Short Rewrite": you can make URL whit out page id and module use alias for get page info. you must edit .htaccess, you can remove module name and Url extension and use Root base for have short URL</li></ul>');
+    define('_NEWS_MI_FRIENDLYURL_DESC', 'Select the URL rewrite mode you want to use.');
     define('_NEWS_MI_URL_STANDARD', 'Standard Mode');
     define('_NEWS_MI_URL_REWRITE', 'Rewrite Mode');
     define('_NEWS_MI_URL_SHORT', 'Short Rewrite');
@@ -85,12 +82,6 @@ if (!defined('_MI_NEWS_NAME')) {
 // Tell a friend
     define('_NEWS_MI_USETAG', ' استخدام الوحدة TAG لإنتاج ');
     define('_NEWS_MI_USETAG_DESC', 'لاستخدام هذا الأیقون یجب تثبیت وحدة TAG');
-// minimum length of single words
-    define('_NEWS_MI_MINWORDLENGHT', 'الکلمات الرئیسیة');
-    define('_NEWS_MI_MINWORDLENGHT_DESC', 'Choose the minimum length of single words');
-// minimum length of single words
-    define('_NEWS_MI_MINWORDOCCUR',' وصف');
-    define('_NEWS_MI_MINWORDOCCUR_DESC', 'Choose the minimum occur of single words');
 // Show options
     define('_NEWS_MI_DISP_OPTION', 'کیفیة العرض');
     define('_NEWS_MI_DISP_OPTION_DESC', 'اختر حالة عرض الخیارات. إما علی اساس خیارات الوحدة أم خیار الفئات');
@@ -141,12 +132,6 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_SHOWTYPE_3', 'وضع الصورة');
     define('_NEWS_MI_SHOWTYPE_4', 'جالت لیست');
     define('_NEWS_MI_SHOWTYPE_5', 'Spotlight');
-//Template
-    define('_NEWS_MI_TEMPLATE', 'نموذج');
-    define('_NEWS_MI_TEMPLATE_DESC', 'اختر نوع النموذج المستخدم');
-    define('_NEWS_MI_TEMPLATE_1', 'Legacy');
-    define('_NEWS_MI_TEMPLATE_2', 'jQuery UI');
-    define('_NEWS_MI_TEMPLATE_3', 'Html 5');
 // Show order
     define('_NEWS_MI_SHOWORDER', 'اولویة العرض');
     define('_NEWS_MI_SHOWORDER_DESC', 'اختر اولویة العرض متصاعدا ام متنازلا');
@@ -155,13 +140,13 @@ if (!defined('_MI_NEWS_NAME')) {
 // Show sort
     define('_NEWS_MI_SHOWSORT', 'تنظیم علی اساس العرض');
     define('_NEWS_MI_SHOWSORT_DESC', 'تنظیم علی اساس اختیار العرض');
-    define('_NEWS_MI_SHOWSORT_1', 'content id');
-    define('_NEWS_MI_SHOWSORT_2', 'content create');
-    define('_NEWS_MI_SHOWSORT_3', 'content update');
-    define('_NEWS_MI_SHOWSORT_4', 'content title');
-    define('_NEWS_MI_SHOWSORT_5', 'content order');
+    define('_NEWS_MI_SHOWSORT_1', 'Id');
+    define('_NEWS_MI_SHOWSORT_2', 'Create');
+    define('_NEWS_MI_SHOWSORT_3', 'Update');
+    define('_NEWS_MI_SHOWSORT_4', 'Title');
+    define('_NEWS_MI_SHOWSORT_5', 'Order');
     define('_NEWS_MI_SHOWSORT_6', 'Random');
-    define('_NEWS_MI_SHOWSORT_7', 'content Hits');
+    define('_NEWS_MI_SHOWSORT_7', 'Hits');
 // Admin page
     define('_NEWS_MI_ADMIN_PERPAGE', 'الوثیقة في کل صفحة');
     define('_NEWS_MI_ADMIN_PERPAGE_DESC', 'إدارة عدد الوثائق في کل صفحة');
@@ -177,9 +162,9 @@ if (!defined('_MI_NEWS_NAME')) {
 // Admin topic Show order
     define('_NEWS_MI_ADMIN_SHOWORDER_TOPIC', 'التنظیم علی اساس عرض الفئات');
     define('_NEWS_MI_ADMIN_SHOWORDER_TOPIC_DESC', 'اختر اولویة العرض متصاعدا ام متنازلا ');
-    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_1', 'topic id');
-    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_2', 'topic weight');
-    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_3', 'topic created');
+    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_1', 'Id');
+    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_2', 'Order');
+    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_3', 'Created');
 // Admin topic sort
     define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC', 'اولویة عرض الفئات');
     define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_DESC', 'التنظیم علی اساس اختیار العرض');

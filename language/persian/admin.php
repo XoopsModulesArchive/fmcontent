@@ -29,12 +29,12 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define("_NEWS_AM_INDEX_ADMENU1", "شاخه ها");
     define("_NEWS_AM_INDEX_ADMENU2", "صفحه ها");
     define("_NEWS_AM_INDEX_TOPICS", "<span class='green'>%s</span> شاخه در پایکاه داده ها قرار دارد");
-	 define("_NEWS_AM_INDEX_CONTENTS", "<span class='green'>%s</span> صفحه در پایگاه داده ها قرار دارد");
-	 define("_NEWS_AM_INDEX_CONTENTS_OFFLINE", "There are <span class='red'>%s</span> Offline news in our database");
-	 define("_NEWS_AM_INDEX_CONTENTS_EXPIRE", "There are <span class='red'>%s</span> Expire news in our database");
+	 define("_NEWS_AM_INDEX_CONTENTS", "<span class='green'>%s</span> خبر در پایگاه داده ها قرار دارد");
+	 define("_NEWS_AM_INDEX_CONTENTS_OFFLINE", "<span class='red'>%s</span> خبر منتظر برای تایید در پایگاه داده ها قرار دارد");
+	 define("_NEWS_AM_INDEX_CONTENTS_EXPIRE", "<span class='red'>%s</span> خبر منقضی شده در پایگاه داده ها قرار دارد");
 // Topic page
     define('_NEWS_AM_TOPIC_FORM', 'مدیریت شاخه ها');
-    define('_NEWS_AM_TOPIC_ID', 'ID');
+    define('_NEWS_AM_TOPIC_ID', 'شماره');
     define('_NEWS_AM_TOPIC_NUM', 'وزن');
     define('_NEWS_AM_TOPIC_NAME', 'عنوان');
     define('_NEWS_AM_TOPIC_PARENT', 'شاخه والد');
@@ -62,20 +62,20 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_TOPIC_SHOWHITS', 'نمایش بازدید ها');
     define('_NEWS_AM_TOPIC_SHOWCOMS', 'نمایش نظرهای ارسال');
     define('_NEWS_AM_TOPIC_HOMEPAGE', 'تنظیمات صفحه اول شاخه');
-    define('_NEWS_AM_TOPIC_HOMEPAGE_DESC', 'Seting content show type in topic pages');
-    define('_NEWS_AM_TOPIC_HOMEPAGE_1', 'List all contents from this topic and subtopics');
-    define('_NEWS_AM_TOPIC_HOMEPAGE_2', 'List all subtopics');
-    define('_NEWS_AM_TOPIC_HOMEPAGE_3', 'List all contents from just this topic');
-    define('_NEWS_AM_TOPIC_HOMEPAGE_4', 'Show selected content from this topic');
-    define('_NEWS_AM_TOPIC_OPTIONS', 'Sellect topic show options');
-    define('_NEWS_AM_TOPIC_OPTIONS_DESC', 'Sellect topic show options');
+    define('_NEWS_AM_TOPIC_HOMEPAGE_DESC', 'انتخاب نوع نمایش مطالب در صفحه اول شاخه');
+    define('_NEWS_AM_TOPIC_HOMEPAGE_1', 'فهرست تمام اخبار و از شاخه و زیر شاخه ها');
+    define('_NEWS_AM_TOPIC_HOMEPAGE_2', 'فهرست همه زیر شاخه ها');
+    define('_NEWS_AM_TOPIC_HOMEPAGE_3', 'فهرست اخبار فقط همین شاخه');
+    define('_NEWS_AM_TOPIC_HOMEPAGE_4', 'یه خبر انتخابی از شاخه');
+    define('_NEWS_AM_TOPIC_OPTIONS', 'انتخاب حالت نمایش شاخه ها');
+    define('_NEWS_AM_TOPIC_OPTIONS_DESC', 'انتخاب حالت نمایش شاخه ها');
     define('_NEWS_AM_TOPIC_ALIAS', 'نام مستعار');
-    define('_NEWS_AM_TOPIC_SHOWTYPE_0', 'Module based');
-    define('_NEWS_AM_TOPIC_SHOWTYPE_1', 'News type');
-    define('_NEWS_AM_TOPIC_SHOWTYPE_2', 'Table type');
-    define('_NEWS_AM_TOPIC_SHOWTYPE_3', 'Photo type');
-    define('_NEWS_AM_TOPIC_SHOWTYPE_4', 'List type');
-    define('_NEWS_AM_TOPIC_SHOWTYPE_5', 'Spotlight');
+    define('_NEWS_AM_TOPIC_SHOWTYPE_0', 'برپایه ماژول');
+    define('_NEWS_AM_TOPIC_SHOWTYPE_1', 'حالت خبری');
+    define('_NEWS_AM_TOPIC_SHOWTYPE_2', 'حالت جدولی');
+    define('_NEWS_AM_TOPIC_SHOWTYPE_3', 'حالت تصویر');
+    define('_NEWS_AM_TOPIC_SHOWTYPE_4', 'حالت لیستی');
+    define('_NEWS_AM_TOPIC_SHOWTYPE_5', 'اسپایت لایت');
 // Content page
     define('_NEWS_AM_CONTENT_FORM', 'مدیریت اخبار');
     define('_NEWS_AM_CONTENT_FORMTITLE', 'عنوان');
@@ -99,8 +99,8 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_CONTENT_SHORT', 'متن خلاصه');
     define('_NEWS_AM_CONTENT_TITLE', 'عنوان');
     define('_NEWS_AM_CONTENT_MANAGER', 'مدیریت اخبار');
-    define('_NEWS_AM_CONTENT_FILE', 'File');
-    define('_NEWS_AM_CONTENT_ID', 'ID');
+    define('_NEWS_AM_CONTENT_FILE', 'فایل');
+    define('_NEWS_AM_CONTENT_ID', 'شماره');
     define('_NEWS_AM_CONTENT_NUM', 'وزن');
     define('_NEWS_AM_CONTENT_PAGE', 'صفحه');
     define('_NEWS_AM_CONTENT_TYPE', 'نوع');
@@ -119,30 +119,30 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_CONTENT_STATICS', 'صفحات استاتیک');
     define('_NEWS_AM_CONTENT_ALL_ITEMS', 'تمام صفحه ها و منو ها از تمام شاخه ها');
     define('_NEWS_AM_CONTENT_ALL_ITEMS_FROM', 'تمام صفحه ها و منو ها از شاخه :');
-    define('_NEWS_AM_CONTENT_FILE_DESC', 'For add more files you must use admin file system in admin side');
-    define('_NEWS_AM_CONTENT_SUBTITLE', 'Subtitle');
-    define('_NEWS_AM_CONTENT_ALL', 'All News');
-    define('_NEWS_AM_CONTENT_OFFLINE', 'Offline news');
-    define('_NEWS_AM_CONTENT_EXPIRE', 'Expire news');
-    define('_NEWS_AM_CONTENT_PEDATE', 'Set publish and expiration date');
-    define('_NEWS_AM_CONTENT_SETDATETIME', 'Set the date/time of publish');
-    define('_NEWS_AM_CONTENT_SETEXPDATETIME', 'Set the date/time of expiration');
+    define('_NEWS_AM_CONTENT_FILE_DESC', 'برای اضافه کردن فایل های بیشتر به بخش مدیریت فایل ها مراجعه نمایید');
+    define('_NEWS_AM_CONTENT_SUBTITLE', 'عنوان دوم');
+    define('_NEWS_AM_CONTENT_ALL', 'همه اخبار');
+    define('_NEWS_AM_CONTENT_OFFLINE', 'اخبار منتظر برای تایید');
+    define('_NEWS_AM_CONTENT_EXPIRE', 'اخبار باطل شده');
+    define('_NEWS_AM_CONTENT_PEDATE', 'تنظیم زمان نمایش و باطل شدن');
+    define('_NEWS_AM_CONTENT_SETDATETIME', 'تعیین زمان/تاریخ قرار گرفتن خبر در سایت');
+    define('_NEWS_AM_CONTENT_SETEXPDATETIME', 'تعیین زمان/تاریخ منقضی شدن خبر در سایت');
 // Tools page
     define('_NEWS_AM_TOOLS_FORMFOLDER_TITLE', 'تکثیر ماژول');
     define('_NEWS_AM_TOOLS_FORMFOLDER_NAME', 'نام پوشه');
     define('_NEWS_AM_TOOLS_LOG_TITLE', 'گزارش تکثیر ماژول');
-    define('_NEWS_AM_TOOLS_FORMPURGE_TITLE', 'Purge page of deleted clone');
+    define('_NEWS_AM_TOOLS_FORMPURGE_TITLE', 'حذف اخباری که ماژول تکثیر شدیشان حذف شده است');
     define('_NEWS_AM_TOOLS_ALIAS_TITLE', 'دوباره سازی نام مستعار');
     define('_NEWS_AM_TOOLS_ALIAS_CONTENT', 'دوباره سازی نام مستعار صفحه');
     define('_NEWS_AM_TOOLS_ALIAS_TOPIC', 'دوباره سازی نام مستعار شاخه');
-    define('_NEWS_AM_TOOLS_META_TITLE', 'Rebuild Metas');
-    define('_NEWS_AM_TOOLS_META_KEYWORD', 'Rebuild Meta keywords');
-    define('_NEWS_AM_TOOLS_META_DESCRIPTION', 'Rebuild Meta Description');
-    define('_NEWS_AM_TOOLS_PRUNE', 'Prune news');
-    define('_NEWS_AM_TOOLS_PRUNE_BEFORE', 'Prune stories that were published before');
-    define('_NEWS_AM_TOOLS_PRUNE_EXPIREDONLY', 'Only remove stories who have expired');
-    define('_NEWS_AM_TOOLS_PRUNE_TOPICS', 'Limit to the following topics');
-    define('_NEWS_AM_TOOLS_PRUNE_EXPORT_DSC', 'If you dont check anything then all the topics will be used else only the selected topics will be used');
+    define('_NEWS_AM_TOOLS_META_TITLE', 'دوباره سازی متا ها');
+    define('_NEWS_AM_TOOLS_META_KEYWORD', 'دوباره سازی کلمات کلیدی متا');
+    define('_NEWS_AM_TOOLS_META_DESCRIPTION', 'دوباره سازی توضیحات متا');
+    define('_NEWS_AM_TOOLS_PRUNE', 'هرس کردن خبرها');
+    define('_NEWS_AM_TOOLS_PRUNE_BEFORE', 'هرس کردن خبرهایی که قبل از این تاریخ در سایت قرار گرفته‌اند');
+    define('_NEWS_AM_TOOLS_PRUNE_EXPIREDONLY', 'فقط خبرهایی را حذف کن که منقضی شده‌اند ');
+    define('_NEWS_AM_TOOLS_PRUNE_TOPICS', 'محدود به سرفصل‌های زیر');
+    define('_NEWS_AM_TOOLS_PRUNE_EXPORT_DSC', 'اگر هیچکدام را انتخاب نکنید همه سرفصل‌ها در نظر گرفته می‌شوند وگرنه فقط سرفصل‌های انتخاب شده در نظر گرفته می‌شوند');
 // Permissions
     define('_NEWS_AM_PERMISSIONS_ACCESS', 'دسترسی نمایش');
     define('_NEWS_AM_PERMISSIONS_SUBMIT', 'دسترسی ارسال');
@@ -151,8 +151,8 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_PERMISSIONS_GLOBAL_8', 'ارسال در بخش کاربر');
     define('_NEWS_AM_PERMISSIONS_GLOBAL_16', 'تایید خودکار');
 // Attach files
-    define('_NEWS_AM_FILE', 'File');
-	 define('_NEWS_AM_FILE_ID', 'ID');
+    define('_NEWS_AM_FILE', 'فایل');
+	 define('_NEWS_AM_FILE_ID', 'شماره');
 	 define('_NEWS_AM_FILE_ONLINE', 'آنلاین');
 	 define('_NEWS_AM_FILE_ACTION', 'فعال');
     define('_NEWS_AM_FILE_FORM', 'اضافه کردن فایل');
@@ -172,8 +172,8 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_MSG_CLONE_ERROR', 'این شاخه هماکنون موجود است!');
     define("_NEWS_AM_MSG_NOPERMSSET", "هیچ دسترسی قابل تنظیم نیست : هنوز هیچ شاخه ای ساخته نشده است! لطفا ابتدا یک شاخه بسازید.");
     define('_NEWS_AM_MSG_ALIASERROR', 'نام مستعار مورد انتخاب شما گرفته شده است. لطفا یک نام دیگر انتخاب کنید.');
-    define('_NEWS_AM_MSG_INPROC', 'Rebuilding ... ');
-    define('_NEWS_AM_MSG_PRUNE_DELETED', '%s Articles deleted');
+    define('_NEWS_AM_MSG_INPROC', 'دوباره سازی ...');
+    define('_NEWS_AM_MSG_PRUNE_DELETED', '%s خبر حذف شده.');
 // about	
     define('_NEWS_AM_ABOUT_ADMIN', 'درباره');
     define('_NEWS_AM_ABOUT_DESCRIPTION', 'توضیحات:');
@@ -188,36 +188,5 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_ABOUT_AUTHOR_INFO', 'اطلاعات سازنده');
     define('_NEWS_AM_ABOUT_AUTHOR_NAME', 'نام:');
     define('_NEWS_AM_ABOUT_CHANGELOG', 'فهرست تغییرات');
-// Tips
-    define('_NEWS_AM_HOME_TIPS',
-    '<ul>
-	<li>هنوز چیزی نوشته نشده است</li>
-	</ul>');
-    define('_NEWS_AM_TOPIC_TIPS',
-    '<ul>
-	<li>ثبت نمایش ویرایش یا حذف تمام شاخه ها</li>
-	<li>استفاده از شاخه ها مشابه منو در سایت</li>
-	<li>فعالی سازی و قابلیت استفاده از منو هابه صورت آی جکس</li>
-	<li>انتخاب شاخه برای مشاهده تمام صفحات داخل شاخه</li>
-	</ul>');
-    define('_NEWS_AM_CONTENT_TIPS',
-    '<ul>
-	<li>ثبت نمایش ویرایش یا حذف تمام صفحات</li>
-	<li>ساخت شاخه و لینک</li>
-	<li>برای مرتب کردن صفحات (برای مشخص کردن جایگاهشان در منو یا حالت نمایش), کافیست فقط صفحه را گرفته و به محل مناسب بکشید (drag and drop).</li>
-	</ul>');
-    define('_NEWS_AM_TOOLS_TIPS',
-    '<ul>
-	<li>هنوز چیزی نوشته نشده است</li>
-	</ul>');
-    define('_NEWS_AM_PERMISSIONS_TIPS',
-    '<ul>
-	<li>دسترسی نمایش و ارسال و تایید خودکار برای ماژول</li>
-	</ul>');
-	define('_NEWS_AM_FILE_TIPS',
-    '<ul>
-	<li>Not yet</li>
-	</ul>');
-
 }
 ?>

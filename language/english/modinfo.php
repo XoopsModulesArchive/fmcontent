@@ -48,10 +48,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_GROUPS_DESC', 'Select general access permission for groups.');	  
 // Urls
     define('_NEWS_MI_FRIENDLYURL', 'URL rewrite method');
-    define('_NEWS_MI_FRIENDLYURL_DESC', 'Select the URL rewrite mode you want to use.<ul>
-    <li>"Standard Mode": Module standard URL</li>
-    <li>"Rewrite Mode": you must use .htaccess file and edit .htaccess sample code if you change SEO / URL Rewrite options</li>
-    <li>"Short Rewrite": you can make URL whit out page id and module use alias for get page info. you must edit .htaccess, you can remove module name and Url extension and use Root base for have short URL</li></ul>');
+    define('_NEWS_MI_FRIENDLYURL_DESC', 'Select the URL rewrite mode you want to use.');
     define('_NEWS_MI_URL_STANDARD', 'Standard Mode');
     define('_NEWS_MI_URL_REWRITE', 'Rewrite Mode');
     define('_NEWS_MI_URL_SHORT', 'Short Rewrite');
@@ -85,12 +82,6 @@ if (!defined('_MI_NEWS_NAME')) {
 // Tell a friend
     define('_NEWS_MI_USETAG', 'Use TAG module to generate tags');
     define('_NEWS_MI_USETAG_DESC', 'You have to install TAG module for this option to work');
-// minimum length of single words
-    define('_NEWS_MI_MINWORDLENGHT', 'Meta Keywords lenght');
-    define('_NEWS_MI_MINWORDLENGHT_DESC', 'Choose the minimum length of single words');
-// minimum length of single words
-    define('_NEWS_MI_MINWORDOCCUR', 'Meta Keywords occur');
-    define('_NEWS_MI_MINWORDOCCUR_DESC', 'Choose the minimum occurrence of single words');
 // Show options
     define('_NEWS_MI_DISP_OPTION', 'General display method');
     define('_NEWS_MI_DISP_OPTION_DESC', 'Select which display options will be used in articles<br />"Topic based" will use display options defined in topic preferences');
@@ -141,12 +132,6 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_SHOWTYPE_3', 'Photo type');
     define('_NEWS_MI_SHOWTYPE_4', 'List type');
     define('_NEWS_MI_SHOWTYPE_5', 'Spotlight');
-//Template
-    define('_NEWS_MI_TEMPLATE', 'Template');
-    define('_NEWS_MI_TEMPLATE_DESC', 'Set general template for the module');
-    define('_NEWS_MI_TEMPLATE_1', 'Legacy');
-    define('_NEWS_MI_TEMPLATE_2', 'jQuery UI');
-    define('_NEWS_MI_TEMPLATE_3', 'HTML 5');
 // Show order
     define('_NEWS_MI_SHOWORDER', 'Display order');
     define('_NEWS_MI_SHOWORDER_DESC', 'Select Descendant/Ascendant order');
@@ -155,13 +140,13 @@ if (!defined('_MI_NEWS_NAME')) {
 // Show sort
     define('_NEWS_MI_SHOWSORT', 'Sort by');
     define('_NEWS_MI_SHOWSORT_DESC', 'Ordering method for articles displayed in the module');
-    define('_NEWS_MI_SHOWSORT_1', 'article id');
-    define('_NEWS_MI_SHOWSORT_2', 'article create');
-    define('_NEWS_MI_SHOWSORT_3', 'article update');
-    define('_NEWS_MI_SHOWSORT_4', 'article title');
-    define('_NEWS_MI_SHOWSORT_5', 'article order');
+    define('_NEWS_MI_SHOWSORT_1', 'Id');
+    define('_NEWS_MI_SHOWSORT_2', 'Create');
+    define('_NEWS_MI_SHOWSORT_3', 'Update');
+    define('_NEWS_MI_SHOWSORT_4', 'Title');
+    define('_NEWS_MI_SHOWSORT_5', 'Order');
     define('_NEWS_MI_SHOWSORT_6', 'Random');
-    define('_NEWS_MI_SHOWSORT_7', 'article Hits');
+    define('_NEWS_MI_SHOWSORT_7', 'Hits');
 // Admin page
     define('_NEWS_MI_ADMIN_PERPAGE', 'Admin article page items number');
     define('_NEWS_MI_ADMIN_PERPAGE_DESC', 'Number of items listed in admin article page');
@@ -177,9 +162,9 @@ if (!defined('_MI_NEWS_NAME')) {
 // Admin topic Show order
     define('_NEWS_MI_ADMIN_SHOWORDER_TOPIC', 'Admin Topic page display order');
     define('_NEWS_MI_ADMIN_SHOWORDER_TOPIC_DESC', 'Select Descendant/Ascendant order for admin Topic page');
-    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_1', 'Topic ID');
-    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_2', 'Topic weight');
-    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_3', 'Topic creation date');
+    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_1', 'Id');
+    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_2', 'Order');
+    define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_3', 'Created');
 // Admin topic sort
     define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC', 'Admin Topic page sort');
     define('_NEWS_MI_ADMIN_SHOWSORT_TOPIC_DESC', 'Ordering method for items listed in admin Topic page');

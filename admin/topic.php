@@ -121,7 +121,6 @@ switch ($op)
         $xoopsTpl->assign('topics', $topics);
         $xoopsTpl->assign('topic_pagenav', $topic_pagenav);
         $xoopsTpl->assign('xoops_dirname', $NewsModule->getVar('dirname'));
-        $xoopsTpl->assign('news_tips', _NEWS_AM_TOPIC_TIPS);
 
         // Call template file
         $xoopsTpl->display(XOOPS_ROOT_PATH . '/modules/' . $NewsModule->getVar('dirname') . '/templates/admin/news_topic.html');
