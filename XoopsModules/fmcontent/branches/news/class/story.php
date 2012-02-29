@@ -1061,7 +1061,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
   /**
 	* Get archive
 	*/
-	 function News_GetArchive($NewsModule, $publish_start, $publish_end ,$topics) {
+	 function News_GetArchive($NewsModule, $publish_start, $publish_end ,$topics ,$limit ,$start) {
 		 $ret = array();
 		 $criteria = new CriteriaCompo ();
 		 $criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
@@ -1072,6 +1072,8 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		 $criteria->add ( new Criteria ( 'story_expire', time() , '>' ) ,'OR');
 		 $criteria->setSort ( 'story_publish' );
 		 $criteria->setOrder ( 'DESC' );
+		 $criteria->setLimit ( $limit );
+		 $criteria->setStart ( $start );
 		 $obj = $this->getObjects ( $criteria, false );
 		 if ($obj) {
 			 foreach ( $obj as $root ) {
@@ -1093,6 +1095,20 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 			 }
 		 }
 		 return $ret;
+	 }	
+	 
+  /**
+	* Get archive count
+	*/
+	 function News_GetArchiveCount($NewsModule, $publish_start, $publish_end ,$topics) {
+		 $criteria = new CriteriaCompo ();
+		 $criteria->add ( new Criteria ( 'story_modid', $NewsModule->getVar ( 'mid' ) ) );
+		 $criteria->add ( new Criteria ( 'story_status', '1' ) );
+       $criteria->add ( new Criteria ( 'story_publish', $publish_start , '>' ));
+		 $criteria->add ( new Criteria ( 'story_publish', $publish_end , '<=' ));
+		 $criteria->add ( new Criteria ( 'story_expire', 0 ));
+		 $criteria->add ( new Criteria ( 'story_expire', time() , '>' ) ,'OR');
+		 return $this->getCount ( $criteria );
 	 }	
 	 
   /**
