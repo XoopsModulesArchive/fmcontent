@@ -127,6 +127,8 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_CONTENT_PEDATE', 'Set publish and expiration date');
     define('_NEWS_AM_CONTENT_SETDATETIME', 'Set the date/time of publish');
     define('_NEWS_AM_CONTENT_SETEXPDATETIME', 'Set the date/time of expiration');
+    define('_NEWS_AM_CONTENT_SLIDE', 'Set as slide');
+    define('_NEWS_AM_CONTENT_MARQUE', 'Set sd margue');
 // Tools page
     define('_NEWS_AM_TOOLS_FORMFOLDER_TITLE', 'استنساخ النسخ المتماثلة');
     define('_NEWS_AM_TOOLS_FORMFOLDER_NAME', 'اسم المجلد');

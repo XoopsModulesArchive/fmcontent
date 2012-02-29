@@ -42,6 +42,8 @@ class news_story extends XoopsObject {
 		$this->initVar ( 'story_desc', XOBJ_DTYPE_TXTBOX, '' );
 		$this->initVar ( 'story_alias', XOBJ_DTYPE_TXTBOX, '' );
 		$this->initVar ( 'story_status', XOBJ_DTYPE_INT, 1 );
+		$this->initVar ( 'story_slide', XOBJ_DTYPE_INT, 0 );
+      $this->initVar ( 'story_marque', XOBJ_DTYPE_INT, 0 );		
 		$this->initVar ( 'story_important', XOBJ_DTYPE_INT, 0 );
 		$this->initVar ( 'story_default', XOBJ_DTYPE_INT, 0 );
 		$this->initVar ( 'story_create', XOBJ_DTYPE_INT, '' );
@@ -233,6 +235,10 @@ class news_story extends XoopsObject {
 		$form->addElement ( new XoopsFormRadioYN ( _NEWS_AM_CONTENT_FORMDEFAULT, 'story_default', $this->getVar ( 'story_default', 'e' ) ) );
 		// Important
 		$form->addElement ( new XoopsFormRadioYN ( _NEWS_AM_CONTENT_IMPORTANT, 'story_important', $this->getVar ( 'story_important', 'e' ) ) );
+		// Slide
+		$form->addElement ( new XoopsFormRadioYN ( _NEWS_AM_CONTENT_SLIDE, 'story_slide', $this->getVar ( 'story_slide', 'e' ) ) );
+      // Marque
+		$form->addElement ( new XoopsFormRadioYN ( _NEWS_AM_CONTENT_MARQUE, 'story_marque', $this->getVar ( 'story_marque', 'e' ) ) );
 		// Submit buttons
 		$button_tray = new XoopsFormElementTray ( '', '' );
 		$submit_btn = new XoopsFormButton ( '', 'post', _SUBMIT, 'submit' );
