@@ -629,7 +629,11 @@ class NewsUtils {
 	         
 	         case 'id': 
 	            return XOOPS_URL . '/modules/' . $module . '/index.php?storytopic=' . $id;
-	            break;  
+	            break;
+	          
+	         case 'topic': 
+	            return XOOPS_URL . '/modules/' . $module . '/index.php?storytopic=' . $id;
+	            break;     
 	    }
 	    
 	}
@@ -712,7 +716,11 @@ class NewsUtils {
 	          
 	         case 'id': 
 	            return XOOPS_URL . '/modules/' . $module . '/' . $type . '.php?storyid=' . $id;
-	            break;     
+	            break; 
+	            
+	         case 'topic': 
+	            return XOOPS_URL . '/modules/' . $module . '/' . $type . '.php?storytopic=' . $array['story_topic'] . '&amp;storyid=' . $id;
+	            break;        
 	    }
 	}
 }

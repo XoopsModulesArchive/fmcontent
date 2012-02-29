@@ -62,25 +62,32 @@ function news_list_show($options) {
     array_shift($options);
     array_shift($options);
     array_shift($options);
+    array_shift($options);
 
     $NewsModule = $module_handler->getByDirname($NewsModule);
     
+    // Set story publish
     if($story_infos['story_sort'] == 'story_hits') {
     	 if($day) {
     	 	$day = 86400 * $day;
-    	   $publish = time() - $day;
+    	   $story_infos['story_publish'] = time() - $day;
     	 } else {
-    	 	$publish = 0;
-    	 }		
+    	 	$story_infos['story_publish'] = 0;
+    	 }	
     } else {
-    	 $publish = 0;
+    	 $story_infos['story_publish'] = 0;
     }		
     
-    $story_infos['story_publish'] = $publish;
-    
-    $options0 = $options[0];
+    // Set topics
+    if(true) {
+    	$topics = array();
+    	$topics[] = NewsUtils::News_CleanVars ( $_GET, 'storytopic', 0, 'int' );
+    } else {
+    	$topics = $options;
+    }		
+
     $story_infos ['topics'] = $topic_handler->getall ();
-    $contents = $story_handler->News_GetContentBlockList($NewsModule, $story_infos ,$options);
+    $contents = $story_handler->News_GetContentBlockList($NewsModule, $story_infos ,$topics);
     
     if($show == 'spotlight') {
 	    $spotlightid = $story_handler->News_SpotlightId($contents);
@@ -197,8 +204,19 @@ function news_list_edit($options) {
     $form .= _NEWS_MB_MORELINK . " : <input name=\"options[12]\" size=\"50\" maxlength=\"255\" value=\"" . $options[12] . "\" type=\"text\" /><br />\n";
     $form .= _NEWS_MB_HITINDAY1 . " <input name=\"options[13]\" size=\"5\" maxlength=\"255\" value=\"" . $options[13] . "\" type=\"text\" />" . _NEWS_MB_HITINDAY2 . "<br />\n";
     	
+    if ($options[14] == false) {
+        $checked_yes = '';
+        $checked_no = 'checked="checked"';
+    } else {
+        $checked_yes = 'checked="checked"';
+        $checked_no = '';
+    }
+    $form .= _NEWS_MB_TOPICLIMIT . " : <input name=\"options[14]\" value=\"1\" type=\"radio\" " . $checked_yes . "/>" . _YES . "&nbsp;\n";
+    $form .= "<input name=\"options[14]\" value=\"0\" type=\"radio\" " . $checked_no . "/>" . _NO . "<br />\n";
+    	
 	 array_shift($options);
 	 array_shift($options);
+    array_shift($options);
     array_shift($options);
     array_shift($options);
     array_shift($options);

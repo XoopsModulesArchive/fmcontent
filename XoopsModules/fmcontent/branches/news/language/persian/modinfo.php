@@ -53,6 +53,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_URL_REWRITE', 'Rewrite Mode');
     define('_NEWS_MI_URL_SHORT', 'Short Rewrite');
     define('_NEWS_MI_URL_ID', 'ID Mode');
+    define('_NEWS_MI_URL_TOPIC', 'ID - Topic Mode');
 // Rewrite Mode
     define('_NEWS_MI_REWRITEBASE', 'آدرسی که به طور پایه قابل نوشتن است انتخاب کنید');
     define('_NEWS_MI_REWRITEBASE_DESC', '"برپایه ماژول": شما باید یک .htacces در شاخه ماژول قرار دهید.<br />"برپایه هسته": شما باید یک .htacces در شاخه ROOT_PATH قرار دهید.');

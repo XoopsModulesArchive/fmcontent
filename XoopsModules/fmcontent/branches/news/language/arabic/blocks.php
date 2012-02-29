@@ -34,5 +34,6 @@ if (!defined('_NEWS_TYPE')) {
     define("_NEWS_MB_TOPIC_IMG", "image");
     define("_NEWS_MB_HITINDAY1", "Show news since");
     define("_NEWS_MB_HITINDAY2", "Day's ago. This option work when you sort news by hit");
+    define("_NEWS_MB_TOPICLIMIT", "Limited list by topic ID if exist");
 }
 ?>

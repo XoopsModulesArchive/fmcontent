@@ -565,13 +565,13 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	/**
 	 * Get content list for list block
 	 */
-	function News_GetContentBlockList($NewsModule, $story_infos ,$options) {
+	function News_GetContentBlockList($NewsModule, $story_infos ,$topics) {
 		$ret = array ();
 
       $access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
 		
-		if (! (count ( $options ) == 1 && $options [0] == 0)) {
-			$topiclist = array_intersect($access_topic , $options);
+		if (! (count ( $topics ) == 1 && $topics [0] == 0)) {
+			$topiclist = array_intersect($access_topic , $topics);
 		} else {
 		   $topiclist = $access_topic;
 		}	
