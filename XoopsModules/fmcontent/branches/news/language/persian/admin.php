@@ -127,6 +127,8 @@ if (!defined('_NEWS_AM_PREFERENCES')) {
     define('_NEWS_AM_CONTENT_PEDATE', 'تنظیم زمان نمایش و باطل شدن');
     define('_NEWS_AM_CONTENT_SETDATETIME', 'تعیین زمان/تاریخ قرار گرفتن خبر در سایت');
     define('_NEWS_AM_CONTENT_SETEXPDATETIME', 'تعیین زمان/تاریخ منقضی شدن خبر در سایت');
+    define('_NEWS_AM_CONTENT_SLIDE', 'استفاده در اسلایدشو');
+    define('_NEWS_AM_CONTENT_MARQUE', 'استفاده در مارکیو');
 // Tools page
     define('_NEWS_AM_TOOLS_FORMFOLDER_TITLE', 'تکثیر ماژول');
     define('_NEWS_AM_TOOLS_FORMFOLDER_NAME', 'نام پوشه');
