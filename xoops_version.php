@@ -227,7 +227,7 @@ $modversion['config'][] = array(
     'description' => '_NEWS_MI_FRIENDLYURL_DESC',
     'formtype' => 'select',
     'valuetype' => 'text',
-    'options' => array(_NEWS_MI_URL_STANDARD => 'none', _NEWS_MI_URL_REWRITE => 'rewrite' , _NEWS_MI_URL_SHORT => 'short' , _NEWS_MI_URL_ID => 'id'),
+    'options' => array(_NEWS_MI_URL_STANDARD => 'none', _NEWS_MI_URL_REWRITE => 'rewrite' , _NEWS_MI_URL_SHORT => 'short' , _NEWS_MI_URL_ID => 'id' , _NEWS_MI_URL_TOPIC => 'topic'),
     'default' => 'none');
 
 $modversion['config'][] = array(

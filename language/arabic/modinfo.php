@@ -53,6 +53,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_URL_REWRITE', 'Rewrite Mode');
     define('_NEWS_MI_URL_SHORT', 'Short Rewrite');
     define('_NEWS_MI_URL_ID', 'ID Mode');
+    define('_NEWS_MI_URL_TOPIC', 'ID - Topic Mode');
 // Rewrite Mode
     define('_NEWS_MI_REWRITEBASE', 'اختر عنوانا یمکن کتابته');
     define('_NEWS_MI_REWRITEBASE_DESC', '"Module base": یجب علیک .htacces جعله في فئة الوحدة.<br />"Root base": یجب علیک .htacces في فئةROOT_PATH جعل.');

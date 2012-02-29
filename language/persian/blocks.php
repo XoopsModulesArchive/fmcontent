@@ -34,5 +34,6 @@ if (!defined('_NEWS_TYPE')) {
     define("_NEWS_MB_TOPIC_IMG", "تصویر");
     define("_NEWS_MB_HITINDAY1", "نمایش اخبار از");
     define("_NEWS_MB_HITINDAY2", "روز قبل. این گزینه وقتی کار میکند که شما نمایش اخبار را بر اساس بازدید مرتب کرده باشید.");
+    define("_NEWS_MB_TOPICLIMIT", "محدود سازی فهرست مطالب به شاخه فعلی");
 }
 ?>

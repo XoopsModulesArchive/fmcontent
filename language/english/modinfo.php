@@ -53,6 +53,7 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_URL_REWRITE', 'Rewrite Mode');
     define('_NEWS_MI_URL_SHORT', 'Short Rewrite');
     define('_NEWS_MI_URL_ID', 'ID Mode');
+    define('_NEWS_MI_URL_TOPIC', 'ID - Topic Mode');
 // Rewrite Mode
     define('_NEWS_MI_REWRITEBASE', 'Rewrite Mode: .htaccess file position');
     define('_NEWS_MI_REWRITEBASE_DESC', '"Module": .htaccess file must be in the module directory.<br />"Root": .htaccess file must be in your ROOT directory.');
