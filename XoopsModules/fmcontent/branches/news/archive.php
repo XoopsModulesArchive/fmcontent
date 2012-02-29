@@ -116,9 +116,9 @@ if ($fromyear != 0 && $frommonth != 0) {
    $topics = $topic_handler->getall (); 
 	$archive = $story_handler->News_GetArchive($NewsModule , $monthstart, $monthend , $topics , $limit , $start);
 	$numrows = $story_handler->News_GetArchiveCount($NewsModule, $publish_start, $publish_end ,$topics);
-
+  
 	if ($numrows > $limit) {
-		$pagenav = new XoopsPageNav ( $numrows, $limit, $start, 'start', 'year=' . $fromyear . '&month=' . $frommonth . '&limit=' . $limit );
+		$pagenav = new XoopsPageNav ( $numrows, $limit, $start, 'start', 'limit=' . $limit . '&year=' . $fromyear . '&month=' . $frommonth );
 		$pagenav = $pagenav->renderNav ( 4 );
 	} else {
 		$pagenav = '';
