@@ -37,6 +37,8 @@ if (!defined('_MI_NEWS_NAME')) {
     define("_NEWS_MI_BLOCK_PAGE", "الصفحة");
     define("_NEWS_MI_BLOCK_LIST", "الفهرسة");
     define('_NEWS_MI_BLOCK_TOPIC', 'Topic list');
+    define('_NEWS_MI_BLOCK_SLIDE', 'Slide');
+	 define('_NEWS_MI_BLOCK_MARQUEE', 'Marquee');
 // Editor
     define("_NEWS_MI_FORM_EDITOR", "اختیار شکل");
     define("_NEWS_MI_FORM_EDITOR_DESC", "تحدید محرر للاستخدام في صفحة إرسال المواضیع.");

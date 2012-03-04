@@ -37,6 +37,8 @@ if (!defined('_MI_NEWS_NAME')) {
     define('_NEWS_MI_BLOCK_PAGE', 'Article page');
     define('_NEWS_MI_BLOCK_LIST', 'Article list');
     define('_NEWS_MI_BLOCK_TOPIC', 'Topic list');
+    define('_NEWS_MI_BLOCK_SLIDE', 'Slide');
+	 define('_NEWS_MI_BLOCK_MARQUEE', 'Marquee');
 // Editor
     define("_NEWS_MI_FORM_EDITOR", "Form Option");
     define("_NEWS_MI_FORM_EDITOR_DESC", "Select the editor to use for editing your article.");
