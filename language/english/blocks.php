@@ -21,6 +21,7 @@ if (!defined('_NEWS_TYPE')) {
     define('_NEWS_MB_TOPICDISPLAY', 'Select Topics to display');
     define('_NEWS_MB_NUMBER', 'Number of listed articles');
     define('_NEWS_MB_CHARS', 'Title lenght (characters)');
+    define('_NEWS_MB_CHARS_DESC', 'Text lenght (characters)');
     define('_NEWS_MB_IMG', 'Display image');
     define('_NEWS_MB_WIDTH', 'Max image width (pixel)');
     define('_NEWS_MB_DESCRIPTION', 'Display article text');

@@ -43,7 +43,7 @@ class news_story extends XoopsObject {
 		$this->initVar ( 'story_alias', XOBJ_DTYPE_TXTBOX, '' );
 		$this->initVar ( 'story_status', XOBJ_DTYPE_INT, 1 );
 		$this->initVar ( 'story_slide', XOBJ_DTYPE_INT, 0 );
-      $this->initVar ( 'story_marque', XOBJ_DTYPE_INT, 0 );		
+      $this->initVar ( 'story_marquee', XOBJ_DTYPE_INT, 0 );		
 		$this->initVar ( 'story_important', XOBJ_DTYPE_INT, 0 );
 		$this->initVar ( 'story_default', XOBJ_DTYPE_INT, 0 );
 		$this->initVar ( 'story_create', XOBJ_DTYPE_INT, '' );
@@ -238,7 +238,7 @@ class news_story extends XoopsObject {
 		// Slide
 		$form->addElement ( new XoopsFormRadioYN ( _NEWS_AM_CONTENT_SLIDE, 'story_slide', $this->getVar ( 'story_slide', 'e' ) ) );
       // Marque
-		$form->addElement ( new XoopsFormRadioYN ( _NEWS_AM_CONTENT_MARQUE, 'story_marque', $this->getVar ( 'story_marque', 'e' ) ) );
+		$form->addElement ( new XoopsFormRadioYN ( _NEWS_AM_CONTENT_MARQUE, 'story_marquee', $this->getVar ( 'story_marquee', 'e' ) ) );
 		// Submit buttons
 		$button_tray = new XoopsFormElementTray ( '', '' );
 		$submit_btn = new XoopsFormButton ( '', 'post', _SUBMIT, 'submit' );
@@ -1154,6 +1154,141 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 		 $this->deleteAll($criteria);
 		 return true;
 	}	
+	
+	function News_Slide($NewsModule, $story_infos ,$topics) {
+		 $ret = array();
+       $access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
+		 if (! (count ( $topics ) == 1 && $topics [0] == 0)) {
+			 $topiclist = array_intersect($access_topic , $topics);
+		 } else {
+		    $topiclist = $access_topic;
+		 }	
+       
+       $criteria = new CriteriaCompo ();
+
+       $part1 = new CriteriaCompo ();
+       $part1->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $topiclist ) . ')', 'IN' ));	
+       $criteria->add($part1);
+       
+       $part2 = new CriteriaCompo ();
+       $part2->add ( new Criteria ( 'story_status', '1' ));
+       $criteria->add($part2);
+       
+       $q3 = new CriteriaCompo ();
+       $q3->add ( new Criteria ( 'story_slide', '1' ));
+       $criteria->add($q3);
+ 
+       $part4 = new CriteriaCompo ();
+		 $part4->add ( new Criteria ( 'story_publish', time() , '<=' ));
+		 $part4->add ( new Criteria ( 'story_publish', 0 , '>' ));
+		 $criteria->add($part4);
+		 
+		 $part5 = new CriteriaCompo ();
+		 $part5->add ( new Criteria ( 'story_expire', time() , '>=' ));
+		 $part5->add ( new Criteria ( 'story_expire', 0 ) ,'OR');
+		 $criteria->add($part5);
+		 
+		 $criteria->setSort ( 'story_publish' );
+		 $criteria->setOrder ( 'DESC' );
+		 $criteria->setLimit ( $story_infos ['story_limit'] );
+		 
+		 $obj = $this->getObjects ( $criteria, false );
+		 if ($obj) {
+			foreach ( $obj as $root ) {
+				 $tab = array ();
+				 $tab = $root->toArray ();
+				
+				 foreach ( array_keys ( $story_infos ['topics'] ) as $i ) {
+					 $list [$i] ['topic_title'] = $story_infos ['topics'] [$i]->getVar ( "topic_title" );
+					 $list [$i] ['topic_id'] = $story_infos ['topics'] [$i]->getVar ( "topic_id" );
+					 $list [$i] ['topic_alias'] = $story_infos ['topics'] [$i]->getVar ( "topic_alias" );
+				 }
+				 if ($root->getVar ( 'story_topic' )) {
+					 $tab ['topic'] = $list [$root->getVar ( 'story_topic' )] ['topic_title'];
+					 $tab ['topic_alias'] = $list [$root->getVar ( 'story_topic' )] ['topic_alias'];
+					 $tab ['topicurl'] = NewsUtils::News_TopicUrl ( $NewsModule->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'story_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'story_topic' )] ['topic_alias'] ));
+				 }
+				
+				 $tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
+				 $tab ['story_publish'] = formatTimestamp ( $root->getVar ( 'story_publish' ), _MEDIUMDATESTRING );
+				 $tab ['imageurl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/medium/' . $root->getVar ( 'story_img' );
+				 $tab ['thumburl'] = XOOPS_URL . xoops_getModuleOption ( 'img_dir', $NewsModule->getVar ( 'dirname' ) ) . '/thumb/' . $root->getVar ( 'story_img' );
+				 $tab ['story_title'] = mb_substr ( strip_tags($root->getVar ( 'story_title' )), 0, $story_infos['title_lenght'], 'utf-8' );
+				 
+				 if(!$root->getVar ( 'story_short' )) {
+					 $tab ['story_short'] = mb_substr ( strip_tags($root->getVar ( 'story_text' )), 0, $story_infos['desc_lenght'], 'utf-8' ) . "...";
+				 } else {
+					 $tab ['story_short'] = mb_substr ( strip_tags($root->getVar ( 'story_short' )), 0, $story_infos['desc_lenght'], 'utf-8' ) . "...";
+				 }	
+				
+				 $ret [] = $tab;
+			 }
+		 }
+		 return $ret;	
+	}
+	
+	function News_Marquee($NewsModule, $story_infos ,$topics) {
+		 $ret = array();
+       $access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
+		 if (! (count ( $topics ) == 1 && $topics [0] == 0)) {
+			 $topiclist = array_intersect($access_topic , $topics);
+		 } else {
+		    $topiclist = $access_topic;
+		 }	
+       
+       $criteria = new CriteriaCompo ();
+
+       $part1 = new CriteriaCompo ();
+       $part1->add ( new Criteria ( 'story_topic', '(' . implode ( ',', $topiclist ) . ')', 'IN' ));	
+       $criteria->add($part1);
+       
+       $part2 = new CriteriaCompo ();
+       $part2->add ( new Criteria ( 'story_status', '1' ));
+       $criteria->add($part2);
+       
+       $q3 = new CriteriaCompo ();
+       $q3->add ( new Criteria ( 'story_marquee', '1' ));
+       $criteria->add($q3);
+ 
+       $part4 = new CriteriaCompo ();
+		 $part4->add ( new Criteria ( 'story_publish', time() , '<=' ));
+		 $part4->add ( new Criteria ( 'story_publish', 0 , '>' ));
+		 $criteria->add($part4);
+		 
+		 $part5 = new CriteriaCompo ();
+		 $part5->add ( new Criteria ( 'story_expire', time() , '>=' ));
+		 $part5->add ( new Criteria ( 'story_expire', 0 ) ,'OR');
+		 $criteria->add($part5);
+		 
+		 $criteria->setSort ( 'story_publish' );
+		 $criteria->setOrder ( 'DESC' );
+		 $criteria->setLimit ( $story_infos ['story_limit'] );
+		 
+		 $obj = $this->getObjects ( $criteria, false );
+		 if ($obj) {
+			foreach ( $obj as $root ) {
+				 $tab = array ();
+				 $tab = $root->toArray ();
+				
+				 foreach ( array_keys ( $story_infos ['topics'] ) as $i ) {
+					 $list [$i] ['topic_title'] = $story_infos ['topics'] [$i]->getVar ( "topic_title" );
+					 $list [$i] ['topic_id'] = $story_infos ['topics'] [$i]->getVar ( "topic_id" );
+					 $list [$i] ['topic_alias'] = $story_infos ['topics'] [$i]->getVar ( "topic_alias" );
+				 }
+				 if ($root->getVar ( 'story_topic' )) {
+					 $tab ['topic'] = $list [$root->getVar ( 'story_topic' )] ['topic_title'];
+					 $tab ['topic_alias'] = $list [$root->getVar ( 'story_topic' )] ['topic_alias'];
+					 $tab ['topicurl'] = NewsUtils::News_TopicUrl ( $NewsModule->getVar ( 'dirname' ), array('topic_id'=>$list [$root->getVar ( 'story_topic' )] ['topic_id'], 'topic_alias'=>$list [$root->getVar ( 'story_topic' )] ['topic_alias'] ));
+				 }
+				
+				 $tab ['url'] = NewsUtils::News_Url ( $NewsModule->getVar ( 'dirname' ), $tab );
+				 $tab ['story_publish'] = formatTimestamp ( $root->getVar ( 'story_publish' ), _MEDIUMDATESTRING );
+				 $tab ['story_title'] = mb_substr ( strip_tags($root->getVar ( 'story_title' )), 0, $story_infos['title_lenght'], 'utf-8' );
+				 $ret [] = $tab;
+			 }
+		 }
+		 return $ret;	
+	}		
 }
 
 ?> 

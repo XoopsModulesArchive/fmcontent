@@ -1,0 +1,38 @@
+/*---------------------------------
+ *  Photos slider > 1 click
+ *---------------------------------*/
+.photoslider-1click{width:280px;height:220px;}
+
+/* Nav */
+.photoslider-1click .sliderkit-nav{position:absolute;bottom:10px;right:10px;}
+.photoslider-1click .sliderkit-nav-clip ul li{float:left;margin:0 1px 0 0;}
+.photoslider-1click .sliderkit-nav-clip ul li a{display:block;padding:2px 6px;color:#fff;background:#000}
+.photoslider-1click .sliderkit-nav-clip ul li.sliderkit-selected a{color:#000;background:#fff;}
+.photoslider-1click .sliderkit-nav-clip ul a:hover{color:#fff;background:#00668d;}
+
+
+/*---------------------------------
+ *	News slider > Vertical
+ *---------------------------------*/			
+.newslider-vertical{width: 600px;height: 380px;}
+
+/* Nav */
+.newslider-vertical .sliderkit-nav{width:200px; height:380px;}
+.newslider-vertical .sliderkit-nav-clip li{height:45px; width:190px;margin-bottom:5px;padding-left:10px;}
+.newslider-vertical .sliderkit-nav-clip li.sliderkit-selected a{ background-color: #E6E306 !important; color: #000 !important;}
+.newslider-vertical .sliderkit-nav-clip li a {height:40px;width:180px;padding:5px;text-align: right;font-size:1em;color:#fff;text-decoration:none; background-color: #80AC00;}
+.newslider-vertical .sliderkit-nav-clip li a:hover,
+.newslider-vertical .sliderkit-nav-clip li a:focus{color:#fff;}
+
+/* Panel */
+.newslider-vertical .sliderkit-panels{ position:absolute; right:200px; width:390px; height:360px; overflow:hidden; border:1px solid #fff;}
+.newslider-vertical .sliderkit-panel{ right:0; top:0; width:380px; height:350px; padding:10px; background:#fff;}
+
+/* News block */
+.newslider-vertical .sliderkit-news h3,
+.newslider-vertical .sliderkit-news h3 a{ color:#000; font-weight: bold; text-align: right; }
+.newslider-vertical .sliderkit-news h3{font-size:1em;}
+.newslider-vertical .sliderkit-news img{width:380px; height: 250px; margin:0 5px; overflow:hidden;}
+.newslider-vertical .sliderkit-news p{margin:0; text-align: right;}
+.newslider-vertical .sliderkit-news-readmore{}
+

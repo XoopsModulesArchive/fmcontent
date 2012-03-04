@@ -37,9 +37,9 @@ function xoops_module_update_news($module, $version) {
 		 	 NewsUtils::News_AddField('`story_slide` TINYINT( 1 ) NOT NULL AFTER `story_status`' ,$db->prefix('news_story'));
 		}
 		
-		if(!NewsUtils::News_FieldExists('story_marque' ,$db->prefix('news_story')))
+		if(!NewsUtils::News_FieldExists('story_marquee' ,$db->prefix('news_story')))
 		{
-		 	 NewsUtils::News_AddField('`story_marque` TINYINT( 1 ) NOT NULL AFTER `story_slide`' ,$db->prefix('news_story'));
+		 	 NewsUtils::News_AddField('`story_marquee` TINYINT( 1 ) NOT NULL AFTER `story_slide`' ,$db->prefix('news_story'));
 		}	
 		    	
     }	
@@ -139,7 +139,7 @@ function xoops_module_update_news($module, $version) {
 				`story_default` tinyint(1) NOT NULL,
 				`story_status` tinyint(1) NOT NULL,
 				`story_slide` tinyint(1) NOT NULL,
-            `story_marque` tinyint(1) NOT NULL,
+            `story_marquee` tinyint(1) NOT NULL,
 				`story_create` int (10) NOT NULL default '0',
 				`story_update` int (10) NOT NULL default '0',
 				`story_publish` int (10) NOT NULL default '0',

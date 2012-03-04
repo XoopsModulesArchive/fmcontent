@@ -15,7 +15,7 @@ CREATE TABLE `news_story` (
 `story_default` tinyint(1) NOT NULL,
 `story_status` tinyint(1) NOT NULL,
 `story_slide` tinyint(1) NOT NULL,
-`story_marque` tinyint(1) NOT NULL,
+`story_marquee` tinyint(1) NOT NULL,
 `story_create` int (10) NOT NULL default '0',
 `story_update` int (10) NOT NULL default '0',
 `story_publish` int (10) NOT NULL default '0',

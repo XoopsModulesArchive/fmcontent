@@ -26,7 +26,7 @@ $modversion = array(
     // Main setting
     'name' => $modsDirname,
     'description' => _MI_NEWS_DESC,
-    'version' => 1.8,
+    'version' => 1.81,
     'author' => '',
     'credits' => '',
     'license' => 'GNU GPL 2.0',
@@ -127,6 +127,24 @@ $modversion['blocks'][] = array(
     'edit_func' => 'news_topic_edit',
     'options' => $modversion['dirname'] . '|list|0|0|0|left|DESC|topic_id',
     'template' => 'news_block_topic.html');
+    
+$modversion['blocks'][] = array(
+    'file' => 'slide.php',
+    'name' => _NEWS_MI_BLOCK_SLIDE,
+    'description' => '',
+    'show_func' => 'news_slide_show',
+    'edit_func' => 'news_slide_edit',
+    'options' => $modversion['dirname'] . '|5|scrollable|50|200|400|200|180|180|0',
+    'template' => 'news_block_slide.html');
+    
+$modversion['blocks'][] = array(
+    'file' => 'marquee.php',
+    'name' => _NEWS_MI_BLOCK_MARQUEE,
+    'description' => '',
+    'show_func' => 'news_marquee_show',
+    'edit_func' => 'news_marquee_edit',
+    'options' => $modversion['dirname'] . '|5|50|1|0',
+    'template' => 'news_block_marquee.html');            
     
 // Settings
 // Load class
