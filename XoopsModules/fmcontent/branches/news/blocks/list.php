@@ -47,6 +47,7 @@ function news_list_show($options) {
     $block['showmore'] = $options[11];
     $block['morelink'] = $options[12];
     $day = $options[13];
+    $topiclimit = $options[14];
     
     array_shift($options);
 	 array_shift($options);
@@ -78,8 +79,8 @@ function news_list_show($options) {
     	 $story_infos['story_publish'] = 0;
     }		
     
-    // Set topics
-    if(true) {
+    // Set topic limit
+    if($topiclimit) {
     	$topics = array();
     	$topics[] = NewsUtils::News_CleanVars ( $_GET, 'storytopic', 0, 'int' );
     } else {
