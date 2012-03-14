@@ -200,14 +200,6 @@ $modversion['config'][] = array(
     'default' => $admin_groups);
 
 $modversion['config'][] = array(
-    'name' => 'editinplace',
-    'title' => '_NEWS_MI_EDITINPLACE',
-    'description' => '_NEWS_MI_EDITINPLACE_DESC',
-    'formtype' => 'yesno',
-    'valuetype' => 'int',
-    'default' => 1);
-
-$modversion['config'][] = array(
     'name' => 'advertisement',
     'title' => '_NEWS_MI_ADVERTISEMENT',
     'description' => '_NEWS_MI_ADVERTISEMENT_DESC',

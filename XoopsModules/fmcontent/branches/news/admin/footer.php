@@ -18,7 +18,4 @@
  * @version     $Id$
  */
 
-echo "<div class='center pad5'><a class='tooltip' title='XOOPS' href='http://www.xoops.org' target='_blank'><img src='../images/admin/xoopsmicrobutton.gif' alt='XOOPS'></a></div>";
-echo "<div class='center smallsmall italic pad5'><strong>" . $xoopsModule->getVar("name") . "</strong> is maintained by the <a class='tooltip' rel='external' href='http://www.xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>";
-
 ?>

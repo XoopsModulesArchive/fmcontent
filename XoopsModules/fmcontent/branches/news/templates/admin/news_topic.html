@@ -25,8 +25,8 @@
     <tbody class="xo-topic">
     <{foreach item=topic from=$topics}>
     <tr class="odd" id="mod_<{$topic.topic_id}>">
-        <td class="width5"><img src="../images/icons/puce.png" alt=""/><{$topic.topic_id}></td>
-        <td class="width5"><img src="../images/icons/puce.png" alt=""/><{$topic.topic_weight}></td>
+        <td class="width5"><{$topic.topic_id}></td>
+        <td class="width5"><{$topic.topic_weight}></td>
         <td class="txtcenter width35 bold">
 	        <a href="article.php?topic=<{$topic.topic_id}>"><{$topic.topic_title}></a>
         </td>
