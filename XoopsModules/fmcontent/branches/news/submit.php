@@ -67,7 +67,6 @@ switch ($op) {
 		$obj->setVar ( 'story_order', $story_handler->News_SetContentOrder($NewsModule) );
 		$obj->setVar ( 'story_next', $story_handler->News_SetNext($NewsModule, $_REQUEST ['story_topic']) );
 		$obj->setVar ( 'story_prev', $story_handler->News_SetPrevious($NewsModule, $_REQUEST ['story_topic']) );
-		$obj->setVar ( 'story_menu', NewsUtils::News_AjaxFilter ( $_REQUEST ['story_title'] ) );
 		$obj->setVar ( 'story_alias', NewsUtils::News_AliasFilter ( $_REQUEST ['story_title'] ) );
 		$obj->setVar ( 'story_words', NewsUtils::News_MetaFilter ( $_REQUEST ['story_title'] ) );
 		$obj->setVar ( 'story_desc', NewsUtils::News_AjaxFilter ( $_REQUEST ['story_title'] ) );
