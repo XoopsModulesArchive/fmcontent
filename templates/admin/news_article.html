@@ -47,19 +47,47 @@
     <th><{$smarty.const._NEWS_AM_CONTENT_ACTION}></th>
     </thead>
     <tbody class="xo-content">
-    <{foreach item=item from=$contents}>
-    <{includeq file="$xoops_rootpath/modules/news/templates/admin/news_level.html" data=$item level='level1'}>
-
-    <{foreach item=child from=$item.child}>
-    <{includeq file="$xoops_rootpath/modules/news/templates/admin/news_level.html" data=$child level='level2' }>
-
-    <{foreach item=sub from=$child.child}>
-    <{includeq file="$xoops_rootpath/modules/news/templates/admin/news_level.html" data=$sub level='level3'}>
-    <{/foreach}>
-
-    <{/foreach}>
-
-    <{/foreach}>
+    <{foreach item=story from=$contents}>
+		<tr class="odd" id="mod_<{$story.story_id}>">
+		    <td class="width5 txtcenter"><{$story.story_id}></td>
+		    <td class="width5 txtcenter"><{$story.story_order}></td>
+		    <td class="width30 txtcenter"><a href="<{$story.url}>"><{$story.story_title}></a></td>
+		    <td class="txtcenter width10 bold">
+		        <{if $story.topic}>
+		        <a href="article.php?topic=<{$story.story_topic}>"><{$story.topic}></a>
+		        <{else}>
+		        <a href="article.php?topic=0"><{$smarty.const._NEWS_AM_CONTENT_STATIC}></a>
+		        <{/if}>
+		    </td>
+		    <td class="txtcenter width10 bold">
+			     <img src="../images/icons/<{$story.story_type}>.png" alt=""/><{$story.story_type}>
+		    </td>
+		    <td class="txtcenter width10">
+		        <a href="<{$xoops_url}>/userinfo.php?uid=<{$story.story_uid}>"><img class="tooltip" src="../images/icons/user.png" alt="<{$story.owner}>" title="<{$story.owner}>"/>&nbsp;<{$story.owner}></a>
+		    </td>
+		    <td class="txtcenter width5">
+		        <img class="cursorpointer" id="status<{$story.story_id}>" onclick="news_setStatus( { op: 'status', story_id: <{$story.story_id}> }, 'status<{$story.story_id}>', 'backend.php' )" src="<{if $story.story_status}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" alt=""/>
+		    </td>
+		    <td class="txtcenter width5">
+		        <img class="cursorpointer xo-defaultimg" id="default<{$story.story_id}>" onclick="news_setDefault( { op: 'default', story_id: <{$story.story_id}> , topic_id: <{$story.story_topic}> }, 'default<{$story.story_id}>', 'backend.php' )" src="<{if $story.story_default}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" alt=""/>
+		    </td>
+		    <td class="txtcenter width5">
+		        <img class="cursorpointer" id="important<{$story.story_id}>" onclick="news_setImportant( { op: 'important', story_id: <{$story.story_id}> }, 'important<{$story.story_id}>', 'backend.php' )" src="<{if $story.story_important}>../images/icons/ok.png<{else}>../images/icons/cancel.png<{/if}>" alt=""/>
+		    </td>
+		    <td class="txtcenter xo-actions width15">
+		        <img class="tooltip" onclick="display_dialog(<{$story.story_id}>, true, true, 'slide', 'slide', 300, 700);" src="<{xoAdminIcons display.png}>" alt="<{$smarty.const._PREVIEW}>" title="<{$smarty.const._PREVIEW}>" />
+		        <a href="<{$story.url}>"><img class="tooltip" src="../images/icons/display.png" alt="<{$smarty.const._NEWS_AM_CONTENT_VIEW}>" title="<{$smarty.const._NEWS_AM_CONTENT_VIEW}>"/></a>
+		        <{if $story.story_file != 0}>
+		        <a href="file.php?content=<{$story.story_id}>"><img class="tooltip" src="../images/icons/file.png" alt="<{$smarty.const._NEWS_AM_CONTENT_FILE}>" title="<{$smarty.const._NEWS_AM_CONTENT_FILE}>"/></a>
+		        <{/if}>
+		        <{if $story.story_topic != 0}>
+		        <a href="<{$story.topicurl}>"><img class="tooltip" src="../images/icons/section.png" alt="<{$smarty.const._NEWS_AM_CONTENT_TOPIC}>" title="<{$smarty.const._NEWS_AM_CONTENT_TOPIC}>"/></a>
+		        <{/if}>
+		        <a href="article.php?op=edit_content&amp;story_id=<{$story.story_id}>"><img class="tooltip" src="../images/icons/edit.png" alt="<{$smarty.const._EDIT}>"  title="<{$smarty.const._EDIT}>"/></a>
+		        <a href="article.php?op=delete&amp;story_id=<{$story.story_id}>"><img class="tooltip" src="../images/icons/delete.png" alt="<{$smarty.const._DELETE}>" title="<{$smarty.const._DELETE}>"/></a>
+		    </td>
+		</tr>
+		<{/foreach}>
     </tbody>
 </table>
 

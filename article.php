@@ -232,17 +232,6 @@ if (isset ( $story_topic ) && $story_topic > 0 && $view_topic->getVar ( 'topic_s
 	}
 }
 
-if (xoops_getModuleOption ( 'editinplace', $NewsModule->getVar ( 'dirname' ) ) && is_object ( $xoopsUser ) && ($xoopsUser->id () == $obj->getVar ( 'story_uid' ) || $xoopsUser->isAdmin ()) && $content ['dohtml']) {
-	// Add scripts
-	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/jquery.js' );
-	$xoTheme->addScript ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/js/jeditable/jquery.wysiwyg.js' );
-	$xoTheme->addScript ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/js/jeditable/jquery.jeditable.mini.js' );
-	$xoTheme->addScript ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/js/jeditable/jquery.jeditable.wysiwyg.js' );
-	// Add Stylesheet
-	$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/jquery.wysiwyg.css' );
-	$xoopsTpl->assign ( 'editinplace', true );
-}
-
 if (xoops_getModuleOption ( 'img_lightbox', $NewsModule->getVar ( 'dirname' ) )) {
 	// Add scripts
 	$xoTheme->addScript ( 'browse.php?Frameworks/jquery/jquery.js' );

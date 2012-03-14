@@ -12,7 +12,7 @@
     <tbody class="xo-file">
     <{foreach item=file from=$files}>
     <tr class="odd" id="mod_<{$file.file_id}>">
-        <td class="width5"><img src="../images/icons/puce.png" alt=""/><{$file.file_id}></td>
+        <td class="width5"><{$file.file_id}></td>
         <td class="txtcenter bold"><{$file.file_title}></td>
         <td class="txtcenter bold"><{$file.content}></td>
         <td class="txtcenter width10 bold"><{$file.file_type}></td>
