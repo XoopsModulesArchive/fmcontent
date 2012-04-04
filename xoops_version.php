@@ -26,7 +26,7 @@ $modversion = array(
     // Main setting
     'name' => $modsDirname,
     'description' => _MI_NEWS_DESC,
-    'version' => 1.81,
+    'version' => 1.82,
     'author' => '',
     'credits' => '',
     'license' => 'GNU GPL 2.0',

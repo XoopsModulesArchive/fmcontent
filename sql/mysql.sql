@@ -73,6 +73,7 @@ CREATE TABLE `news_topic` (
 `topic_alias` varchar(255) NOT NULL,
 `topic_homepage` tinyint (4)   NOT NULL ,
 `topic_show` tinyint (1)   NOT NULL default '1',
+`topic_style` varchar(64)   NOT NULL,
 PRIMARY KEY (`topic_id`,`topic_modid`),
 UNIQUE KEY `file_id` (`topic_id`,`topic_modid`)
 ) ENGINE=MyISAM;

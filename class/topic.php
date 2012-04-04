@@ -55,6 +55,7 @@ class news_topic extends XoopsObject {
 		$this->initVar ( "topic_alias", XOBJ_DTYPE_TXTBOX, '' );
 		$this->initVar ( "topic_homepage", XOBJ_DTYPE_INT, 1 );
 		$this->initVar ( "topic_show", XOBJ_DTYPE_INT, 1 );
+		$this->initVar ( "topic_style", XOBJ_DTYPE_TXTBOX, '' );
 		
 		// Pour autoriser le html
 		$this->initVar ( "dohtml", XOBJ_DTYPE_INT, 1, false );
@@ -109,6 +110,8 @@ class news_topic extends XoopsObject {
 		}
 		$fileseltray_topic_img->addElement ( new XoopsFormFile ( _NEWS_AM_GLOBAL_FORMUPLOAD, 'topic_img', xoops_getModuleOption ( 'img_size', $NewsModule->getVar ( 'dirname' ) ) ), false );
 		$form->addElement ( $fileseltray_topic_img );
+		
+		$form->addElement ( new XoopsFormText ( _NEWS_AM_TOPIC_STYLE, "topic_style", 50, 64, $this->getVar ( "topic_style" ) ), false );
 		
 		$form->addElement ( new XoopsFormRadioYN ( _NEWS_AM_TOPIC_ONLINE, 'topic_online', $this->getVar ( 'topic_online', 'e' ) ) );
 		$form->addElement ( new XoopsFormRadioYN ( _NEWS_AM_TOPIC_MENU, 'topic_asmenu', $this->getVar ( 'topic_asmenu', 'e' ) ) );

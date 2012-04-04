@@ -75,6 +75,8 @@ define('_NEWS_AM_TOPIC_SHOWTYPE_2', 'Table type');
 define('_NEWS_AM_TOPIC_SHOWTYPE_3', 'Photo type');
 define('_NEWS_AM_TOPIC_SHOWTYPE_4', 'List type');
 define('_NEWS_AM_TOPIC_SHOWTYPE_5', 'Spotlight');
+define('_NEWS_AM_TOPIC_STYLE', 'Topic Style');
+
 // Content page
 define('_NEWS_AM_CONTENT_FORM', 'Manage Article');
 define('_NEWS_AM_CONTENT_FORMTITLE', 'Title');

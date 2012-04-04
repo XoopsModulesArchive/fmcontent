@@ -312,6 +312,11 @@ if(xoops_getModuleOption ( 'related', $NewsModule->getVar ( 'dirname' ) )) {
 	$xoopsTpl->assign ( 'related', $related );	
 }	
  
+// Add topic style if set
+if(file_exists(XOOPS_ROOT_PATH .'/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/' . $view_topic->getVar ( 'topic_style' ) . '.css')) {
+	$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/' . $view_topic->getVar ( 'topic_style' ) . '.css');
+}
+ 
 $xoopsTpl->assign ( 'content', $content );
 $xoopsTpl->assign ( 'link', $link );
 $xoopsTpl->assign ( 'modname', $NewsModule->getVar ( 'name' ) );
