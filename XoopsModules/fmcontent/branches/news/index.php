@@ -116,6 +116,11 @@ if (isset ( $story_topic )) {
 	
 	$story_subtopic = $topic_handler->News_GetSubTopics($NewsModule , $story_topic , $topics);
 
+	// Add topic style if set
+	if(file_exists(XOOPS_ROOT_PATH .'/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/' . $view_topic->getVar ( 'topic_style' ) . '.css')) {
+		$xoTheme->addStylesheet ( XOOPS_URL . '/modules/' . $NewsModule->getVar ( 'dirname' ) . '/css/' . $view_topic->getVar ( 'topic_style' ) . '.css');
+	}
+	
 } else {
 	
 	// get all topic informations

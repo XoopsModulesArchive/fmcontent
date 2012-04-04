@@ -75,6 +75,7 @@ define('_NEWS_AM_TOPIC_SHOWTYPE_2', 'حالت جدولی');
 define('_NEWS_AM_TOPIC_SHOWTYPE_3', 'حالت تصویر');
 define('_NEWS_AM_TOPIC_SHOWTYPE_4', 'حالت لیستی');
 define('_NEWS_AM_TOPIC_SHOWTYPE_5', 'اسپایت لایت');
+define('_NEWS_AM_TOPIC_STYLE', 'استایل تاپیک');
 // Content page
 define('_NEWS_AM_CONTENT_FORM', 'مدیریت اخبار');
 define('_NEWS_AM_CONTENT_FORMTITLE', 'عنوان');

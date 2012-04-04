@@ -24,6 +24,22 @@
  */
 function xoops_module_update_news($module, $version) {
 
+    // start update to version 1.82
+    if($version < 182) {
+    	 
+    	$db = $GLOBALS["xoopsDB"];
+	   $error = false;
+	   
+		include_once XOOPS_ROOT_PATH . '/modules/news/class/utils.php';
+		 
+		if(!NewsUtils::News_FieldExists('topic_style' ,$db->prefix('news_topic')))
+		{
+		 	 NewsUtils::News_AddField('`topic_style` varchar(64) NOT NULL' ,$db->prefix('news_topic'));
+		}
+		    	
+    }	
+    // end update to version 1.82
+    
     // start update to version 1.81
     if($version < 181) {
     	 
