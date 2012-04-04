@@ -91,8 +91,10 @@ function news_list_show($options) {
     $contents = $story_handler->News_GetContentBlockList($NewsModule, $story_infos ,$topics);
     
     if($show == 'spotlight') {
-	    $spotlightid = $story_handler->News_SpotlightId($contents);
-	    $block['spotlightid'] = $spotlightid;
+	    $id = $story_handler->News_SpotlightId($contents);
+	    $block['spotlightid'] = $id['spotlightid'];
+       $block['subspotlightid1'] = $id['subspotlightid1'];
+       $block['subspotlightid2'] = $id['subspotlightid2'];
     }
     
     // Add block data

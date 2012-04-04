@@ -1020,14 +1020,34 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	       }	
 		 }	
        
+       $id = array();
+
        if($defaultid) {
-       	$spotlightid = max($defaultid);
+       	$id['spotlightid'] = max($defaultid);
+       	unset($defaultid['0']);
        }	else {
-       	$spotlightid = max($storyid);
+       	$id['spotlightid'] = max($storyid);
+       	unset($storyid['0']);
        }	
-       
-		 return $spotlightid;
-	 }	
+
+       if($defaultid) {
+       	$id['subspotlightid1'] = max($defaultid);
+       	unset($defaultid['0']);
+       } else {
+       	$id['subspotlightid1'] = max($storyid);
+       	unset($storyid['0']);
+       }	
+
+       if($defaultid) {
+       	$id['subspotlightid2'] = max($defaultid);
+       	unset($defaultid['0']);
+       } else {
+       	$id['subspotlightid2'] = max($storyid);
+       	unset($storyid['0']);
+       }	
+
+		 return $id;
+	 }		
 	 
   /**
 	* Returns the number of published news per topic
