@@ -16,16 +16,6 @@
  */
  
 include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'mainfile.php';
-
-require_once XOOPS_TRUST_PATH . '/modules/fmcontent/include/functions.php';
-include_once XOOPS_TRUST_PATH . '/modules/fmcontent/class/perm.php';
-// Load template class
-require_once XOOPS_ROOT_PATH . '/class/template.php';
-
-$modsDirname = basename(XOOPS_TRUST_PATH . '/modules/fmcontent');
-
-$module_handler =& xoops_gethandler('module');
-$forMods =& $module_handler->getByDirname($modsDirname);
-require_once XOOPS_TRUST_PATH . '/modules/fmcontent/rss.php';
+include XOOPS_ROOT_PATH . '/modules/news/rss.php';
 
 ?>

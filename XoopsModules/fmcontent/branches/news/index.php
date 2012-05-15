@@ -41,8 +41,8 @@ if (isset ( $_REQUEST ["user"] )) {
 
 if (isset ( $_REQUEST ["storytopic"] )) {
 	$story_topic = NewsUtils::News_CleanVars ( $_REQUEST, 'storytopic', 0, 'int' );
-} elseif(isset ($_REQUEST ["page"])) {
-	$topic_alias = NewsUtils::News_CleanVars ( $_REQUEST, 'story', 0, 'string' );
+} elseif(isset ($_REQUEST ["topic"])) {
+	$topic_alias = NewsUtils::News_CleanVars ( $_REQUEST, 'topic', 0, 'string' );
 	$story_topic = $topic_handler->News_GetTopicId($topic_alias);
 } else {
 	$story_topic = null;

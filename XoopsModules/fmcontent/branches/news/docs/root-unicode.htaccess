@@ -1,10 +1,18 @@
 Options +FollowSymlinks
 RewriteEngine on
-RewriteRule   ^fmcontent/topic/([^./]+)/([^./]+)\.html$ modules/fmcontent/index.php?topic=$1&page=$2 [L]
-RewriteRule   ^fmcontent/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/content.php?id=$2&page=$3 [L]
-RewriteRule   ^fmcontent/print/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/print.php?id=$2&page=$3 [L]
-RewriteRule   ^fmcontent/pdf/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/pdf.php?id=$2&page=$3 [L]
-RewriteRule   ^fmcontent/comment-new/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/comment-new.php?id=$2&page=$3 [L]
-RewriteRule   ^fmcontent/comment-edit/([^./]+)/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/comment-edit.php?id=$2&page=$3&com_id=$3 [L]
-RewriteRule   ^fmcontent/comment-reply/([^./]+)/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/comment-reply.php?id=$2&page=$3&com_id=$3 [L]
-RewriteRule   ^fmcontent/comment-delete/([^./]+)/([^./]+)/([^./]+)/([^./]+)\.html$ modules/fmcontent/comment-delete.php?id=$2&page=$3&com_id=$3 [L]
+RewriteRule   ^news/topic/([^./]+)/([^./]+)\.html$ modules/news/index.php?topic=$1&page=$2 [L]
+RewriteRule   ^news/([^./]+)/([^./]+)/([^./]+)\.html$ modules/news/article.php?id=$2&page=$3 [L]
+RewriteRule   ^news/print/([^./]+)/([^./]+)/([^./]+)\.html$ modules/news/print.php?id=$2&page=$3 [L]
+RewriteRule   ^news/pdf/([^./]+)/([^./]+)/([^./]+)\.html$ modules/news/pdf.php?id=$2&page=$3 [L]
+RewriteRule   ^news/comment-new/([^./]+)/([^./]+)/([^./]+)\.html$ modules/news/comment-new.php?id=$2&page=$3 [L]
+RewriteRule   ^news/comment-edit/([^./]+)/([^./]+)/([^./]+)/([^./]+)\.html$ modules/news/comment-edit.php?id=$2&page=$3&com_id=$3 [L]
+RewriteRule   ^news/comment-reply/([^./]+)/([^./]+)/([^./]+)/([^./]+)\.html$ modules/news/comment-reply.php?id=$2&page=$3&com_id=$3 [L]
+RewriteRule   ^news/comment-delete/([^./]+)/([^./]+)/([^./]+)/([^./]+)\.html$ modules/news/comment-delete.php?id=$2&page=$3&com_id=$3 [L]
+
+OR
+
+RewriteRule   ^topic/([a-zA-Z0-9_-]*)$ modules/news/index.php?topic=$1 [L]
+RewriteRule   ^([a-zA-Z0-9_-]*)$ modules/news/article.php?story=$1 [L]
+RewriteRule   ^([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)$ modules/news/article.php?story=$2 [L]
+RewriteRule   ^print/([a-zA-Z0-9_-]*)$ modules/news/print.php?story=$1 [L]
+RewriteRule   ^pdf/([a-zA-Z0-9_-]*)$ modules/news/pdf.php?story=$1 [L]
