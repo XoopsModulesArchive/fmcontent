@@ -24,7 +24,7 @@ class NewsUtils {
 	 * Uploadimg function
 	 *
 	 * For manage all upload parts for images
-	 * Add topic , Edit topic , Add content , Edit content
+	 * Add topic , Edit topic , Add article , Edit article
 	 */
 	function News_UploadImg($NewsModule, $type, $obj, $image) {
 		include_once XOOPS_ROOT_PATH . "/class/uploader.php";
@@ -57,7 +57,7 @@ class NewsUtils {
 	 * Deleteimg function
 	 *
 	 * For Deleteing uploaded images
-	 * Edit topic ,Edit content
+	 * Edit topic ,Edit article
 	 */
 	function News_DeleteImg($NewsModule, $type, $obj) {
 		if ($obj->getVar ( $type )) {
@@ -684,7 +684,7 @@ class NewsUtils {
 	            $page = $array['story_alias'];
 	            $type = $type . '/';
 	            $id = $id . '/';
-	            if ($type == 'content/') $type = '';
+	            if ($type == 'article/') $type = '';
 	
 	            if ($type == 'comment-edit/' || $type == 'comment-reply/' || $type == 'comment-delete/') {
 	                return XOOPS_URL . $rewrite_base . $module_name . $type . $id . '/';
@@ -705,7 +705,7 @@ class NewsUtils {
 	            }	
 	            $page = $array['story_alias'];
 	            $type = $type . '/';
-	            if ($type == 'content/') $type = '';
+	            if ($type == 'article/') $type = '';
 	
 	            if ($type == 'comment-edit/' || $type == 'comment-reply/' || $type == 'comment-delete/') {
 	                return XOOPS_URL . $rewrite_base . $module_name . $type . $id . '/';
