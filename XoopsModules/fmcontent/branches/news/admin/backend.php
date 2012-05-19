@@ -67,7 +67,7 @@ switch ($op) {
 		$topic_id = $obj->db->getInsertId ();
 		
 		//permission
-		NewsPermission::News_SetPermission ( $NewsModule, 'news_access', $_POST ['groups_view'], $topic_id, true );
+		NewsPermission::News_SetPermission ( $NewsModule, 'news_view', $_POST ['groups_view'], $topic_id, true );
 		NewsPermission::News_SetPermission ( $NewsModule, 'news_submit', $_POST ['groups_submit'], $topic_id, true );
 		
 		// Redirect page
@@ -96,7 +96,7 @@ switch ($op) {
 				NewsUtils::News_DeleteImg ( $NewsModule, 'topic_img', $obj );
 			}
 			//permission
-			NewsPermission::News_SetPermission ( $NewsModule, 'news_access', $_POST ['groups_view'], $topic_id, false );
+			NewsPermission::News_SetPermission ( $NewsModule, 'news_view', $_POST ['groups_view'], $topic_id, false );
 			NewsPermission::News_SetPermission ( $NewsModule, 'news_submit', $_POST ['groups_submit'], $topic_id, false );
 			
 			if (! $topic_handler->insert ( $obj )) {
