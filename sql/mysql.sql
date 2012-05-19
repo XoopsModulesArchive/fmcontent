@@ -91,3 +91,17 @@ CREATE TABLE `news_file` (
 PRIMARY KEY (`file_id`,`file_modid`),
 UNIQUE KEY `file_id` (`file_id`,`file_modid`)
 ) ENGINE=MyISAM;
+
+CREATE TABLE `news_rate` (
+`rate_id` int(11) unsigned NOT NULL auto_increment,
+`rate_modid` int(11) NOT NULL,
+`rate_story` int(8) unsigned NOT NULL default '0',
+`rate_user` int(11) NOT NULL default '0',
+`rate_rating` tinyint(3) unsigned NOT NULL default '0',
+`rate_hostname` varchar(60) NOT NULL default '',
+`rate_created` int(10) NOT NULL default '0',
+PRIMARY KEY  (rate_id),
+KEY rate_user (rate_user),
+KEY rate_hostname (rate_hostname),
+KEY rate_story (rate_story)
+) ENGINE=MyISAM;

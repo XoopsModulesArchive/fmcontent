@@ -23,43 +23,6 @@
  * If your version is under 1.68 ( or 1.66 ) please frist update your old version to 1.68.
  */
 function xoops_module_update_news($module, $version) {
-
-    // start update to version 1.82
-    if($version < 182) {
-    	 
-    	$db = $GLOBALS["xoopsDB"];
-	   $error = false;
-	   
-		include_once XOOPS_ROOT_PATH . '/modules/news/class/utils.php';
-		 
-		if(!NewsUtils::News_FieldExists('topic_style' ,$db->prefix('news_topic')))
-		{
-		 	 NewsUtils::News_AddField('`topic_style` varchar(64) NOT NULL' ,$db->prefix('news_topic'));
-		}
-		    	
-    }	
-    // end update to version 1.82
-    
-    // start update to version 1.81
-    if($version < 181) {
-    	 
-    	$db = $GLOBALS["xoopsDB"];
-	   $error = false;
-	   
-		include_once XOOPS_ROOT_PATH . '/modules/news/class/utils.php';
-		 
-		if(!NewsUtils::News_FieldExists('story_slide' ,$db->prefix('news_story')))
-		{
-		 	 NewsUtils::News_AddField('`story_slide` TINYINT( 1 ) NOT NULL AFTER `story_status`' ,$db->prefix('news_story'));
-		}
-		
-		if(!NewsUtils::News_FieldExists('story_marquee' ,$db->prefix('news_story')))
-		{
-		 	 NewsUtils::News_AddField('`story_marquee` TINYINT( 1 ) NOT NULL AFTER `story_slide`' ,$db->prefix('news_story'));
-		}	
-		    	
-    }	
-    // end update to version 1.81	
     
     // start update to version 1.80
 	 if($version < 180) {
@@ -155,7 +118,7 @@ function xoops_module_update_news($module, $version) {
 				`story_default` tinyint(1) NOT NULL,
 				`story_status` tinyint(1) NOT NULL,
 				`story_slide` tinyint(1) NOT NULL,
-            `story_marquee` tinyint(1) NOT NULL,
+				`story_marquee` tinyint(1) NOT NULL,
 				`story_create` int (10) NOT NULL default '0',
 				`story_update` int (10) NOT NULL default '0',
 				`story_publish` int (10) NOT NULL default '0',
@@ -218,6 +181,7 @@ function xoops_module_update_news($module, $version) {
 				`topic_alias` varchar(255) NOT NULL,
 				`topic_homepage` tinyint (4)   NOT NULL ,
 				`topic_show` tinyint (1)   NOT NULL default '1',
+				`topic_style` varchar(64)   NOT NULL,
 				PRIMARY KEY (`topic_id`,`topic_modid`),
 				UNIQUE KEY `file_id` (`topic_id`,`topic_modid`)
 				) ENGINE=MyISAM;";
@@ -245,6 +209,26 @@ function xoops_module_update_news($module, $version) {
 				return false;
 			}
 		}
+		
+		if(!NewsUtils::News_TableExists($db->prefix('news_rate')))
+		{
+			$sql = "CREATE TABLE " . $db->prefix('news_rate') . " (
+				`rate_id` int(11) unsigned NOT NULL auto_increment,
+				`rate_modid` int(11) NOT NULL,
+				`rate_story` int(8) unsigned NOT NULL default '0',
+				`rate_user` int(11) NOT NULL default '0',
+				`rate_rating` tinyint(3) unsigned NOT NULL default '0',
+				`rate_hostname` varchar(60) NOT NULL default '',
+				`rate_created` int(10) NOT NULL default '0',
+				PRIMARY KEY  (rate_id),
+				KEY rate_user (rate_user),
+				KEY rate_hostname (rate_hostname),
+				KEY rate_story (rate_story)
+				) ENGINE=MyISAM;";
+			if (!$db->queryF($sql)) {
+				return false;
+			}
+		}	
 	
 		//load needed handler
 		$module_handler = xoops_gethandler('module');
@@ -253,6 +237,7 @@ function xoops_module_update_news($module, $version) {
 		$topic_handler = xoops_getmodulehandler('topic', 'news');
 	   $story_handler = xoops_getmodulehandler('story', 'news');
 	   $file_handler = xoops_getmodulehandler('file', 'news');
+	   $vote_handler = xoops_getmodulehandler('rate', 'news');
 	   $newsModule = $module_handler->getByDirname('news');
 		$news_mid = $newsModule->getVar('mid');
 	    
@@ -280,9 +265,9 @@ function xoops_module_update_news($module, $version) {
 			   return false;
 			}
 			
-			$result = $db->query('SELECT * FROM '.$old_articles.' WHERE topicid = '.$topic['topic_id'].' ORDER BY created');
+			$result1 = $db->query('SELECT * FROM '.$old_articles.' WHERE topicid = '.$topic['topic_id'].' ORDER BY created');
 			
-			while ( $article = $db->fetchArray($result) ) {
+			while ( $article = $db->fetchArray($result1) ) {
 	         
 	         $storyobj = $story_handler->create ();			
 				$storyobj->setVar ( 'story_id', $article['storyid']);
@@ -317,8 +302,8 @@ function xoops_module_update_news($module, $version) {
 				}
 				
 				// The files
-				$result4 = $db->query('SELECT * FROM '.$old_files.' WHERE storyid='.$article['storyid']);
-				while ( $file = $db->fetchArray($result4) ) {
+				$result2 = $db->query('SELECT * FROM '.$old_files.' WHERE storyid='.$article['storyid']);
+				while ( $file = $db->fetchArray($result2) ) {
 		         $fileobj = $file_handler->create ();
 		         $fileobj->setVar ( 'file_id', $file['fileid']);
 		         $fileobj->setVar ( 'file_modid', $news_mid);
@@ -334,6 +319,24 @@ function xoops_module_update_news($module, $version) {
 			         return false;
 					}
 				}
+				
+				// The votess
+				$result3 = $db->query('SELECT * FROM '.$old_rating.' WHERE storyid='.$article['storyid']);
+				while ( $vote = $db->fetchArray($result3) ) {
+		         $voteobj = $vote_handler->create ();
+		         $voteobj->setVar ( 'rate_id', $vote['ratingid']);
+					$voteobj->setVar ( 'rate_modid', $news_mid);
+					$voteobj->setVar ( 'rate_story', $vote['storyid']);
+					$voteobj->setVar ( 'rate_user', $vote['ratinguser']);
+					$voteobj->setVar ( 'rate_rating', $vote['rating']);
+					$voteobj->setVar ( 'rate_hostname', $vote['ratinghostname']);
+					$voteobj->setVar ( 'rate_created', $vote['ratingtimestamp']);
+
+			      if (! $vote_handler->insert ( $voteobj )) {
+			         return false;
+					}
+				}
+				
 			}	
 	   }
 	}

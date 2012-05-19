@@ -509,7 +509,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	function News_GetContentList($NewsModule, $story_infos) {
 		$ret = array ();
 		
-		$access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
+		$access_topic = NewsPermission::News_GetItemIds ( 'news_view', $NewsModule);
 		$topic_handler = xoops_getmodulehandler ( 'topic', 'news' );
 		$topic_show = $topic_handler->allVisible($NewsModule,$story_infos ['topics'],$story_infos ['story_topic']);
 		if(isset($story_infos ['story_subtopic'])) {
@@ -574,7 +574,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	function News_GetContentBlockList($NewsModule, $story_infos ,$topics) {
 		$ret = array ();
 
-      $access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
+      $access_topic = NewsPermission::News_GetItemIds ( 'news_view', $NewsModule);
 		
 		if (! (count ( $topics ) == 1 && $topics [0] == 0)) {
 			$topiclist = array_intersect($access_topic , $topics);
@@ -677,7 +677,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	 * use in homepage function in NewsUtils class
 	 */
 	function News_GetContentCount($NewsModule, $story_infos) {
-		$access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
+		$access_topic = NewsPermission::News_GetItemIds ( 'news_view', $NewsModule);
 		$topic_handler = xoops_getmodulehandler ( 'topic', 'news' );
 		$topic_show = $topic_handler->allVisible($NewsModule,$story_infos ['topics'],$story_infos ['story_topic']);
 		if(isset($story_infos ['story_subtopic'])) {
@@ -1177,7 +1177,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	
 	function News_Slide($NewsModule, $story_infos ,$topics) {
 		 $ret = array();
-       $access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
+       $access_topic = NewsPermission::News_GetItemIds ( 'news_view', $NewsModule);
 		 if (! (count ( $topics ) == 1 && $topics [0] == 0)) {
 			 $topiclist = array_intersect($access_topic , $topics);
 		 } else {
@@ -1249,7 +1249,7 @@ class NewsStoryHandler extends XoopsPersistableObjectHandler {
 	
 	function News_Marquee($NewsModule, $story_infos ,$topics) {
 		 $ret = array();
-       $access_topic = NewsPermission::News_GetItemIds ( 'news_access', $NewsModule);
+       $access_topic = NewsPermission::News_GetItemIds ( 'news_view', $NewsModule);
 		 if (! (count ( $topics ) == 1 && $topics [0] == 0)) {
 			 $topiclist = array_intersect($access_topic , $topics);
 		 } else {

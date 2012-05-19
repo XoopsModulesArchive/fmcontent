@@ -92,7 +92,7 @@ if (!$xoopsTpl->is_cached('db:news_rss.html')) {
 
     if ($story_topic != 0) {
         $permHandler = NewsPermission::getHandler();
-        if ($permHandler->News_IsAllowed($xoopsUser, 'news_access', $story_topic)) {
+        if ($permHandler->News_IsAllowed($xoopsUser, 'news_view', $story_topic)) {
             $topic_obj = $topic_handler->get($story_topic);
         }
     }

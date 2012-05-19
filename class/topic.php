@@ -153,7 +153,7 @@ class news_topic extends XoopsObject {
 		$full_list = array_keys ( $group_list );
 		global $xoopsModule;
 		if (! $this->isNew ()) {
-			$groups_ids_view = $gperm_handler->getGroupIds ( 'news_access', $this->getVar ( 'topic_id' ), $xoopsModule->getVar ( 'mid' ) );
+			$groups_ids_view = $gperm_handler->getGroupIds ( 'news_view', $this->getVar ( 'topic_id' ), $xoopsModule->getVar ( 'mid' ) );
 			$groups_ids_submit = $gperm_handler->getGroupIds ( 'news_submit', $this->getVar ( 'topic_id' ), $xoopsModule->getVar ( 'mid' ) );
 			$groups_ids_view = array_values ( $groups_ids_view );
 			$groups_NEWS_AM_can_view_checkbox = new XoopsFormCheckBox ( _NEWS_AM_PERMISSIONS_ACCESS, 'groups_view[]', $groups_ids_view );

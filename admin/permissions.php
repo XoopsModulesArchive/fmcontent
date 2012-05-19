@@ -64,7 +64,7 @@ switch ($permtoset)
         break;
     case 2:
         $title_of_form = _NEWS_AM_PERMISSIONS_ACCESS;
-        $perm_name = "news_access";
+        $perm_name = "news_view";
         $perm_desc = "";
         break;
 
@@ -73,6 +73,12 @@ switch ($permtoset)
         $perm_name = "news_submit";
         $perm_desc = "";
         break;
+        
+    case 4:
+        $title_of_form = _NEWS_AM_PERMISSIONS_APPROVE;
+        $perm_name = "news_approve";
+        $perm_desc = "";
+        break;    
 }
 
 $permform = new XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc, "admin/permissions.php");

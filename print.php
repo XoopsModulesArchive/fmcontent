@@ -75,7 +75,7 @@ if (isset($story_topic) && $story_topic > 0) {
 
     // Check the access permission
     $perm_handler = NewsPermission::getHandler();
-    if (!$perm_handler->News_IsAllowed($xoopsUser, 'news_access', $view_topic->getVar('topic_id'), $NewsModule)) {
+    if (!$perm_handler->News_IsAllowed($xoopsUser, 'news_view', $view_topic->getVar('topic_id'), $NewsModule)) {
         redirect_header("index.php", 3, _NOPERM);
         exit;
     }
