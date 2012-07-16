@@ -411,7 +411,7 @@ class NewsUtils {
 	   
 	   // Redirect
 	   if($start_id <= $last_id) {
-	      self::News_Redirect('tools.php?op='.$op.'&start_id='.$start_id.'&end_id='.$end_id, 20, _NEWS_AM_MSG_INPROC);
+	      self::News_Redirect('tools.php?op='.$op.'&start_id='.$start_id.'&end_id='.$end_id, 3, _NEWS_AM_MSG_INPROC);
 	      xoops_cp_footer ();
          exit ();
       }

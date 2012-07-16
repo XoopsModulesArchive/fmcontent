@@ -58,9 +58,9 @@
 		<ul>
 		<{foreach item=content from=$block.contents}>
 			<li>
-				<h3><{if $content.story_important}><span class="red bold"><{$smarty.const._NEWS_MB_IMPORTANT}></span><{/if}><a href="<{$content.url}>" title="<{$content.story_title}>"><{$content.story_title}></a></h3>
+				<{if $content.story_important}><span class="red bold"><{$smarty.const._NEWS_MB_IMPORTANT}></span><{/if}><a href="<{$content.url}>" title="<{$content.story_title}>"><{$content.title}></a>
 				<{if $block.date}>
-				<div class="itemPostDate"><{$content.date}></div>
+				<span class="itemPostDate"><{$content.date}></span>
 				<{/if}>
 			</li>
 		<{/foreach}>
