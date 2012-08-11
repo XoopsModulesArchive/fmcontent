@@ -20,68 +20,68 @@
 
 if (!defined('_FMCONTENT_NEXT')) {
     // All
-    define('_FMCONTENT_ID', 'ID');
-    define('_FMCONTENT_TITLE', 'Title');
-    define('_FMCONTENT_PUBLICDATE', 'Date');
-    define('_FMCONTENT_MORE', 'Read more');
-    define('_FMCONTENT_HITS', 'Reads');
-    define("_FMCONTENT_SOURCE", "Source: ");
-    define("_FMCONTENT_PUBTOPIC", "Published in");
-    define("_FMCONTENT_AUTHOR_ALL", "Read all");
-    define("_FMCONTENT_AUTHOR_ALL_DESC", "View all contributions by ");
-    define('_FMCONTENT_COM', 'Comment');
-    define('_FMCONTENT_RELATED', 'Related contents');
-    define("_FMCONTENT_XHOME", "Home");
+    define('_FMCONTENT_ID','ID');
+    define('_FMCONTENT_TITLE','Title');
+    define('_FMCONTENT_PUBLICDATE','Date');
+    define('_FMCONTENT_MORE','Read more');
+    define('_FMCONTENT_HITS','Reads');
+    define("_FMCONTENT_SOURCE","Source: ");
+    define("_FMCONTENT_PUBTOPIC","Published in");
+    define("_FMCONTENT_AUTHOR_ALL","Read all");
+    define("_FMCONTENT_AUTHOR_ALL_DESC","View all contributions by ");
+    define('_FMCONTENT_COM','Comment');
+    define('_FMCONTENT_RELATED','Related contents');
+    define("_FMCONTENT_XHOME","Home");
 // Link
-    define('_FMCONTENT_NEXT', 'Next page');
-    define('_FMCONTENT_PREV', 'Previous page');
-    define('_FMCONTENT_EDIT', 'Edit page');
-    define('_FMCONTENT_DELETE', 'Delete page');
-    define('_FMCONTENT_PRINT', 'Printable version');
-    define('_FMCONTENT_PDF', 'Convert to PDF');
-    define('_FMCONTENT_MAIL', 'Recommend by eMail');
-    define('_FMCONTENT_COMS', 'Comments');
-    define('_FMCONTENT_NOCOMS', '0 comment');
+    define('_FMCONTENT_NEXT','Next page');
+    define('_FMCONTENT_PREV','Previous page');
+    define('_FMCONTENT_EDIT','Edit page');
+    define('_FMCONTENT_DELETE','Delete page');
+    define('_FMCONTENT_PRINT','Printable version');
+    define('_FMCONTENT_PDF','Convert to PDF');
+    define('_FMCONTENT_MAIL','Recommend by eMail');
+    define('_FMCONTENT_COMS','Comments');
+    define('_FMCONTENT_NOCOMS','0 comment');
 // Pdf
-    define('_FMCONTENT_AUTHOR', 'Author');
-    define('_FMCONTENT_DATE', 'Published');
-    define('_FMCONTENT_UPDATE', 'Updated');
+    define('_FMCONTENT_AUTHOR','Author');
+    define('_FMCONTENT_DATE','Published');
+    define('_FMCONTENT_UPDATE','Updated');
 // Error message
-    define('_FMCONTENT_ERROR_DEFAULT', 'Module Error: You have not defined default page !');
-    define('_FMCONTENT_ERROR_NOPAGE', 'You have not created any page yet');
-    define('_FMCONTENT_ERROR_STATUS', 'This page is diactive');
-    define('_FMCONTENT_TOPIC_ERROR', 'Selected topic does not exist');
+    define('_FMCONTENT_ERROR_DEFAULT','Module Error: You have not defined default page !');
+    define('_FMCONTENT_ERROR_NOPAGE','You have not created any page yet');
+    define('_FMCONTENT_ERROR_STATUS','This page is diactive');
+    define('_FMCONTENT_TOPIC_ERROR','Selected topic does not exist');
 // Light box
-    define('_FMCONTENT_LIGHTBOX_IMAGE', 'Image');
-    define('_FMCONTENT_LIGHTBOX_OF', 'of');
+    define('_FMCONTENT_LIGHTBOX_IMAGE','Image');
+    define('_FMCONTENT_LIGHTBOX_OF','of');
 // Public bookmarks
-    define("_FMCONTENT_BOOKMARK_ME", "Bookmark Me");
-    define("_FMCONTENT_BOOKMARK_TO_BLINKLIST", "Bookmark to Blinklist");
-    define("_FMCONTENT_BOOKMARK_TO_DELICIOUS", "Bookmark to del.icio.us");
-    define("_FMCONTENT_BOOKMARK_TO_DIGG", "Bookmark to Digg");
-    define("_FMCONTENT_BOOKMARK_TO_FARK", "Bookmark to Fark");
-    define("_FMCONTENT_BOOKMARK_TO_FURL", "Bookmark to Furl");
-    define("_FMCONTENT_BOOKMARK_TO_NEWSVINE", "Bookmark to Newsvine");
-    define("_FMCONTENT_BOOKMARK_TO_REDDIT", "Bookmark to Reddit");
-    define("_FMCONTENT_BOOKMARK_TO_SIMPY", "Bookmark to Simpy");
-    define("_FMCONTENT_BOOKMARK_TO_SPURL", "Bookmark to Spurl");
-    define("_FMCONTENT_BOOKMARK_TO_YAHOO", "Bookmark to Yahoo");
-    define("_FMCONTENT_BOOKMARK_TO_FACEBOOK", "Bookmark to Faceboom");
-    define("_FMCONTENT_BOOKMARK_TO_TWITTER", "Bookmark to Twitter");
-    define("_FMCONTENT_BOOKMARK_TO_SCRIPSTYLE", "Bookmark to Scripstyle");
-    define("_FMCONTENT_BOOKMARK_TO_STUMBLE", "Bookmark to Stumble");
-    define("_FMCONTENT_BOOKMARK_TO_TECHNORATI", "Bookmark to Technorati");
-    define("_FMCONTENT_BOOKMARK_TO_MIXX", "Bookmark to Mixx");
-    define("_FMCONTENT_BOOKMARK_TO_MYSPACE", "Bookmark to Myspace");
-    define("_FMCONTENT_BOOKMARK_TO_DESIGNFLOAT", "Bookmark to Designfloat");
-    define("_FMCONTENT_BOOKMARK_TO_BALATARIN", "Bookmark to Balatarin");
-    define("_FMCONTENT_BOOKMARK_TO_GOOLGEBUZZ", "Bookmark to Google Buzz");
-    define("_FMCONTENT_BOOKMARK_TO_GOOLGEREADER", "Bookmark to Google Reader");
-    define("_FMCONTENT_BOOKMARK_TO_GOOLGEBOOKMARKS", "Bookmark to Google Bookmarks");
+    define("_FMCONTENT_BOOKMARK_ME","Bookmark Me");
+    define("_FMCONTENT_BOOKMARK_TO_BLINKLIST","Bookmark to Blinklist");
+    define("_FMCONTENT_BOOKMARK_TO_DELICIOUS","Bookmark to del.icio.us");
+    define("_FMCONTENT_BOOKMARK_TO_DIGG","Bookmark to Digg");
+    define("_FMCONTENT_BOOKMARK_TO_FARK","Bookmark to Fark");
+    define("_FMCONTENT_BOOKMARK_TO_FURL","Bookmark to Furl");
+    define("_FMCONTENT_BOOKMARK_TO_NEWSVINE","Bookmark to Newsvine");
+    define("_FMCONTENT_BOOKMARK_TO_REDDIT","Bookmark to Reddit");
+    define("_FMCONTENT_BOOKMARK_TO_SIMPY","Bookmark to Simpy");
+    define("_FMCONTENT_BOOKMARK_TO_SPURL","Bookmark to Spurl");
+    define("_FMCONTENT_BOOKMARK_TO_YAHOO","Bookmark to Yahoo");
+    define("_FMCONTENT_BOOKMARK_TO_FACEBOOK","Bookmark to Faceboom");
+    define("_FMCONTENT_BOOKMARK_TO_TWITTER","Bookmark to Twitter");
+    define("_FMCONTENT_BOOKMARK_TO_SCRIPSTYLE","Bookmark to Scripstyle");
+    define("_FMCONTENT_BOOKMARK_TO_STUMBLE","Bookmark to Stumble");
+    define("_FMCONTENT_BOOKMARK_TO_TECHNORATI","Bookmark to Technorati");
+    define("_FMCONTENT_BOOKMARK_TO_MIXX","Bookmark to Mixx");
+    define("_FMCONTENT_BOOKMARK_TO_MYSPACE","Bookmark to Myspace");
+    define("_FMCONTENT_BOOKMARK_TO_DESIGNFLOAT","Bookmark to Designfloat");
+    define("_FMCONTENT_BOOKMARK_TO_BALATARIN","Bookmark to Balatarin");
+    define("_FMCONTENT_BOOKMARK_TO_GOOLGEBUZZ","Bookmark to Google Buzz");
+    define("_FMCONTENT_BOOKMARK_TO_GOOLGEREADER","Bookmark to Google Reader");
+    define("_FMCONTENT_BOOKMARK_TO_GOOLGEBOOKMARKS","Bookmark to Google Bookmarks");
 // topic 
-    define("_FMCONTENT_TOPIC_ID", "ID");
-    define("_FMCONTENT_TOPIC_NAME", "Title");
-    define("_FMCONTENT_TOPIC_DESC", "Description");
-    define("_FMCONTENT_TOPIC_IMG", "image");  
+    define("_FMCONTENT_TOPIC_ID","ID");
+    define("_FMCONTENT_TOPIC_NAME","Title");
+    define("_FMCONTENT_TOPIC_DESC","Description");
+    define("_FMCONTENT_TOPIC_IMG","image");  
 }
 ?>

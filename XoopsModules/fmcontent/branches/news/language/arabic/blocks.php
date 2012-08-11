@@ -15,19 +15,19 @@
  * @since       2.3.0
  */
 
-define('_NEWS_MB_SELECTPAGE', 'إختیار صفحة :');
-define('_NEWS_MB_ALLMENUS', 'جمیع الفئات');
-define('_NEWS_MB_TOPICDISPLAY', 'إختیار الفئة للعرض');
-define('_NEWS_MB_NUMBER', 'عدد المواضیع');
-define('_NEWS_MB_CHARS', 'طول العنوان');
-define('_NEWS_MB_CHARS_DESC', 'Text lenght (characters)');
-define('_NEWS_MB_IMG', 'الصورة');
-define('_NEWS_MB_WIDTH', 'عرض الصورة');
-define('_NEWS_MB_DESCRIPTION', 'وصف');
-define('_NEWS_MB_DATE', 'تاریخ العرض');
-define('_NEWS_MB_MORE', ' اقرأ المزيد ');
-define('_NEWS_MB_SHOE_MORELINK', 'Show more link');
-define('_NEWS_MB_MORELINK', 'More link');
+define('_NEWS_MB_SELECTPAGE','إختیار صفحة :');
+define('_NEWS_MB_ALLMENUS','جمیع الفئات');
+define('_NEWS_MB_TOPICDISPLAY','إختیار الفئة للعرض');
+define('_NEWS_MB_NUMBER','عدد المواضیع');
+define('_NEWS_MB_CHARS','طول العنوان');
+define('_NEWS_MB_CHARS_DESC','Text lenght (characters)');
+define('_NEWS_MB_IMG','الصورة');
+define('_NEWS_MB_WIDTH','عرض الصورة');
+define('_NEWS_MB_DESCRIPTION','وصف');
+define('_NEWS_MB_DATE','تاریخ العرض');
+define('_NEWS_MB_MORE',' اقرأ المزيد ');
+define('_NEWS_MB_SHOE_MORELINK','Show more link');
+define('_NEWS_MB_MORELINK','More link');
 define("_NEWS_MB_IMPORTANT", "Immediate ");
 define("_NEWS_MB_COUNT", "Show news count");
 define("_NEWS_MB_TOPIC_NAME", "Title");
