@@ -20,7 +20,7 @@
 if (!function_exists('fmcontent_menu_show')) {
     function fmcontent_menu_show($options) {
         global $xoTheme, $xoopsTpl, $module_header;
-        $myts =& MyTextSanitizer::getInstance();
+        $myts = MyTextSanitizer::getInstance();
 
         $block = array();
         $forMods = $options[0];
