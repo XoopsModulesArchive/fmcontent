@@ -47,7 +47,7 @@ function fmcontent_page_show($options) {
 
 function fmcontent_page_edit($options) {
     require_once XOOPS_TRUST_PATH . '/modules/fmcontent/class/registry.php';
-    $registry =& ForRegistry::getInstance();
+    $registry = ForRegistry::getInstance();
     // Initialize content handler
     $content_handler = xoops_getmodulehandler('page', 'fmcontent');
 

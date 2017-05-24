@@ -33,7 +33,7 @@ if(isset($_REQUEST['id'])) {
 }
 
 // Deprecate
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 // Include pdf library
 require_once XOOPS_TRUST_PATH . '/modules/fmcontent/fpdf/fpdf.inc.php';
 $obj = $content_handler->get($content_id);

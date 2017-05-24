@@ -28,7 +28,7 @@
 // comment callback functions
 
 function fmcontent_com_update($content_id, $content_comments) {
-    $db =& Database::getInstance();
+    $db = Database::getInstance();
     $sql = 'UPDATE ' . $db->prefix('fmcontent_content') . ' SET content_comments = ' . $content_comments . ' WHERE content_id = ' . $content_id;
     $db->query($sql);
 }
